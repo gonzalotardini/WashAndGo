@@ -94,3 +94,6 @@ C:\Users\gtardini\Google Drive\TFI\WashAndGo\WashAndGo\bin\Microsoft.AI.Web.xml
 C:\Users\gtardini\Google Drive\TFI\WashAndGo\WashAndGo\obj\Debug\WashAndGo.dll
 C:\Users\gtardini\Google Drive\TFI\WashAndGo\WashAndGo\obj\Debug\WashAndGo.pdb
 C:\Users\gtardini\Google Drive\TFI\WashAndGo\WashAndGo\obj\Debug\WashAndGo.csprojResolveAssemblyReference.cache
+C:\Users\gtardini\Google Drive\TFI\WashAndGo\WashAndGo\bin\SendGrid.dll
+C:\Users\gtardini\Google Drive\TFI\WashAndGo\WashAndGo\bin\SendGrid.pdb
+C:\Users\gtardini\Google Drive\TFI\WashAndGo\WashAndGo\bin\SendGrid.xml

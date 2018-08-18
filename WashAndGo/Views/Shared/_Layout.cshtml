@@ -7,6 +7,30 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <style>
+        .navbar-inverse {
+            background-image: url("http://blog.visme.co/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-025.jpg");
+            background-color: transparent;
+            border-color: transparent;
+
+            background-size: 2000px 400px;
+        }
+        
+
+            .navbar-inverse .navbar-nav > li > a  {
+                color: white;
+                font-family: Bahnschrift;
+            }
+
+            .navbar-inverse .navbar-brand {
+                color: white;
+                font-family: Bahnschrift;
+            }
+           
+          
+
+
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,7 +41,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Wash & Go!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
