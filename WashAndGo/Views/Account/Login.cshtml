@@ -19,19 +19,22 @@
         margin-left: 0px;
     }
     body {
-        background-image: url("https://di-uploads-pod3.dealerinspire.com/fletcherjonesmercedesbenzontario/uploads/2017/07/POBHEADER-minbutton-min.jpg");
-               
+        background-color: #e8e7e5;
     }
 
-    .vertical-offset-100 {
-        padding-top: 100px;
+
+    .panel-body {
+        padding: 15px;
+        background-image: url('../../img/fondo.JPG');
     }
+
+
 </style>
 
 
 <div class="container">
     <div class="row vertical-offset-100">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-4 col-md-offset-4" style="margin-top: 6%;">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Iniciar Sesión</h3>
@@ -43,6 +46,7 @@
                         <div class="panel-body">
                             <form accept-charset="UTF-8" role="form">
                                 <fieldset>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })                                    
                                     <div class="form-group">
                                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
                                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
