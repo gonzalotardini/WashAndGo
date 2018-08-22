@@ -4,9 +4,9 @@
 
 <style>
 
-    .jumbotron {
+    #jumbo1 {
         background-image: url('../../img/3.jpg');
-        margin-top: 2%;
+        margin-top: 6%;
         padding: 10%;
        
     }
@@ -22,38 +22,44 @@
         border-radius: 10px 10px 10px 10px;
     }
 
+    #jumbo2 {
+        background-image: url('../../img/autos.JPG');
+        padding: 15%;
+    }
+
        
 </style>
 
-<div class="jumbotron" style="text-align: center;color:azure;text-shadow: 6px 6px black; position: relative;display: block;">
+<div class="jumbotron" id="jumbo1" style="text-align: center;color:azure;text-shadow: 6px 6px black; position: relative;display: block;">
 
 
-    <h1 style=" font-size:103px; color:papayawhip">Wash & Go!</h1>
+    <h1 style=" font-size:103px; color:#ffad29">Wash & Go!</h1>
 
 </div>
 
 <div class="container">
 
-    @*<div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
+    <div id="jumbo2" class="jumbotron">
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 jumbotron">
+            <h2>Misión</h2>
             <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
+                Brindarle la facilidad de contratar un servicio de lavado automotor a cualquier residente argentino que sea amante de su auto y desee mantenerlo siempre limpio y vistoso, asegurando calidad de servicio y tranquilidad.
             </p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+          
         </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <div class="col-md-6 jumbotron">
+            <h2>Visión</h2>
+            <p>Poder ofrecer el servicio de lavado a domicilio a lo largo y a la ancho de todo el país en un lapso menor a 10 años, logrando que la gran mayoría de lavados automotor se realicen a través de nuestra plataforma. Además, lograr que todos los lavadores autónomos del país utilicen nuestra aplicación.</p>
         </div>
-        <div class="col-md-4">
+        @*<div class="col-md-4 jumbotron">
             <h2>Web Hosting</h2>
             <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
             <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>
-    </div>*@
+        </div>*@
+    </div>
 
 </div>

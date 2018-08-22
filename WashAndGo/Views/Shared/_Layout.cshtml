@@ -8,6 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <style>
+        
         .navbar-inverse {
             background-image: url("http://blog.visme.co/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-025.jpg");
             background-color: transparent;
@@ -28,10 +29,17 @@
                 font-family: Bahnschrift;
             }
            
+
+
           
 
 
     </style>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link href="~/Content/footer.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -67,4 +75,52 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
+<div class="row">
+    <footer id="myFooter">
+        <div class="container">
+            <div class="col-sm-3 myCols">
+                <h5>Get started</h5>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Sign up</a></li>
+                    <li><a href="#">Downloads</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3 myCols">
+                <h5>About us</h5>
+                <ul>
+                    <li><a href="#">Company Information</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Reviews</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3 myCols">
+                <h5>Support</h5>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Help desk</a></li>
+                    <li><a href="#">Forums</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-3 myCols">
+                <h5>Legal</h5>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+</div>
+    <div class="social-networks">
+        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="facebook"><i class="fa fa-facebook-official"></i></a>
+        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+    </div>
+    <div class="footer-copyright">
+        <p>© 2016 Copyright Text </p>
+    </div>
+</footer>
+
 </html>
