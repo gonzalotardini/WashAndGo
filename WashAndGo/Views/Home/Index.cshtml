@@ -3,23 +3,23 @@
 }
 
 <style>
-
     #jumbo1 {
         background-image: url('../../img/3.jpg');
         margin-top: 6%;
         padding: 10%;
-       
     }
 
     body {
-        background-color:#e8e7e5;
+        background-color: #e8e7e5;
     }
 
-    h1 {
+    #inicialTitle {
         font-weight: bold;
         font-family: Bahnschrift;
         background-color: #80808070;
         border-radius: 10px 10px 10px 10px;
+        margin-right: 20%;
+        margin-left: 20%;
     }
 
     #jumbo2 {
@@ -27,13 +27,21 @@
         padding: 15%;
     }
 
-       
+    #article {
+        background: white;
+        text-align: center;
+    }
+
+    #fotoDetales {
+        border-radius: 50%;
+        WIDTH: 100%;
+    }
 </style>
 
 <div class="jumbotron" id="jumbo1" style="text-align: center;color:azure;text-shadow: 6px 6px black; position: relative;display: block;">
 
 
-    <h1 style=" font-size:103px; color:#ffad29">Wash & Go!</h1>
+    <h1 id="inicialTitle" style=" font-size:103px; color:#ffad29">Wash & Go!</h1>
 
 </div>
 
@@ -43,23 +51,41 @@
 
     </div>
 
+    <article class="col-md-4 jumbotron">
+        
+        <img id="fotoDetales" src="~/img/Capture.JPG" />
+    </article>
+    <article class="col-md-4 jumbotron">
+       
+        <img id="fotoDetales" src="~/img/Capture.JPG" />
+    </article>
+    <article class="col-md-4 jumbotron">
+      
+        <img id="fotoDetales" src="~/img/Capture.JPG" />
+    </article>
+    
+
+
+
+
+
     <div class="row">
         <div class="col-md-6 jumbotron">
             <h2>Misión</h2>
             <p>
                 Brindarle la facilidad de contratar un servicio de lavado automotor a cualquier residente argentino que sea amante de su auto y desee mantenerlo siempre limpio y vistoso, asegurando calidad de servicio y tranquilidad.
             </p>
-          
+
         </div>
         <div class="col-md-6 jumbotron">
             <h2>Visión</h2>
             <p>Poder ofrecer el servicio de lavado a domicilio a lo largo y a la ancho de todo el país en un lapso menor a 10 años, logrando que la gran mayoría de lavados automotor se realicen a través de nuestra plataforma. Además, lograr que todos los lavadores autónomos del país utilicen nuestra aplicación.</p>
         </div>
         @*<div class="col-md-4 jumbotron">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>*@
+                <h2>Web Hosting</h2>
+                <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            </div>*@
     </div>
 
 </div>
