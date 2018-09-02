@@ -29,6 +29,9 @@
         background-color: #e8e7e5;
     }
 
+    .my-class{
+        color:black;
+    }
 
 
 </style>
@@ -67,8 +70,10 @@
                                     <input  class="btn btn-lg btn-info btn-block" type="submit" value="Login">
                                 </fieldset>
 
-                                @Html.ActionLink("New User     ", "Register")
+                                @*@Html.ActionLink("New User  ", "Register", new { @class = "my-class" })*@
 
+                                <a style="color:black;" href="register">Registrar</a>
+                                <a style="color:black" href="ForgotPassword">Olvide mi Contraseña</a>
 
                                 @Html.ActionLink("Forgot your password?", "ForgotPassword")
 

@@ -1,125 +1,69 @@
-'use strict';
-angular.module("ngLocale", [], ["$provide", function($provide) {
-var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
-$provide.value("$locale", {
-  "DATETIME_FORMATS": {
-    "AMPMS": [
-      "de.",
-      "du."
-    ],
-    "DAY": [
-      "vas\u00e1rnap",
-      "h\u00e9tf\u0151",
-      "kedd",
-      "szerda",
-      "cs\u00fct\u00f6rt\u00f6k",
-      "p\u00e9ntek",
-      "szombat"
-    ],
-    "ERANAMES": [
-      "id\u0151sz\u00e1m\u00edt\u00e1sunk el\u0151tt",
-      "id\u0151sz\u00e1m\u00edt\u00e1sunk szerint"
-    ],
-    "ERAS": [
-      "i. e.",
-      "i. sz."
-    ],
-    "FIRSTDAYOFWEEK": 0,
-    "MONTH": [
-      "janu\u00e1r",
-      "febru\u00e1r",
-      "m\u00e1rcius",
-      "\u00e1prilis",
-      "m\u00e1jus",
-      "j\u00fanius",
-      "j\u00falius",
-      "augusztus",
-      "szeptember",
-      "okt\u00f3ber",
-      "november",
-      "december"
-    ],
-    "SHORTDAY": [
-      "V",
-      "H",
-      "K",
-      "Sze",
-      "Cs",
-      "P",
-      "Szo"
-    ],
-    "SHORTMONTH": [
-      "jan.",
-      "febr.",
-      "m\u00e1rc.",
-      "\u00e1pr.",
-      "m\u00e1j.",
-      "j\u00fan.",
-      "j\u00fal.",
-      "aug.",
-      "szept.",
-      "okt.",
-      "nov.",
-      "dec."
-    ],
-    "STANDALONEMONTH": [
-      "janu\u00e1r",
-      "febru\u00e1r",
-      "m\u00e1rcius",
-      "\u00e1prilis",
-      "m\u00e1jus",
-      "j\u00fanius",
-      "j\u00falius",
-      "augusztus",
-      "szeptember",
-      "okt\u00f3ber",
-      "november",
-      "december"
-    ],
-    "WEEKENDRANGE": [
-      5,
-      6
-    ],
-    "fullDate": "y. MMMM d., EEEE",
-    "longDate": "y. MMMM d.",
-    "medium": "y. MMM d. H:mm:ss",
-    "mediumDate": "y. MMM d.",
-    "mediumTime": "H:mm:ss",
-    "short": "y. MM. dd. H:mm",
-    "shortDate": "y. MM. dd.",
-    "shortTime": "H:mm"
-  },
-  "NUMBER_FORMATS": {
-    "CURRENCY_SYM": "Ft",
-    "DECIMAL_SEP": ",",
-    "GROUP_SEP": "\u00a0",
-    "PATTERNS": [
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 3,
-        "minFrac": 0,
-        "minInt": 1,
-        "negPre": "-",
-        "negSuf": "",
-        "posPre": "",
-        "posSuf": ""
-      },
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 2,
-        "minFrac": 2,
-        "minInt": 1,
-        "negPre": "-",
-        "negSuf": "\u00a0\u00a4",
-        "posPre": "",
-        "posSuf": "\u00a0\u00a4"
-      }
-    ]
-  },
-  "id": "hu-hu",
-  "localeID": "hu_HU",
-  "pluralCat": function(n, opt_precision) {  if (n == 1) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
-});
-}]);
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN"><HTML><HEAD><TITLE>Version Information</TITLE> 
+
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso8859-1">
+<META NAME="PRODUCT" CONTENT="JScript">
+<META NAME="TECHNOLOGY" CONTENT="SCRIPTING">
+<META NAME="CATEGORY" CONTENT="Language Reference">
+<META NAME="Description" CONTENT="JScript Version Information">
+<META NAME="Keywords" CONTENT="">
+
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+</HEAD>
+
+
+<BODY BGCOLOR=FFFFFF LINK=#0033CC>
+<FONT FACE="Verdana, Arial, Helvetica" SIZE=2>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 WIDTH=100%><TR VALIGN=TOP><TD WIDTH=360>
+<FONT SIZE=1 COLOR=#660033>Microsoft&#174; JScript&#153;</FONT><BR>
+<FONT SIZE=5 COLOR=#660033><B>Version Information</B></FONT></TD>
+
+
+<TD ALIGN=RIGHT>
+<FONT SIZE=2>&nbsp;<A HREF="jstoc.htm">Language&nbsp;Reference</A>&nbsp;<BR>
+<P></FONT>
+
+</TD></TR>
+</TABLE> 
+
+<p>
+<HR noshade SIZE=1>
+<br>
+<BLOCKQUOTE>The following table lists the version of Microsoft JScript implemented by host applications.<P>
+
+
+<TABLE WIDTH=87% BORDER=1 CELLPADDING=5 CELLSPACING=0>
+<TR VALIGN=TOP BGCOLOR="#DDDDDD">
+<TD><FONT SIZE=2><b>Host</b></FONT></TD>
+<TD ALIGN=CENTER><FONT SIZE=2><b>JScript Version 1.0</b></FONT></TD>
+<TD ALIGN=CENTER><FONT SIZE=2><b>JScript Version 2.0</b></FONT></TD>
+<TD ALIGN=CENTER><font SIZE=2><b>JScript Version&nbsp;3.0</b></font></TD>
+</TR>
+<TR VALIGN=TOP>
+<TD><FONT SIZE=2><b>Microsoft Internet Explorer&nbsp;3.0</b></FONT></TD>
+<TD ALIGN=CENTER><FONT SIZE=2><b>X</b></FONT></TD>
+<TD ALIGN=CENTER><FONT SIZE=2><b>&nbsp;</b></FONT></TD>
+<TD ALIGN=CENTER><font SIZE=2><b>&nbsp;</b></font></TD>
+</TR>
+<TR VALIGN=TOP>
+<TD><FONT SIZE=2><b>Microsoft Internet Information Server 1.0</b></FONT></TD>
+<TD ALIGN=CENTER><FONT SIZE=2><b>&nbsp;</b></FONT></TD>
+<TD ALIGN=CENTER><FONT SIZE=2><b>X</b></FONT></TD>
+<TD ALIGN=CENTER><font SIZE=2><b>&nbsp;</b></font></TD>
+</TR>
+<TR VALIGN=TOP>
+<TD><font SIZE=2><b>Microsoft Internet Explorer&nbsp;4.0</b></font></TD>
+<TD ALIGN=CENTER><font SIZE=2><b>&nbsp;</b></font></TD>
+<TD ALIGN=CENTER><font SIZE=2><b>&nbsp;</b></font></TD>
+<TD ALIGN=CENTER><font SIZE=2><b>x</b></font></TD>
+</TR>
+<TR VALIGN=TOP>
+<TD><font SIZE=2><b>Microsoft Internet Information Server&nbsp;4.0</b></font></TD>
+<TD ALIGN=CENTER><font SIZE=2><b>&nbsp;</b></font></TD>
+<TD ALIGN=CENTER><font SIZE=2><b>&nbsp;</b></font></TD>
+<TD ALIGN=CENTER><font SIZE=2><b>x</b></font></TD>
+</TR>
+<TR VALIGN=TOP>
+<TD><font SIZ

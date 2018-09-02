@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WashAndGo.Models;
+using System.Collections.Generic;
 
 namespace WashAndGo.Controllers
 {
@@ -142,6 +143,25 @@ namespace WashAndGo.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            var model = new RegisterViewModel();
+
+             List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem
+            {
+                Text = "Lavador",
+                Value = "1"
+            });
+
+            items.Add(new SelectListItem
+            {
+                Text = "Cliente",
+                Value = "2"
+            });
+
+            SelectList s = new SelectList(items, "Value", "Text");
+
+            ViewBag.TipoList = s;          
+
             return View();
         }
 

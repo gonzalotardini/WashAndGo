@@ -1,125 +1,70 @@
-'use strict';
-angular.module("ngLocale", [], ["$provide", function($provide) {
-var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
-$provide.value("$locale", {
-  "DATETIME_FORMATS": {
-    "AMPMS": [
-      "\u4e0a\u5348",
-      "\u4e0b\u5348"
-    ],
-    "DAY": [
-      "\u661f\u671f\u65e5",
-      "\u661f\u671f\u4e00",
-      "\u661f\u671f\u4e8c",
-      "\u661f\u671f\u4e09",
-      "\u661f\u671f\u56db",
-      "\u661f\u671f\u4e94",
-      "\u661f\u671f\u516d"
-    ],
-    "ERANAMES": [
-      "\u516c\u5143\u524d",
-      "\u516c\u5143"
-    ],
-    "ERAS": [
-      "\u516c\u5143\u524d",
-      "\u516c\u5143"
-    ],
-    "FIRSTDAYOFWEEK": 6,
-    "MONTH": [
-      "\u4e00\u6708",
-      "\u4e8c\u6708",
-      "\u4e09\u6708",
-      "\u56db\u6708",
-      "\u4e94\u6708",
-      "\u516d\u6708",
-      "\u4e03\u6708",
-      "\u516b\u6708",
-      "\u4e5d\u6708",
-      "\u5341\u6708",
-      "\u5341\u4e00\u6708",
-      "\u5341\u4e8c\u6708"
-    ],
-    "SHORTDAY": [
-      "\u5468\u65e5",
-      "\u5468\u4e00",
-      "\u5468\u4e8c",
-      "\u5468\u4e09",
-      "\u5468\u56db",
-      "\u5468\u4e94",
-      "\u5468\u516d"
-    ],
-    "SHORTMONTH": [
-      "1\u6708",
-      "2\u6708",
-      "3\u6708",
-      "4\u6708",
-      "5\u6708",
-      "6\u6708",
-      "7\u6708",
-      "8\u6708",
-      "9\u6708",
-      "10\u6708",
-      "11\u6708",
-      "12\u6708"
-    ],
-    "STANDALONEMONTH": [
-      "\u4e00\u6708",
-      "\u4e8c\u6708",
-      "\u4e09\u6708",
-      "\u56db\u6708",
-      "\u4e94\u6708",
-      "\u516d\u6708",
-      "\u4e03\u6708",
-      "\u516b\u6708",
-      "\u4e5d\u6708",
-      "\u5341\u6708",
-      "\u5341\u4e00\u6708",
-      "\u5341\u4e8c\u6708"
-    ],
-    "WEEKENDRANGE": [
-      5,
-      6
-    ],
-    "fullDate": "y\u5e74M\u6708d\u65e5EEEE",
-    "longDate": "y\u5e74M\u6708d\u65e5",
-    "medium": "y\u5e74M\u6708d\u65e5 ah:mm:ss",
-    "mediumDate": "y\u5e74M\u6708d\u65e5",
-    "mediumTime": "ah:mm:ss",
-    "short": "y/M/d ah:mm",
-    "shortDate": "y/M/d",
-    "shortTime": "ah:mm"
-  },
-  "NUMBER_FORMATS": {
-    "CURRENCY_SYM": "\u00a5",
-    "DECIMAL_SEP": ".",
-    "GROUP_SEP": ",",
-    "PATTERNS": [
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 3,
-        "minFrac": 0,
-        "minInt": 1,
-        "negPre": "-",
-        "negSuf": "",
-        "posPre": "",
-        "posSuf": ""
-      },
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 2,
-        "minFrac": 2,
-        "minInt": 1,
-        "negPre": "-\u00a4",
-        "negSuf": "",
-        "posPre": "\u00a4",
-        "posSuf": ""
-      }
-    ]
-  },
-  "id": "zh",
-  "localeID": "zh",
-  "pluralCat": function(n, opt_precision) {  return PLURAL_CATEGORY.OTHER;}
-});
-}]);
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text-html; charset=Windows-1252">
+<title>IMSAdminReplication Interface Reference</title>
+<script language="JavaScript">
+
+    szNavVersion = navigator.appVersion
+
+    if (navigator.appName == "Microsoft Internet Explorer") {
+	if (szNavVersion.indexOf ("4.") >= 0) {
+	    document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie4.css">');
+	} else {
+	    document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie3.css">');
+	}
+    }
+    else if (navigator.appName == "Netscape") {
+	document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie4.css">');
+    }
+    else {
+	document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie3.css">');
+    }
+
+</script>
+<META NAME="DESCRIPTION" CONTENT="Internet Information Server reference information"></HEAD>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="Verdana, Arial, Helvetica">
+<h2><a name="_k2_imsadminreplication_interface_reference"></a>IMSAdminReplication Interface Reference</h2>
+<p>
+Any interfaces you create must implement the following <b>IMSAdminReplication </b>methods. </p>
+<table>
+<tr valign=top>
+<td>
+<b>Method</b></td>
+<td>
+<b>Description</b></td>
+</tr>
+<tr valign=top>
+<td>
+<a href="/iishelp/iis/htm/sdk/aire8acl.htm"><b>IMSAdminReplication::DeSerialize</b></a></td>
+<td>
+Receives data on the target computer that is provided by the <b>Serialize</b> method on the source computer.</td>
+</tr>
+<tr valign=top>
+<td>
+<a href="/iishelp/iis/htm/sdk/aire1vtx.htm"><b>IMSAdminReplication::GetSignature</b></a></td>
+<td>
+Provides your custom-designed signature that indicates the state of the data to be replicated.</td>
+</tr>
+<tr valign=top>
+<td>
+<a href="/iishelp/iis/htm/sdk/aire47ad.htm"><b>IMSAdminReplication::Propagate</b></a></td>
+<td>
+Called if signatures differ between source computer and target computer. Receives the name of the target computer so that you can transfer data.</td>
+</tr>
+<tr valign=top>
+<td>
+<a href="/iishelp/iis/htm/sdk/aire8ygi.htm"><b>IMSAdminReplication::Propagate2</b></a></td>
+<td>
+Called on the source computer after metabase replication is complete to a target computer. Receives the name of the target computer and signature comparison flag. Used for termination tasks.</td>
+</tr>
+<tr valign=top>
+<td>
+<a href="/iishelp/iis/htm/sdk/aire8xr9.htm"><b>IMSAdminReplication::Serialize</b></a></td>
+<td>
+Provides your data to be replicated by iissync.exe.</td>
+</tr>
+</table><br>
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishe

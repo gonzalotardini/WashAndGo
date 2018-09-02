@@ -1,143 +1,24 @@
-'use strict';
-angular.module("ngLocale", [], ["$provide", function($provide) {
-var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
-function getDecimals(n) {
-  n = n + '';
-  var i = n.indexOf('.');
-  return (i == -1) ? 0 : n.length - i - 1;
-}
-
-function getVF(n, opt_precision) {
-  var v = opt_precision;
-
-  if (undefined === v) {
-    v = Math.min(getDecimals(n), 3);
-  }
-
-  var base = Math.pow(10, v);
-  var f = ((n * base) | 0) % base;
-  return {v: v, f: f};
-}
-
-$provide.value("$locale", {
-  "DATETIME_FORMATS": {
-    "AMPMS": [
-      "AM",
-      "PM"
-    ],
-    "DAY": [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ],
-    "ERANAMES": [
-      "Before Christ",
-      "Anno Domini"
-    ],
-    "ERAS": [
-      "BC",
-      "AD"
-    ],
-    "FIRSTDAYOFWEEK": 0,
-    "MONTH": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ],
-    "SHORTDAY": [
-      "Sun",
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat"
-    ],
-    "SHORTMONTH": [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ],
-    "STANDALONEMONTH": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ],
-    "WEEKENDRANGE": [
-      5,
-      6
-    ],
-    "fullDate": "EEEE, d MMMM y",
-    "longDate": "d MMMM y",
-    "medium": "d MMM y HH:mm:ss",
-    "mediumDate": "d MMM y",
-    "mediumTime": "HH:mm:ss",
-    "short": "dd/MM/y HH:mm",
-    "shortDate": "dd/MM/y",
-    "shortTime": "HH:mm"
-  },
-  "NUMBER_FORMATS": {
-    "CURRENCY_SYM": "\u20ac",
-    "DECIMAL_SEP": ",",
-    "GROUP_SEP": ".",
-    "PATTERNS": [
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 3,
-        "minFrac": 0,
-        "minInt": 1,
-        "negPre": "-",
-        "negSuf": "",
-        "posPre": "",
-        "posSuf": ""
-      },
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 2,
-        "minFrac": 2,
-        "minInt": 1,
-        "negPre": "-\u00a4",
-        "negSuf": "",
-        "posPre": "\u00a4",
-        "posSuf": ""
-      }
-    ]
-  },
-  "id": "en-de",
-  "localeID": "en_DE",
-  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
-});
-}]);
+..."""".#.@.........0....
+000009a0    005dea00 008c0008 00000000 00000000 00000000 00510000 00000000 002d0000 \ .]...................Q.......-..
+000009c0    00000000 00030000 00000000 000d0001 00db0480 1900dbd3 00002222 2222b823 \ .........................."""".#
+000009e0    e540670f 00000900 0000f020 00129000 005dea00 000c0000 00000000 00000000 \ .@g........ .....]..............
+00000a00    00000000 004e0100 00000000 000d0001 00dc0480 1900dcd3 00002222 2222b823 \ .....N...................."""".#
+00000a20    e540ba12 00000900 0000f020 00129000 005dea00 000c0000 00000000 00000000 \ .@......... .....]..............
+00000a40    00000000 00020000 00000000 000d0001 00dd0480 1900ddd3 00002222 2222b823 \ .........................."""".#
+00000a60    e540570f 00000d00 0000f030 00129000 005dea00 000c0008 00080000 00000000 \ .@W........0.....]..............
+00000a80    00000000 00820100 00000000 00480000 00000000 00010000 00000000 000d0001 \ .............H..................
+00000aa0    00de0480 1900ded3 00002222 2222b823 e540520f 00000d00 0000f020 00129000 \ .........."""".#.@R........ ....
+00000ac0    005dea00 000c0000 00000000 00000000 00000000 00440000 00000000 000d0001 \ .]...................D..........
+00000ae0    00df0480 1900dfd3 00002222 2222b823 e5404d0f 00000d00 0000f030 00129000 \ .........."""".#.@M........0....
+00000b00    005dea00 004c0000 00080000 00000000 00000000 00611000 00000000 00ac0100 \ .]...L...............a..........
+00000b20    00000000 00040100 00000000 000d0001 00e00480 1900e0d3 00002222 2222b823 \ .........................."""".#
+00000b40    e5404e0f 00000d00 0000f030 00129000 005dea00 000c0008 00080000 00000000 \ .@N........0.....]..............
+00000b60    00000000 00740500 00000000 005d0000 00000000 00250300 00000000 000d0001 \ .....t.......].......%..........
+00000b80    00e10480 1900e1d3 00002222 2222b823 e5404b0f 00000d00 0000f028 00129000 \ .........."""".#.@K........(....
+00000ba0    005dea00 000c0008 00000000 00000000 00000000 00350100 00000000 00050000 \ .]...................5..........
+00000bc0    00000000 000d0001 00e20480 1900e2d3 00002222 2222b823 e5405d0f 00000d00 \ .................."""".#.@].....
+00000be0    0000f020 00129000 0060ea00 000c0000 00000000 00000000 00000000 00010000 \ ... .....`......................
+00000c00    00000000 000d0001 00e30480 1900e3d3 00002222 2222b823 e540540f 00000d00 \ .................."""".#.@T.....
+00000c20    0000f030 00129000 005dea00 004c0008 00000000 00000000 00000000 003c0100 \ ...0.....]...L...............<..
+00000c40    00000000 008b0200 00000000 001a0000 00000000 000d0001 00e40480 1900e4d3 \ ................................
+00000c60    00002222 2222b823 e5408c0e 00000d00 0000f028 00129000 0

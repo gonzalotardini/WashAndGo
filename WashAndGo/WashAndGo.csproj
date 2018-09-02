@@ -218,12 +218,16 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="img\3.jpg" />
-    <Content Include="img\6.JPG" />
-    <Content Include="img\autos.JPG" />
-    <Content Include="img\Capture.JPG" />
-    <Content Include="img\fondo.JPG" />
-    <Content Include="img\login.jpg" />
+    <Content Include="img\bg_Cover.jpg" />
+    <Content Include="img\calidad.png" />
+    <Content Include="img\comodidad.PNG" />
+    <Content Include="img\ecofriendly.png" />
+    <Content Include="img\favicon.ico" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\mano.JPG" />
+    <Content Include="img\servicio básico.jpg" />
+    <Content Include="img\servicio-estándar.jpg" />
+    <Content Include="img\servicio-premium.jpg" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -1090,6 +1094,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="SPA\Conrollers\" />
+    <Folder Include="SPA\Services\" />
+    <Folder Include="SPA\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

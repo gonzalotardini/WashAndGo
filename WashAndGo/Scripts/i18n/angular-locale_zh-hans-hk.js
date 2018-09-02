@@ -1,125 +1,79 @@
-'use strict';
-angular.module("ngLocale", [], ["$provide", function($provide) {
-var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
-$provide.value("$locale", {
-  "DATETIME_FORMATS": {
-    "AMPMS": [
-      "\u4e0a\u5348",
-      "\u4e0b\u5348"
-    ],
-    "DAY": [
-      "\u661f\u671f\u65e5",
-      "\u661f\u671f\u4e00",
-      "\u661f\u671f\u4e8c",
-      "\u661f\u671f\u4e09",
-      "\u661f\u671f\u56db",
-      "\u661f\u671f\u4e94",
-      "\u661f\u671f\u516d"
-    ],
-    "ERANAMES": [
-      "\u516c\u5143\u524d",
-      "\u516c\u5143"
-    ],
-    "ERAS": [
-      "\u516c\u5143\u524d",
-      "\u516c\u5143"
-    ],
-    "FIRSTDAYOFWEEK": 6,
-    "MONTH": [
-      "\u4e00\u6708",
-      "\u4e8c\u6708",
-      "\u4e09\u6708",
-      "\u56db\u6708",
-      "\u4e94\u6708",
-      "\u516d\u6708",
-      "\u4e03\u6708",
-      "\u516b\u6708",
-      "\u4e5d\u6708",
-      "\u5341\u6708",
-      "\u5341\u4e00\u6708",
-      "\u5341\u4e8c\u6708"
-    ],
-    "SHORTDAY": [
-      "\u5468\u65e5",
-      "\u5468\u4e00",
-      "\u5468\u4e8c",
-      "\u5468\u4e09",
-      "\u5468\u56db",
-      "\u5468\u4e94",
-      "\u5468\u516d"
-    ],
-    "SHORTMONTH": [
-      "1\u6708",
-      "2\u6708",
-      "3\u6708",
-      "4\u6708",
-      "5\u6708",
-      "6\u6708",
-      "7\u6708",
-      "8\u6708",
-      "9\u6708",
-      "10\u6708",
-      "11\u6708",
-      "12\u6708"
-    ],
-    "STANDALONEMONTH": [
-      "\u4e00\u6708",
-      "\u4e8c\u6708",
-      "\u4e09\u6708",
-      "\u56db\u6708",
-      "\u4e94\u6708",
-      "\u516d\u6708",
-      "\u4e03\u6708",
-      "\u516b\u6708",
-      "\u4e5d\u6708",
-      "\u5341\u6708",
-      "\u5341\u4e00\u6708",
-      "\u5341\u4e8c\u6708"
-    ],
-    "WEEKENDRANGE": [
-      5,
-      6
-    ],
-    "fullDate": "y\u5e74M\u6708d\u65e5EEEE",
-    "longDate": "y\u5e74M\u6708d\u65e5",
-    "medium": "y\u5e74M\u6708d\u65e5 ah:mm:ss",
-    "mediumDate": "y\u5e74M\u6708d\u65e5",
-    "mediumTime": "ah:mm:ss",
-    "short": "d/M/yy ah:mm",
-    "shortDate": "d/M/yy",
-    "shortTime": "ah:mm"
-  },
-  "NUMBER_FORMATS": {
-    "CURRENCY_SYM": "$",
-    "DECIMAL_SEP": ".",
-    "GROUP_SEP": ",",
-    "PATTERNS": [
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 3,
-        "minFrac": 0,
-        "minInt": 1,
-        "negPre": "-",
-        "negSuf": "",
-        "posPre": "",
-        "posSuf": ""
-      },
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 2,
-        "minFrac": 2,
-        "minInt": 1,
-        "negPre": "-\u00a4",
-        "negSuf": "",
-        "posPre": "\u00a4",
-        "posSuf": ""
-      }
-    ]
-  },
-  "id": "zh-hans-hk",
-  "localeID": "zh_Hans_HK",
-  "pluralCat": function(n, opt_precision) {  return PLURAL_CATEGORY.OTHER;}
-});
-}]);
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text-html; charset=Windows-1252">
+<title>IIsFilter</title>
+<script language="JavaScript">
+
+    szNavVersion = navigator.appVersion
+
+    if (navigator.appName == "Microsoft Internet Explorer") {
+	if (szNavVersion.indexOf ("4.") >= 0) {
+	    document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie4.css">');
+	} else {
+	    document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie3.css">');
+	}
+    }
+    else if (navigator.appName == "Netscape") {
+	document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie4.css">');
+    }
+    else {
+	document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/spidie3.css">');
+    }
+
+</script>
+<META NAME="DESCRIPTION" CONTENT="Internet Information Server reference information"></HEAD>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000>
+<font face="Verdana, Arial, Helvetica">
+<h3><a name="_k2_iisfilter"></a>IIsFilter</h3>
+<p>
+You can use the <b>IIsFilter</b> object to set metabase properties that affect the operation of ISAPI filters. You can set filter properties at the WebService level or at an individual Web server. </p>
+<p>
+The <b>IIsFilter</b> object is an ADSI object, but not an ADSI container object. </p>
+<h4>ADsPath</h4>
+<p>
+IIS://<i>MachineName</i>/W3SVC/Filters/<i>FilterName</i></p>
+<p>
+Where <i>MachineName </i>can be any name or &quot;LocalHost&quot;.</p>
+<p>
+or</p>
+<p>
+IIS://<i>MachineName</i>/W3SVC/<i>n</i>/Filters/<i>FilterName</i></p>
+<p>
+Where <i>MachineName </i>can be any name or &quot;LocalHost&quot;, and <i>n</i> is the number of a Web server.</p>
+<h4>Syntax</h4>
+<pre><i>varReturn </i><b>= </b><i>object</i><b>.</b>{<i>Method</i>}
+ </pre>
+<h4>Parts</h4>
+<dl>
+<dt>
+<i>varReturn</i></dt>
+<dd>
+A variable that receives the return value from the method.<br>
+</dd>
+<dt>
+<i>object</i></dt>
+<dd>
+A variable that contains the <b>IIsFilter</b> object, usually as a result of a previous <b>GetObject</b> operation.<br>
+</dd>
+<dt>
+<i>Method</i></dt>
+<dd>
+The object method chosen.</dd>
+</dl>
+<h4>Properties</h4>
+<p>
+<a href="/iishelp/iis/htm/sdk/aoii57hv.htm"><b>ADSI Object Properties</b></a></p>
+<b>Metabase Properties</b>
+<table>
+<tr valign=top>
+<td>
+<a href="/iishelp/iis/htm/sdk/arpr4mcu.htm"><b>FilterDescription</b></a></td>
+<td>
+<a href="/iishelp/iis/htm/sdk/arpr9mk4.htm"><b>NotifyNonSecurePort</b></a></td>
+</tr>
+<tr valign=top>
+<td>
+<a href="/iishelp/iis/htm/sdk/arpr799g.htm"><b>FilterEnabled</b></a></td>
+<td>
+<a href="/iishelp/iis/htm/sdk/arpr8mco.htm"><b>NotifyOrderHigh</b></a

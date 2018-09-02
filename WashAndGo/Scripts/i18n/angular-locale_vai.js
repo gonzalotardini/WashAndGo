@@ -1,143 +1,83 @@
-'use strict';
-angular.module("ngLocale", [], ["$provide", function($provide) {
-var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
-function getDecimals(n) {
-  n = n + '';
-  var i = n.indexOf('.');
-  return (i == -1) ? 0 : n.length - i - 1;
-}
+////////////////////////////////////////////////////////////////////////////
+// Implementatation of CoolHeadLines class
+//
+// The main applet.
+// 
+// This is a part of the Internet Information Server SDK Samples
+// Copyright (C) 1997 Microsoft Corporation
+// All rights reserved.
+//
+// This source code is only intended as a supplement to the Software 
+// Development Kit Reference and related electronic documentation provided.
+//
+////////////////////////////////////////////////////////////////////////////
 
-function getVF(n, opt_precision) {
-  var v = opt_precision;
+import java.applet.*;
+import java.awt.*;
+import java.util.*;
+import java.net.*;
+import TextJump;
+import DoubleBuffer;
 
-  if (undefined === v) {
-    v = Math.min(getDecimals(n), 3);
-  }
+public class CoolHeadLines extends Applet implements Runnable
+{
+	// constants to gather data from <param> tags
+	private final String	PARAM_BackColor = "BackColor";
+	private final String	PARAM_TextColor = "TextColor";
+	private final String	PARAM_HiliteTextColor = "HiliteTextColor";
+	private final String	PARAM_ScrollDelay = "ScrollDelay";
+	private final String	PARAM_MessageDelay = "MessageDelay";
+	private final String	PARAM_NumItems = "NumItems";
+	private final String	PARAM_URLPrefix = "URLPrefix";
 
-  var base = Math.pow(10, v);
-  var f = ((n * base) | 0) % base;
-  return {v: v, f: f};
-}
+	// data from <param> tags
+	private Color			m_colBackColor;
+	private Color			m_colTextColor;
+	private Color			m_colHiliteTextColor;
+	private int				m_iScrollDelay = 10;
+	private int				m_iMessageDelay = 4;
+	private int				m_iNumItems;
+	private String			m_strURLPrefix;
 
-$provide.value("$locale", {
-  "DATETIME_FORMATS": {
-    "AMPMS": [
-      "AM",
-      "PM"
-    ],
-    "DAY": [
-      "\ua55e\ua54c\ua535",
-      "\ua5f3\ua5e1\ua609",
-      "\ua55a\ua55e\ua55a",
-      "\ua549\ua55e\ua552",
-      "\ua549\ua524\ua546\ua562",
-      "\ua549\ua524\ua540\ua56e",
-      "\ua53b\ua52c\ua533"
-    ],
-    "ERANAMES": [
-      "BCE",
-      "CE"
-    ],
-    "ERAS": [
-      "BCE",
-      "CE"
-    ],
-    "FIRSTDAYOFWEEK": 0,
-    "MONTH": [
-      "\ua5a8\ua56a\ua583 \ua51e\ua56e",
-      "\ua552\ua561\ua59d\ua595",
-      "\ua57e\ua5ba",
-      "\ua5a2\ua595",
-      "\ua591\ua571",
-      "6",
-      "7",
-      "\ua5db\ua515",
-      "\ua562\ua54c",
-      "\ua56d\ua583",
-      "\ua51e\ua60b\ua554\ua57f \ua578\ua583\ua5cf",
-      "\ua5a8\ua56a\ua571 \ua5cf\ua56e"
-    ],
-    "SHORTDAY": [
-      "\ua55e\ua54c\ua535",
-      "\ua5f3\ua5e1\ua609",
-      "\ua55a\ua55e\ua55a",
-      "\ua549\ua55e\ua552",
-      "\ua549\ua524\ua546\ua562",
-      "\ua549\ua524\ua540\ua56e",
-      "\ua53b\ua52c\ua533"
-    ],
-    "SHORTMONTH": [
-      "\ua5a8\ua56a\ua583 \ua51e\ua56e",
-      "\ua552\ua561\ua59d\ua595",
-      "\ua57e\ua5ba",
-      "\ua5a2\ua595",
-      "\ua591\ua571",
-      "6",
-      "7",
-      "\ua5db\ua515",
-      "\ua562\ua54c",
-      "\ua56d\ua583",
-      "\ua51e\ua60b\ua554\ua57f \ua578\ua583\ua5cf",
-      "\ua5a8\ua56a\ua571 \ua5cf\ua56e"
-    ],
-    "STANDALONEMONTH": [
-      "\ua5a8\ua56a\ua583 \ua51e\ua56e",
-      "\ua552\ua561\ua59d\ua595",
-      "\ua57e\ua5ba",
-      "\ua5a2\ua595",
-      "\ua591\ua571",
-      "6",
-      "7",
-      "\ua5db\ua515",
-      "\ua562\ua54c",
-      "\ua56d\ua583",
-      "\ua51e\ua60b\ua554\ua57f \ua578\ua583\ua5cf",
-      "\ua5a8\ua56a\ua571 \ua5cf\ua56e"
-    ],
-    "WEEKENDRANGE": [
-      5,
-      6
-    ],
-    "fullDate": "EEEE, d MMMM y",
-    "longDate": "d MMMM y",
-    "medium": "d MMM y h:mm:ss a",
-    "mediumDate": "d MMM y",
-    "mediumTime": "h:mm:ss a",
-    "short": "dd/MM/y h:mm a",
-    "shortDate": "dd/MM/y",
-    "shortTime": "h:mm a"
-  },
-  "NUMBER_FORMATS": {
-    "CURRENCY_SYM": "$",
-    "DECIMAL_SEP": ".",
-    "GROUP_SEP": ",",
-    "PATTERNS": [
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 3,
-        "minFrac": 0,
-        "minInt": 1,
-        "negPre": "-",
-        "negSuf": "",
-        "posPre": "",
-        "posSuf": ""
-      },
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 2,
-        "minFrac": 2,
-        "minInt": 1,
-        "negPre": "-\u00a4",
-        "negSuf": "",
-        "posPre": "\u00a4",
-        "posSuf": ""
-      }
-    ]
-  },
-  "id": "vai",
-  "localeID": "vai",
-  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
-});
-}]);
+	private Thread			m_CoolHeadLines = null;				// worker thread
+	private Dimension		m_dimAppletSize;					// size of the containing applet
+	private Vector			m_vectData=null;					// vector of TextJump objects
+	private Font			m_font;								// font to draw text with
+	private FontMetrics		m_fm;								// size of the font
+	private int				m_iFontHeight;						// maximum height of font
+	private DoubleBuffer	m_buff=null;						// off-screen buffer
+	private boolean			m_fStoppedScrolling = false;		// has the image stopped scrolling (when true mouse-clicks are active)
+	private int				m_iCurrentMessage = -1;				// what's the current message at the bottom of the screen?
+	private int				m_iMaxMessage=0;						// how many messages can the applet display at once?
+	private int				m_iOldMessageSelected = -1;			// what was the last message the mouse moved over?
+	private int				m_iOldMessageSelectedYOffset = -1;	// what was the last message location on screen?
+
+	////////////////////////////////////////////////////////////////////////////
+	// ctor
+	public CoolHeadLines()
+	{
+		// set some default colors
+		m_colBackColor =	   new Color(255,255,128);
+		m_colTextColor = 	   new Color(0,0,0);
+		m_colHiliteTextColor = new Color(255,0,0);
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// getAppletInfo
+	// info about this applet
+	public String getAppletInfo()
+	{
+		return "Name: CoolHeadLines\r\n" +
+		       "Author: Michael Howard (mikehow@microsoft.com)\r\n" +
+		       "Created with Microsoft Visual J++ Version 1.1";
+	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// getParameterInfo
+	// <param> info
+	public String[][] getParameterInfo()
+	{
+		String[][] info =
+		{
+			{ PARAM_BackColor,			"String",	"Background Color" },
+			{ PARAM_TextColor,			"String",	"Text Color" 

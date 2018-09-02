@@ -3,18 +3,28 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Wash & Go!</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.ico">
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
     <style>
         .navbar-inverse {
-            background-color: #4285f4 !important;
+            background-color: #003359;
             border-color: transparent;
             padding: 0.5%;
             background-size: 2000px 400px;
         }
 
+        .navbar-nav {
+            float: left;
+            margin: 1.3%;
+        }
 
             .navbar-inverse .navbar-nav > li > a {
                 color: white;
@@ -22,21 +32,33 @@
                 font-size: 16px;
             }
 
-            .navbar-inverse .navbar-nav > li:hover > a{
-                color: white;                
-              
-                font-weight:bold;
+            .navbar-inverse .navbar-nav > li:hover > a {
+                color: white;
+                font-weight: bold;
             }
 
             .navbar-inverse .navbar-brand {
                 color: white;
                 font-family: 'Roboto','Heebo',Arial,sans-serif;
             }
+
+        footer {
+            padding: 5%;
+            background-color: #1f1f1f;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
     </style>
 
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link href="~/Content/footer.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    
 
 </head>
 <body>
@@ -48,11 +70,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Wash & Go!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                <a href="/home/index" class="navbar-left"><img style="width:150px;" src="~/img/logo.png"/></a>
+
+                @*@Html.ActionLink("Wash & Go!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    <li><a href="#mision">Quiénes Somos</a></li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
@@ -74,51 +100,6 @@
     @RenderSection("scripts", required: false)
 </body>
 
-<div class="row">
-    <footer id="myFooter">
-        <div class="container">
-            <div class="col-sm-3 myCols">
-                <h5>Get started</h5>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Sign up</a></li>
-                    <li><a href="#">Downloads</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-3 myCols">
-                <h5>About us</h5>
-                <ul>
-                    <li><a href="#">Company Information</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Reviews</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-3 myCols">
-                <h5>Support</h5>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Help desk</a></li>
-                    <li><a href="#">Forums</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-3 myCols">
-                <h5>Legal</h5>
-                <ul>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Terms of Use</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
-        </div>
-</div>
-<div class="social-networks">
-    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-    <a href="#" class="facebook"><i class="fa fa-facebook-official"></i></a>
-    <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
-</div>
-<div class="footer-copyright">
-    <p>© 2016 Copyright Text </p>
-</div>
-</footer>
 
 </html>
+

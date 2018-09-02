@@ -1,143 +1,69 @@
-'use strict';
-angular.module("ngLocale", [], ["$provide", function($provide) {
-var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
-function getDecimals(n) {
-  n = n + '';
-  var i = n.indexOf('.');
-  return (i == -1) ? 0 : n.length - i - 1;
-}
-
-function getVF(n, opt_precision) {
-  var v = opt_precision;
-
-  if (undefined === v) {
-    v = Math.min(getDecimals(n), 3);
-  }
-
-  var base = Math.pow(10, v);
-  var f = ((n * base) | 0) % base;
-  return {v: v, f: f};
-}
-
-$provide.value("$locale", {
-  "DATETIME_FORMATS": {
-    "AMPMS": [
-      "AM",
-      "PM"
-    ],
-    "DAY": [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ],
-    "ERANAMES": [
-      "Before Christ",
-      "Anno Domini"
-    ],
-    "ERAS": [
-      "BC",
-      "AD"
-    ],
-    "FIRSTDAYOFWEEK": 0,
-    "MONTH": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ],
-    "SHORTDAY": [
-      "Sun",
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat"
-    ],
-    "SHORTMONTH": [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ],
-    "STANDALONEMONTH": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ],
-    "WEEKENDRANGE": [
-      5,
-      6
-    ],
-    "fullDate": "EEEE, d MMMM y",
-    "longDate": "d MMMM y",
-    "medium": "d MMM y HH:mm:ss",
-    "mediumDate": "d MMM y",
-    "mediumTime": "HH:mm:ss",
-    "short": "dd/MM/y HH:mm",
-    "shortDate": "dd/MM/y",
-    "shortTime": "HH:mm"
-  },
-  "NUMBER_FORMATS": {
-    "CURRENCY_SYM": "MURs",
-    "DECIMAL_SEP": ".",
-    "GROUP_SEP": ",",
-    "PATTERNS": [
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 3,
-        "minFrac": 0,
-        "minInt": 1,
-        "negPre": "-",
-        "negSuf": "",
-        "posPre": "",
-        "posSuf": ""
-      },
-      {
-        "gSize": 3,
-        "lgSize": 3,
-        "maxFrac": 0,
-        "minFrac": 0,
-        "minInt": 1,
-        "negPre": "-\u00a4",
-        "negSuf": "",
-        "posPre": "\u00a4",
-        "posSuf": ""
-      }
-    ]
-  },
-  "id": "en-mu",
-  "localeID": "en_MU",
-  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
-});
-}]);
+ntGuid>{D42CF7EF-DE92-473E-8B6C-621EA663113A}</EventGuid>
+ </ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+ <System>
+  <Provider Name="WWW Server" Guid="{3A2A4E84-4C21-4981-AE10-3FDA0D9B0F83}"/>
+  <EventID>0</EventID>
+  <Version>1</Version>
+  <Level>4</Level>
+  <Opcode>47</Opcode>
+  <Keywords>0x0</Keywords>
+  <TimeCreated SystemTime="2018-08-22T23:33:49.366Z"/>
+  <Correlation ActivityID="{80000058-0001-F500-B63F-84710C7967BB}"/>
+  <Execution ProcessID="6252" ThreadID="19132"/>
+  <Computer>AR5CG5060K8D</Computer>
+ </System>
+ <EventData>
+  <Data Name="ContextId">{80000058-0001-F500-B63F-84710C7967BB}</Data>
+  <Data Name="Headers">Accept-Ranges: bytes
+ETag: &quot;2a828db59a35d41:0&quot;
+Server: Microsoft-IIS/10.0
+X-SourceFiles: =?UTF-8?B?QzpcV2FzaEFuZEdvXFdhc2hBbmRHb1xTY3JpcHRzXGpxdWVyeS52YWxpZGF0ZS5qcw==?=
+X-Powered-By: ASP.NET
+</Data>
+ </EventData>
+ <RenderingInfo Culture="es-AR">
+  <Opcode>GENERAL_RESPONSE_HEADERS</Opcode>
+ </RenderingInfo>
+ <ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+  <EventGuid>{D42CF7EF-DE92-473E-8B6C-621EA663113A}</EventGuid>
+ </ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+ <System>
+  <Provider Name="WWW Server" Guid="{3A2A4E84-4C21-4981-AE10-3FDA0D9B0F83}"/>
+  <EventID>0</EventID>
+  <Version>1</Version>
+  <Level>4</Level>
+  <Opcode>36</Opcode>
+  <Keywords>0x0</Keywords>
+  <TimeCreated SystemTime="2018-08-22T23:33:49.366Z"/>
+  <Correlation ActivityID="{80000058-0001-F500-B63F-84710C7967BB}"/>
+  <Execution ProcessID="6252" ThreadID="19132"/>
+  <Computer>AR5CG5060K8D</Computer>
+ </System>
+ <EventData>
+  <Data Name="ContextId">{80000058-0001-F500-B63F-84710C7967BB}</Data>
+  <Data Name="BytesSent">263</Data>
+  <Data Name="ErrorCode">0</Data>
+ </EventData>
+ <RenderingInfo Culture="es-AR">
+  <Opcode>GENERAL_FLUSH_RESPONSE_END</Opcode>
+  <freb:Description Data="ErrorCode">The operation completed successfully. (0x0)</freb:Description>
+ </RenderingInfo>
+ <ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+  <EventGuid>{D42CF7EF-DE92-473E-8B6C-621EA663113A}</EventGuid>
+ </ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+ <System>
+  <Provider Name="WWW Server" Guid="{3A2A4E84-4C21-4981-AE10-3FDA0D9B0F83}"/>
+  <EventID>0</EventID>
+  <Version>1</Version>
+  <Level>0</Level>
+  <Opcode>2</Opcode>
+  <Keywords>0x0</Keywords>
+  <TimeCreated SystemTime="2018-08-22T23:33:49.366Z"/>
+  <Correlation ActivityID="{80000058-0001-F500-B63F-84710C7967BB}"/>
+  <Execution Pr

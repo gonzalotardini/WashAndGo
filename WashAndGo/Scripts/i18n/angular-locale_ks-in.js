@@ -138,6 +138,4 @@ $provide.value("$locale", {
   },
   "id": "ks-in",
   "localeID": "ks_IN",
-  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
-});
-}]);
+  "pluralCat": f diferente en otro lugar de la estructura de directorios. De forma alternativa, puede utilizar el mismo nombre de archivo en cada directorio, pero con contenidos diferentes dependien

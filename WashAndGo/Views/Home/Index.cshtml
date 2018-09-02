@@ -2,15 +2,13 @@
     ViewBag.Title = "Home Page";
 }
 
-<style>
-    #jumbo1 {
-        background-image: url('../../img/3.jpg');
-        margin-top: 6%;
-        padding: 10%;
-    }
+<head>
 
+    <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.ico">
+</head>
+<style>
     body {
-        background-color: #e8e7e5;
+        background: white;
     }
 
     #inicialTitle {
@@ -22,70 +20,131 @@
         margin-left: 20%;
     }
 
-    #jumbo2 {
-        background-image: url('../../img/autos.JPG');
-        padding: 15%;
-    }
 
-    #article {
-        background: white;
+
+    #mision {
+        font-family: 'Century Gothic';
+        font-size: 22px;
         text-align: center;
+        margin-bottom: 6%;
     }
 
-    #fotoDetales {
-        border-radius: 50%;
-        WIDTH: 100%;
+    h2 {
+        text-align: center;
+        font-family: 'Century Gothic';
+        font-size: 30px;
+        color: #1487eb;
+        text-align: center;
+        margin-bottom: 4%;
+    }
+
+    h3 {
+        text-align: center;
+        font-family: 'Century Gothic';
+        font-size: 20px;
+        color: #003359;
+        text-align: center;
+        font-weight: bold;
+    }
+
+
+    #fotoPrincipal {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url('../../img/bg_Cover.jpg');
+        padding: 10%;
+    }
+
+    #tituloPrincipal {
+        color: white;
+        text-align: center;
+        font-family: 'Century Gothic';
+        font-weight: bold;
+        font-size: 60px;
+        text-shadow: 2px 2px #010101;
+    }
+
+    #tituloSecundario {
+        color: white;
+        text-align: center;
+        font-family: 'Century Gothic';
+        font-weight: bold;
+        text-shadow: 2px 2px #010101;
+    }
+
+    #QuienesSomos {
+        margin-top: 2%;
+    }
+
+    .jumbotron {
+        background: white;
+    }
+
+    #servicios { /*fotos*/
+        box-shadow: 4px 3px 13px 0px black
     }
 </style>
 
-<div class="jumbotron" id="jumbo1" style="text-align: center;color:azure;text-shadow: 6px 6px black; position: relative;display: block;">
 
+<div id="fotoPrincipal" class="row">
 
-    <h1 id="inicialTitle" style=" font-size:103px; color:#ffad29">Wash & Go!</h1>
-
+    <h1 id="tituloPrincipal">LAVAMOS TU AUTO DONDE SEA QUE ESTÉS</h1>
+    <h3 id="tituloSecundario">No te muevas de tu casa, nosotros llegamos y lavamos tu auto.</h3>
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+        <a href="/account/register" style="margin-top: 5%;" class="btn btn-info btn-lg">¡Solicitá tu lavado!</a>
+    </div>
 </div>
+
+
 
 <div class="container">
 
-    <div id="jumbo2" class="jumbotron">
-
-    </div>
-
-    <article class="col-md-3 jumbotron">
-        
-        <img id="fotoDetales" src="~/img/Capture.JPG" />
-    </article>
-    <article class="col-md-3 jumbotron">
-       
-        <img id="fotoDetales" src="~/img/Capture.JPG" />d
-    </article>
-    <article class="col-md-3 jumbotron">
-      
-        <img id="fotoDetales" src="~/img/Capture.JPG" />
-    </article>
-    
-
-
-
-
-
-    <div class="row">
-        <div class="col-md-6 jumbotron">
-            <h2>Misión</h2>
-            <p>
-                Brindarle la facilidad de contratar un servicio de lavado automotor a cualquier residente argentino que sea amante de su auto y desee mantenerlo siempre limpio y vistoso, asegurando calidad de servicio y tranquilidad.
+    <div class="row" id="QuienesSomos" style="background-color:white;">
+        <div class="col-md-12 jumbotron">
+            <h2>¿Quiénes Somos?</h2>
+            <p id="mision">
+                Brindar la facilidad de contratar un servicio de lavado automotor a domicilio a cualquier residente argentino que sea amante de su auto y desee mantenerlo siempre limpio y vistoso, asegurando calidad de servicio y tranquilidad.
             </p>
 
+            <div class="col-md-4 text-center">
+                <img src="~/img/calidad.png" style="height:200px; width:200px;" />
+                <h3>CALIDAD</h3>
+                <p style="font-family:'Century Gothic'">Profesionales capacitados, productos de primera calidad y respuesta inmediata.</p>
+            </div>
+
+
+            <div class="col-md-4 text-center">
+                <img src="~/img/comodidad.PNG" style="height:200px; width:200px;" />
+                <h3>COMODIDAD</h3>
+                <p style="font-family:'Century Gothic'">Sin moverte de donde estés y con solo un click, llegamos.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="~/img/ecofriendly.png" style="height:200px; width:200px;" />
+                <h3>ECO-FRIENDLY</h3>
+                <p style="font-family:'Century Gothic'">Ahorramos el consumo de agua y utilizamos productos ecológicos.</p>
+            </div>
+
         </div>
-        <div class="col-md-6 jumbotron">
-            <h2>Visión</h2>
-            <p>Poder ofrecer el servicio de lavado a domicilio a lo largo y a la ancho de todo el país en un lapso menor a 10 años, logrando que la gran mayoría de lavados automotor se realicen a través de nuestra plataforma. Además, lograr que todos los lavadores autónomos del país utilicen nuestra aplicación.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-12 jumbotron" style="background:#1487eb">
+            <h2 style="color:white; font-family:'Century Gothic'; font-size:30px">Nuestros Servicios</h2>
+            <p style="color:white; font-family:'Century Gothic'; text-align:center; font-size:22px;margin-top: -2%;">¡No más tiempos de espera antes y durante el lavado de tu auto! Ofrecemos tres servicios que se acomodan a tus necesidades, solicitá el tuyo.</p>
+
+            <div class="col-md-4 text-center">
+                <img id="servicios" src="~/img/servicio básico.jpg" />
+            </div>
+            <div class="col-md-4 text-center">
+                <img id="servicios" src="~/img/servicio-estándar.jpg" />
+                
+            </div>
+            <div class="col-md-4 text-center">
+                <img id="servicios" src="~/img/servicio-premium.jpg" />
+            </div>
+
         </div>
-        @*<div class="col-md-4 jumbotron">
-                <h2>Web Hosting</h2>
-                <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-            </div>*@
+
     </div>
 
 </div>

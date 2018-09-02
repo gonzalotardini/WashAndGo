@@ -22,9 +22,10 @@
         </div>
 
         <div class="form-group">
-            @Html.DropDownList(m => m.Email, new { @class = "col-md-2 control-label" })*@
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.LabelFor(x => Model.SelectedTipo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+               @Html.DropDownListFor(x => x.SelectedTipo, ViewBag.TipoList as SelectList, " ", new { id = "TipoList", @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.SelectedTipo, "", new { @class = "text-danger" })
             </div>
         </div>
 
