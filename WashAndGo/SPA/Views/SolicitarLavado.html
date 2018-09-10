@@ -98,6 +98,9 @@
                         <button type="button" ng-click="ActualizarUbicacion(Direccion)" class="btn btn-info">
                             <span class="glyphicon glyphicon-search"></span> 
                         </button>
+                        <div ng-show="ErrorDireccion" class="alert alert-danger">
+                            <strong>Error!</strong> La dirección introducida es incorrecta. Intente nuevamente.
+                        </div>
                         
                     </div>
                    
