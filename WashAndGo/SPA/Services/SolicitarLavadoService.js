@@ -63,6 +63,21 @@
 
     };
 
+    service.CrearSolicitud = function (idSegmento, idServicio) {
+        var promise = $http({
+            method: 'post',
+            url: '/SolicitarLavado/obtenerTotal',
+            params: {
+                idSegmento: idSegmento,
+                idServicio: idServicio
+            }
+        });
+
+        return $q.when(promise);
+
+    };
+
+
 
     return service;
 })

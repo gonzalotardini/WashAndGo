@@ -57,7 +57,7 @@
                 <h5 style="text-align:left; font-weight:bold;">Elegí marca y modelo del vehiculo a lavar</h5>
 
                 <div class="form-group">
-                    <select ng-model="Marca" ng-change="ObtenerModelos(Marca); limpiarSegmentoMarca()" class="form-control" id="sel1">
+                    <select ng-model="Marca" ng-change="ObtenerModelos(Marca); limpiarSegmentoMarca()" class="form-control" id="sel1" required>
                         <option value="" disabled selected>Seleccione Marca</option>
                         <option ng-repeat="x in Marcas" value="{{x.IdMarca}} ">{{x.Descripcion}}</option>
                     </select>
@@ -124,9 +124,17 @@
                 <div class="col-md-6 text-center">
                     <h2 style="font-weight:bold;">Total</h2>
                     <h2>$ {{Total}}</h2>
-                </div>
+                   
+                </div>               
 
             </div>
+
+            <div class="col-md-12 row text-center" style="margin-top:5%;">
+                <button  type="button" ng-click="CrearSolicitud(Marca,Modelo)" class="btn btn-lg btn-danger" style="font-family:'Century Gothic';width:50%;font-size: 26px;">
+                    <span class="glyphicon glyphicon-ok"></span> Solicitar Lavado
+                </button>
+            </div>
+
         </div>
     </div>
 

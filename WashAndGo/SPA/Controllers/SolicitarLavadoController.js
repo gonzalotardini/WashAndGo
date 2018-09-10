@@ -25,7 +25,7 @@
     var contador = 0;
     //Total
     $scope.Total = '';
-
+    //muestra cartel de error si la direccion no es valida
     $scope.ErrorDireccion = false;
 
 
@@ -35,18 +35,12 @@
 
     $scope.ObtenerModelos = function (Marca) {
 
-        if (Marca !== null) {
+        if (Marca != null) {
             $scope.cargandoModelos = true;
             SolicitarLavadoService.ObtenerModelos(Marca).then(
                 function (d) {
                     $scope.Modelos = d.data;
                     $scope.cargandoModelos = false;
-
-                    //var prueba = $scope.Modelos[1].Segmentos.Descripcion;
-
-                    //var prueba = $scope.Modelos;
-
-                    //var obj = $filter('filter')(prueba, { 'idModelo': 3 }); 
                 },
                 function (error) {
 
@@ -149,7 +143,7 @@
 
             $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + Direccion);
             var json;
-            $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + Direccion + '&sensor=true').then(function (response) {
+            $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + Direccion + '&sensor=true').then(function (response) {
                 json = response.data;
 
                 
@@ -162,8 +156,9 @@
 
                     var address = json.results[0].formatted_address;
                     var n = address.search("Argentina");
+                    var length = json.results[0].address_components.length
 
-                    if (n < 0) {
+                    if (n < 0  || length <=5) {
                         $scope.ErrorDireccion = true;
                         $scope.cargandoMapa = true;
                     }
@@ -190,20 +185,18 @@
 
     }
 
-    //$scope.obtenerDireccion = function () {
-    //    var urlDireccion = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=-34.539259,-58.4680163&sensor=true';
+    $scope.CrearSolicitud = function (Marca,Modelo) {
+
+        SolicitarLavadoService.ObtenerServicios().then(
+            function (d) {
+                $scope.Servicios = d.data;
+            },
+            function (error) {
 
 
-    //    //$http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=-34.539259,-58.4680163&sensor=true').then(function (response) {
-    //    //    var json = response.data;
-    //    //    $scope.Direccion = json.results[0].formatted_address;
-    //    //});
+            });
 
-
-    //}
-
-
-    //$scope.obtenerDireccion();
+    }
 
 
     //==============Ejecuto funcion para obtener geolaclizaion=========0
