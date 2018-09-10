@@ -12,6 +12,11 @@ app.config(function ($routeProvider, $locationProvider) {
             templateUrl: 'SPA/Views/Home.html',
             //controller: 'GestionController'
         })
+        .when('/error',
+        {
+            templateUrl: 'SPA/Views/Error.html',
+            //controller: 'GestionController'
+        })
         .otherwise({
             templateUrl: 'SPA/Views/Home.html',
             //////controller: 'LoginController'

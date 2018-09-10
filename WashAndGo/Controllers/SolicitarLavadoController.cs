@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DAL;
 using Newtonsoft.Json;
 using BLL;
+using Microsoft.AspNet.Identity;
 
 namespace WashAndGo.Controllers
 {
@@ -20,6 +21,7 @@ namespace WashAndGo.Controllers
 
         public string obtenerMarcas()
         {
+            var userID = User.Identity.GetUserId();
 
             var lavado = new Lavado();
             return JsonConvert.SerializeObject(lavado.ObtenerMarcas(), Formatting.None,

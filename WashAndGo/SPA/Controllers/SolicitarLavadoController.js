@@ -59,7 +59,8 @@
         if (Modelo !== null) {
             SolicitarLavadoService.ObtenerSegmento(Modelo).then(
                 function (d) {
-                    $scope.Segmento = d.data;                   
+                    $scope.Segmento = d.data;
+                    $scope.botonTotal();
                 },
                 function (error) {
 
@@ -94,11 +95,16 @@
     }   
  
 
-  
+    $scope.limpiarSegmentoMarca = function () {
+
+        $scope.Segmento = '';
+        $scope.Total = '';
+
+    }   
 
     function ObtenerTotal (idSegmento, idServicio) {
 
-        if (idSegmento !== null & idServicio !== null) {
+        if (idSegmento != null && idServicio != null && idServicio != "") {
             SolicitarLavadoService.ObtenerTotal(idSegmento, idServicio).then(
                 function (d) {
                     $scope.Total = d.data;
@@ -138,13 +144,15 @@
             $scope.cargandoMapa = true;
         }
         else {
-            $scope.cargandoMapa = false;
+            
             $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + Direccion);
             $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + Direccion +'&sensor=true').then(function (response) {
                 var json = response.data;
                 $scope.Direccion = json.results[0].formatted_address;
                 return $http;
             });
+
+            $scope.cargandoMapa = false;
         }
 
       

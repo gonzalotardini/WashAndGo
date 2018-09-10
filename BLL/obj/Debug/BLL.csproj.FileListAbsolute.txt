@@ -4,9 +4,9 @@ C:\WashAndGo2\BLL\bin\Debug\Newtonsoft.Json.dll
 C:\WashAndGo2\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 C:\WashAndGo2\BLL\obj\Debug\BLL.dll
 C:\WashAndGo2\BLL\obj\Debug\BLL.pdb
-C:\WashAndGo\BLL\bin\Debug\BLL.dll
-C:\WashAndGo\BLL\bin\Debug\BLL.pdb
-C:\WashAndGo\BLL\bin\Debug\Newtonsoft.Json.dll
-C:\WashAndGo\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
-C:\WashAndGo\BLL\obj\Debug\BLL.dll
-C:\WashAndGo\BLL\obj\Debug\BLL.pdb
+C:\qqqq\BLL\bin\Debug\BLL.dll
+C:\qqqq\BLL\bin\Debug\BLL.pdb
+C:\qqqq\BLL\bin\Debug\Newtonsoft.Json.dll
+C:\qqqq\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+C:\qqqq\BLL\obj\Debug\BLL.dll
+C:\qqqq\BLL\obj\Debug\BLL.pdb

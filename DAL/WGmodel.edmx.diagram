@@ -9,11 +9,7 @@
         <EntityTypeShape EntityType="WashAndGoModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="WashAndGoModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="WashAndGoModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WashAndGoModel.AspNetUsers" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="WashAndGoModel.Marcas" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <AssociationConnector Association="WashAndGoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="WashAndGoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="WashAndGoModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="WashAndGoModel.Modelos" Width="1.5" PointX="5" PointY="9.625" />
         <EntityTypeShape EntityType="WashAndGoModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="0.75" />
         <AssociationConnector Association="WashAndGoModel.FK_Modelos_Marcas" />
@@ -23,6 +19,10 @@
         <EntityTypeShape EntityType="WashAndGoModel.Servicios" Width="1.5" PointX="7.5" PointY="10.75" />
         <AssociationConnector Association="WashAndGoModel.FK_ListaPrecios_Segmentos" />
         <AssociationConnector Association="WashAndGoModel.FK_ListaPrecios_Servicios" />
+        <EntityTypeShape EntityType="WashAndGoModel.AspNetUsers" Width="1.5" PointX="3" PointY="1.25" />
+        <AssociationConnector Association="WashAndGoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="WashAndGoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="WashAndGoModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
