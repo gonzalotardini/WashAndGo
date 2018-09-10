@@ -71,14 +71,15 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a href="/home/index" class="navbar-left"><img style="width:150px;" src="~/img/logo.png"/></a>
+                <a href="/" class="navbar-left"><img style="width:150px;" src="~/img/logo.png"/></a>
 
                 @*@Html.ActionLink("Wash & Go!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li><a href="#mision">Quiénes Somos</a></li>
+                    <li><a href="#quienesSomosTitle">Quiénes Somos</a></li>
+                    <li><a href="/#!/solicitarlavado">Cruzados</a></li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
@@ -86,14 +87,41 @@
             </div>
         </div>
     </div>
-    <div class="body-content">
+    <div class="body-content" ng-app="app">
 
         @RenderBody()
         <hr />
-        <footer>
+        <footer style="padding-top:3%;">
+
+            <div class="container col-md-12">
+                <div class="col-md-4">
+                    <img src="~/img/logo fb.png" style="width:50px;margin-left:3%;"/>
+                    <img src="~/img/logo ig.png" style="width:50px; margin-left:3%;" />
+                </div>
+                <div class="col-md-4 text-center">
+
+                    <a href="https://api.whatsapp.com/send?phone=5491161434897"><img src="~/img/Whatsapp-botón.png" /></a>
+                </div>
+                
+            </div>
+
+
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-animate.min.js"></script>
+    <script src="~/Scripts/angular-aria.min.js"></script>
+    <script src="~/Scripts/angular-messages.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+
+
+
+    <script src="~/SPA/Controllers/AppController.js"></script>
+    <script src="~/SPA/Controllers/SolicitarLavadoController.js"></script>
+
+    <script src="~/SPA/Services/SolicitarLavadoService.js"></script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

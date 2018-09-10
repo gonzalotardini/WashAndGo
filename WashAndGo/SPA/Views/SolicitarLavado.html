@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <script src="https://rawgithub.com/arunisrael/angularjs-geolocation/master/dist/angularjs-geolocation.min.js"></script>
+    <style>
+        .jumbotron {
+            background: white;
+            border-style: solid;
+            border-color: #5cd0d6;
+            /*padding-right: 60px;
+             padding-left: 1%;
+             padding-right:1%;*/
+        }
+
+        #jumbovehiculoservicio {
+            /*padding-right: 1%;
+            padding-left: 3%;
+            padding-top: 1%;
+            padding-bottom: 1%;*/
+        }
+
+        .input-group {
+            display: block;
+        }
+
+        input, select {
+            max-width: 90%;
+            font-family: 'Century Gothic';
+        }
+
+        h3, h4, h5, h2 {
+            font-family: 'Century Gothic';
+            color: #003359;
+        }
+
+        #direccion {
+            max-width: 100%
+        }
+
+        #map {
+            margin-bottom: 5%;
+            margin-top: 6%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="col-md-12 jumbotron" style="margin-top:10%">
+
+            <div class="col-md-6 text-center" id="jumbovehiculoservicio">
+
+                <h3 style="text-align:left; font-weight:bold;">¿Cuál es tu auto?</h3>
+                <h5 style="text-align:left; font-weight:bold;">Elegí marca y modelo del vehiculo a lavar</h5>
+
+                <div class="form-group">
+                    <select ng-model="Marca" ng-change="ObtenerModelos(Marca)" class="form-control" id="sel1">
+                        <option value="" disabled selected>Seleccione Marca</option>
+                        <option ng-repeat="x in Marcas" value="{{x.IdMarca}} ">{{x.Descripcion}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <select style="margin-bottom:2%;" ng-model="Modelo" ng-change="ObtenerSegmento(Modelo)" class="form-control">
+                            <option value="" disabled selected>Seleccione Modelo</option>
+                            <option ng-repeat="x in Modelos" value="{{x.IdModelo}}">{{x.Descripcion}}</option>
+                        </select>
+                        <span ng-show="cargandoModelos">
+                            <img style="width:25px; padding:-1px;" src="../../img/loading.gif" />
+                        </span>
+                    </div>
+                </div>
+
+                <img src="../../img/auto.png" style="width: 30%" />
+                <h3>Segmento: {{Segmento.Descripcion}}</h3>
+                <!--<h3 ng-view="IdSegmento">{{Segmento.IdSegmento}}</h3>-->
+                <br />
+                <br />
+
+
+
+            </div>
+
+
+
+            <div class="col-md-6 text-center ">
+                <div>
+                    <img ng-show="cargandoMapa" src="../../img/loading.gif" />
+                    <div ng-hide="cargandoMapa" id="map">
+                        <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{url}}" allowfullscreen></iframe>
+                    </div>
+                    <div class="form-group text-left">
+                        <input id="direccion" ng-model="Direccion" class="form-control" value="{{Direccion}}" type="text" />
+                        <button type="button" ng-click="ActualizarUbicacion(Direccion)" class="btn btn-info">
+                            <span class="glyphicon glyphicon-search"></span> 
+                        </button>
+                        
+                    </div>
+                   
+                </div>
+
+            </div>
+
+            <div class="row col-md-12">
+
+                <div class="col-md-6">
+                    <h3 style="text-align:left;font-weight:bold">¿Qué tipo de lavado querés?</h3>
+                    <h5 style="text-align:left;font-weight:bold">Elegí el servicio ideal para tu vehículo</h5>
+                    <div class="form-group">
+                        <select ng-model="Servicio" ng-change="botonTotal()" class="form-control">
+                            <option value="" disabled selected>Seleccione Servicio</option>
+                            <option ng-repeat="x in Servicios" value="{{x.IdServicio}} ">{{x.Nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 text-center">
+                    <h2 style="font-weight:bold;">Total</h2>
+                    <h2>$ {{Total}}</h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

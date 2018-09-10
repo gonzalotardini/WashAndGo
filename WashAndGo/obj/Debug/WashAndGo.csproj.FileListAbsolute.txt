@@ -196,6 +196,7 @@ C:\WashAndGo\WashAndGo\bin\Microsoft.AI.Web.xml
 C:\WashAndGo\WashAndGo\obj\Debug\WashAndGo.csprojResolveAssemblyReference.cache
 C:\WashAndGo\WashAndGo\obj\Debug\WashAndGo.dll
 C:\WashAndGo\WashAndGo\obj\Debug\WashAndGo.pdb
+C:\WashAndGo2\WashAndGo\obj\Debug\WashAndGo.csprojResolveAssemblyReference.cache
 C:\WashAndGo2\WashAndGo\bin\ApplicationInsights.config
 C:\WashAndGo2\WashAndGo\bin\roslyn\csc.exe
 C:\WashAndGo2\WashAndGo\bin\roslyn\csc.exe.config
@@ -227,6 +228,8 @@ C:\WashAndGo2\WashAndGo\bin\WashAndGo.dll.config
 C:\WashAndGo2\WashAndGo\bin\WashAndGo.dll
 C:\WashAndGo2\WashAndGo\bin\WashAndGo.pdb
 C:\WashAndGo2\WashAndGo\bin\Antlr3.Runtime.dll
+C:\WashAndGo2\WashAndGo\bin\BLL.dll
+C:\WashAndGo2\WashAndGo\bin\DAL.dll
 C:\WashAndGo2\WashAndGo\bin\EntityFramework.dll
 C:\WashAndGo2\WashAndGo\bin\EntityFramework.SqlServer.dll
 C:\WashAndGo2\WashAndGo\bin\Microsoft.AI.Agent.Intercept.dll
@@ -261,6 +264,9 @@ C:\WashAndGo2\WashAndGo\bin\System.Web.WebPages.Deployment.dll
 C:\WashAndGo2\WashAndGo\bin\System.Web.WebPages.dll
 C:\WashAndGo2\WashAndGo\bin\System.Web.WebPages.Razor.dll
 C:\WashAndGo2\WashAndGo\bin\WebGrease.dll
+C:\WashAndGo2\WashAndGo\bin\BLL.pdb
+C:\WashAndGo2\WashAndGo\bin\DAL.pdb
+C:\WashAndGo2\WashAndGo\bin\DAL.dll.config
 C:\WashAndGo2\WashAndGo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\WashAndGo2\WashAndGo\bin\Newtonsoft.Json.xml
 C:\WashAndGo2\WashAndGo\bin\SendGrid.pdb
@@ -292,6 +298,10 @@ C:\WashAndGo2\WashAndGo\bin\Microsoft.AI.DependencyCollector.xml
 C:\WashAndGo2\WashAndGo\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\WashAndGo2\WashAndGo\bin\Microsoft.AI.WindowsServer.xml
 C:\WashAndGo2\WashAndGo\bin\Microsoft.AI.Web.xml
-C:\WashAndGo2\WashAndGo\obj\Debug\WashAndGo.csprojResolveAssemblyReference.cache
 C:\WashAndGo2\WashAndGo\obj\Debug\WashAndGo.dll
 C:\WashAndGo2\WashAndGo\obj\Debug\WashAndGo.pdb
+C:\WashAndGo\WashAndGo\bin\BLL.dll
+C:\WashAndGo\WashAndGo\bin\DAL.dll
+C:\WashAndGo\WashAndGo\bin\BLL.pdb
+C:\WashAndGo\WashAndGo\bin\DAL.pdb
+C:\WashAndGo\WashAndGo\bin\DAL.dll.config

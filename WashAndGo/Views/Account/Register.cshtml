@@ -1,7 +1,18 @@
 ﻿@model WashAndGo.Models.RegisterViewModel
 
+<style>
+    input, #TipoList {
+        max-width: 100%;
+    }
+
+    .panel-default {
+        border-color: #efe593;
+        border-width: 3px;
+        margin-top: 25%;
+    }
+</style>
 <div class="container">
-    @{
+    @*@{
         ViewBag.Title = "Register";
     }
 
@@ -46,8 +57,71 @@
                 <input type="submit" class="btn btn-default" value="Register" />
             </div>
         </div>
-    }
 
+    }*@
+
+    <div class="col-md-12">
+        <div class="col-md-4"></div>
+        <div class="row vertical-offset-100">
+            <div class="col-md-4 col-md-offset-4" style="margin-top: 6%;">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 style="text-align:center" class="panel-title">Register</h3>
+                    </div>
+
+                    @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+            {
+                        @Html.AntiForgeryToken()
+                        <div class="panel-body">
+                            <form accept-charset="UTF-8" role="form">
+                                <fieldset>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                      
+                                            @Html.DropDownListFor(x => x.SelectedTipo, ViewBag.TipoList as SelectList, "--Tipo--", new { id = "TipoList", placeholder="Tipo" ,@class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.SelectedTipo, "", new { @class = "text-danger" })
+                                       
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-group has-feedback">
+                                           @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", id = "myInput" })
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                            @*<i onclick="myFunction()" class="glyphicon glyphicon-eye-open form-control-feedback"></i>*@
+                                        </div>                                     
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="form-group has-feedback">
+                                           @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password", id = "myInput" })
+                                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                                            @*<i onclick="myFunction()" class="glyphicon glyphicon-eye-open form-control-feedback"></i>*@
+                                        </div>
+                                    </div>
+                                   
+
+                                    <input class="btn btn-lg btn-info btn-block" type="submit" value="Register">
+                                </fieldset>
+
+                                @*@Html.ActionLink("New User  ", "Register", new { @class = "my-class" })*@
+
+                                @*<a style="color:black;" href="register">Registrar</a>
+                                <a style="color:black" href="ForgotPassword">Olvide mi Contraseña</a>
+
+                                @Html.ActionLink("Forgot your password?", "ForgotPassword")*@
+
+                            </form>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

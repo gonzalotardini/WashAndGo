@@ -1,15 +1,125 @@
-e other network copy utility, to copy data files to the target computer from the source computer or from another computer on the network. <b>Serialize</b> and <b>Propagate</b> are called on the source computer before <b>DeSerialize</b> is called on the target computer. <b>Deserialize</b> will not be called on the target computer if either the <b>Serialize</b> or <b>Propagate</b> method returns an error that causes replication to be terminated. <br><br></li>
-<li>
-Iissync.exe then calls <b>Propagate2</b> on the source computer, identifying the target computer and providing a flag that indicates the signatures were not the same. Your program on the source computer can then perform any termination tasks you require associated with this target computer. </li>
-</ul>
-<p>
-<b>Scenario B:</b> 
-<ul>
-<li>
-The process operates exactly the same for each target computer as described in Scenario A. <br><br></li>
-<li>
-Iissync.exe calls the source computer's <b>GetSignature</b> method only once. The returned signature is compared against each target computer's signature. <br><br></li>
-<li>
-If any target computer's signature differs from the source computer, iissync.exe calls the source computer's <b>Serialize</b> method once. Your program returns data to iissync.exe for presentation to all target computers that have different signatures. Iissync.exe also calls the <b>Propagate</b> method on the source computer once for each target computer with a signature mismatch. The data returned from the source computer's <b>Serialize</b> method is presented through the <b>DeSerialize</b> method to those target computers that have different signatures. <b>DeSerialize</b> will not be called on the target computer if either the <b>Serialize</b> or <b>Propagate</b> method returns an error that causes replication to be terminated. <br><br></li>
-<li>
-After iissync replicates the metabase to a target computer, it calls the <b>Propagate2</b> method on the source computer, identifying the target computer and providing a flag that indicates whether or not this target computer's signature matches the source computer's signature. Iissync.exe calls the source computer's <b>Propagate2</b> method once for each target computer, regardless of whether the target computer's signature matches the source computer's signature. <b>Propagate2</b
+'use strict';
+angular.module("ngLocale", [], ["$provide", function($provide) {
+var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
+$provide.value("$locale", {
+  "DATETIME_FORMATS": {
+    "AMPMS": [
+      "AM",
+      "PM"
+    ],
+    "DAY": [
+      "ISonto",
+      "UMsombuluko",
+      "ULwesibili",
+      "ULwesithathu",
+      "ULwesine",
+      "ULwesihlanu",
+      "UMgqibelo"
+    ],
+    "ERANAMES": [
+      "BC",
+      "AD"
+    ],
+    "ERAS": [
+      "BC",
+      "AD"
+    ],
+    "FIRSTDAYOFWEEK": 6,
+    "MONTH": [
+      "UMasingana",
+      "Februwari",
+      "Mashi",
+      "Ephreli",
+      "Meyi",
+      "Juni",
+      "Julayi",
+      "Agasti",
+      "Septhemba",
+      "Okthoba",
+      "Novemba",
+      "Disemba"
+    ],
+    "SHORTDAY": [
+      "Son",
+      "Mso",
+      "Bil",
+      "Tha",
+      "Sin",
+      "Hla",
+      "Mgq"
+    ],
+    "SHORTMONTH": [
+      "Jan",
+      "Feb",
+      "Mas",
+      "Eph",
+      "Mey",
+      "Jun",
+      "Jul",
+      "Aga",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Dis"
+    ],
+    "STANDALONEMONTH": [
+      "Januwari",
+      "Februwari",
+      "Mashi",
+      "Ephreli",
+      "Meyi",
+      "Juni",
+      "Julayi",
+      "Agasti",
+      "Septhemba",
+      "Okthoba",
+      "Novemba",
+      "Disemba"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
+    "fullDate": "EEEE, MMMM d, y",
+    "longDate": "MMMM d, y",
+    "medium": "MMM d, y HH:mm:ss",
+    "mediumDate": "MMM d, y",
+    "mediumTime": "HH:mm:ss",
+    "short": "M/d/yy HH:mm",
+    "shortDate": "M/d/yy",
+    "shortTime": "HH:mm"
+  },
+  "NUMBER_FORMATS": {
+    "CURRENCY_SYM": "R",
+    "DECIMAL_SEP": ".",
+    "GROUP_SEP": ",",
+    "PATTERNS": [
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 3,
+        "minFrac": 0,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "",
+        "posPre": "",
+        "posSuf": ""
+      },
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 2,
+        "minFrac": 2,
+        "minInt": 1,
+        "negPre": "-\u00a4",
+        "negSuf": "",
+        "posPre": "\u00a4",
+        "posSuf": ""
+      }
+    ]
+  },
+  "id": "zu-za",
+  "localeID": "zu_ZA",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  if (i == 0 || n == 1) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+});
+}]);

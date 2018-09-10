@@ -32,5 +32,7 @@ namespace WashAndGo.Controllers
 
             return View();
         }
+
+
     }
 }

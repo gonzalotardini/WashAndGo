@@ -1,110 +1,143 @@
-  CkyMunge: ISAPI filter for ASP session state for cookieless browsers
-  ====================================================================
+'use strict';
+angular.module("ngLocale", [], ["$provide", function($provide) {
+var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
+function getDecimals(n) {
+  n = n + '';
+  var i = n.indexOf('.');
+  return (i == -1) ? 0 : n.length - i - 1;
+}
 
+function getVF(n, opt_precision) {
+  var v = opt_precision;
 
-Table of Contents
-=================
+  if (undefined === v) {
+    v = Math.min(getDecimals(n), 3);
+  }
 
-    Overview
-    Installation
-    Build Notes
-    Support
-    Change Notes
+  var base = Math.pow(10, v);
+  var f = ((n * base) | 0) % base;
+  return {v: v, f: f};
+}
 
-
-Overview
-========
-
-This filter is a workaround that helps Active Server Pages deal with
-browsers that don't understand cookies or that refuse to accept
-cookies.  ASP uses the ASPSESSIONID cookie to maintain its session
-state.  ASP expects the browser to send this cookie to the server with
-every request that it makes.  The ASPSESSIONID cookie is unique to a
-session.  Without it, ASP does not know which session the user owns and
-it cannot keep the Session object up to date as the user moves from page
-to page.
-
-The CkyMunge filter works like this:
-
-1. The filter receives a request for a particular URL.  If the
-   headers of the request contain either "Cookie: ASPSESSIONID=xxx"
-   (IIS 3.0) or "Cookie: ASPSESSIONIDxxxxxxxx=xxx" (IIS 4.0)
-   header that ASPSESSIONID is recorded.  If the URL contains an
-   encoded ASPSESSIONID (see step 2), the ASPSESSIONID is
-   removed from the URL and a Cookie header is generated
-   instead.  The ASPSESSIONID, if present, is recorded for this
-   transaction.
-
-2. CkyMunge filters all outgoing data.  When ASP sends out a page in
-   response to the above request, CkyMunge removes the ASPSESSIONID
-   Set-Cookie headers, if present (so that browsers with cookie
-   warnings will have nothing to complain about), and munges any
-   local, relative URLs embedded in the page (e.g., http:foo/bar.asp will
-   become something like http:foo/bar.asp-ASP=PVZQGHUMEAYAHMFV).
-
-3. If the user clicks on one of those modified URLs, the request
-   comes back to the server (and filter) and step 1 starts all
-   over again.
-
-Notes:
-
-* Filtering outgoing raw data is an expensive process.  Every
-  single byte of data sent out by IIS must be streamed through
-  the filter.  The filter goes to some pains to be smart about
-  not unneccesarily processing data it's not interested in (such
-  as GIFs), but there are unavoidable performance costs
-  associated with IIS needing to copy all data from kernel to
-  user memory.
-
-  It is impossible to give an accurate prediction of how much
-  performance will degrade on your server if the CkyMunge filter
-  is installed.  On a lightly loaded server, the difference
-  should not matter.  On a heavily loaded server, the
-  performance might become unacceptable.
-
-  It is up to you to measure the performance of your server both
-  with and without the filter installed and see if the
-  convenience of supporting paranoid users or users with old
-  browsers outweighs the cost of poorer performance.
-
-  User education may be a better solution in the long run.
-	The ASPSESSIONID cookie is not used to track longterm
-	information about you.  The cookie is destroyed as soon
-	as your browser shuts down and it is not stored on your
-	machine.  It simply allows our webserver to keep track
-	of what's in your shopping basket as you move from page
-	to page in our application.
-
-	If your browser doesn't support cookies, we'd like to
-	suggest that you upgrade to a newer one that does.  When
-	you do, you'll enjoy our site much more because your
-	browser will also support frames and tables and other
-	newer features of HTML that we've made use of.
-
-* If you elect not to install this filter, you can minimize the
-  number of cookies sent by Active Server Pages in one of two ways:
-    * Put something into the Session object:
-      <% Session("something") = whatever %>
-    * Put a global.asa into the virtual root for your
-      application, with a do-nothing Session_OnStart subroutine.
-
-* The filter has 3 modes: off, on, and smart.  In the off mode
-  the filter does no work (a better way of turning it off would
-  be to remove it from the list of filters).  In On mode, all
-  URLs will be munged as normal, and no cookies will be sent
-  out.  In smart mode, the filter will munge and let cookies
-  go out to the browser.  If the cookie comes back it will
-  stop munging URLs and use the cookies.  If the cookie doesn't
-  come back it will begin eating outgoing cookies and continue
-  to munge URLs.  This will result in slightly better performance.
-  The mode is controlled by a registry setting:
-  /HKEY_LOCAL_MACHINE/software/microsoft/ckymunge/mungemode.  A
-  mode of 0 is off, 1 is on, and 2 is smart.
-
-* URLs will look ugly (http:foo/bar.asp-ASP=PVZQGHUMEAYAHMFV).
-  Users can still bookmark them, however.  If the ASPSESSIONID
-  is stale, the server will assign them a new session ID and
-  start a new session.  If CkyMunge has been disabled in the
-  meantime, then the URL will be unreachable.
-
-* Only local, relative URLs are modified.  Ab
+$provide.value("$locale", {
+  "DATETIME_FORMATS": {
+    "AMPMS": [
+      "\u0628.\u0646",
+      "\u062f.\u0646"
+    ],
+    "DAY": [
+      "\u06cc\u06d5\u06a9\u0634\u06d5\u0645\u0645\u06d5",
+      "\u062f\u0648\u0648\u0634\u06d5\u0645\u0645\u06d5",
+      "\u0633\u06ce\u0634\u06d5\u0645\u0645\u06d5",
+      "\u0686\u0648\u0627\u0631\u0634\u06d5\u0645\u0645\u06d5",
+      "\u067e\u06ce\u0646\u062c\u0634\u06d5\u0645\u0645\u06d5",
+      "\u06be\u06d5\u06cc\u0646\u06cc",
+      "\u0634\u06d5\u0645\u0645\u06d5"
+    ],
+    "ERANAMES": [
+      "\u067e\u06ce\u0634 \u0632\u0627\u06cc\u06cc\u0646",
+      "\u0632\u0627\u06cc\u06cc\u0646\u06cc"
+    ],
+    "ERAS": [
+      "\u067e\u06ce\u0634 \u0632\u0627\u06cc\u06cc\u0646",
+      "\u0632\u0627\u06cc\u06cc\u0646\u06cc"
+    ],
+    "FIRSTDAYOFWEEK": 5,
+    "MONTH": [
+      "\u06a9\u0627\u0646\u0648\u0648\u0646\u06cc \u062f\u0648\u0648\u06d5\u0645",
+      "\u0634\u0648\u0628\u0627\u062a",
+      "\u0626\u0627\u0632\u0627\u0631",
+      "\u0646\u06cc\u0633\u0627\u0646",
+      "\u0626\u0627\u06cc\u0627\u0631",
+      "\u062d\u0648\u0632\u06d5\u06cc\u0631\u0627\u0646",
+      "\u062a\u06d5\u0645\u0648\u0648\u0632",
+      "\u0626\u0627\u0628",
+      "\u0626\u06d5\u06cc\u0644\u0648\u0648\u0644",
+      "\u062a\u0634\u0631\u06cc\u0646\u06cc \u06cc\u06d5\u06a9\u06d5\u0645",
+      "\u062a\u0634\u0631\u06cc\u0646\u06cc \u062f\u0648\u0648\u06d5\u0645",
+      "\u06a9\u0627\u0646\u0648\u0646\u06cc \u06cc\u06d5\u06a9\u06d5\u0645"
+    ],
+    "SHORTDAY": [
+      "\u06cc\u06d5\u06a9\u0634\u06d5\u0645\u0645\u06d5",
+      "\u062f\u0648\u0648\u0634\u06d5\u0645\u0645\u06d5",
+      "\u0633\u06ce\u0634\u06d5\u0645\u0645\u06d5",
+      "\u0686\u0648\u0627\u0631\u0634\u06d5\u0645\u0645\u06d5",
+      "\u067e\u06ce\u0646\u062c\u0634\u06d5\u0645\u0645\u06d5",
+      "\u06be\u06d5\u06cc\u0646\u06cc",
+      "\u0634\u06d5\u0645\u0645\u06d5"
+    ],
+    "SHORTMONTH": [
+      "\u06a9\u0627\u0646\u0648\u0648\u0646\u06cc \u062f\u0648\u0648\u06d5\u0645",
+      "\u0634\u0648\u0628\u0627\u062a",
+      "\u0626\u0627\u0632\u0627\u0631",
+      "\u0646\u06cc\u0633\u0627\u0646",
+      "\u0626\u0627\u06cc\u0627\u0631",
+      "\u062d\u0648\u0632\u06d5\u06cc\u0631\u0627\u0646",
+      "\u062a\u06d5\u0645\u0648\u0648\u0632",
+      "\u0626\u0627\u0628",
+      "\u0626\u06d5\u06cc\u0644\u0648\u0648\u0644",
+      "\u062a\u0634\u0631\u06cc\u0646\u06cc \u06cc\u06d5\u06a9\u06d5\u0645",
+      "\u062a\u0634\u0631\u06cc\u0646\u06cc \u062f\u0648\u0648\u06d5\u0645",
+      "\u06a9\u0627\u0646\u0648\u0646\u06cc \u06cc\u06d5\u06a9\u06d5\u0645"
+    ],
+    "STANDALONEMONTH": [
+      "\u06a9\u0627\u0646\u0648\u0648\u0646\u06cc \u062f\u0648\u0648\u06d5\u0645",
+      "\u0634\u0648\u0628\u0627\u062a",
+      "\u0626\u0627\u0632\u0627\u0631",
+      "\u0646\u06cc\u0633\u0627\u0646",
+      "\u0626\u0627\u06cc\u0627\u0631",
+      "\u062d\u0648\u0632\u06d5\u06cc\u0631\u0627\u0646",
+      "\u062a\u06d5\u0645\u0648\u0648\u0632",
+      "\u0626\u0627\u0628",
+      "\u0626\u06d5\u06cc\u0644\u0648\u0648\u0644",
+      "\u062a\u0634\u0631\u06cc\u0646\u06cc \u06cc\u06d5\u06a9\u06d5\u0645",
+      "\u062a\u0634\u0631\u06cc\u0646\u06cc \u062f\u0648\u0648\u06d5\u0645",
+      "\u06a9\u0627\u0646\u0648\u0646\u06cc \u06cc\u06d5\u06a9\u06d5\u0645"
+    ],
+    "WEEKENDRANGE": [
+      4,
+      4
+    ],
+    "fullDate": "y MMMM d, EEEE",
+    "longDate": "d\u06cc MMMM\u06cc y",
+    "medium": "y MMM d HH:mm:ss",
+    "mediumDate": "y MMM d",
+    "mediumTime": "HH:mm:ss",
+    "short": "y-MM-dd HH:mm",
+    "shortDate": "y-MM-dd",
+    "shortTime": "HH:mm"
+  },
+  "NUMBER_FORMATS": {
+    "CURRENCY_SYM": "Rial",
+    "DECIMAL_SEP": "\u066b",
+    "GROUP_SEP": "\u066c",
+    "PATTERNS": [
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 3,
+        "minFrac": 0,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "",
+        "posPre": "",
+        "posSuf": ""
+      },
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 0,
+        "minFrac": 0,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "\u00a0\u00a4",
+        "posPre": "",
+        "posSuf": "\u00a0\u00a4"
+      }
+    ]
+  },
+  "id": "ckb-ir",
+  "localeID": "ckb_IR",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  var vf = getVF(n, opt_precision);  if (i == 1 && vf.v == 0) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+});
+}]);

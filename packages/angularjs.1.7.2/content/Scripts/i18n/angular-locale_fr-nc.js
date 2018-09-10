@@ -1,1 +1,125 @@
-c7-11d2-9929-00c04f68fdaf}" DockedHeight="153.6" DockedWidth="819.2" FloatingHeight="153.6" FloatingWidth="614.4" /><wm:ToolWindowView ContextVisibilityEnabled="False" ForceCreate="ForceCreate" Name="ST:0:0:{51c76317-9037-4cf2-a20a-6206fd30b4a1}" DockedHeight="153.6" DockedWidth="819.2" FloatingHeight="153.6" FloatingWidth="614.4" /><wm:ToolWindowView ContextVisibilityEnabled="False" ForceCreate="ForceCreate" Name="ST:0:0:{e62ce6a0-b439-11d0-a79d-00a0c9110051}" DockedHeight="153.6" DockedWidth="819.2" FloatingHeight="153.6" FloatingWidth="614.4" /><wm:ToolWindowView ContextVisibilityEnabled="False" ForceCreate="ForceCreate" Name="ST:0:0:{8d263989-ff4b-4a78-90c8-b2ba3fa69311}" DockedHeight="153.6" DockedWidth="819.2" FloatingHeight="199.68" FloatingWidth="512" /><wm:ToolWindowView ContextVisibilityEnabled="False" ForceCreate="ForceCreate" Name="ST:0:0:{37aba9be-445a-11d3-9949-00c04f68fd0a}" DockedHeight="153.6" DockedWidth="819.2" FloatingHeight="153.6" FloatingWidth="614.4" /></TabGroup><DocumentGroupContainer IsVisible="True" DockedHeight="*" DockedWidth="*"><wm:WMDocumentGroup IsVisible="True"><wm:ToolWindowView ContextVisibilityEnabled="False" ForceCreate="DontForceCreate" Name="ST:0:0:{387cb18d-6153-4156-9257-9ac3f9207bbe}" FloatingHeight="537.6" FloatingWidth="716.8" /><wm:ToolWindowView ContextVisibilityEnabled="False" ForceCreate="ForceCreate" Name="ST:0:0:{c79b74ff-f1d7-4c94-aefa-4d22bfe1b1f9}" FloatingHeight="537.6" FloatingWidth="716.8" /><wm:ToolWindowView ContextVisibilityEnabled="False" Name="ST:0:0:{46c87f81-5a06-43a8-9e25-85d33bac49f8}" FloatingHeight="537.6" FloatingWidth="716.8" /><wm:ToolWindowView ContextVisibilityEnabled="False" ForceCreate="ForceCreate" Name="ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}" FloatingHeight="384" FloatingWidth="512" /><wm:ToolWindowView ContextVisibilityEnabled="False" ForceCreate="ForceCreate" Name="ST:0:0:{99b8fa2f-ab90-4f57-9c32-949f146f1914}" FloatingHeight="537.6" FloatingWidth="716.8" /><wm:ToolWindowView ContextVisibilityEnabled="False" ForceCreate="ForceCreate" Name="ST:0:0:{cf577b8c-4134-11d2-83e5-00c04f9902c1}" FloatingHeight="384" FloatingWidth="358.4" /><ViewBookmark Name="ST:0:0:{131369f2-062d-44a2-8671-91ff31efb4f4}" ViewBookmarkType="DocumentWell" /><ViewBookmark Name="ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}" ViewBookmarkType="DocumentWell" /><ViewBookmark Name="ST:701509135:0:{83107a3e-496a-485e-b455-16ddb978e55e}" ViewBookmarkType="DocumentW
+'use strict';
+angular.module("ngLocale", [], ["$provide", function($provide) {
+var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
+$provide.value("$locale", {
+  "DATETIME_FORMATS": {
+    "AMPMS": [
+      "AM",
+      "PM"
+    ],
+    "DAY": [
+      "dimanche",
+      "lundi",
+      "mardi",
+      "mercredi",
+      "jeudi",
+      "vendredi",
+      "samedi"
+    ],
+    "ERANAMES": [
+      "avant J\u00e9sus-Christ",
+      "apr\u00e8s J\u00e9sus-Christ"
+    ],
+    "ERAS": [
+      "av. J.-C.",
+      "ap. J.-C."
+    ],
+    "FIRSTDAYOFWEEK": 0,
+    "MONTH": [
+      "janvier",
+      "f\u00e9vrier",
+      "mars",
+      "avril",
+      "mai",
+      "juin",
+      "juillet",
+      "ao\u00fbt",
+      "septembre",
+      "octobre",
+      "novembre",
+      "d\u00e9cembre"
+    ],
+    "SHORTDAY": [
+      "dim.",
+      "lun.",
+      "mar.",
+      "mer.",
+      "jeu.",
+      "ven.",
+      "sam."
+    ],
+    "SHORTMONTH": [
+      "janv.",
+      "f\u00e9vr.",
+      "mars",
+      "avr.",
+      "mai",
+      "juin",
+      "juil.",
+      "ao\u00fbt",
+      "sept.",
+      "oct.",
+      "nov.",
+      "d\u00e9c."
+    ],
+    "STANDALONEMONTH": [
+      "janvier",
+      "f\u00e9vrier",
+      "mars",
+      "avril",
+      "mai",
+      "juin",
+      "juillet",
+      "ao\u00fbt",
+      "septembre",
+      "octobre",
+      "novembre",
+      "d\u00e9cembre"
+    ],
+    "WEEKENDRANGE": [
+      5,
+      6
+    ],
+    "fullDate": "EEEE d MMMM y",
+    "longDate": "d MMMM y",
+    "medium": "d MMM y HH:mm:ss",
+    "mediumDate": "d MMM y",
+    "mediumTime": "HH:mm:ss",
+    "short": "dd/MM/y HH:mm",
+    "shortDate": "dd/MM/y",
+    "shortTime": "HH:mm"
+  },
+  "NUMBER_FORMATS": {
+    "CURRENCY_SYM": "FCFP",
+    "DECIMAL_SEP": ",",
+    "GROUP_SEP": "\u00a0",
+    "PATTERNS": [
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 3,
+        "minFrac": 0,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "",
+        "posPre": "",
+        "posSuf": ""
+      },
+      {
+        "gSize": 3,
+        "lgSize": 3,
+        "maxFrac": 0,
+        "minFrac": 0,
+        "minInt": 1,
+        "negPre": "-",
+        "negSuf": "\u00a0\u00a4",
+        "posPre": "",
+        "posSuf": "\u00a0\u00a4"
+      }
+    ]
+  },
+  "id": "fr-nc",
+  "localeID": "fr_NC",
+  "pluralCat": function(n, opt_precision) {  var i = n | 0;  if (i == 0 || i == 1) {    return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+});
+}]);
