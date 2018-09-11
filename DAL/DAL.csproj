@@ -61,10 +61,16 @@
     <Compile Include="AspNetUsers.cs">
       <DependentUpon>WGmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Clientes.cs">
+      <DependentUpon>WGmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>WGmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Lavado.cs" />
+    <Compile Include="Lavados.cs">
+      <DependentUpon>WGmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ListaPrecios.cs">
       <DependentUpon>WGmodel.tt</DependentUpon>
     </Compile>

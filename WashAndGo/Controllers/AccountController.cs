@@ -201,6 +201,21 @@ namespace WashAndGo.Controllers
                             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                             await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                        var cliente = new Clientes()
+                        {
+                            IdCliente = user.Id,
+                            Email=user.Email                           
+
+                        };
+
+                        using (var context = new WGentities())
+                        {
+                            context.Clientes.Add(cliente);
+                            context.SaveChanges();
+
+                        }
+
+
                             return RedirectToAction("Login", "Account");
                         }
                         AddErrors(result);

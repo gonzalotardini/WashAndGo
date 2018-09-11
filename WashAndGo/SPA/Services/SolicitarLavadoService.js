@@ -64,13 +64,14 @@
 
     };
 
-    service.CrearSolicitud = function (Marca, Modelo, seg, dir, total) {
+    service.CrearSolicitud = function (Marca, Modelo,Servicio, seg, dir, total) {
         var promise = $http({
             method: 'post',
             url: '/SolicitarLavado/crearSolicitud',
             params: {
                 Marca: Marca,
                 Modelo: Modelo,
+                Servicio:Servicio,
                 seg: seg,
                 dir: dir,
                 total:total

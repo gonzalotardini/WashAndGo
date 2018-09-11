@@ -12,22 +12,21 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Servicios
+    public partial class Clientes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Servicios()
+        public Clientes()
         {
             this.Lavados = new HashSet<Lavados>();
-            this.ListaPrecios = new HashSet<ListaPrecios>();
         }
     
-        public int IdServicio { get; set; }
+        public string IdCliente { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
+        public string Apellido { get; set; }
+        public string DNI { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lavados> Lavados { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ListaPrecios> ListaPrecios { get; set; }
     }
 }

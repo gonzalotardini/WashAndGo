@@ -7,6 +7,7 @@ using DAL;
 using Newtonsoft.Json;
 using BLL;
 using Microsoft.AspNet.Identity;
+using System.Globalization;
 
 namespace WashAndGo.Controllers
 {
@@ -24,9 +25,7 @@ namespace WashAndGo.Controllers
         [Authorize]
         public string obtenerMarcas()
         {
-            var userID = User.Identity.GetUserId();
-
-        
+                   
             var lavado = new Lavado();
             return JsonConvert.SerializeObject(lavado.ObtenerMarcas(), Formatting.None,
                    new JsonSerializerSettings()
@@ -109,11 +108,33 @@ namespace WashAndGo.Controllers
 
         }
 
-        public void crearSolicitud(string Marca, string Modelo,int seg,string dir,string total)
+        public void crearSolicitud(string Marca, string Modelo,string Servicio,int seg,string dir,string total)
         {
             try
             {
+                var userID = User.Identity.GetUserId();
                 var lavadoDal = new Lavado();
+                var context = new WGentities();
+
+
+                total = total.Replace(".", ",");
+                var lavado = new Lavados()
+                {
+                    IdCliente = User.Identity.GetUserId(),
+                    IdMarca = Convert.ToInt32(Marca),
+                    IdModelo = Convert.ToInt32(Modelo),
+                    IdSegmento = seg,
+                    IdServicio = Convert.ToInt32(Servicio),
+                    Direccion = dir,
+                    Estado="SOLICITADO",
+                    Fecha = DateTime.Now,                    
+                    Total=  Decimal.Parse(total.Replace(" ", ""), NumberStyles.AllowThousands
+                            | NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol)
+            };
+
+                context.Lavados.Add(lavado);
+                context.SaveChanges();
+                
             }
             catch (Exception ex)
             {

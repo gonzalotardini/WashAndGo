@@ -14,11 +14,19 @@ namespace DAL
     
     public partial class Modelos
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Modelos()
+        {
+            this.Lavados = new HashSet<Lavados>();
+        }
+    
         public int IdModelo { get; set; }
         public int IdMarca { get; set; }
         public string Descripcion { get; set; }
         public int IdSegmento { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Lavados> Lavados { get; set; }
         public virtual Marcas Marcas { get; set; }
         public virtual Segmentos Segmentos { get; set; }
     }

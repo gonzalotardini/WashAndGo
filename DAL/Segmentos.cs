@@ -17,16 +17,19 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Segmentos()
         {
-            this.Modelos = new HashSet<Modelos>();
+            this.Lavados = new HashSet<Lavados>();
             this.ListaPrecios = new HashSet<ListaPrecios>();
+            this.Modelos = new HashSet<Modelos>();
         }
     
         public int IdSegmento { get; set; }
         public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Modelos> Modelos { get; set; }
+        public virtual ICollection<Lavados> Lavados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ListaPrecios> ListaPrecios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Modelos> Modelos { get; set; }
     }
 }

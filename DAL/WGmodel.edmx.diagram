@@ -5,23 +5,30 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c8c25c95d84e4b7489baa07cfd897b7e" Name="Diagram1">
-        <EntityTypeShape EntityType="WashAndGoModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WashAndGoModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="WashAndGoModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="WashAndGoModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WashAndGoModel.Marcas" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WashAndGoModel.Modelos" Width="1.5" PointX="5" PointY="9.625" />
-        <EntityTypeShape EntityType="WashAndGoModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="0.75" />
-        <AssociationConnector Association="WashAndGoModel.FK_Modelos_Marcas" />
-        <EntityTypeShape EntityType="WashAndGoModel.Segmentos" Width="1.5" PointX="2.75" PointY="9.875" />
-        <AssociationConnector Association="WashAndGoModel.FK_Modelos_Segmentos" />
-        <EntityTypeShape EntityType="WashAndGoModel.ListaPrecios" Width="1.5" PointX="9.75" PointY="10.5" />
-        <EntityTypeShape EntityType="WashAndGoModel.Servicios" Width="1.5" PointX="7.5" PointY="10.75" />
-        <AssociationConnector Association="WashAndGoModel.FK_ListaPrecios_Segmentos" />
-        <AssociationConnector Association="WashAndGoModel.FK_ListaPrecios_Servicios" />
-        <EntityTypeShape EntityType="WashAndGoModel.AspNetUsers" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="WashAndGoModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WashAndGoModel.AspNetRoles" Width="1.5" PointX="8.75" PointY="11.5" />
+        <EntityTypeShape EntityType="WashAndGoModel.AspNetUserClaims" Width="1.5" PointX="13.25" PointY="10" />
+        <EntityTypeShape EntityType="WashAndGoModel.AspNetUserLogins" Width="1.5" PointX="13.25" PointY="12.75" />
+        <EntityTypeShape EntityType="WashAndGoModel.AspNetUsers" Width="1.5" PointX="11" PointY="10.25" />
+        <EntityTypeShape EntityType="WashAndGoModel.Clientes" Width="1.5" PointX="6" PointY="11.25" />
+        <EntityTypeShape EntityType="WashAndGoModel.Lavados" Width="1.5" PointX="8.25" PointY="4.5" />
+        <EntityTypeShape EntityType="WashAndGoModel.ListaPrecios" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="WashAndGoModel.Marcas" Width="1.5" PointX="6" PointY="8.75" />
+        <EntityTypeShape EntityType="WashAndGoModel.Modelos" Width="1.5" PointX="6" PointY="5.5" />
+        <EntityTypeShape EntityType="WashAndGoModel.Segmentos" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="WashAndGoModel.Servicios" Width="1.5" PointX="6" PointY="2" />
+        <EntityTypeShape EntityType="WashAndGoModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" />
         <AssociationConnector Association="WashAndGoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="WashAndGoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="WashAndGoModel.FK_Lavados_Clientes" />
+        <AssociationConnector Association="WashAndGoModel.FK_Lavados_Marcas" />
+        <AssociationConnector Association="WashAndGoModel.FK_Lavados_Modelos" />
+        <AssociationConnector Association="WashAndGoModel.FK_Lavados_Segmentos" />
+        <AssociationConnector Association="WashAndGoModel.FK_Lavados_Servicios" />
+        <AssociationConnector Association="WashAndGoModel.FK_ListaPrecios_Segmentos" />
+        <AssociationConnector Association="WashAndGoModel.FK_ListaPrecios_Servicios" />
+        <AssociationConnector Association="WashAndGoModel.FK_Modelos_Marcas" />
+        <AssociationConnector Association="WashAndGoModel.FK_Modelos_Segmentos" />
         <AssociationConnector Association="WashAndGoModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>

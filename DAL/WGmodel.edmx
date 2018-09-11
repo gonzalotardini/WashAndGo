@@ -67,6 +67,34 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="TipoUsuario" Type="int" />
         </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" />
+          <Property Name="Apellido" Type="varchar" MaxLength="200" />
+          <Property Name="DNI" Type="varchar" MaxLength="200" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Lavados">
+          <Key>
+            <PropertyRef Name="IdLavado" />
+          </Key>
+          <Property Name="IdLavado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLavador" Type="nvarchar" MaxLength="128" />
+          <Property Name="IdCliente" Type="nvarchar" MaxLength="128" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IdSegmento" Type="int" />
+          <Property Name="IdModelo" Type="int" />
+          <Property Name="IdMarca" Type="int" />
+          <Property Name="Direccion" Type="varchar" MaxLength="300" />
+          <Property Name="Calificacion" Type="int" />
+          <Property Name="Comentario" Type="varchar" MaxLength="500" />
+          <Property Name="IdServicio" Type="int" />
+        </EntityType>
         <EntityType Name="ListaPrecios">
           <Key>
             <PropertyRef Name="IdSegmento" />
@@ -175,6 +203,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Lavados_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Lavados" Type="Self.Lavados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Lavados">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lavados_Marcas">
+          <End Role="Marcas" Type="Self.Marcas" Multiplicity="0..1" />
+          <End Role="Lavados" Type="Self.Lavados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marcas">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="Lavados">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lavados_Modelos">
+          <End Role="Modelos" Type="Self.Modelos" Multiplicity="0..1" />
+          <End Role="Lavados" Type="Self.Lavados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelos">
+              <PropertyRef Name="IdModelo" />
+            </Principal>
+            <Dependent Role="Lavados">
+              <PropertyRef Name="IdModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lavados_Segmentos">
+          <End Role="Segmentos" Type="Self.Segmentos" Multiplicity="0..1" />
+          <End Role="Lavados" Type="Self.Lavados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Segmentos">
+              <PropertyRef Name="IdSegmento" />
+            </Principal>
+            <Dependent Role="Lavados">
+              <PropertyRef Name="IdSegmento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lavados_Servicios">
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="0..1" />
+          <End Role="Lavados" Type="Self.Lavados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="IdServicio" />
+            </Principal>
+            <Dependent Role="Lavados">
+              <PropertyRef Name="IdServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ListaPrecios_Segmentos">
           <End Role="Segmentos" Type="Self.Segmentos" Multiplicity="1" />
           <End Role="ListaPrecios" Type="Self.ListaPrecios" Multiplicity="*" />
@@ -261,6 +349,8 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lavados" EntityType="Self.Lavados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListaPrecios" EntityType="Self.ListaPrecios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marcas" EntityType="Self.Marcas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modelos" EntityType="Self.Modelos" Schema="dbo" store:Type="Tables" />
@@ -283,6 +373,26 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Lavados_Clientes" Association="Self.FK_Lavados_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Lavados" EntitySet="Lavados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lavados_Marcas" Association="Self.FK_Lavados_Marcas">
+            <End Role="Marcas" EntitySet="Marcas" />
+            <End Role="Lavados" EntitySet="Lavados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lavados_Modelos" Association="Self.FK_Lavados_Modelos">
+            <End Role="Modelos" EntitySet="Modelos" />
+            <End Role="Lavados" EntitySet="Lavados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lavados_Segmentos" Association="Self.FK_Lavados_Segmentos">
+            <End Role="Segmentos" EntitySet="Segmentos" />
+            <End Role="Lavados" EntitySet="Lavados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lavados_Servicios" Association="Self.FK_Lavados_Servicios">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="Lavados" EntitySet="Lavados" />
+          </AssociationSet>
           <AssociationSet Name="FK_ListaPrecios_Segmentos" Association="Self.FK_ListaPrecios_Segmentos">
             <End Role="Segmentos" EntitySet="Segmentos" />
             <End Role="ListaPrecios" EntitySet="ListaPrecios" />
@@ -304,65 +414,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WashAndGoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="WashAndGoModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="WashAndGoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="WashAndGoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="Marcas">
-          <Key>
-            <PropertyRef Name="IdMarca" />
-          </Key>
-          <Property Name="IdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Modelos" Relationship="WashAndGoModel.FK_Modelos_Marcas" FromRole="Marcas" ToRole="Modelos" />
-        </EntityType>
         <EntityContainer Name="WGentities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
-          <EntitySet Name="Marcas" EntityType="Self.Marcas" />
-          <EntitySet Name="Modelos" EntityType="WashAndGoModel.Modelos" />
-          <EntitySet Name="sysdiagrams" EntityType="WashAndGoModel.sysdiagrams" />
-          <AssociationSet Name="FK_Modelos_Marcas" Association="WashAndGoModel.FK_Modelos_Marcas">
-            <End Role="Marcas" EntitySet="Marcas" />
-            <End Role="Modelos" EntitySet="Modelos" />
-          </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -393,22 +445,19 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="Segmentos" EntityType="WashAndGoModel.Segmentos" />
-          <AssociationSet Name="FK_Modelos_Segmentos" Association="WashAndGoModel.FK_Modelos_Segmentos">
-            <End Role="Segmentos" EntitySet="Segmentos" />
-            <End Role="Modelos" EntitySet="Modelos" />
-          </AssociationSet>
-          <EntitySet Name="ListaPrecios" EntityType="WashAndGoModel.ListaPrecios" />
-          <EntitySet Name="Servicios" EntityType="WashAndGoModel.Servicios" />
-          <AssociationSet Name="FK_ListaPrecios_Segmentos" Association="WashAndGoModel.FK_ListaPrecios_Segmentos">
-            <End Role="Segmentos" EntitySet="Segmentos" />
-            <End Role="ListaPrecios" EntitySet="ListaPrecios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ListaPrecios_Servicios" Association="WashAndGoModel.FK_ListaPrecios_Servicios">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="ListaPrecios" EntitySet="ListaPrecios" />
-          </AssociationSet>
+          <EntitySet Name="C__MigrationHistory" EntityType="WashAndGoModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="WashAndGoModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="WashAndGoModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="WashAndGoModel.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="WashAndGoModel.AspNetUsers" />
+          <EntitySet Name="Clientes" EntityType="WashAndGoModel.Clientes" />
+          <EntitySet Name="Lavados" EntityType="WashAndGoModel.Lavados" />
+          <EntitySet Name="ListaPrecios" EntityType="WashAndGoModel.ListaPrecios" />
+          <EntitySet Name="Marcas" EntityType="WashAndGoModel.Marcas" />
+          <EntitySet Name="Modelos" EntityType="WashAndGoModel.Modelos" />
+          <EntitySet Name="Segmentos" EntityType="WashAndGoModel.Segmentos" />
+          <EntitySet Name="Servicios" EntityType="WashAndGoModel.Servicios" />
+          <EntitySet Name="sysdiagrams" EntityType="WashAndGoModel.sysdiagrams" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="WashAndGoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -417,44 +466,47 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK_Lavados_Clientes" Association="WashAndGoModel.FK_Lavados_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Lavados" EntitySet="Lavados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lavados_Marcas" Association="WashAndGoModel.FK_Lavados_Marcas">
+            <End Role="Marcas" EntitySet="Marcas" />
+            <End Role="Lavados" EntitySet="Lavados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lavados_Modelos" Association="WashAndGoModel.FK_Lavados_Modelos">
+            <End Role="Modelos" EntitySet="Modelos" />
+            <End Role="Lavados" EntitySet="Lavados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lavados_Segmentos" Association="WashAndGoModel.FK_Lavados_Segmentos">
+            <End Role="Segmentos" EntitySet="Segmentos" />
+            <End Role="Lavados" EntitySet="Lavados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lavados_Servicios" Association="WashAndGoModel.FK_Lavados_Servicios">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="Lavados" EntitySet="Lavados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListaPrecios_Segmentos" Association="WashAndGoModel.FK_ListaPrecios_Segmentos">
+            <End Role="Segmentos" EntitySet="Segmentos" />
+            <End Role="ListaPrecios" EntitySet="ListaPrecios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListaPrecios_Servicios" Association="WashAndGoModel.FK_ListaPrecios_Servicios">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="ListaPrecios" EntitySet="ListaPrecios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelos_Marcas" Association="WashAndGoModel.FK_Modelos_Marcas">
+            <End Role="Marcas" EntitySet="Marcas" />
+            <End Role="Modelos" EntitySet="Modelos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modelos_Segmentos" Association="WashAndGoModel.FK_Modelos_Segmentos">
+            <End Role="Segmentos" EntitySet="Segmentos" />
+            <End Role="Modelos" EntitySet="Modelos" />
+          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="WashAndGoModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Modelos">
-          <Key>
-            <PropertyRef Name="IdModelo" />
-          </Key>
-          <Property Name="IdModelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdMarca" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Marcas" Relationship="WashAndGoModel.FK_Modelos_Marcas" FromRole="Modelos" ToRole="Marcas" />
-          <Property Name="IdSegmento" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Segmentos" Relationship="WashAndGoModel.FK_Modelos_Segmentos" FromRole="Modelos" ToRole="Segmentos" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <Association Name="FK_Modelos_Marcas">
-          <End Type="WashAndGoModel.Marcas" Role="Marcas" Multiplicity="1" />
-          <End Type="WashAndGoModel.Modelos" Role="Modelos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Marcas">
-              <PropertyRef Name="IdMarca" />
-            </Principal>
-            <Dependent Role="Modelos">
-              <PropertyRef Name="IdMarca" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -466,73 +518,45 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="Segmentos">
+        <EntityType Name="C__MigrationHistory">
           <Key>
-            <PropertyRef Name="IdSegmento" />
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="IdSegmento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Modelos" Relationship="WashAndGoModel.FK_Modelos_Segmentos" FromRole="Segmentos" ToRole="Modelos" />
-          <NavigationProperty Name="ListaPrecios" Relationship="WashAndGoModel.FK_ListaPrecios_Segmentos" FromRole="Segmentos" ToRole="ListaPrecios" />
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_Modelos_Segmentos">
-          <End Type="WashAndGoModel.Segmentos" Role="Segmentos" Multiplicity="1" />
-          <End Type="WashAndGoModel.Modelos" Role="Modelos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Segmentos">
-              <PropertyRef Name="IdSegmento" />
-            </Principal>
-            <Dependent Role="Modelos">
-              <PropertyRef Name="IdSegmento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ListaPrecios">
+        <EntityType Name="AspNetRoles">
           <Key>
-            <PropertyRef Name="IdSegmento" />
-            <PropertyRef Name="IdServicio" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdSegmento" Type="Int32" Nullable="false" />
-          <Property Name="IdServicio" Type="Int32" Nullable="false" />
-          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Segmentos" Relationship="WashAndGoModel.FK_ListaPrecios_Segmentos" FromRole="ListaPrecios" ToRole="Segmentos" />
-          <NavigationProperty Name="Servicios" Relationship="WashAndGoModel.FK_ListaPrecios_Servicios" FromRole="ListaPrecios" ToRole="Servicios" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="WashAndGoModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="Servicios">
+        <EntityType Name="AspNetUserClaims">
           <Key>
-            <PropertyRef Name="IdServicio" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdServicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ListaPrecios" Relationship="WashAndGoModel.FK_ListaPrecios_Servicios" FromRole="Servicios" ToRole="ListaPrecios" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="WashAndGoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
-        <Association Name="FK_ListaPrecios_Segmentos">
-          <End Type="WashAndGoModel.Segmentos" Role="Segmentos" Multiplicity="1" />
-          <End Type="WashAndGoModel.ListaPrecios" Role="ListaPrecios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Segmentos">
-              <PropertyRef Name="IdSegmento" />
-            </Principal>
-            <Dependent Role="ListaPrecios">
-              <PropertyRef Name="IdSegmento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ListaPrecios_Servicios">
-          <End Type="WashAndGoModel.Servicios" Role="Servicios" Multiplicity="1" />
-          <End Type="WashAndGoModel.ListaPrecios" Role="ListaPrecios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="IdServicio" />
-            </Principal>
-            <Dependent Role="ListaPrecios">
-              <PropertyRef Name="IdServicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="WashAndGoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -553,6 +577,104 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="WashAndGoModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="WashAndGoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="WashAndGoModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DNI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Lavados" Relationship="WashAndGoModel.FK_Lavados_Clientes" FromRole="Clientes" ToRole="Lavados" />
+        </EntityType>
+        <EntityType Name="Lavados">
+          <Key>
+            <PropertyRef Name="IdLavado" />
+          </Key>
+          <Property Name="IdLavado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLavador" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdCliente" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdSegmento" Type="Int32" />
+          <Property Name="IdModelo" Type="Int32" />
+          <Property Name="IdMarca" Type="Int32" />
+          <Property Name="Direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Calificacion" Type="Int32" />
+          <Property Name="Comentario" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdServicio" Type="Int32" />
+          <NavigationProperty Name="Clientes" Relationship="WashAndGoModel.FK_Lavados_Clientes" FromRole="Lavados" ToRole="Clientes" />
+          <NavigationProperty Name="Marcas" Relationship="WashAndGoModel.FK_Lavados_Marcas" FromRole="Lavados" ToRole="Marcas" />
+          <NavigationProperty Name="Modelos" Relationship="WashAndGoModel.FK_Lavados_Modelos" FromRole="Lavados" ToRole="Modelos" />
+          <NavigationProperty Name="Segmentos" Relationship="WashAndGoModel.FK_Lavados_Segmentos" FromRole="Lavados" ToRole="Segmentos" />
+          <NavigationProperty Name="Servicios" Relationship="WashAndGoModel.FK_Lavados_Servicios" FromRole="Lavados" ToRole="Servicios" />
+        </EntityType>
+        <EntityType Name="ListaPrecios">
+          <Key>
+            <PropertyRef Name="IdSegmento" />
+            <PropertyRef Name="IdServicio" />
+          </Key>
+          <Property Name="IdSegmento" Type="Int32" Nullable="false" />
+          <Property Name="IdServicio" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Segmentos" Relationship="WashAndGoModel.FK_ListaPrecios_Segmentos" FromRole="ListaPrecios" ToRole="Segmentos" />
+          <NavigationProperty Name="Servicios" Relationship="WashAndGoModel.FK_ListaPrecios_Servicios" FromRole="ListaPrecios" ToRole="Servicios" />
+        </EntityType>
+        <EntityType Name="Marcas">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Lavados" Relationship="WashAndGoModel.FK_Lavados_Marcas" FromRole="Marcas" ToRole="Lavados" />
+          <NavigationProperty Name="Modelos" Relationship="WashAndGoModel.FK_Modelos_Marcas" FromRole="Marcas" ToRole="Modelos" />
+        </EntityType>
+        <EntityType Name="Modelos">
+          <Key>
+            <PropertyRef Name="IdModelo" />
+          </Key>
+          <Property Name="IdModelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMarca" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdSegmento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lavados" Relationship="WashAndGoModel.FK_Lavados_Modelos" FromRole="Modelos" ToRole="Lavados" />
+          <NavigationProperty Name="Marcas" Relationship="WashAndGoModel.FK_Modelos_Marcas" FromRole="Modelos" ToRole="Marcas" />
+          <NavigationProperty Name="Segmentos" Relationship="WashAndGoModel.FK_Modelos_Segmentos" FromRole="Modelos" ToRole="Segmentos" />
+        </EntityType>
+        <EntityType Name="Segmentos">
+          <Key>
+            <PropertyRef Name="IdSegmento" />
+          </Key>
+          <Property Name="IdSegmento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Lavados" Relationship="WashAndGoModel.FK_Lavados_Segmentos" FromRole="Segmentos" ToRole="Lavados" />
+          <NavigationProperty Name="ListaPrecios" Relationship="WashAndGoModel.FK_ListaPrecios_Segmentos" FromRole="Segmentos" ToRole="ListaPrecios" />
+          <NavigationProperty Name="Modelos" Relationship="WashAndGoModel.FK_Modelos_Segmentos" FromRole="Segmentos" ToRole="Modelos" />
+        </EntityType>
+        <EntityType Name="Servicios">
+          <Key>
+            <PropertyRef Name="IdServicio" />
+          </Key>
+          <Property Name="IdServicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Lavados" Relationship="WashAndGoModel.FK_Lavados_Servicios" FromRole="Servicios" ToRole="Lavados" />
+          <NavigationProperty Name="ListaPrecios" Relationship="WashAndGoModel.FK_ListaPrecios_Servicios" FromRole="Servicios" ToRole="ListaPrecios" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="WashAndGoModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
@@ -582,82 +704,124 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Lavados_Clientes">
+          <End Type="WashAndGoModel.Clientes" Role="Clientes" Multiplicity="0..1" />
+          <End Type="WashAndGoModel.Lavados" Role="Lavados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Lavados">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lavados_Marcas">
+          <End Type="WashAndGoModel.Marcas" Role="Marcas" Multiplicity="0..1" />
+          <End Type="WashAndGoModel.Lavados" Role="Lavados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marcas">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="Lavados">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lavados_Modelos">
+          <End Type="WashAndGoModel.Modelos" Role="Modelos" Multiplicity="0..1" />
+          <End Type="WashAndGoModel.Lavados" Role="Lavados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelos">
+              <PropertyRef Name="IdModelo" />
+            </Principal>
+            <Dependent Role="Lavados">
+              <PropertyRef Name="IdModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lavados_Segmentos">
+          <End Type="WashAndGoModel.Segmentos" Role="Segmentos" Multiplicity="0..1" />
+          <End Type="WashAndGoModel.Lavados" Role="Lavados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Segmentos">
+              <PropertyRef Name="IdSegmento" />
+            </Principal>
+            <Dependent Role="Lavados">
+              <PropertyRef Name="IdSegmento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lavados_Servicios">
+          <End Type="WashAndGoModel.Servicios" Role="Servicios" Multiplicity="0..1" />
+          <End Type="WashAndGoModel.Lavados" Role="Lavados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="IdServicio" />
+            </Principal>
+            <Dependent Role="Lavados">
+              <PropertyRef Name="IdServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListaPrecios_Segmentos">
+          <End Type="WashAndGoModel.Segmentos" Role="Segmentos" Multiplicity="1" />
+          <End Type="WashAndGoModel.ListaPrecios" Role="ListaPrecios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Segmentos">
+              <PropertyRef Name="IdSegmento" />
+            </Principal>
+            <Dependent Role="ListaPrecios">
+              <PropertyRef Name="IdSegmento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListaPrecios_Servicios">
+          <End Type="WashAndGoModel.Servicios" Role="Servicios" Multiplicity="1" />
+          <End Type="WashAndGoModel.ListaPrecios" Role="ListaPrecios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="IdServicio" />
+            </Principal>
+            <Dependent Role="ListaPrecios">
+              <PropertyRef Name="IdServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelos_Marcas">
+          <End Type="WashAndGoModel.Marcas" Role="Marcas" Multiplicity="1" />
+          <End Type="WashAndGoModel.Modelos" Role="Modelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marcas">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="Modelos">
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modelos_Segmentos">
+          <End Type="WashAndGoModel.Segmentos" Role="Segmentos" Multiplicity="1" />
+          <End Type="WashAndGoModel.Modelos" Role="Modelos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Segmentos">
+              <PropertyRef Name="IdSegmento" />
+            </Principal>
+            <Dependent Role="Modelos">
+              <PropertyRef Name="IdSegmento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Type="WashAndGoModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="WashAndGoModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WashAndGoModelStoreContainer" CdmEntityContainer="WGentities">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="WashAndGoModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="WashAndGoModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="WashAndGoModel.AspNetUserClaims">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="WashAndGoModel.AspNetUserLogins">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Marcas">
-            <EntityTypeMapping TypeName="WashAndGoModel.Marcas">
-              <MappingFragment StoreEntitySet="Marcas">
-                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Modelos">
-            <EntityTypeMapping TypeName="WashAndGoModel.Modelos">
-              <MappingFragment StoreEntitySet="Modelos">
-                <ScalarProperty Name="IdSegmento" ColumnName="IdSegmento" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
-                <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="WashAndGoModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="WashAndGoModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="WashAndGoModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="WashAndGoModel.Store.sp_dropdiagram" />
@@ -682,31 +846,40 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="WashAndGoModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="WashAndGoModel.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="Segmentos">
-            <EntityTypeMapping TypeName="WashAndGoModel.Segmentos">
-              <MappingFragment StoreEntitySet="Segmentos">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdSegmento" ColumnName="IdSegmento" />
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="WashAndGoModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ListaPrecios">
-            <EntityTypeMapping TypeName="WashAndGoModel.ListaPrecios">
-              <MappingFragment StoreEntitySet="ListaPrecios">
-                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
-                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="IdServicio" ColumnName="IdServicio" />
-                <ScalarProperty Name="IdSegmento" ColumnName="IdSegmento" />
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="WashAndGoModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Servicios">
-            <EntityTypeMapping TypeName="WashAndGoModel.Servicios">
-              <MappingFragment StoreEntitySet="Servicios">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdServicio" ColumnName="IdServicio" />
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="WashAndGoModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="WashAndGoModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -729,6 +902,93 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="WashAndGoModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lavados">
+            <EntityTypeMapping TypeName="WashAndGoModel.Lavados">
+              <MappingFragment StoreEntitySet="Lavados">
+                <ScalarProperty Name="IdServicio" ColumnName="IdServicio" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Calificacion" ColumnName="Calificacion" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
+                <ScalarProperty Name="IdSegmento" ColumnName="IdSegmento" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdLavador" ColumnName="IdLavador" />
+                <ScalarProperty Name="IdLavado" ColumnName="IdLavado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaPrecios">
+            <EntityTypeMapping TypeName="WashAndGoModel.ListaPrecios">
+              <MappingFragment StoreEntitySet="ListaPrecios">
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="IdServicio" ColumnName="IdServicio" />
+                <ScalarProperty Name="IdSegmento" ColumnName="IdSegmento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marcas">
+            <EntityTypeMapping TypeName="WashAndGoModel.Marcas">
+              <MappingFragment StoreEntitySet="Marcas">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modelos">
+            <EntityTypeMapping TypeName="WashAndGoModel.Modelos">
+              <MappingFragment StoreEntitySet="Modelos">
+                <ScalarProperty Name="IdSegmento" ColumnName="IdSegmento" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="IdModelo" ColumnName="IdModelo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Segmentos">
+            <EntityTypeMapping TypeName="WashAndGoModel.Segmentos">
+              <MappingFragment StoreEntitySet="Segmentos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdSegmento" ColumnName="IdSegmento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicios">
+            <EntityTypeMapping TypeName="WashAndGoModel.Servicios">
+              <MappingFragment StoreEntitySet="Servicios">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdServicio" ColumnName="IdServicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WashAndGoModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="WashAndGoModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetUsers">
               <ScalarProperty Name="Id" ColumnName="UserId" />
@@ -737,7 +997,7 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

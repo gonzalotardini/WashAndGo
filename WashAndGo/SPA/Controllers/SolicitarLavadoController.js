@@ -185,14 +185,16 @@
 
     }
 
-    $scope.CrearSolicitud = function (Marca, Modelo) {
+    $scope.CrearSolicitud = function (Marca, Modelo,Servicio) {
 
         var seg = $scope.Segmento.IdSegmento;
-        var dir = $scope.Direccion;
-        var total = $scope.Total;
-        SolicitarLavadoService.CrearSolicitud(Marca,Modelo,seg,dir,total).then(
+        var dir = $scope.Direccion;     
+        var total = $scope.Total;       
+
+        SolicitarLavadoService.CrearSolicitud(Marca,Modelo,Servicio,seg,dir,total).then(
             function (d) {
-                $scope.Servicios = d.data;
+                //$scope.Servicios = d.data;
+                $location.path('/a');
             },
             function (error) {
 
