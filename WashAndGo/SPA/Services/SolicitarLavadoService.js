@@ -6,6 +6,7 @@
         var promise = $http({
             method: 'get',
             url: '/SolicitarLavado/obtenerMarcas'
+            
         });
 
         return $q.when(promise);
@@ -63,13 +64,16 @@
 
     };
 
-    service.CrearSolicitud = function (idSegmento, idServicio) {
+    service.CrearSolicitud = function (Marca, Modelo, seg, dir, total) {
         var promise = $http({
             method: 'post',
-            url: '/SolicitarLavado/obtenerTotal',
+            url: '/SolicitarLavado/crearSolicitud',
             params: {
-                idSegmento: idSegmento,
-                idServicio: idServicio
+                Marca: Marca,
+                Modelo: Modelo,
+                seg: seg,
+                dir: dir,
+                total:total
             }
         });
 

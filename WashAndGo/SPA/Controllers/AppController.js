@@ -5,7 +5,8 @@ app.config(function ($routeProvider, $locationProvider) {
         .when('/solicitarlavado',
         {
             templateUrl: 'SPA/Views/SolicitarLavado.html',
-            controller: 'SolicitarLavadoController'
+            controller: 'SolicitarLavadoController',
+            data: { requireLogin: true}
         })
         .when('/',
         {

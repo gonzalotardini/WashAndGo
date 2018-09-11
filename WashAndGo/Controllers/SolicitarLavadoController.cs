@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace WashAndGo.Controllers
 {
+    [Authorize]
     public class SolicitarLavadoController : Controller
     {
         // GET: SolicitarLavado
@@ -19,10 +20,13 @@ namespace WashAndGo.Controllers
             return View();
         }
 
+
+        [Authorize]
         public string obtenerMarcas()
         {
             var userID = User.Identity.GetUserId();
 
+        
             var lavado = new Lavado();
             return JsonConvert.SerializeObject(lavado.ObtenerMarcas(), Formatting.None,
                    new JsonSerializerSettings()
@@ -31,7 +35,7 @@ namespace WashAndGo.Controllers
                    });
 
         }
-
+        [Authorize]
         public string obtenerServicios()
         {
 
@@ -43,7 +47,7 @@ namespace WashAndGo.Controllers
                    });
 
         }
-
+        [Authorize]
         public string obtenerModelos(int Marca)
         {
 
@@ -56,7 +60,7 @@ namespace WashAndGo.Controllers
 
         }
 
-
+        [Authorize]
         public string obtenerSegmento(int Modelo)
         {
 
@@ -68,7 +72,7 @@ namespace WashAndGo.Controllers
                    });
 
         }
-
+        [Authorize]
         public string obtenerTotal(int idSegmento, string idServicio)
         {
 
@@ -84,7 +88,7 @@ namespace WashAndGo.Controllers
            
         }
 
-
+        [Authorize]
         public string obtenerDireccion(string url)
         {
 
@@ -103,6 +107,19 @@ namespace WashAndGo.Controllers
             //           ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             //       });
 
+        }
+
+        public void crearSolicitud(string Marca, string Modelo,int seg,string dir,string total)
+        {
+            try
+            {
+                var lavadoDal = new Lavado();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

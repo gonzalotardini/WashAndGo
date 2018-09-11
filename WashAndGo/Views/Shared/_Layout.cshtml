@@ -23,8 +23,13 @@
 
         .navbar-nav {
             float: left;
+          
+        }
+
+        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
             margin: 1.3%;
         }
+
 
         .navbar-inverse .navbar-nav > li > a {
             color: white;
@@ -103,7 +108,7 @@
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li><a href="#quienesSomosTitle">Quiénes Somos</a></li>
-                    <li><a href="/#!/solicitarlavado">Cruzados</a></li>
+                    @*<li><a href="/#!/solicitarlavado">Cruzados</a></li>*@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li class="dropdown">
