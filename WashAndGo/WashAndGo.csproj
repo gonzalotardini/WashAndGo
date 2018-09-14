@@ -195,6 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SolicitarLavadoController.cs" />
@@ -1056,8 +1057,11 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="SPA\Controllers\AppController.js" />
+    <Content Include="SPA\Controllers\ClienteController.js" />
     <Content Include="SPA\Controllers\SolicitarLavadoController.js" />
+    <Content Include="SPA\Services\ClienteService.js" />
     <Content Include="SPA\Services\SolicitarLavadoService.js" />
+    <Content Include="SPA\Views\client.html" />
     <Content Include="SPA\Views\Error.html" />
     <Content Include="SPA\Views\Home.html" />
     <Content Include="SPA\Views\SolicitarLavado.html" />
@@ -1109,6 +1113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Cliente\" />
     <Folder Include="Views\SolicitarLavado\" />
   </ItemGroup>
   <ItemGroup>

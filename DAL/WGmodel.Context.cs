@@ -20,6 +20,7 @@ namespace DAL
         public WGentities()
             : base("name=WGentities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

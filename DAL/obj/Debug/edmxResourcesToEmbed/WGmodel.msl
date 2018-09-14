@@ -84,6 +84,10 @@
     <EntitySetMapping Name="Clientes">
       <EntityTypeMapping TypeName="WashAndGoModel.Clientes">
         <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Marca" ColumnName="Marca" />
+          <ScalarProperty Name="Completo" ColumnName="Completo" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="DNI" ColumnName="DNI" />
           <ScalarProperty Name="Apellido" ColumnName="Apellido" />

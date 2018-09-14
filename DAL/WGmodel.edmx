@@ -76,6 +76,10 @@
           <Property Name="Apellido" Type="varchar" MaxLength="200" />
           <Property Name="DNI" Type="varchar" MaxLength="200" />
           <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="Completo" Type="varchar" MaxLength="50" />
+          <Property Name="Marca" Type="int" />
+          <Property Name="Modelo" Type="int" />
+          <Property Name="FechaNacimiento" Type="date" />
         </EntityType>
         <EntityType Name="Lavados">
           <Key>
@@ -147,6 +151,30 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Clientes_Marcas">
+          <End Role="Marcas" Type="Self.Marcas" Multiplicity="0..1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marcas">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="Marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clientes_Modelos">
+          <End Role="Modelos" Type="Self.Modelos" Multiplicity="0..1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelos">
+              <PropertyRef Name="IdModelo" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="Modelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -357,6 +385,14 @@
           <EntitySet Name="Segmentos" EntityType="Self.Segmentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Clientes_Marcas" Association="Self.FK_Clientes_Marcas">
+            <End Role="Marcas" EntitySet="Marcas" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clientes_Modelos" Association="Self.FK_Clientes_Modelos">
+            <End Role="Modelos" EntitySet="Modelos" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -414,7 +450,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WashAndGoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="WGentities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WGentities" annotation:LazyLoadingEnabled="false">
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -465,6 +501,14 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="WashAndGoModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clientes_Marcas" Association="WashAndGoModel.FK_Clientes_Marcas">
+            <End Role="Marcas" EntitySet="Marcas" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clientes_Modelos" Association="WashAndGoModel.FK_Clientes_Modelos">
+            <End Role="Modelos" EntitySet="Modelos" />
+            <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
           <AssociationSet Name="FK_Lavados_Clientes" Association="WashAndGoModel.FK_Lavados_Clientes">
             <End Role="Clientes" EntitySet="Clientes" />
@@ -587,6 +631,12 @@
           <Property Name="Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DNI" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Completo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Marca" Type="Int32" />
+          <Property Name="Modelo" Type="Int32" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Marcas" Relationship="WashAndGoModel.FK_Clientes_Marcas" FromRole="Clientes" ToRole="Marcas" />
+          <NavigationProperty Name="Modelos" Relationship="WashAndGoModel.FK_Clientes_Modelos" FromRole="Clientes" ToRole="Modelos" />
           <NavigationProperty Name="Lavados" Relationship="WashAndGoModel.FK_Lavados_Clientes" FromRole="Clientes" ToRole="Lavados" />
         </EntityType>
         <EntityType Name="Lavados">
@@ -631,6 +681,7 @@
           </Key>
           <Property Name="IdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clientes" Relationship="WashAndGoModel.FK_Clientes_Marcas" FromRole="Marcas" ToRole="Clientes" />
           <NavigationProperty Name="Lavados" Relationship="WashAndGoModel.FK_Lavados_Marcas" FromRole="Marcas" ToRole="Lavados" />
           <NavigationProperty Name="Modelos" Relationship="WashAndGoModel.FK_Modelos_Marcas" FromRole="Marcas" ToRole="Modelos" />
         </EntityType>
@@ -642,6 +693,7 @@
           <Property Name="IdMarca" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IdSegmento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="WashAndGoModel.FK_Clientes_Modelos" FromRole="Modelos" ToRole="Clientes" />
           <NavigationProperty Name="Lavados" Relationship="WashAndGoModel.FK_Lavados_Modelos" FromRole="Modelos" ToRole="Lavados" />
           <NavigationProperty Name="Marcas" Relationship="WashAndGoModel.FK_Modelos_Marcas" FromRole="Modelos" ToRole="Marcas" />
           <NavigationProperty Name="Segmentos" Relationship="WashAndGoModel.FK_Modelos_Segmentos" FromRole="Modelos" ToRole="Segmentos" />
@@ -701,6 +753,30 @@
             </Principal>
             <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clientes_Marcas">
+          <End Type="WashAndGoModel.Marcas" Role="Marcas" Multiplicity="0..1" />
+          <End Type="WashAndGoModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marcas">
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="Marca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clientes_Modelos">
+          <End Type="WashAndGoModel.Modelos" Role="Modelos" Multiplicity="0..1" />
+          <End Type="WashAndGoModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modelos">
+              <PropertyRef Name="IdModelo" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="Modelo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -905,6 +981,10 @@
           <EntitySetMapping Name="Clientes">
             <EntityTypeMapping TypeName="WashAndGoModel.Clientes">
               <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Completo" ColumnName="Completo" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="DNI" ColumnName="DNI" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />

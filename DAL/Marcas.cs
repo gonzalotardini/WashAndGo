@@ -17,6 +17,7 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Marcas()
         {
+            this.Clientes = new HashSet<Clientes>();
             this.Lavados = new HashSet<Lavados>();
             this.Modelos = new HashSet<Modelos>();
         }
@@ -24,6 +25,8 @@ namespace DAL
         public int IdMarca { get; set; }
         public string Descripcion { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Clientes> Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lavados> Lavados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

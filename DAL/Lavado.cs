@@ -72,5 +72,22 @@ namespace DAL
             return listaPrecio.Precio;
             
         }
+
+        public string VerificarClienteDAL (string userid)
+        {
+            try
+            {
+                var context = new WGentities();
+                var cliente = context.Clientes.Where(c => c.IdCliente == userid).First();
+
+                return cliente.Completo;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }
     }
 }

@@ -27,10 +27,46 @@
     $scope.Total = '';
     //muestra cartel de error si la direccion no es valida
     $scope.ErrorDireccion = false;
+    // variable para ocultar o mostrar el formulario dependiendo si esta o no validado el cliente
+    $scope.BuscandoCliente = true;
 
 
 
+    //==============Ejecuto funcion para obtener geolaclizaion=========0
+    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+
+    VerificarCliente();
     ObtenerMarcas();
+   
+
+
+
+    function VerificarCliente() {
+      
+            //$scope.cargandoModelos = true;
+            SolicitarLavadoService.VerificarCliente().then(
+                function (d) {
+                    var estado = d.data;
+
+                    if (estado=="False") {
+                        $location.path('/cliente');
+                    }
+                    else {
+                        $scope.BuscandoCliente = false;
+                    }
+
+
+                },
+                function (error) {
+
+
+                });
+        
+    }
+
+
 
 
     $scope.ObtenerModelos = function (Marca) {
@@ -111,9 +147,6 @@
 
         }
     }
-
-
-
 
 
     $scope.ObtenerServicios = function () {
@@ -204,10 +237,6 @@
     }
 
 
-    //==============Ejecuto funcion para obtener geolaclizaion=========0
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
     function ObtenerMarcas() {
 
@@ -227,11 +256,7 @@
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
         $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + lat + "," + lng + "&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY");
-        $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + lat + "," + lng + "&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY");
-        $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + lat + "," + lng + "&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY");
-        $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + lat + "," + lng + "&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY");
-
-
+       
         $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&sensor=true').then(function (response) {
             var json = response.data;
             $scope.Direccion = json.results[0].formatted_address;

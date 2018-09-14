@@ -6,7 +6,7 @@ app.config(function ($routeProvider, $locationProvider) {
         {
             templateUrl: 'SPA/Views/SolicitarLavado.html',
             controller: 'SolicitarLavadoController',
-            data: { requireLogin: true}
+          
         })
         .when('/',
         {
@@ -17,6 +17,11 @@ app.config(function ($routeProvider, $locationProvider) {
         {
             templateUrl: 'SPA/Views/Error.html',
             //controller: 'GestionController'
+        })
+        .when('/cliente',
+        {
+            templateUrl: 'SPA/Views/client.html',
+            controller: 'ClienteController'
         })
         .otherwise({
             templateUrl: 'SPA/Views/Home.html',

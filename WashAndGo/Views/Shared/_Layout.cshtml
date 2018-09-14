@@ -108,7 +108,7 @@
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li><a href="#quienesSomosTitle">Quiénes Somos</a></li>
-                    @*<li><a href="/#!/solicitarlavado">Cruzados</a></li>*@
+                   
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li class="dropdown">
@@ -160,9 +160,10 @@
 
     <script src="~/SPA/Controllers/AppController.js"></script>
     <script src="~/SPA/Controllers/SolicitarLavadoController.js"></script>
+    <script src="~/SPA/Controllers/ClienteController.js"></script>
 
     <script src="~/SPA/Services/SolicitarLavadoService.js"></script>
-
+    <script src="~/SPA/Services/ClienteService.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

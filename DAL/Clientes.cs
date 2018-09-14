@@ -25,7 +25,13 @@ namespace DAL
         public string Apellido { get; set; }
         public string DNI { get; set; }
         public string Email { get; set; }
+        public string Completo { get; set; }
+        public Nullable<int> Marca { get; set; }
+        public Nullable<int> Modelo { get; set; }
+        public Nullable<System.DateTime> FechaNacimiento { get; set; }
     
+        public virtual Marcas Marcas { get; set; }
+        public virtual Modelos Modelos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lavados> Lavados { get; set; }
     }

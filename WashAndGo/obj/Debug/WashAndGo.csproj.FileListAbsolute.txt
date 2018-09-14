@@ -505,6 +505,6 @@ C:\WG\WashAndGo\bin\Microsoft.AI.DependencyCollector.xml
 C:\WG\WashAndGo\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\WG\WashAndGo\bin\Microsoft.AI.WindowsServer.xml
 C:\WG\WashAndGo\bin\Microsoft.AI.Web.xml
+C:\WG\WashAndGo\obj\Debug\WashAndGo.csprojResolveAssemblyReference.cache
 C:\WG\WashAndGo\obj\Debug\WashAndGo.dll
 C:\WG\WashAndGo\obj\Debug\WashAndGo.pdb
-C:\WG\WashAndGo\obj\Debug\WashAndGo.csprojResolveAssemblyReference.cache

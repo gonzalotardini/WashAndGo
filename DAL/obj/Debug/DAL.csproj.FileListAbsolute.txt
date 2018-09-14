@@ -25,5 +25,6 @@ C:\WG\DAL\bin\Debug\EntityFramework.dll
 C:\WG\DAL\bin\Debug\EntityFramework.SqlServer.dll
 C:\WG\DAL\bin\Debug\EntityFramework.xml
 C:\WG\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\WG\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 C:\WG\DAL\obj\Debug\DAL.dll
 C:\WG\DAL\obj\Debug\DAL.pdb

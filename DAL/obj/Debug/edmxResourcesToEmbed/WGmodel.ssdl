@@ -71,6 +71,10 @@
     <Property Name="Apellido" Type="varchar" MaxLength="200" />
     <Property Name="DNI" Type="varchar" MaxLength="200" />
     <Property Name="Email" Type="varchar" MaxLength="200" />
+    <Property Name="Completo" Type="varchar" MaxLength="50" />
+    <Property Name="Marca" Type="int" />
+    <Property Name="Modelo" Type="int" />
+    <Property Name="FechaNacimiento" Type="date" />
   </EntityType>
   <EntityType Name="Lavados">
     <Key>
@@ -142,6 +146,30 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <Association Name="FK_Clientes_Marcas">
+    <End Role="Marcas" Type="Self.Marcas" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marcas">
+        <PropertyRef Name="IdMarca" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="Marca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_Modelos">
+    <End Role="Modelos" Type="Self.Modelos" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modelos">
+        <PropertyRef Name="IdModelo" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="Modelo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -352,6 +380,14 @@
     <EntitySet Name="Segmentos" EntityType="Self.Segmentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Clientes_Marcas" Association="Self.FK_Clientes_Marcas">
+      <End Role="Marcas" EntitySet="Marcas" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_Modelos" Association="Self.FK_Clientes_Modelos">
+      <End Role="Modelos" EntitySet="Modelos" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />

@@ -2,10 +2,21 @@
 
     var service = {};
 
+    service.VerificarCliente = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/SolicitarLavado/VerificarCliente'
+
+        });
+
+        return $q.when(promise);
+
+    };
+
     service.SolicitarLavado = function () {
         var promise = $http({
             method: 'get',
-            url: '/SolicitarLavado/obtenerMarcas'
+            url: '/SolicitarLavado/ObtenerMarcas'
             
         });
 

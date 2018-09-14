@@ -142,5 +142,26 @@ namespace WashAndGo.Controllers
                 throw;
             }
         }
+
+        public string VerificarCliente()
+        {
+            try
+            {
+                var userid = User.Identity.GetUserId();
+                var lavadodal = new Lavado();
+                var estado= lavadodal.VerificarClienteDAL(userid);
+
+                return estado;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
     }
 }
