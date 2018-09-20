@@ -11,9 +11,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using WashAndGo.Models;
-using System.Net.Mail;
-using System.Net.Mime;
-using System.Configuration;
 
 namespace WashAndGo
 {
@@ -22,41 +19,8 @@ namespace WashAndGo
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            //return Task.FromResult(0);
-
-            return Task.Factory.StartNew(() =>
-            {
-
-                sendEmail(message);
-
-            });
+            return Task.FromResult(0);
         }
-
-
-        void sendEmail(IdentityMessage message) {
-            string text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
-            string html = "Please confirm your by clicking on this link <a href=\"" + message.Body + "\">link</a><br/>";
-
-            html += HttpUtility.HtmlEncode(@" Or click on the copy the following link on the browser:" + message.Body);
-
-            MailMessage msg = new MailMessage();
-            msg.From = new MailAddress(ConfigurationManager.AppSettings["Email"].ToString());
-            msg.To.Add(new MailAddress(message.Destination));
-            msg.Subject = message.Subject;
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
-
-            SmtpClient smtpclient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587));
-            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Email"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());
-            smtpclient.Credentials = credentials;
-            smtpclient.EnableSsl = true;
-
-            smtpclient.Send(msg);
-
-
-        }
-
-
     }
 
     public class SmsService : IIdentityMessageService

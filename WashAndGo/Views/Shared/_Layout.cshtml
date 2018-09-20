@@ -3,91 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Wash & Go!</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
-    <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.ico">
-
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
-    <style>
-        .navbar-inverse {
-            background-color: #003359;
-            border-color: transparent;
-            padding: 0.5%;
-            background-size: 2000px 400px;
-        }
-
-        .navbar-nav {
-            float: left;
-          
-        }
-
-        .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-            margin: 1.3%;
-        }
-
-
-        .navbar-inverse .navbar-nav > li > a {
-            color: white;
-            font-family: 'Century Gothic';
-            font-size: 16px;
-        }
-
-        .navbar-inverse .navbar-nav > li:hover > a {
-            color: white;
-            font-size: 18px;
-        }
-
-            .navbar-inverse .navbar-brand {
-                color: white;
-                font-family: 'Century Gothic';
-            }
-
-        footer {
-            padding: 5%;
-            background-color: #1f1f1f;
-        }
-
-        a {
-            color: white;
-            text-decoration: none;
-        }
-        a:hover {
-            color: white;
-            text-decoration: none;
-        }
-
-        .dropdown-menu > li > a {
-            color:white;
-        }
-
-        .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-            background-color: #003359;
-            font-family:'Century Gothic';
-           
-
-        }
-        .navbar-nav > li > .dropdown-menu {
-            background-color: #003359;
-            font-family: 'Century Gothic';
-            font-size: 16px;
-        }
-
-        .dropdown-menu > li > a:hover {
-            color: white;
-            
-            font-family: 'Century Gothic';
-            background-color: #003359;
-            font-size: 18px;
-        }
-
-    </style>
-
-    
 
 </head>
 <body>
@@ -99,76 +17,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-                <a href="/" class="navbar-left"><img style="width:150px;" src="~/img/logo.png"/></a>
-
-                @*@Html.ActionLink("Wash & Go!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li><a href="#quienesSomosTitle">Quiénes Somos</a></li>
-                   
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Menu
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/#!/solicitarlavado">SolicitarLavado</a></li>
-                            @*<li><a href="#">Page 1-2</a></li>
-                            <li><a href="#">Page 1-3</a></li>*@
-                        </ul>
-                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="body-content" ng-app="app">
-
+    <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer style="padding-top:3%;">
-
-            <div class="container col-md-12">
-                <div class="col-md-4">
-                    <img src="~/img/logo fb.png" style="width:50px;margin-left:3%;"/>
-                    <img src="~/img/logo ig.png" style="width:50px; margin-left:3%;" />
-                </div>
-                <div class="col-md-4 text-center">
-
-                    <a href="https://api.whatsapp.com/send?phone=5491161434897"><img src="~/img/Whatsapp-botón.png" /></a>
-                </div>
-                
-            </div>
-
-
+        <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
 
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/angular-animate.min.js"></script>
-    <script src="~/Scripts/angular-aria.min.js"></script>
-    <script src="~/Scripts/angular-messages.min.js"></script>
-    <script src="~/Scripts/angular-route.min.js"></script>
-
-
-
-    <script src="~/SPA/Controllers/AppController.js"></script>
-    <script src="~/SPA/Controllers/SolicitarLavadoController.js"></script>
-    <script src="~/SPA/Controllers/ClienteController.js"></script>
-
-    <script src="~/SPA/Services/SolicitarLavadoService.js"></script>
-    <script src="~/SPA/Services/ClienteService.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
-
-
 </html>
-

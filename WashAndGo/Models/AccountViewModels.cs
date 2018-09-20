@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.WebPages.Html;
 
 namespace WashAndGo.Models
 {
@@ -80,12 +79,6 @@ namespace WashAndGo.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        [Required]
-        [Display(Name = "Tipo")]
-        public string SelectedTipo { get; set; }
-        public IEnumerable<SelectListItem> TipoList { get; set; }
-        
     }
 
     public class ResetPasswordViewModel

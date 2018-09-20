@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,11 +10,6 @@ namespace WashAndGo.Controllers
     {
         public ActionResult Index()
         {
-
-            string strHostName = "";
-            strHostName = System.Net.Dns.GetHostName();
-
-            IPHostEntry ipEntry = System.Net.Dns.GetHostEntry(strHostName);
             return View();
         }
 
@@ -32,7 +26,5 @@ namespace WashAndGo.Controllers
 
             return View();
         }
-
-
     }
 }

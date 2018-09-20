@@ -9,9 +9,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WashAndGo.Models;
-using System.Collections.Generic;
-using DAL;
-using System.Transactions;
 
 namespace WashAndGo.Controllers
 {
@@ -25,7 +22,7 @@ namespace WashAndGo.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -37,9 +34,9 @@ namespace WashAndGo.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set
-            {
-                _signInManager = value;
+            private set 
+            { 
+                _signInManager = value; 
             }
         }
 
@@ -61,8 +58,7 @@ namespace WashAndGo.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();         
-            
+            return View();
         }
 
         //
@@ -77,24 +73,21 @@ namespace WashAndGo.Controllers
                 return View(model);
             }
 
-
-            var user = await UserManager.FindAsync(model.Email, model.Password); if (user != null)
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
             {
-                if (user.EmailConfirmed == true)
-                {
-                    await SignInManager.SignInAsync(user, model.RememberMe, true); return RedirectToLocal(returnUrl);
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Confirm Email Address.");
-                    //return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "Invalid username or password.");
-                return View(model);
             }
         }
 
@@ -127,7 +120,7 @@ namespace WashAndGo.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -146,25 +139,6 @@ namespace WashAndGo.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            var model = new RegisterViewModel();
-
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem
-            {
-                Text = "Lavador",
-                Value = "1"
-            });
-
-            items.Add(new SelectListItem
-            {
-                Text = "Cliente",
-                Value = "2"
-            });
-
-            SelectList s = new SelectList(items, "Value", "Text");
-
-            ViewBag.TipoList = s;
-
             return View();
         }
 
@@ -175,87 +149,28 @@ namespace WashAndGo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-
-            try
-            {            
-                    if (ModelState.IsValid)
-                    {
-                        
-                        var result = await UserManager.CreateAsync(user, model.Password);
-                        if (result.Succeeded)
-                        {
-                            //asigno en la base el tipo de usuario que es (lavador 1 cliente 2)
-                            using (var context = new WGentities())
-                            {
-                                AspNetUsers usuario = context.AspNetUsers.Where(c => c.Id == user.Id).First();
-                                usuario.TipoUsuario = Convert.ToInt32(model.SelectedTipo);
-                                context.SaveChanges();
-                            }
-                            //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-                            // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                            // Send an email with this link
-                            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                            var userID = User.Identity.GetUserId();
-                            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                            await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                        var cliente = new Clientes()
-                        {
-                            IdCliente = user.Id,
-                            Email=user.Email                           
-
-                        };
-
-                        using (var context = new WGentities())
-                        {
-                            context.Clientes.Add(cliente);
-                            context.SaveChanges();
-
-                        }
-
-
-                            return RedirectToAction("Login", "Account");
-                        }
-                        AddErrors(result);
-                    }
-                
-            }
-            catch (Exception ex)
+            if (ModelState.IsValid)
             {
-                using (var context = new WGentities())
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
                 {
-                  
-                    AspNetUsers usuario = context.AspNetUsers.Where(c => c.Id == user.Id).First();
-                    context.AspNetUsers.Remove(usuario);
-                    context.SaveChanges();
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
                 }
+                AddErrors(result);
             }
-
-            //if (bandera == 1)
-            //{
-            //    return RedirectToAction("Error", "Account");
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Login", "Account");
-            //}
-
 
             // If we got this far, something failed, redisplay form
-            //return View(model);
-
-            return RedirectToAction("Error","Account");
+            return View(model);
         }
-
-
-        [AllowAnonymous]
-        public ActionResult Error()
-        {
-            return View();
-        }
-
 
         //
         // GET: /Account/ConfirmEmail
@@ -287,7 +202,7 @@ namespace WashAndGo.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByEmailAsync(model.Email);
+                var user = await UserManager.FindByNameAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -295,11 +210,11 @@ namespace WashAndGo.Controllers
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                //Send an email with this link
-                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                // Send an email with this link
+                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -333,7 +248,7 @@ namespace WashAndGo.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByEmailAsync(model.Email);
+            var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
