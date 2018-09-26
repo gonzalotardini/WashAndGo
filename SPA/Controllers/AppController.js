@@ -1,12 +1,11 @@
-﻿var app = angular.module("app", ['ngRoute']);
+﻿var app = angular.module("app", ['ngRoute','ngDialog']);
 
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/solicitarlavado',
         {
             templateUrl: 'SPA/Views/SolicitarLavado.html',
-            controller: 'SolicitarLavadoController',
-          
+            controller: 'SolicitarLavadoController'          
         })
         .when('/',
         {

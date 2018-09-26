@@ -50,7 +50,7 @@ namespace WashAndGo.Controllers
                    });           
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

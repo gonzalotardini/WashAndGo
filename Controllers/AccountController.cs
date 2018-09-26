@@ -204,8 +204,9 @@ namespace WashAndGo.Controllers
                         var cliente = new Clientes()
                         {
                             IdCliente = user.Id,
-                            Email=user.Email                           
-
+                            Email=user.Email    ,
+                            Completo="False"
+                            
                         };
 
                         using (var context = new WGentities())

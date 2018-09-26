@@ -1,10 +1,12 @@
-﻿angular.module('app').controller("ClienteController", ["$scope", "$sce", "$http", "$window", "$filter", "ClienteService", "$location", function ($scope, $sce, $http, $window, $filter, ClienteService, $location) {
+﻿angular.module('app').controller("ClienteController", ["$scope", "$sce", "$http", "$window", "ngDialog", "$filter", "ClienteService", "$location", function ($scope, $sce, $http, $window, ngDialog,$filter, ClienteService, $location) {
 
     $scope.MostrarDatosPersonales = false;
     $scope.Marcas = [];
     $scope.MarcaSeleccionada = '';
+    $scope.MarcaDescripcion = '';
     $scope.Modelos = [];
     $scope.Modelo = '';
+    $scope.ModeloDescripcion = '';
     $scope.Nombre = '';
     $scope.Apellido = '';
     $scope.DNI = '';
@@ -12,8 +14,9 @@
     $scope.Fecha = '';
     $scope.Cliente = [];
     $scope.MarcaObtenida = '';
-
-
+    $scope.ReadOnly = true;
+    $scope.DatosGuardadosOK = false;
+    $scope.cargandoCliente = false;
 
     $scope.ObtenerMarcas = function () {
 
@@ -25,25 +28,38 @@
 
                 var elerror = error;
             });
-    }
+    };
 
     $scope.ObtenerDatos = function () {
-
+        $scope.cargandoCliente = true;
         ClienteService.ObtenerDatos().then(
             function (d) {
                 $scope.Cliente = d.data;
-                $scope.Nombre = $scope.Cliente.Nombre;
-                $scope.Apellido = $scope.Cliente.Apellido,
+                var fecha = new Date();
+                
+                if ($scope.Cliente.Completo === 'True') {
+                    $scope.Nombre = $scope.Cliente.Nombre,
+                    $scope.Apellido = $scope.Cliente.Apellido,
                     $scope.DNI = $scope.Cliente.DNI,
-                    $scope.Email = $scope.Cliente.Email,
-                    $scope.Fecha = $scope.Cliente.FechaNacimiento,
-                    $scope.MarcaSeleccionada = $scope.Cliente.Marca
+                    $scope.Email = $scope.Cliente.Email,                    
+                        $scope.Fecha = $scope.Cliente.FechaNacimiento.slice(0, 10),                    
+                    $scope.MarcaDescripcion = $scope.Cliente.Marcas.Descripcion,
+                    $scope.ModeloDescripcion = $scope.Cliente.Modelos.Descripcion
+                    //$scope.MarcaSeleccionada = $scope.Cliente.Marca
+                    $scope.cargandoCliente = false;
+                    var element = angular.element('#my_modal_popup');
+                    element.modal('show');
+                }
+                else {
+                    $scope.ReadOnly = false;
+                }
+
             },
             function (error) {
 
                 var elerror = error;
             });
-    }
+    };
 
 
 
@@ -68,7 +84,9 @@
         ClienteService.GuardarDatos(Nombre, Apellido, DNI, Email, Fecha, MarcaSeleccionada, Modelo).then(
             function (d) {
                 //$scope.Servicios = d.data;
-                $location.path('/a');
+                //$location.path('/a');
+                $scope.DatosGuardadosOK = true;
+                $scope.MostrarDatosPersonales = false;
             },
             function (error) {
 
@@ -76,6 +94,8 @@
             });
 
     }
+
+   
 
 
 }]) 

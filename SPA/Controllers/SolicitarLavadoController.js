@@ -1,4 +1,4 @@
-﻿angular.module('app').controller("SolicitarLavadoController", ["$scope", "$sce", "$http", "$window", "$filter", "SolicitarLavadoService", "$location", function ($scope, $sce, $http, $window, $filter, SolicitarLavadoService, $location) {
+﻿angular.module('app').controller("SolicitarLavadoController", ["$scope", "$sce", "$http", "$window", "ngDialog", "$filter", "SolicitarLavadoService", "$location", function ($scope, $sce, $http, $window, ngDialog,$filter, SolicitarLavadoService, $location) {
 
 
     //Array de MARCAS
@@ -31,11 +31,13 @@
     $scope.BuscandoCliente = true;
 
 
+    //$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
+
 
     //==============Ejecuto funcion para obtener geolaclizaion=========0
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+    //if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+    //if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
     VerificarCliente();
     ObtenerMarcas();
@@ -168,19 +170,18 @@
 
     $scope.ActualizarUbicacion = function (Direccion) {
 
-        if (Direccion == "" || Direccion==undefined) {
+        if (Direccion === "") {
 
             $scope.cargandoMapa = true;
         }
         else {
 
-            $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + Direccion);
-            var json;
-            $http.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + Direccion + '&sensor=true').then(function (response) {
-                json = response.data;
-
-
-
+            //$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + Direccion);
+            var h = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + Direccion + '&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY';
+    
+            $http.get(h).
+                then(function (response) {
+               var json = response.data;
                 if ((json.results.length) == 0) {
                     $scope.ErrorDireccion = true;
                     $scope.cargandoMapa = true;
@@ -226,7 +227,8 @@
         SolicitarLavadoService.CrearSolicitud(Marca, Modelo, Servicio, seg, dir, total).then(
             function (d) {
                 //$scope.Servicios = d.data;
-                $location.path('/a');
+                $scope.abrirDialogSolicitado();
+                //$location.path('/a');
             },
             function (error) {
 
@@ -237,11 +239,15 @@
 
 
 
+
+
+
+
     function ObtenerMarcas() {
 
         SolicitarLavadoService.SolicitarLavado().then(
-            function (d) {
-                $scope.Marcas = d.data;
+            function (response) {                
+                $scope.Marcas = response.data;
             },
             function (error) {
 
@@ -254,31 +260,19 @@
     function onPositionUpdate(position) {
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
-        var json;
-        var h = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&sensor=true';
-        $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + lat + "," + lng + "&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY");
+        var json='';
+        var h = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY';
+        //$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + lat + "," + lng + "&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q");
 
-        //while (json==undefined) {
-            $http.get('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&sensor=true').then(function (response) {
-                json = response.data;
-                $scope.Direccion = json.results[0].formatted_address;
-                return $http;
-            });
-       // }
-       
 
-        
-
-        //if (contador == 2) {
-
-        //    sleep(2000);
-        //    $scope.cargandoMapa = false;
-        //}
-        //else {
-        //    contador = contador + 1;
-
-        //}
-
+        //while (json === '') {
+            $http.get(h)
+                .then(function (response) {
+                    json = response.data.results[0].formatted_address;
+                    $scope.Direccion = response.data.results[0].formatted_address;
+                });
+      
+        $scope.cargandoMapa = false;
     }
 
     function sleep(milliseconds) {
@@ -290,9 +284,17 @@
         }
     }
 
+    $scope.abrirDialogSolicitado = function () {
+        ngDialog.open({
+            template: 'SPA/Views/Modal/lavado.html',
+            className: 'ngdialog-theme-default',
+            scope: $scope,
+
+        });
+    }; 
 
     //url por defecto para q me cargo algo en el mapa
-    $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
+    //$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 
 
 

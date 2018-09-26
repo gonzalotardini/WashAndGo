@@ -13,6 +13,9 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/1.0.1/css/ngDialog.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/1.0.1/css/ngDialog-theme-default.min.css">
+
     <style>
         .navbar-inverse {
             background-color: #003359;
@@ -23,7 +26,6 @@
 
         .navbar-nav {
             float: left;
-          
         }
 
         .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
@@ -42,10 +44,10 @@
             font-size: 18px;
         }
 
-            .navbar-inverse .navbar-brand {
-                color: white;
-                font-family: 'Century Gothic';
-            }
+        .navbar-inverse .navbar-brand {
+            color: white;
+            font-family: 'Century Gothic';
+        }
 
         footer {
             padding: 5%;
@@ -56,21 +58,21 @@
             color: white;
             text-decoration: none;
         }
-        a:hover {
-            color: white;
-            text-decoration: none;
-        }
+
+            a:hover {
+                color: white;
+                text-decoration: none;
+            }
 
         .dropdown-menu > li > a {
-            color:white;
+            color: white;
         }
 
         .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
             background-color: #003359;
-            font-family:'Century Gothic';
-           
-
+            font-family: 'Century Gothic';
         }
+
         .navbar-nav > li > .dropdown-menu {
             background-color: #003359;
             font-family: 'Century Gothic';
@@ -79,15 +81,13 @@
 
         .dropdown-menu > li > a:hover {
             color: white;
-            
             font-family: 'Century Gothic';
             background-color: #003359;
             font-size: 18px;
         }
-
     </style>
 
-    
+
 
 </head>
 <body>
@@ -100,7 +100,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a href="/" class="navbar-left"><img style="width:150px;" src="~/img/logo.png"/></a>
+                <a href="/" class="navbar-left"><img style="width:150px;" src="~/img/logo.png" /></a>
 
                 @*@Html.ActionLink("Wash & Go!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
@@ -108,7 +108,7 @@
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li><a href="#quienesSomosTitle">Quiénes Somos</a></li>
-                   
+
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li class="dropdown">
@@ -119,7 +119,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="/#!/solicitarlavado">SolicitarLavado</a></li>
                             @*<li><a href="#">Page 1-2</a></li>
-                            <li><a href="#">Page 1-3</a></li>*@
+                                <li><a href="#">Page 1-3</a></li>*@
                         </ul>
                     </li>
                 </ul>
@@ -135,14 +135,14 @@
 
             <div class="container col-md-12">
                 <div class="col-md-4">
-                    <img src="~/img/logo fb.png" style="width:50px;margin-left:3%;"/>
+                    <img src="~/img/logo fb.png" style="width:50px;margin-left:3%;" />
                     <img src="~/img/logo ig.png" style="width:50px; margin-left:3%;" />
                 </div>
                 <div class="col-md-4 text-center">
 
                     <a href="https://api.whatsapp.com/send?phone=5491161434897"><img src="~/img/Whatsapp-botón.png" /></a>
                 </div>
-                
+
             </div>
 
 
@@ -167,6 +167,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/ngDialog.min.js"></script>
 </body>
 
 

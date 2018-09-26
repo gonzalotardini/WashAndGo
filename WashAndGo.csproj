@@ -27,6 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -214,6 +215,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\footer.css" />
+    <Content Include="Content\ngDialog-theme-default.css" />
+    <Content Include="Content\ngDialog.css" />
+    <Content Include="Content\ngDialog.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1045,6 +1049,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ngDialog.js" />
+    <Content Include="Scripts\ngDialog.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -1064,6 +1070,7 @@
     <Content Include="SPA\Views\client.html" />
     <Content Include="SPA\Views\Error.html" />
     <Content Include="SPA\Views\Home.html" />
+    <Content Include="SPA\Views\Modal\lavado.html" />
     <Content Include="SPA\Views\SolicitarLavado.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
