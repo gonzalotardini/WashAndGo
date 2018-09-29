@@ -44,6 +44,24 @@
             margin-bottom: 5%;
             margin-top: 6%;
         }
+        .panel-title {
+            display: inline;
+            font-weight: bold;
+        }
+
+        .checkbox.pull-right {
+            margin: 0;
+        }
+
+        .pl-ziro {
+            padding-left: 0px;
+        }
+        .glyphicon-lock:before {
+            content: "\e033";
+            vertical-align: middle;
+            margin-left: 20%;
+        }
+
     </style>
 </head>
 <body>
@@ -52,8 +70,8 @@
         <img ng-show="BuscandoCliente" src="../../img/loading.gif" />
     </div>
     
-    <div class="container" ng-hide="BuscandoCliente">
-        <div class="col-md-12 jumbotron" style="margin-top:10%">
+    <div class="container">
+        <div  ng-hide="BuscandoCliente || ClienteSinDatos || Pago" class="col-md-12 jumbotron" style="margin-top:10%">
 
             <div class="col-md-6 text-center" id="jumbovehiculoservicio">
 
@@ -98,14 +116,17 @@
                         <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{url}}" allowfullscreen></iframe>
                     </div>
                     <div class="form-group text-left">
-                        <input id="direccion" ng-model="Direccion" class="form-control" value="{{Direccion}}" type="text" />
-                        <button type="button" ng-click="ActualizarUbicacion(Direccion)" class="btn btn-info">
-                            <span class="glyphicon glyphicon-search"></span> 
-                        </button>
+                        <div class="form-inline" style="width: 85%">
+                            <input id="direccion" ng-model="Direccion" class="form-control" style="width: 85%" value="{{Direccion}}" type="text" />
+                            <button type="button" ng-click="ActualizarUbicacion(Direccion)" class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+
                         <div ng-show="ErrorDireccion" class="alert alert-danger">
                             <strong>Error!</strong> La dirección introducida es incorrecta. Intente nuevamente.
                         </div>
-                        
+
                     </div>
                    
                 </div>
@@ -140,6 +161,101 @@
             </div>
 
         </div>
+
+        <div style="margin-top:10%;"   ng-show="ClienteSinDatos" class="col-md-12 text-center">
+
+            <h3>Atención! Ingrese sus datos personales antes de contratar un lavado!</h3>
+            <a class="btn btn-lg btn-danger"href="/#!/cliente">Datos Personales</a>
+            
+        </div>
+
+        <div  class="col-md-4"></div>
+        
+            <div  ng-show="Pago" class="row">
+                <div style="margin-top: 10%;" class="col-xs-12 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center" style="background-color:#5bc0de; color:white;">
+                            <h3 class="panel-title">
+                                Payment Details
+                            </h3>
+                            <!--<div class="checkbox pull-right">
+                                <label>
+                                    <input type="checkbox" />
+                                    Remember
+                                </label>
+                            </div>-->
+                        </div>
+                        <div class="panel-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="cardNumber">
+                                        Nombre
+                                    </label>
+                                 
+                                        <input type="text" class="form-control" style="max-width:100%;" id="nombre" placeholder="Ej: Gonzalo T. Tardini" required autofocus />                                        
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardNumber">
+                                        N° de Tarjeta
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="cardNumber" placeholder="Ej: 4485 7158 6086 8875"
+                                               required autofocus />
+                                        <span class="glyphicon glyphicon-lock"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--<div class="col-xs-7 col-md-7">
+        <div class="form-group">
+            <label style="font-family:'Century Gothic'" for="expityMonth">
+                EXPIRY DATE
+            </label>
+            <div class="col-xs-6 col-lg-6 pl-ziro">
+                <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+            </div>
+            <div class="col-xs-6 col-lg-6 pl-ziro">
+                <input type="text" class="form-control" id="expityYear" placeholder="YY" required />
+            </div>
+        </div>
+    </div>-->
+                                    <div class="col-xs-5 col-md-5">
+                                        <div class="form-group" style="margin-top: 10%;">
+                                            <label style="font-family:'Century Gothic'" for="cvCode">
+                                                Vencimiento
+                                            </label>
+                                            <div class="form-inline">
+                                                <input style="width:45%;" type="password" class="form-control" id="cvCode" placeholder="MM" required />
+                                                <input style="width:45%;" type="password" class="form-control" id="cvCode" placeholder="YY" required />
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-5 col-md-5 pull-right">
+                                        <div class="form-group text-center" style="margin-top: 10%;">
+                                            <label style="font-family:'Century Gothic'" for="cvCode">
+                                                Cod.
+                                            </label>                                         
+                                           
+                                                <input type="password"  class="form-control text-center" id="cvCode" placeholder="Ej: 123" required />                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active">
+                            <a style="background-color:#d9534f; padding:10%; font-family:'Century Gothic'; font-size:30px"><span style="font-size:30px;" class="pull-right"><span></span><strong>${{Total}}</strong></span><strong>TOTAL</strong></a>
+                        </li>
+                    </ul>
+                    <br />
+                    <a class="btn btn-success btn-lg btn-block" role="button">Pay</a>
+                </div>
+            </div>
+       
+
+
     </div>
 
 

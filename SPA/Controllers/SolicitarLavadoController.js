@@ -30,12 +30,17 @@
     // variable para ocultar o mostrar el formulario dependiendo si esta o no validado el cliente
     $scope.BuscandoCliente = true;
 
+    $scope.ClienteSinDatos = false;
+
+    $scope.Pago = false;
+
+
 
     //$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 
 
     //==============Ejecuto funcion para obtener geolaclizaion=========0
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+   // if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
     //if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
     //if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
@@ -53,7 +58,10 @@
                 var estado = d.data;
 
                 if (estado == "False") {
-                    $location.path('/cliente');
+                    $scope.BuscandoCliente = false;
+                    $scope.ClienteSinDatos = true;
+
+                    //$location.path('/cliente');
                 }
                 else {
                     $scope.BuscandoCliente = false;
@@ -227,6 +235,7 @@
         SolicitarLavadoService.CrearSolicitud(Marca, Modelo, Servicio, seg, dir, total).then(
             function (d) {
                 //$scope.Servicios = d.data;
+                $scope.Pago = true;
                 $scope.abrirDialogSolicitado();
                 //$location.path('/a');
             },

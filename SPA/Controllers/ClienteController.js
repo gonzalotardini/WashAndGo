@@ -52,6 +52,7 @@
                 }
                 else {
                     $scope.ReadOnly = false;
+                    $scope.cargandoCliente = false;
                 }
 
             },
