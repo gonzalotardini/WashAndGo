@@ -62,6 +62,11 @@
             margin-left: 20%;
         }
 
+        .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+            background-color : white;
+        }
+
+
     </style>
 </head>
 <body>
@@ -71,21 +76,21 @@
     </div>
     
     <div class="container">
-        <div  ng-hide="BuscandoCliente || ClienteSinDatos || Pago" class="col-md-12 jumbotron" style="margin-top:10%">
+        <div ng-hide="BuscandoCliente || ClienteSinDatos || Pago" class="col-md-12 jumbotron" style="margin-top:10%">
 
             <div class="col-md-6 text-center" id="jumbovehiculoservicio">
 
                 <h3 style="text-align:left; font-weight:bold;">¿Cuál es tu auto?</h3>
                 <h5 style="text-align:left; font-weight:bold;">Elegí marca y modelo del vehiculo a lavar</h5>
 
-                <div class="form-group">
+                <div ng-show="EditAuto" class="form-group">
                     <select ng-model="Marca" ng-change="ObtenerModelos(Marca); limpiarSegmentoMarca()" class="form-control" id="sel1" required>
                         <option value="" disabled selected>Seleccione Marca</option>
                         <option ng-repeat="x in Marcas" value="{{x.IdMarca}} ">{{x.Descripcion}}</option>
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div ng-show="EditAuto" class="form-group">
                     <div class="input-group">
                         <select style="margin-bottom:2%;" ng-model="Modelo" ng-change="ObtenerSegmento(Modelo)" class="form-control">
                             <option value="" disabled selected>Seleccione Modelo</option>
@@ -94,8 +99,22 @@
                         <span ng-show="cargandoModelos">
                             <img style="width:25px; padding:-1px;" src="../../img/loading.gif" />
                         </span>
+
                     </div>
                 </div>
+
+                <div ng-show="!EditAuto" class="form-group">
+                    <input ng-readonly="ReadOnly" ng-model="MarcaDescripcion" class="form-control" type="text" />
+                </div>
+                <div ng-show="!EditAuto" style="text-align:left;" class="form-group form-inline">
+                    <input style="width:90%;" ng-readonly="ReadOnly" ng-model="ModeloDescripcion" class="form-control" type="text" />
+                    <button ng-click="EditarAuto()" style="width:8%;" class="btn btn-danger form-control">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+
+                </div>
+
+
 
                 <img src="../../img/auto.png" style="width: 30%" />
                 <h3 ng-model="Segmento">Segmento: {{Segmento.Descripcion}}</h3>
@@ -115,8 +134,8 @@
                     <div ng-hide="cargandoMapa" id="map">
                         <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{url}}" allowfullscreen></iframe>
                     </div>
-                    <div class="form-group text-left">
-                        <div class="form-inline" style="width: 85%">
+                    <div class="form-group">
+                        <div class="form-inline" style="width: 100%">
                             <input id="direccion" ng-model="Direccion" class="form-control" style="width: 85%" value="{{Direccion}}" type="text" />
                             <button type="button" ng-click="ActualizarUbicacion(Direccion)" class="btn btn-info">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -128,7 +147,7 @@
                         </div>
 
                     </div>
-                   
+
                 </div>
 
             </div>
@@ -138,126 +157,153 @@
                 <div class="col-md-6">
                     <h3 style="text-align:left;font-weight:bold">¿Qué tipo de lavado querés?</h3>
                     <h5 style="text-align:left;font-weight:bold">Elegí el servicio ideal para tu vehículo</h5>
-                    <div class="form-group">
-                        <select ng-model="Servicio" ng-change="botonTotal()" class="form-control">
+                    <div class="form-group form-inline">
+                        <select style="width:90%;" ng-model="Servicio" ng-change="botonTotal()" class="form-control">
                             <option value="" disabled selected>Seleccione Servicio</option>
                             <option ng-repeat="x in Servicios" value="{{x.IdServicio}} ">{{x.Nombre}}</option>
                         </select>
+                        <label><span data-toggle="modal" data-target="#myModal" style="width:5%;" class="glyphicon glyphicon-info-sign"></span></label>
                     </div>
                 </div>
 
                 <div class="col-md-6 text-center">
                     <h2 style="font-weight:bold;">Total</h2>
                     <h2>$ {{Total}}</h2>
-                   
-                </div>               
+
+                </div>
 
             </div>
 
             <div class="col-md-12 row text-center" style="margin-top:5%;">
-                <button  type="button" ng-click="CrearSolicitud(Marca,Modelo,Servicio)" class="btn btn-lg btn-danger" style="font-family:'Century Gothic';width:50%;font-size: 26px;">
+                <button type="button" ng-click="CrearSolicitud(Marca,Modelo,Servicio)" class="btn btn-lg btn-danger" style="font-family:'Century Gothic';width:50%;font-size: 26px;">
                     <span class="glyphicon glyphicon-ok"></span> Solicitar Lavado
                 </button>
             </div>
 
         </div>
 
-        <div style="margin-top:10%;"   ng-show="ClienteSinDatos" class="col-md-12 text-center">
+        <div style="margin-top:10%;" ng-show="ClienteSinDatos" class="col-md-12 text-center">
 
             <h3>Atención! Ingrese sus datos personales antes de contratar un lavado!</h3>
-            <a class="btn btn-lg btn-danger"href="/#!/cliente">Datos Personales</a>
-            
+            <a class="btn btn-lg btn-danger" href="/#!/cliente">Datos Personales</a>
+
         </div>
 
-        <div  class="col-md-4"></div>
-        
-            <div  ng-show="Pago" class="row">
-                <div style="margin-top: 10%;" class="col-xs-12 col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center" style="background-color:#5bc0de; color:white;">
-                            <h3 class="panel-title">
-                                Payment Details
-                            </h3>
-                            <!--<div class="checkbox pull-right">
-                                <label>
-                                    <input type="checkbox" />
-                                    Remember
-                                </label>
-                            </div>-->
-                        </div>
-                        <div class="panel-body">
-                            <form role="form">
-                                <div class="form-group">
-                                    <label for="cardNumber">
-                                        Nombre
-                                    </label>
-                                 
-                                        <input type="text" class="form-control" style="max-width:100%;" id="nombre" placeholder="Ej: Gonzalo T. Tardini" required autofocus />                                        
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label for="cardNumber">
-                                        N° de Tarjeta
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="cardNumber" placeholder="Ej: 4485 7158 6086 8875"
-                                               required autofocus />
-                                        <span class="glyphicon glyphicon-lock"></span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <!--<div class="col-xs-7 col-md-7">
-        <div class="form-group">
-            <label style="font-family:'Century Gothic'" for="expityMonth">
-                EXPIRY DATE
-            </label>
-            <div class="col-xs-6 col-lg-6 pl-ziro">
-                <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
-            </div>
-            <div class="col-xs-6 col-lg-6 pl-ziro">
-                <input type="text" class="form-control" id="expityYear" placeholder="YY" required />
-            </div>
-        </div>
-    </div>-->
-                                    <div class="col-xs-5 col-md-5">
-                                        <div class="form-group" style="margin-top: 10%;">
-                                            <label style="font-family:'Century Gothic'" for="cvCode">
-                                                Vencimiento
-                                            </label>
-                                            <div class="form-inline">
-                                                <input style="width:45%;" type="password" class="form-control" id="cvCode" placeholder="MM" required />
-                                                <input style="width:45%;" type="password" class="form-control" id="cvCode" placeholder="YY" required />
-                                            </div>
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-5 col-md-5 pull-right">
-                                        <div class="form-group text-center" style="margin-top: 10%;">
-                                            <label style="font-family:'Century Gothic'" for="cvCode">
-                                                Cod.
-                                            </label>                                         
-                                           
-                                                <input type="password"  class="form-control text-center" id="cvCode" placeholder="Ej: 123" required />                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+        <div class="col-md-4"></div>
+
+        <div ng-show="Pago" class="row">
+            <div style="margin-top: 10%;" class="col-xs-12 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center" style="background-color:#5bc0de; color:white;">
+                        <h3 class="panel-title">
+                            Payment Details
+                        </h3>
+                        <!--<div class="checkbox pull-right">
+                        <label>
+                            <input type="checkbox" />
+                            Remember
+                        </label>
+                    </div>-->
                     </div>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active">
-                            <a style="background-color:#d9534f; padding:10%; font-family:'Century Gothic'; font-size:30px"><span style="font-size:30px;" class="pull-right"><span></span><strong>${{Total}}</strong></span><strong>TOTAL</strong></a>
-                        </li>
-                    </ul>
-                    <br />
-                    <a class="btn btn-success btn-lg btn-block" role="button">Pay</a>
+                    <div class="panel-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="cardNumber">
+                                    Nombre
+                                </label>
+
+                                <input type="text" class="form-control" style="max-width:100%;" id="nombre" placeholder="Ej: Gonzalo T. Tardini" required autofocus />
+
+                            </div>
+                            <div class="form-group">
+                                <label for="cardNumber">
+                                    N° de Tarjeta
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="cardNumber" placeholder="Ej: 4485 7158 6086 8875"
+                                           required autofocus />
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--<div class="col-xs-7 col-md-7">
+                                <div class="form-group">
+                                    <label style="font-family:'Century Gothic'" for="expityMonth">
+                                        EXPIRY DATE
+                                    </label>
+                                    <div class="col-xs-6 col-lg-6 pl-ziro">
+                                        <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+                                    </div>
+                                    <div class="col-xs-6 col-lg-6 pl-ziro">
+                                        <input type="text" class="form-control" id="expityYear" placeholder="YY" required />
+                                    </div>
+                                </div>
+                            </div>-->
+                                <div class="col-xs-5 col-md-5">
+                                    <div class="form-group" style="margin-top: 10%;">
+                                        <label style="font-family:'Century Gothic'" for="cvCode">
+                                            Vencimiento
+                                        </label>
+                                        <div class="form-inline">
+                                            <input style="width:45%;" type="password" class="form-control" id="cvCode" placeholder="MM" required />
+                                            <input style="width:45%;" type="password" class="form-control" id="cvCode" placeholder="YY" required />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 col-md-5 pull-right">
+                                    <div class="form-group text-center" style="margin-top: 10%;">
+                                        <label style="font-family:'Century Gothic'" for="cvCode">
+                                            Cod.
+                                        </label>
+
+                                        <input type="password" class="form-control text-center" id="cvCode" placeholder="Ej: 123" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <a style="background-color:#d9534f; padding:10%; font-family:'Century Gothic'; font-size:30px"><span style="font-size:30px;" class="pull-right"><span></span><strong>${{Total}}</strong></span><strong>TOTAL</strong></a>
+                    </li>
+                </ul>
+                <br />
+                <a class="btn btn-success btn-lg btn-block" role="button">Pay</a>
             </div>
-       
+        </div>
 
 
-    </div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
 
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div style="background-color:#31b0d5;" class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 style="color:white;" class="modal-title text-center">¿Qué incluye mi lavado?</h3>
+                    </div>
+                    <div  class="modal-body">
+                        <div  ng-repeat="x in Servicios">
+                           
+                            <div style="border-style: dashed;border-color:#31b0d5 ;padding:2%">                                
+                                <h4 style="color:darkred; font-weight:bold;">{{x.Nombre}}</h4>
+                                <h4>{{x.Descripcion}}</h4>                              
+
+                            </div>
+                            <br />
+                        </div>
+                       <!--<h4 style="border-style: dashed; padding:2%" ng-repeat="x in Servicios"><strong>{{x.Nombre}}:</strong><br /> {{x.Descripcion}}<br /><br /></h4>-->
+                    </div>
+                    <!--<div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    </div>-->
+                </div>
+
+            </div>
+        </div>
+        
 
 </body>
 </html>

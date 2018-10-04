@@ -30,25 +30,39 @@
     // variable para ocultar o mostrar el formulario dependiendo si esta o no validado el cliente
     $scope.BuscandoCliente = true;
 
-    $scope.ClienteSinDatos = false;
+    $scope.ClienteSinDatos =false;
 
     $scope.Pago = false;
 
+    $scope.ReadOnly = true;
+
+    $scope.EditAuto = false;
 
 
     //$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 
 
     //==============Ejecuto funcion para obtener geolaclizaion=========0
-   // if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+    //if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
     //if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
     //if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
     VerificarCliente();
-    ObtenerMarcas();
+   
 
 
+   
 
+
+    $scope.EditarAuto = function () {
+
+        $scope.Marca = '';
+        $scope.Modelo = '';
+        $scope.Segmento.Descripcion='';
+        $scope.EditAuto = true;
+        ObtenerMarcas();
+
+    };
 
     function VerificarCliente() {
 
@@ -77,7 +91,44 @@
     }
 
 
+    $scope.ObtenerDatos = function () {
+        //$scope.cargandoCliente = true;
+        SolicitarLavadoService.ObtenerDatos().then(
+            function (d) {
+                $scope.Cliente = d.data;
+                var fecha = new Date();
 
+                if ($scope.Cliente.Completo === 'True') {
+                    //$scope.Nombre = $scope.Cliente.Nombre,
+                    //    $scope.Apellido = $scope.Cliente.Apellido,
+                    //    $scope.DNI = $scope.Cliente.DNI,
+                    //    $scope.Email = $scope.Cliente.Email,
+                    //    $scope.Fecha = $scope.Cliente.FechaNacimiento.slice(0, 10),
+                    $scope.MarcaDescripcion = $scope.Cliente.Marcas.Descripcion,
+                    $scope.ModeloDescripcion = $scope.Cliente.Modelos.Descripcion;                    
+                    $scope.Marca = $scope.Cliente.Marcas.IdMarca;
+                    $scope.Modelo = $scope.Cliente.Modelos.IdModelo;
+                    //$scope.MarcaSeleccionada = $scope.Cliente.Marca
+                 
+                    $scope.ObtenerSegmento($scope.Cliente.Modelos.IdSegmento);
+
+                    $scope.cargandoCliente = false;
+                    
+                }
+                else {
+                    $scope.ReadOnly = false;
+                    $scope.cargandoCliente = false;
+                    $scope.EditAuto = true;
+                }
+
+            },
+            function (error) {
+
+                var elerror = error;
+            });
+    };
+
+    $scope.ObtenerDatos();
 
     $scope.ObtenerModelos = function (Marca) {
 
@@ -171,6 +222,7 @@
             });
 
     };
+
 
     $scope.ObtenerServicios();
 

@@ -94,6 +94,17 @@
     };
 
 
+    service.ObtenerDatos = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/Cliente/ObtenerDatos'
+
+        });
+
+        return $q.when(promise);
+
+    };
+
 
     return service;
 })
