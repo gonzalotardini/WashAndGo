@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+        .glyphicon-user:before, .glyphicon-option-horizontal:before, .input-group-addon:first-child {
+            color: white;
+        }
+
+        .input-group-addon:first-child {
+            background-color: #1487eb;
+        }
+
+        .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+            background-color:white;
+        }
+        .glyphicon-user:before, .glyphicon-option-horizontal:before, .input-group-addon:first-child{
+            margin:0px;
+        }
+
+    </style>
+
+
+
+
+
+
+</head>
+<body>
+    <div class=" container">
+
+
+
+        <div class="col-md-12 row text-center" style="margin-top:8%;">
+            <div ng-show="DatosGuardadosOK" class="row">
+                <div class="alert alert-success">
+                    <strong>Success!</strong> Datos personales guardados correctamente!.
+                </div>
+            </div>
+            <button ng-click="!MostrarDatosPersonales?MostrarDatosPersonales=true:MostrarDatosPersonales=false;ObtenerMarcas();ObtenerDatos();" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
+                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
+                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Datos Personales
+                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:right;"></span>
+                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:right;"></span>
+
+            </button>
+        </div>
+
+
+        <div class="col-md-4"></div>
+        <img ng-show="cargandoCliente" src="../../img/loading.gif" />
+        <div ng-show="MostrarDatosPersonales && !cargandoCliente">
+            <div class="panel text-center col-md-4" style="margin-top:1%;  border-style:solid; border-color:#1487eb;">
+
+                <div class="panel-heading text-center">
+                    <h2 style="font-size:26px; font-family:'Century Gothic'; color:#1487eb;margin-bottom: 10%;margin-top: 5%;" class="panel-title">Datos Personales</h2>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input ng-readonly="ReadOnly" ng-model="Nombre" class="form-control" type="text" placeholder="Nombre">
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i style="color:white;" class="glyphicon glyphicon-user"></i></span>
+                        <input ng-readonly="ReadOnly" ng-model="Apellido" class="form-control" placeholder="Apellido" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                        <input ng-readonly="ReadOnly" ng-model="DNI" class="form-control" placeholder="DNI" type="text">
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input ng-readonly="ReadOnly" ng-model="Email" class="form-control" placeholder="Email" type="email">
+                    </div>
+                </div>
+
+
+                <div ng-show="ReadOnly" class="form-group col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <input ng-readonly="ReadOnly" ng-model="Fecha" class="form-control" placeholder="Fecha de Nacimiento" type="text">
+                    </div>
+                </div>
+
+                <div ng-hide="ReadOnly" class="form-group col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <!--<input class="form-control" placeholder="Email" type="date">-->
+                        <input ng-readonly="ReadOnly" ng-model="Fecha" class="form-control" type="date" id="date">
+                    </div>
+                </div>
+
+                <div ng-hide="ReadOnly" class="form-group col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <select class="form-control" ng-trim="false" ng-model="MarcaSeleccionada" ng-change="ObtenerModelos(MarcaSeleccionada)" required>
+                            <option value="" disabled selected>Seleccione Marca</option>
+                            <option ng-repeat="x in Marcas" ng-selected="MarcaSeleccionada == x.IdMarca" value="{{x.IdMarca}} ">{{x.Descripcion}}</option>
+                        </select>
+
+                        <!--<select name="..." ng-model="MarcaSeleccionada" ng-options="Id as Descripcion (IdMarca, Descripcion) in Marcas">
+                        <option value="">Select date</option>
+                    </select>-->
+
+                    </div>
+                </div>
+
+
+                <div ng-hide="ReadOnly" class="form-group col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <select ng-model="Modelo" class="form-control">
+                            <option value="" disabled selected>Seleccione Modelo</option>
+                            <option ng-repeat="x in Modelos" value="{{x.IdModelo}}">{{x.Descripcion}}</option>-->
+                        </select>
+                    </div>
+                </div>
+
+
+                <div ng-show="ReadOnly" class="form-group col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <input ng-readonly="ReadOnly" ng-model="MarcaDescripcion" class="form-control" placeholder="Marca" type="text">
+                    </div>
+                </div>
+                <div ng-show="ReadOnly" class="form-group col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                        <input ng-readonly="ReadOnly" ng-model="ModeloDescripcion" class="form-control" placeholder="Modelo" type="text">
+                    </div>
+                </div>
+
+
+                <div ng-hide="ReadOnly" class="form-group col-md-12" style="width:100%;">
+                    <input ng-click="GuardarDatos(Nombre,Apellido,DNI,Email,Fecha,MarcaSeleccionada,Modelo)" class="btn btn-primary" value="Aceptar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
+                </div>
+                <div ng-show="ReadOnly" class="form-group col-md-12" style="width:100%;">
+                    <input ng-click="ReadOnly=False" class="btn btn-primary" value="Modificar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12 row text-center" style="margin-top:1%;">
+            <button type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
+                <span style="float:left;" class="glyphicon glyphicon-chevron-up"></span> Mis Lavados
+            </button>
+        </div>
+
+
+
+      
+
+
+    </div>
+
+</body>
+
+
+</html>

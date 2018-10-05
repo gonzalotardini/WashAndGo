@@ -1,0 +1,44 @@
+﻿<style>
+    .glyphicon-user:before, .glyphicon-option-horizontal:before, .input-group-addon:first-child {
+        color: white;
+        margin: 10px;
+    }
+
+    .glyphicon-off:before {
+        margin:10px;
+    }
+</style>
+
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+
+
+    <ul class="nav navbar-nav navbar-right form-inline">
+        <li>
+            @*@Html.ActionLink("Hello " + User.Identity.GetUserName()+ "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+            @*@Html.ActionLink("Mi Cuenta", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+        <a href="/#!/cliente"><span class="glyphicon glyphicon-user"></span>Mi Cuenta</a>
+        </li>
+        <li><a  href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span>Log off</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink"})</li>*@
+        @*<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class= "glyphicon glyphicon-alert" })</li>*@
+        
+        
+        <li><a href="/account/register"><span class="glyphicon glyphicon-plus"></span>     Register</a></li>
+        <li><a href="/account/login"><span class="glyphicon glyphicon-log-in"></span>     Log in</a></li>
+
+    </ul>
+}
