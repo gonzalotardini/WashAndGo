@@ -288,7 +288,7 @@
             function (d) {
                 //$scope.Servicios = d.data;
                 $scope.Pago = true;
-                $scope.abrirDialogSolicitado();
+                //$scope.abrirDialogSolicitado();
                 //$location.path('/a');
             },
             function (error) {
@@ -345,14 +345,14 @@
         }
     }
 
-    $scope.abrirDialogSolicitado = function () {
-        ngDialog.open({
-            template: 'SPA/Views/Modal/lavado.html',
-            className: 'ngdialog-theme-default',
-            scope: $scope,
+    //$scope.abrirDialogSolicitado = function () {
+    //    ngDialog.open({
+    //        template: 'SPA/Views/Modal/lavado.html',
+    //        className: 'ngdialog-theme-default',
+    //        scope: $scope,
 
-        });
-    }; 
+    //    });
+    //}; 
 
     //url por defecto para q me cargo algo en el mapa
     //$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");

@@ -117,7 +117,7 @@ namespace WashAndGo.Controllers
                 var context = new WGentities();
 
 
-                total = total.Replace(".", ",");
+               // total = total.Replace(".", ",");
                 var lavado = new Lavados()
                 {
                     IdCliente = User.Identity.GetUserId(),
