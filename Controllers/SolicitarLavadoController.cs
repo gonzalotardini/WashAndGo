@@ -8,10 +8,11 @@ using Newtonsoft.Json;
 using BLL;
 using Microsoft.AspNet.Identity;
 using System.Globalization;
+using System.Net;
 
 namespace WashAndGo.Controllers
 {
-    [Authorize]
+  
     public class SolicitarLavadoController : Controller
     {
         // GET: SolicitarLavado
@@ -112,6 +113,8 @@ namespace WashAndGo.Controllers
         {
             try
             {
+               
+
                 var userID = User.Identity.GetUserId();
                 var lavadoDal = new Lavado();
                 var context = new WGentities();
@@ -147,6 +150,12 @@ namespace WashAndGo.Controllers
         {
             try
             {
+                if (User.Identity.IsAuthenticated == false)
+                {
+                    return "403";
+                  
+                }
+
                 var userid = User.Identity.GetUserId();
                 var lavadodal = new Lavado();
                 var estado= lavadodal.VerificarClienteDAL(userid);
@@ -154,13 +163,29 @@ namespace WashAndGo.Controllers
                 return estado;
 
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+
+        }
+
+        public int VerificarLavadoAbierto()
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                var lavadoBll = new SolicitarLavadoBLL();
+
+                return lavadoBll.VerificarLavadoAbiertoBLL(userId);
+
+            }
             catch (Exception)
             {
 
                 throw;
             }
-
-
         }
 
     }

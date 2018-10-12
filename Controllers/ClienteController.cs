@@ -39,10 +39,14 @@ namespace WashAndGo.Controllers
         {
             try
             {
-                var clienteBll = new ClienteBLL();
-                var userid = User.Identity.GetUserId();
-                var clientes = new Clientes();
+                if (User.Identity.IsAuthenticated==false)
+                {
+                    throw new Exception("403");
+                }
 
+                var clienteBll = new ClienteBLL();
+                var userid = User.Identity.GetUserId();                
+                var clientes = new Clientes();
                 return JsonConvert.SerializeObject(clienteBll.ObtenerDatos(userid), Formatting.None,
                    new JsonSerializerSettings()
                    {
@@ -53,7 +57,7 @@ namespace WashAndGo.Controllers
             catch (Exception ex)
             {
 
-                throw;
+                return ex.Message;
             }
 
         }

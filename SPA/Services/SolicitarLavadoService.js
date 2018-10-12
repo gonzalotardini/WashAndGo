@@ -105,6 +105,17 @@
 
     };
 
+    service.VerificarLavadoAbierto = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/SolicitarLavado/VerificarLavadoAbierto'
+
+        });
+
+        return $q.when(promise);
+
+    };
+
 
     return service;
 })
