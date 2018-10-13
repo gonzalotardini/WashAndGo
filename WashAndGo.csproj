@@ -227,6 +227,7 @@
     </Content>
     <Content Include="img\auto.png" />
     <Content Include="img\bg_Cover.jpg" />
+    <Content Include="img\buscando.gif" />
     <Content Include="img\calidad.png" />
     <Content Include="img\comodidad.PNG" />
     <Content Include="img\ecofriendly.png" />

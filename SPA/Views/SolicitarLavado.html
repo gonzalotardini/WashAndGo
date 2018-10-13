@@ -229,9 +229,10 @@
                                     N° de Tarjeta
                                 </label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="cardNumber" placeholder="Ej: 4485 7158 6086 8875"
+                                    <input name="numTarjeta" type="text" class="form-control" id="cardNumber" placeholder="Ej: 4485 7158 6086 8875"
                                            required autofocus />
                                     <span class="glyphicon glyphicon-lock"></span>
+                                    <span ng-show="numTarjeta.$error.pattern">Not a valid number!</span>
                                 </div>
                             </div>
                             <div class="row">
