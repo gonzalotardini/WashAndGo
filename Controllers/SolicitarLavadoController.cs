@@ -120,13 +120,14 @@ namespace WashAndGo.Controllers
                 var context = new WGentities();
 
 
-               // total = total.Replace(".", ",");
+                // total = total.Replace(".", ",");
                 var lavado = new Lavados()
                 {
                     IdCliente = User.Identity.GetUserId(),
                     IdMarca = Convert.ToInt32(Marca),
                     IdModelo = Convert.ToInt32(Modelo),
                     IdSegmento = seg,
+                    IdLavador = "-1",
                     IdServicio = Convert.ToInt32(Servicio),
                     Direccion = dir,
                     Estado="SOLICITADO",
@@ -180,6 +181,20 @@ namespace WashAndGo.Controllers
 
                 return lavadoBll.VerificarLavadoAbiertoBLL(userId);
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void CancelarLavado(int lavadoid)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+                lavadobll.CancelarLavado(lavadoid);
             }
             catch (Exception)
             {

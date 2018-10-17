@@ -14,6 +14,18 @@
     };   
 
 
+    service.ObtenerLavadoAbierto = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/Cliente/ObtenerLavadoAbierto'
+
+        });
+
+        return $q.when(promise);
+
+    };   
+
+
     service.ObtenerMarcas = function () {
         var promise = $http({
             method: 'get',

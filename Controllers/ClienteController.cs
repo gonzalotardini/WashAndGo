@@ -61,5 +61,30 @@ namespace WashAndGo.Controllers
             }
 
         }
+
+        public string ObtenerLavadoAbierto()
+        {
+            try
+            {
+
+                var clienteid = User.Identity.GetUserId();
+                var clienteBLL = new ClienteBLL();
+
+                return JsonConvert.SerializeObject(clienteBLL.ObtenerLavadoAbiertoBll(clienteid), Formatting.None,
+                   new JsonSerializerSettings()
+                   {
+                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                   });
+                
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

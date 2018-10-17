@@ -76,7 +76,7 @@
     </div>
     
     <div class="container">
-        <div ng-hide="BuscandoCliente || ClienteSinDatos || Pago" class="col-md-12 jumbotron" style="margin-top:10%">
+        <div ng-hide="BuscandoCliente || ClienteSinDatos || Pago || LavadoAbierto" class="col-md-12 jumbotron" style="margin-top:10%">
 
             <div class="col-md-6 text-center" id="jumbovehiculoservicio">
 
@@ -189,6 +189,14 @@
 
         </div>
 
+        <div style="margin-top:10%;" ng-show="LavadoAbierto" class="col-md-12 text-center">
+
+            <h3>Atención!</h3>
+            <h3>Usted ya posee un lavado en proceso, no puede contratar otro hasta que este no finalice!</h3>
+            <a class="btn btn-lg btn-danger" href="/#!/cliente">Mis Lavados</a>
+
+        </div>
+
         <div class="col-md-4"></div>
 
         <div ng-show="Pago" class="row col-md-12">
@@ -200,11 +208,11 @@
                             Payment Details
                         </h3>
                         <!--<div class="checkbox pull-right">
-                    <label>
-                        <input type="checkbox" />
-                        Remember
-                    </label>
-                </div>-->
+                        <label>
+                            <input type="checkbox" />
+                            Remember
+                        </label>
+                    </div>-->
                     </div>
                     <div class="panel-body">
                         <form role="form">
@@ -221,25 +229,26 @@
                                     N° de Tarjeta
                                 </label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="cardNumber" placeholder="Ej: 4485 7158 6086 8875"
+                                    <input name="numTarjeta" type="text" class="form-control" id="cardNumber" placeholder="Ej: 4485 7158 6086 8875"
                                            required autofocus />
                                     <span class="glyphicon glyphicon-lock"></span>
+                                    <!--<span ng-show="numTarjeta.$error.pattern">Not a valid number!</span>-->
                                 </div>
                             </div>
                             <div class="row">
                                 <!--<div class="col-xs-7 col-md-7">
-                            <div class="form-group">
-                                <label style="font-family:'Century Gothic'" for="expityMonth">
-                                    EXPIRY DATE
-                                </label>
-                                <div class="col-xs-6 col-lg-6 pl-ziro">
-                                    <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+                                <div class="form-group">
+                                    <label style="font-family:'Century Gothic'" for="expityMonth">
+                                        EXPIRY DATE
+                                    </label>
+                                    <div class="col-xs-6 col-lg-6 pl-ziro">
+                                        <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+                                    </div>
+                                    <div class="col-xs-6 col-lg-6 pl-ziro">
+                                        <input type="text" class="form-control" id="expityYear" placeholder="YY" required />
+                                    </div>
                                 </div>
-                                <div class="col-xs-6 col-lg-6 pl-ziro">
-                                    <input type="text" class="form-control" id="expityYear" placeholder="YY" required />
-                                </div>
-                            </div>
-                        </div>-->
+                            </div>-->
                                 <div class="col-xs-5 col-md-5">
                                     <div class="form-group" style="margin-top: 10%;">
                                         <label style="font-family:'Century Gothic'" for="cvCode">
@@ -273,14 +282,14 @@
                 <br />
                 <a class="btn btn-success btn-lg btn-block" ng-click="ProcesandoPago=true" role="button">Pay</a>
             </div>
-            
+
             <div ng-show="ProcesandoPago" style="margin-top: 10%;" class="col-xs-12 col-md-4">
                 <img src="../../img/payment.gif" />
                 <h3 style="text-align:center;">Procesando Pago...</h3>
             </div>
         </div>
 
-        
+
 
 
 
@@ -310,9 +319,13 @@
                 </div>-->
                 </div>
 
-            </div>
-        </div>
+                iv
 
+            </div>
+         
+        </div>
+        
+    </div>
 
 </body>
 </html>

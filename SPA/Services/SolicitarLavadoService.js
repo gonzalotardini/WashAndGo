@@ -94,6 +94,20 @@
     };
 
 
+    service.CancelarLavado = function (lavadoid) {
+        var promise = $http({
+            method: 'post',
+            url: '/SolicitarLavado/CancelarLavado',
+            params: {
+                lavadoid:lavadoid
+            }
+        });
+
+        return $q.when(promise);
+
+    };
+
+
     service.ObtenerDatos = function () {
         var promise = $http({
             method: 'get',

@@ -40,6 +40,8 @@
 
     $scope.ProcesandoPago = false;
 
+    $scope.LavadoAbierto = false;
+
 
     //$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 
@@ -48,6 +50,8 @@
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
     //if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
     //if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+
+    VerificarLavadoAbierto();
 
     VerificarCliente();
    
@@ -73,20 +77,28 @@
             function (d) {
                 var estado = d.data;
 
-                if (estado == "False") {
-                    $scope.BuscandoCliente = false;
-                    $scope.ClienteSinDatos = true;
 
-                    //$location.path('/cliente');
-                }
-                else {
-                    $scope.BuscandoCliente = false;
-                }
+                if (estado == "403") {
 
+                    window.location.href = '/Account/LogIn';
+                   //$location.path('/Account/LogIn');
 
+                } else {
+                    if (estado == "False") {
+                        $scope.BuscandoCliente = false;
+                        $scope.ClienteSinDatos = true;
+
+                        //$location.path('/cliente');
+                    }
+                    else {
+                        $scope.BuscandoCliente = false;
+                    }
+                }               
+                
             },
             function (error) {
 
+                var hola= error;
 
             });
 
@@ -302,7 +314,22 @@
 
 
 
+   function VerificarLavadoAbierto () {
 
+        SolicitarLavadoService.VerificarLavadoAbierto().then(
+            function (d) {
+                var abierto = d.data;
+                if (abierto>0) {
+                    $scope.LavadoAbierto = true;
+                }
+
+            },
+            function (error) {
+
+
+            });
+
+    };
 
 
 

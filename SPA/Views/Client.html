@@ -20,6 +20,10 @@
             margin:0px;
         }
 
+        h4{
+            font-family:'Century Gothic';
+        }
+
     </style>
 
 
@@ -33,7 +37,7 @@
 
         <div  class="row col-md-12">
             <div class="col-md-2"></div>
-            <div ng-hide="" style="margin-top: 10%;" class="col-md-8">
+            <div ng-show="LavadoAbierto" style="margin-top: 10%;" class="col-md-8">
                 <div class="panel panel-default" style="border-color:#1487eb; border-width:2px;">
                     <div class="panel-heading text-center" style="background-color:white;border-color: #1487eb; border-width:2px; ">
                         <h2 style="color:#1487eb; font-size:20px; font-family:'Century Gothic';" class="panel-title">
@@ -50,7 +54,14 @@
 
                         <div class="row">
                             <div class="col-md-8">
-                                <h4>Estamos buscando un lavador para tu auto!</h4>
+                                <h2 style="text-align:center; font-family:'Century Gothic'; color:#1487eb;">Buscando Lavador...</h2>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Estado:</b></u></h4>&nbsp;<h4>  {{Lavado.Estado}}</h4></div>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Auto: </b></u></h4>&nbsp;<h4>  {{Lavado.Marcas.Descripcion}}  {{Lavado.Modelos.Descripcion}}</h4></div>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Servicio: </b></u></h4>&nbsp;<h4> {{Lavado.Servicios.Nombre}}</h4></div>
+                                <br />
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Total:</b></u></h4>&nbsp;<h4>${{Lavado.Total}},00</h4></div>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Dirección: </b></u></h4>&nbsp;<h4>  {{Lavado.Direccion}}</h4></div>
+                                
                             </div>
                             <div class="col-md-4 text-right">
                                 <img src="../../img/buscando.gif" />
@@ -106,7 +117,7 @@
                     </div>
                 </div>              
                
-                <a class="btn btn-danger btn-lg btn-block"  role="button">Cancelar Lavado</a>
+                <a class="btn btn-danger btn-lg btn-block" ng-click="CancelarLavado(Lavado.IdLavado)"  role="button">Cancelar Lavado</a>
             </div>
                        
         </div>
@@ -233,10 +244,52 @@
 
 
         <div class="col-md-12 row text-center" style="margin-top:1%;">
-            <button type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
-                <span style="float:left;" class="glyphicon glyphicon-chevron-up"></span> Mis Lavados
+            <button type="button"ng-click="!VerListaLavados?VerListaLavados=true:VerListaLavados=false" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
+                <span style="float:left;"  class="glyphicon glyphicon-chevron-up"></span> Mis Lavados
             </button>
+            <div class="row col-md-12 " ng-show="VerListaLavados">
+                <table class="table table-striped custab">
+                    <thead>
+                        <!--<a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>-->
+                        <tr>
+                            <th class="text-center">Fecha</th>
+                            <th class="text-center">Vehículo</th>
+                            <th class="text-center">Servicio</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>1</td>
+                        <td>VOLKSWAGEN GOL TREND</td>
+                        <td>LAVADO PREMIUM</td>
+                        <td>CANCELADO</td>
+                        <td class="text-center"><a class='btn btn-warning btn-xs' style="color:black;" href=""><span class="glyphicon glyphicon-edit"></span> Detalle</a> <!--<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>--></td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>VOLKSWAGEN GOL TREND</td>
+                        <td>LAVADO PREMIUM</td>
+                        <td>CANCELADO</td>
+                        <td class="text-center"><a class='btn btn-warning btn-xs' style="color:black;" href=""><span class="glyphicon glyphicon-edit"></span> Detalle</a> <!--<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>--></td>
+                    </tr>
+                    <!--<tr>
+        <td>2</td>
+        <td>Products</td>
+        <td>Main Products</td>
+        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Blogs</td>
+        <td>Parent Blogs</td>
+        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+    </tr>-->
+                </table>
+            </div>
         </div>
+
+
 
 
 
