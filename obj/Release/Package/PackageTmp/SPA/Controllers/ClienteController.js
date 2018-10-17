@@ -1,4 +1,4 @@
-﻿angular.module('app').controller("ClienteController", ["$scope", "$sce", "$http", "$window", "ngDialog", "$filter", "ClienteService", "$location", function ($scope, $sce, $http, $window, ngDialog,$filter, ClienteService, $location) {
+﻿angular.module('app').controller("ClienteController", ["$scope", "$sce", "$http", "$window", "ngDialog", "$filter", "ClienteService", "SolicitarLavadoService", "$location", function ($scope, $sce, $http, $window, ngDialog, $filter, ClienteService, SolicitarLavadoService,$location) {
 
     $scope.MostrarDatosPersonales = false;
     $scope.Marcas = [];
@@ -17,6 +17,18 @@
     $scope.ReadOnly = true;
     $scope.DatosGuardadosOK = false;
     $scope.cargandoCliente = false;
+    $scope.Lavado = '';
+    $scope.LavadoAbierto = false;
+    $scope.VerListaLavados = false;
+    $scope.ListaLavados = [];
+    $scope.CargandoLavados = false;
+    ObtenerLavadoAbierto();
+    
+
+    setInterval(function () {
+        ObtenerLavadoAbierto();
+    }, 30000)
+
 
     $scope.ObtenerMarcas = function () {
 
@@ -97,6 +109,59 @@
     }
 
    
+    function ObtenerLavadoAbierto() {
+
+        ClienteService.ObtenerLavadoAbierto().then(
+            function (response) {
+               $scope.Lavado = response.data;
+
+                if ($scope.Lavado != "null") {
+                    $scope.LavadoAbierto = true;
+                }
+                else {
+                    $scope.LavadoAbierto = false;
+                }
+            },
+            function (error) {
+
+                var elerror = error;
+            });
+    }
 
 
+
+    $scope.CancelarLavado = function (lavadoid) {
+
+
+
+        SolicitarLavadoService.CancelarLavado(lavadoid).then(
+            function (d) {
+                //$scope.Servicios = d.data;
+                ObtenerLavadoAbierto();
+                //$scope.abrirDialogSolicitado();
+                //$location.path('/a');
+            },
+            function (error) {
+
+
+            });
+
+    };
+
+
+    $scope.ObtenerLavados = function () {
+
+        $scope.CargandoLavados = true;
+        SolicitarLavadoService.ObtenerLavados().then(
+            function (d) {
+                //$scope.Servicios = d.data;
+                $scope.CargandoLavados = false;
+                $scope.ListaLavados = d.data;                
+            },
+            function (error) {
+
+
+            });
+
+    };
 }]) 

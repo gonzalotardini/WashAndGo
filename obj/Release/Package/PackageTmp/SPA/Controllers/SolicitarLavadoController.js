@@ -42,6 +42,8 @@
 
     $scope.LavadoAbierto = false;
 
+    $scope.Lavados = [];
+
 
     //$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 
@@ -311,6 +313,27 @@
             });
 
     };
+
+
+
+    $scope.ObtenerLavados = function () {
+
+       
+
+        SolicitarLavadoService.ObtenerLavados().then(
+            function (d) {
+                //$scope.Servicios = d.data;
+                $scope.Lavados = d.data;
+                var hola = 'hola';
+            },
+            function (error) {
+
+
+            });
+
+    };
+
+   
 
 
 

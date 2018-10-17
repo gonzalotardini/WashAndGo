@@ -9,6 +9,7 @@ using BLL;
 using Microsoft.AspNet.Identity;
 using System.Globalization;
 using System.Net;
+using DAL.Views;
 
 namespace WashAndGo.Controllers
 {
@@ -109,7 +110,7 @@ namespace WashAndGo.Controllers
 
         }
 
-        public void crearSolicitud(string Marca, string Modelo,string Servicio,int seg,string dir,string total)
+        public void crearSolicitud(string Marca, string Modelo,string Servicio,int seg,string dir,string total,string NombreTarjeta,string NumeroTarjeta, string Mes,string Año,string CodTarjeta)
         {
             try
             {
@@ -118,6 +119,7 @@ namespace WashAndGo.Controllers
                 var userID = User.Identity.GetUserId();
                 var lavadoDal = new Lavado();
                 var context = new WGentities();
+                var lavadobll = new SolicitarLavadoBLL();
 
 
                 // total = total.Replace(".", ",");
@@ -138,6 +140,8 @@ namespace WashAndGo.Controllers
 
                 context.Lavados.Add(lavado);
                 context.SaveChanges();
+
+                lavadobll.ProcesarPago(lavado.IdLavado, NombreTarjeta, NumeroTarjeta, Año, Mes, CodTarjeta);
                 
             }
             catch (Exception ex)
@@ -202,6 +206,34 @@ namespace WashAndGo.Controllers
                 throw;
             }
         }
+
+        public string ObtenerLavados()
+        {
+
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+                var clienteid = User.Identity.GetUserId();
+
+
+                return JsonConvert.SerializeObject(lavadobll.ObtenerLavados(clienteid), Formatting.None,
+                   new JsonSerializerSettings()
+                   {
+                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                   });
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            
+
+            
+
+        }
+
 
     }
 }

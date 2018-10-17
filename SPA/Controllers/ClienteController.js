@@ -20,7 +20,12 @@
     $scope.Lavado = '';
     $scope.LavadoAbierto = false;
     $scope.VerListaLavados = false;
+    $scope.ListaLavados = [];
+    $scope.CargandoLavados = false;
+ 
+
     ObtenerLavadoAbierto();
+    
 
     setInterval(function () {
         ObtenerLavadoAbierto();
@@ -137,6 +142,23 @@
                 ObtenerLavadoAbierto();
                 //$scope.abrirDialogSolicitado();
                 //$location.path('/a');
+            },
+            function (error) {
+
+
+            });
+
+    };
+
+
+    $scope.ObtenerLavados = function () {
+
+        $scope.CargandoLavados = true;
+        SolicitarLavadoService.ObtenerLavados().then(
+            function (d) {              
+                //$scope.Servicios = d.data;
+                $scope.CargandoLavados = false;
+                $scope.ListaLavados = d.data;                
             },
             function (error) {
 

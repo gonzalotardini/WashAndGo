@@ -75,7 +75,7 @@
 
     };
 
-    service.CrearSolicitud = function (Marca, Modelo,Servicio, seg, dir, total) {
+    service.CrearSolicitud = function (Marca, Modelo, Servicio, seg, dir, total, NombreTarjeta, NumeroTarjeta, Mes, Año, CodTarjeta) {
         var promise = $http({
             method: 'post',
             url: '/SolicitarLavado/crearSolicitud',
@@ -85,7 +85,12 @@
                 Servicio:Servicio,
                 seg: seg,
                 dir: dir,
-                total:total
+                total: total,
+                NombreTarjeta: NombreTarjeta,
+                NumeroTarjeta: NumeroTarjeta,
+                Mes: Mes,
+                Año: Año,
+                CodTarjeta: CodTarjeta
             }
         });
 
@@ -112,6 +117,17 @@
         var promise = $http({
             method: 'get',
             url: '/Cliente/ObtenerDatos'
+
+        });
+
+        return $q.when(promise);
+
+    };
+
+    service.ObtenerLavados = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/SolicitarLavado/ObtenerLavados'
 
         });
 
