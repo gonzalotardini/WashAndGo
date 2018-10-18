@@ -44,6 +44,14 @@
 
     $scope.Lavados = [];
 
+    $scope.NombreTarjeta = '';
+    $scope.NumeroTarjeta = '';
+    $scope.Mes;
+    $scope.Anio;
+    $scope.CodTarjeta;
+
+    $scope.Redirigiendo = false;
+
 
     //$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 
@@ -56,10 +64,7 @@
     VerificarLavadoAbierto();
 
     VerificarCliente();
-   
-
-
-   
+     
 
 
     $scope.EditarAuto = function () {
@@ -294,18 +299,21 @@
 
  
 
-    $scope.CrearSolicitud = function (Marca, Modelo, Servicio) {
+    $scope.CrearSolicitud = function (Marca, Modelo, Servicio, NombreTarjeta, NumeroTarjeta, Mes, Anio, CodTarjeta) {
 
         var seg = $scope.Segmento.IdSegmento;
         var dir = $scope.Direccion;
         var total = $scope.Total;
 
-        SolicitarLavadoService.CrearSolicitud(Marca, Modelo, Servicio, seg, dir, total).then(
+        SolicitarLavadoService.CrearSolicitud(Marca, Modelo, Servicio, seg, dir, total, NombreTarjeta, NumeroTarjeta, Mes, Anio, CodTarjeta).then(
             function (d) {
                 //$scope.Servicios = d.data;
-                $scope.Pago = true;
-                //$scope.abrirDialogSolicitado();
-                //$location.path('/a');
+                sleep(1000);
+                $scope.ProcesandoPago = false;
+                $scope.Redirigiendo = true;
+                sleep(5000);
+               $location.path('/cliente');
+                
             },
             function (error) {
 
@@ -324,7 +332,7 @@
             function (d) {
                 //$scope.Servicios = d.data;
                 $scope.Lavados = d.data;
-                var hola = 'hola';
+             
             },
             function (error) {
 
@@ -354,6 +362,8 @@
 
     };
 
+
+    
 
 
     function ObtenerMarcas() {

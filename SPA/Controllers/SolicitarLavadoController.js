@@ -301,6 +301,13 @@
 
     $scope.CrearSolicitud = function (Marca, Modelo, Servicio, NombreTarjeta, NumeroTarjeta, Mes, Anio, CodTarjeta) {
 
+
+        if ($scope.paymentForm.$valid==false) {
+            var hola = "g";
+        }
+        else {
+
+            $scope.ProcesandoPago = true;
         var seg = $scope.Segmento.IdSegmento;
         var dir = $scope.Direccion;
         var total = $scope.Total;
@@ -313,14 +320,13 @@
                 $scope.Redirigiendo = true;
                 sleep(5000);
                $location.path('/cliente');
-                //$scope.abrirDialogSolicitado();
-                //$location.path('/a');
+                
             },
             function (error) {
 
 
             });
-
+        }
     };
 
 

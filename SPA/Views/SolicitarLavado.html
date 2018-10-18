@@ -66,6 +66,11 @@
             background-color : white;
         }
 
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
 
     </style>
 </head>
@@ -215,8 +220,9 @@
                         </label>
                     </div>-->
                     </div>
+                    
                     <div class="panel-body">
-                        <form role="form">
+                        <form name="paymentForm" role="form">
                             <div class="form-group">
                                 <label for="cardNumber">
                                     Nombre
@@ -230,9 +236,11 @@
                                     N° de Tarjeta
                                 </label>
                                 <div class="input-group">
-                                    <input name="numTarjeta" type="text" class="form-control" id="cardNumber" ng-model="NumeroTarjeta" placeholder="Ej: 4485 7158 6086 8875"
+                                    <input name="creditNumber" maxlength="19" type="text" data-ng-minlength="15" class="form-control" id="cardNumber" ng-pattern="/^[0-9]*$/" ng-model="NumeroTarjeta" placeholder="Ej: 4485 7158 6086 8875"
                                            required autofocus />
                                     <span class="glyphicon glyphicon-lock"></span>
+                                    <p style="color:red;" ng-show="paymentForm.creditNumber.$error.minlength">Credit card must be 15-19 digits</p>
+                                    <p style="color:red;" ng-show="paymentForm.creditNumber.$error.pattern">Ingrese solo números!</p>
                                     <!--<span ng-show="numTarjeta.$error.pattern">Not a valid number!</span>-->
                                 </div>
                             </div>
@@ -243,10 +251,15 @@
                                             Vencimiento
                                         </label>
                                         <div class="form-inline">
-                                            <input style="width:45%;" ng-model="Mes" type="text" class="form-control" id="cvCode" placeholder="MM" required />
-                                            <input style="width:45%;"ng-model="Anio" type="text" class="form-control" id="cvCode" placeholder="YY" required />
+                                            <input style="width:45%;" name="mes" ng-minlength="2" ng-maxlength="2" ng-model="Mes" min="01" max="12" type="number" class="form-control" id="cvCode" ng-pattern="/^[0-9]*$/" placeholder="MM" required />
+
+                                            <input style="width:45%;" ng-model="Anio" type="text" class="form-control" id="cvCode" placeholder="YY" required />
                                         </div>
 
+                                        <p style="color:red;" ng-show="paymentForm.mes.$error.minlength">Credit card must be 15-19 digits</p>
+                                        <p style="color:red;" ng-show="paymentForm.mes.$error.pattern">Ingrese solo números!</p>
+                                        <p style="color:red;" ng-show="paymentForm.mes.$error.min">01</p>
+                                        <p style="color:red;" ng-show="paymentForm.mes.$error.max">12</p>
                                     </div>
                                 </div>
                                 <div class="col-xs-5 col-md-5 pull-right">
@@ -268,7 +281,7 @@
                     </li>
                 </ul>
                 <br />
-                <a class="btn btn-success btn-lg btn-block" ng-click="ProcesandoPago=true; CrearSolicitud(Marca,Modelo,Servicio,NombreTarjeta,NumeroTarjeta,Mes,Anio,CodTarjeta)" role="button">Pay</a>
+                <a class="btn btn-success btn-lg btn-block" ng-click="CrearSolicitud(Marca,Modelo,Servicio,NombreTarjeta,NumeroTarjeta,Mes,Anio,CodTarjeta)" role="button">Pay</a>
             </div>
 
             <div ng-show="ProcesandoPago && !Redirigiendo" style="margin-top: 10%;" class="col-xs-12 col-md-4">

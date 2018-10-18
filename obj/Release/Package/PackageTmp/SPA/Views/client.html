@@ -273,8 +273,8 @@
                     </thead>
                     <tr ng-repeat="x in ListaLavados | orderBy : '-Fecha'">
                         <td>{{x.Fecha | date : "dd/MM/y"}}</td>
-                        <td>{{x.Marcas.Descripcion}} {{x.Modelos.Descripcion}}</td>
-                        <td>{{x.Servicios.Nombre}}</td>
+                        <td>{{x.Marca}} {{x.Modelo}}</td>
+                        <td>{{x.Servicio}}</td>
                         <td>{{x.Estado}}</td>
                         <td class="text-center"><a class='btn btn-warning btn-xs' data-toggle="modal" data-target="#myModal" style="color:black;" href=""><span class="glyphicon glyphicon-edit"></span> Detalle</a> <!--<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>--></td>
                     </tr>

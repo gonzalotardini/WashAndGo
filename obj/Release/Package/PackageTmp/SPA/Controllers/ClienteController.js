@@ -22,6 +22,8 @@
     $scope.VerListaLavados = false;
     $scope.ListaLavados = [];
     $scope.CargandoLavados = false;
+ 
+
     ObtenerLavadoAbierto();
     
 
@@ -153,7 +155,7 @@
 
         $scope.CargandoLavados = true;
         SolicitarLavadoService.ObtenerLavados().then(
-            function (d) {
+            function (d) {              
                 //$scope.Servicios = d.data;
                 $scope.CargandoLavados = false;
                 $scope.ListaLavados = d.data;                
