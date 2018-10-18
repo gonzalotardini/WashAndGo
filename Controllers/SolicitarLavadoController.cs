@@ -110,7 +110,7 @@ namespace WashAndGo.Controllers
 
         }
 
-        public void crearSolicitud(string Marca, string Modelo,string Servicio,int seg,string dir,string total,string NombreTarjeta,string NumeroTarjeta, string Mes,string Año,string CodTarjeta)
+        public void crearSolicitud(string Marca, string Modelo,string Servicio,int seg,string dir,string total,string NombreTarjeta,long NumeroTarjeta, int Mes,int Año,int CodTarjeta)
         {
             try
             {

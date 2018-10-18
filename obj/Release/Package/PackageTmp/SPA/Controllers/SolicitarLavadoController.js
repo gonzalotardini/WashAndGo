@@ -1,4 +1,4 @@
-﻿angular.module('app').controller("SolicitarLavadoController", ["$scope", "$sce", "$http", "$window", "ngDialog", "$filter", "SolicitarLavadoService", "$location", function ($scope, $sce, $http, $window, ngDialog,$filter, SolicitarLavadoService, $location) {
+﻿angular.module('app').controller("SolicitarLavadoController", ["$scope", "$sce", "$http", "$window", "ngDialog", "$filter", "SolicitarLavadoService", "$location", "$timeout", function ($scope, $sce, $http, $window, ngDialog, $filter, SolicitarLavadoService, $location, $timeout) {
 
 
     //Array de MARCAS
@@ -301,6 +301,13 @@
 
     $scope.CrearSolicitud = function (Marca, Modelo, Servicio, NombreTarjeta, NumeroTarjeta, Mes, Anio, CodTarjeta) {
 
+
+        if ($scope.paymentForm.$valid==false) {
+            var hola = "g";
+        }
+        else {
+
+            $scope.ProcesandoPago = true;
         var seg = $scope.Segmento.IdSegmento;
         var dir = $scope.Direccion;
         var total = $scope.Total;
@@ -308,18 +315,20 @@
         SolicitarLavadoService.CrearSolicitud(Marca, Modelo, Servicio, seg, dir, total, NombreTarjeta, NumeroTarjeta, Mes, Anio, CodTarjeta).then(
             function (d) {
                 //$scope.Servicios = d.data;
-                sleep(1000);
+                sleep(50000);
                 $scope.ProcesandoPago = false;
                 $scope.Redirigiendo = true;
-                sleep(5000);
-               $location.path('/cliente');
+                $timeout(function () {
+                    $location.path('/cliente');
+                }, 5000);
+               
                 
             },
             function (error) {
 
 
             });
-
+        }
     };
 
 

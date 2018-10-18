@@ -66,6 +66,11 @@
             background-color : white;
         }
 
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
 
     </style>
 </head>
@@ -215,37 +220,39 @@
                         </label>
                     </div>-->
                     </div>
+                    
                     <div class="panel-body">
-                        <form role="form">
+                        <form name="paymentForm" role="form">
                             <div class="form-group">
                                 <label for="cardNumber">
                                     Nombre
                                 </label>
-
-                                <input type="text" ng-model="NombreTarjeta" class="form-control" style="max-width:100%;" id="nombre" placeholder="Ej: Gonzalo T. Tardini" required autofocus />
-
+                                <input type="text" name="nombre" ng-model="NombreTarjeta" class="form-control" style="max-width:100%;" id="nombre" placeholder="Ej: Gonzalo T. Tardini" ng-minlength="10" ng-maxlength="50" ng-pattern="/^[a-zA-Z\s]*$/" required autofocus />
                             </div>
+                           
                             <div class="form-group">
                                 <label for="cardNumber">
                                     N° de Tarjeta
                                 </label>
                                 <div class="input-group">
-                                    <input name="numTarjeta" type="text" class="form-control" id="cardNumber" ng-model="NumeroTarjeta" placeholder="Ej: 4485 7158 6086 8875"
-                                           required autofocus />
+                                    <input name="creditNumber" ng-maxlength="16" type="number" min="1" ng-minlength="16" class="form-control" id="cardNumber" ng-pattern="/^[0-9]*$/" ng-model="NumeroTarjeta" placeholder="Ej: 4485 7158 6086 8875"
+                                           required />
                                     <span class="glyphicon glyphicon-lock"></span>
                                     <!--<span ng-show="numTarjeta.$error.pattern">Not a valid number!</span>-->
                                 </div>
                             </div>
-                            <div class="row">                               
+                            <div class="row">
                                 <div class="col-xs-5 col-md-5">
                                     <div class="form-group" style="margin-top: 10%;">
                                         <label style="font-family:'Century Gothic'" for="cvCode">
                                             Vencimiento
                                         </label>
                                         <div class="form-inline">
-                                            <input style="width:45%;" ng-model="Mes" type="text" class="form-control" id="cvCode" placeholder="MM" required />
-                                            <input style="width:45%;"ng-model="Anio" type="text" class="form-control" id="cvCode" placeholder="YY" required />
+                                            <input style="width:45%;" name="mes" ng-minlength="2" ng-maxlength="2" ng-model="Mes" min="01" max="12" type="number" class="form-control" ng-pattern="/^[0-9]*$/" placeholder="MM" required />
+
+                                            <input style="width:45%;" name="anio" ng-minlength="2" ng-maxlength="2" ng-model="Anio" min="18" max="26" type="number" class="form-control" ng-pattern="/^[0-9]*$/" placeholder="YY" required />
                                         </div>
+
 
                                     </div>
                                 </div>
@@ -254,12 +261,20 @@
                                         <label style="font-family:'Century Gothic'" for="cvCode">
                                             Cod.
                                         </label>
-                                        <input type="text" ng-model="CodTarjeta" class="form-control text-center" id="cvCode" placeholder="Ej: 123" required />
-                                        <!--<input type="password"  class="form-control text-center" id="cvCode" placeholder="Ej: 123" required />-->
+                                        <input type="number" name="cod" ng-model="CodTarjeta" class="form-control text-center" id="cvCode" min="0" ng-minlength="3" ng-maxlength="4" ng-pattern="/^[0-9]*$/" placeholder="Ej: 123" required />
+
                                     </div>
                                 </div>
+
                             </div>
                         </form>
+
+                        <p style="color:red;font-family:'Century Gothic'; text-align:center;" ng-show="(paymentForm.nombre.$dirty && paymentForm.nombre.$error.required) || paymentForm.nombre.$error.minlength ||paymentForm.nombre.$error.pattern ">Revise nombre ingresado</p>
+                        <p style="color:red;font-family:'Century Gothic'; text-align:center;" ng-show="paymentForm.nombre.$error.maxlenght">El nombre no puede superar los 50 caracteres</p>                  
+                        <p style="color:red;font-family:'Century Gothic'; text-align:center;" ng-show="paymentForm.creditNumber.$error.maxlength||paymentForm.creditNumber.$error.minlength||paymentForm.creditNumber.$error.min ||paymentForm.creditNumber.$error.pattern || (paymentForm.creditNumber.$dirty && paymentForm.creditNumber.$error.required)">Revise número de tarjeta ingresado</p>
+                        <p style="color:red;font-family:'Century Gothic'; text-align:center;" ng-show="paymentForm.cod.$error.pattern || paymentForm.cod.$error.min || paymentForm.cod.$error.minlength || paymentForm.cod.$error.maxlength || (paymentForm.cod.$error.required && paymentForm.cod.$dirty)">Revise el código ingresado</p>
+                        <p style="color:red;font-family:'Century Gothic'; text-align:center;" ng-show="paymentForm.mes.$error.pattern || paymentForm.mes.$error.min || paymentForm.mes.$error.minlength || paymentForm.mes.$error.maxlength|| paymentForm.mes.$error.max || (paymentForm.mes.$error.required && paymentForm.mes.$dirty)">Revise el mes ingresado</p>
+                        <p style="color:red;font-family:'Century Gothic'; text-align:center;" ng-show="paymentForm.mes.$error.pattern || paymentForm.anio.$error.min || paymentForm.anio.$error.minlength || paymentForm.anio.$error.maxlength || paymentForm.anio.$error.max || (paymentForm.anio.$error.required && paymentForm.anio.$dirty)">Revise el año ingresado</p>
                     </div>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
@@ -268,7 +283,8 @@
                     </li>
                 </ul>
                 <br />
-                <a class="btn btn-success btn-lg btn-block" ng-click="ProcesandoPago=true; CrearSolicitud(Marca,Modelo,Servicio,NombreTarjeta,NumeroTarjeta,Mes,Anio,CodTarjeta)" role="button">Pay</a>
+                <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="CrearSolicitud(Marca,Modelo,Servicio,NombreTarjeta,NumeroTarjeta,Mes,Anio,CodTarjeta)">Pay</button>
+                <!--<a class="btn btn-success btn-lg btn-block" ng-click="CrearSolicitud(Marca,Modelo,Servicio,NombreTarjeta,NumeroTarjeta,Mes,Anio,CodTarjeta)" >Pay</a>-->
             </div>
 
             <div ng-show="ProcesandoPago && !Redirigiendo" style="margin-top: 10%;" class="col-xs-12 col-md-4">
