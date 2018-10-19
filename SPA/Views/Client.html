@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="app">
+<html>
 <head>
     
     <meta charset="utf-8" />
@@ -27,13 +27,7 @@
             font-family: 'Century Gothic';
         }
     </style>
-
-
-
-
-
-
-</head>
+          </head>
 <body>
     <div class=" container">
 
@@ -266,41 +260,49 @@
             <div ng-show="CargandoLavados" class="col-md-12 text-center">
                 <img src="../../img/loading.gif" />
             </div>
-            <div class="row col-md-12 " ng-show="VerListaLavados && !CargandoLavados">
+            <div class="row col-md-12" ng-show="VerListaLavados && !CargandoLavados">
 
+                <form style="    margin-bottom: 2%;    margin-top: 2%;    margin-left: 4%;" class="form-inline text-left">
+                    <div class="form-group">
+                        <label>Search</label>
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                    </div>
+                </form>
+                <div class="table-responsive">
 
-                <table class="table table-striped custab">
-                    <thead>
-                        <!--<a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>-->
-                        <tr>
-                            <th class="text-center">Fecha</th>
-                            <th class="text-center">Vehículo</th>
-                            <th class="text-center">Servicio</th>
-                            <th class="text-center">Estado</th>
-                            <th class="text-center"></th>
+                    <table class="table">
+                        <thead>
+                            <!--<a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>-->
+                            <tr>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Vehículo</th>
+                                <th class="text-center">Servicio</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tr dir-paginate="x in ListaLavados | orderBy : '-Fecha'|filter:search |itemsPerPage:10">
+                            <td>{{x.Fecha | date : "dd/MM/y"}}</td>
+                            <td>{{x.Marca}} {{x.Modelo}}</td>
+                            <td>{{x.Servicio}}</td>
+                            <td>{{x.Estado}}</td>
+                            <td class="text-center"><a class='btn btn-warning btn-xs' data-toggle="modal" data-target="#myModal" style="color:black;" href=""><span class="glyphicon glyphicon-edit"></span> Detalle</a> <!--<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>--></td>
                         </tr>
-                    </thead>
-                    <tr dir-paginate="x in ListaLavados | orderBy : '-Fecha'| itemsPerPage:10">
-                        <td>{{x.Fecha | date : "dd/MM/y"}}</td>
-                        <td>{{x.Marca}} {{x.Modelo}}</td>
-                        <td>{{x.Servicio}}</td>
-                        <td>{{x.Estado}}</td>
-                        <td class="text-center"><a class='btn btn-warning btn-xs' data-toggle="modal" data-target="#myModal" style="color:black;" href=""><span class="glyphicon glyphicon-edit"></span> Detalle</a> <!--<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>--></td>
-                    </tr>
 
-                    <!--<tr>
-            <td>2</td>
-            <td>Products</td>
-            <td>Main Products</td>
-            <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Blogs</td>
-            <td>Parent Blogs</td>
-            <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-        </tr>-->
-                </table>
+                        <!--<tr>
+                <td>2</td>
+                <td>Products</td>
+                <td>Main Products</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Blogs</td>
+                <td>Parent Blogs</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+            </tr>-->
+                    </table>
+                </div>
                 <dir-pagination-controls max-size="5"
                                          direction-links="true"
                                          boundary-links="true">

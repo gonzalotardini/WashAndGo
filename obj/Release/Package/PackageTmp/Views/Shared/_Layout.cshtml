@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - Wash & Go!</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+   
     <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.ico">
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/1.0.1/css/ngDialog.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/1.0.1/css/ngDialog-theme-default.min.css">
+
 
     <style>
         .navbar-inverse {
@@ -114,20 +115,20 @@
 
                     @if (Request.IsAuthenticated)
                     {
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Menu
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/#!/solicitarlavado">SolicitarLavado</a></li>
-                            @*<li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>*@
-                        </ul>
-                    </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Menu
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/#!/solicitarlavado">SolicitarLavado</a></li>
+                                @*<li><a href="#">Page 1-2</a></li>
+                                    <li><a href="#">Page 1-3</a></li>*@
+                            </ul>
+                        </li>
 
                     }
-                        
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -161,7 +162,7 @@
     <script src="~/Scripts/angular-aria.min.js"></script>
     <script src="~/Scripts/angular-messages.min.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
-
+    <script src="~/Scripts/dirPagination.js"></script>
 
 
     <script src="~/SPA/Controllers/AppController.js"></script>
@@ -174,6 +175,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/ngDialog.min.js"></script>
+    <script src="~/Scripts/dirPagination.js"></script>
 </body>
 
 

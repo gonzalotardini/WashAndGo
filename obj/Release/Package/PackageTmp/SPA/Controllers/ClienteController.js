@@ -1,4 +1,4 @@
-﻿angular.module('app').controller("ClienteController", ["$scope", "$sce", "$http", "$window", "ngDialog", "$filter", "ClienteService", "SolicitarLavadoService", "$location", function ($scope, $sce, $http, $window, ngDialog, $filter, ClienteService, SolicitarLavadoService,$location) {
+﻿angular.module('app').controller("ClienteController", ["$scope", "$sce", "$http", "$window", "$filter", "ClienteService", "SolicitarLavadoService", "$location", function ($scope, $sce, $http, $window, $filter, ClienteService, SolicitarLavadoService, $location) {
 
     $scope.MostrarDatosPersonales = false;
     $scope.Marcas = [];
@@ -22,6 +22,7 @@
     $scope.VerListaLavados = false;
     $scope.ListaLavados = [];
     $scope.CargandoLavados = false;
+    $scope.submit = false;
  
 
     ObtenerLavadoAbierto();
@@ -56,7 +57,7 @@
                     $scope.Apellido = $scope.Cliente.Apellido,
                     $scope.DNI = $scope.Cliente.DNI,
                     $scope.Email = $scope.Cliente.Email,                    
-                        $scope.Fecha = $scope.Cliente.FechaNacimiento.slice(0, 10),                    
+                    $scope.Fecha = $filter('date')($scope.Cliente.FechaNacimiento.slice(0, 10), "dd/MM/yyyy"),                    
                     $scope.MarcaDescripcion = $scope.Cliente.Marcas.Descripcion,
                     $scope.ModeloDescripcion = $scope.Cliente.Modelos.Descripcion
                     //$scope.MarcaSeleccionada = $scope.Cliente.Marca
@@ -96,17 +97,24 @@
 
     $scope.GuardarDatos = function (Nombre, Apellido, DNI, Email, Fecha, MarcaSeleccionada, Modelo) {
 
-        ClienteService.GuardarDatos(Nombre, Apellido, DNI, Email, Fecha, MarcaSeleccionada, Modelo).then(
-            function (d) {
-                //$scope.Servicios = d.data;
-                //$location.path('/a');
-                $scope.DatosGuardadosOK = true;
-                $scope.MostrarDatosPersonales = false;
-            },
-            function (error) {
+        if ($scope.cliente.$valid==false) {
+            var hola = 'a';
+        }
+        else {
+            ClienteService.GuardarDatos(Nombre, Apellido, DNI, Email, Fecha, MarcaSeleccionada, Modelo).then(
+                function (d) {
+                    //$scope.Servicios = d.data;
+                    //$location.path('/a');
+                    $scope.DatosGuardadosOK = true;
+                    $scope.MostrarDatosPersonales = false;
+                },
+                function (error) {
 
 
-            });
+                });
+        }
+
+       
 
     }
 
