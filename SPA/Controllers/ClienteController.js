@@ -1,4 +1,4 @@
-﻿angular.module('app').controller("ClienteController", ["$scope", "$sce", "$http", "$window", "ngDialog", "$filter", "ClienteService", "SolicitarLavadoService", "$location", function ($scope, $sce, $http, $window, ngDialog, $filter, ClienteService, SolicitarLavadoService,$location) {
+﻿angular.module('app').controller("ClienteController", ["$scope", "$sce", "$http", "$window", "$filter", "ClienteService", "SolicitarLavadoService", "$location", function ($scope, $sce, $http, $window, $filter, ClienteService, SolicitarLavadoService, $location) {
 
     $scope.MostrarDatosPersonales = false;
     $scope.Marcas = [];
