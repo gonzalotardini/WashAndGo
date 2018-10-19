@@ -143,104 +143,111 @@
         </div>
         <div class="col-md-4"></div>
         <div ng-show="MostrarDatosPersonales && !cargandoCliente">
-            <div class="panel text-center col-md-4" style="margin-top:1%;  border-style:solid; border-color:#1487eb;">
+            <form name="cliente">
+                <div class="panel text-center col-md-4" style="margin-top:1%;  border-style:solid; border-color:#1487eb;">
 
-                <div class="panel-heading text-center">
-                    <h2 style="font-size:26px; font-family:'Century Gothic'; color:#1487eb;margin-bottom: 10%;margin-top: 5%;" class="panel-title">Datos Personales</h2>
-                </div>
+                    <div class="panel-heading text-center">
+                        <h2 style="font-size:26px; font-family:'Century Gothic'; color:#1487eb;margin-bottom: 10%;margin-top: 5%;" class="panel-title">Datos Personales</h2>
+                    </div>
 
-                <div class="form-group col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input ng-readonly="ReadOnly" ng-model="Nombre" class="form-control" type="text" placeholder="Nombre">
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input ng-readonly="ReadOnly" ng-pattern="/^[a-zA-Z]*$/" name="nombre" ng-model="Nombre" class="form-control" type="text" required placeholder="Nombre">
+                        </div>
+                    </div>
+                    <p ng-show="(cliente.nombre.$error.pattern || (cliente.nombre.$error.required && cliente.nombre.$dirty)) && submit" style="font-family:'Century Gothic'; color:red;">Verfique nombre ingresado</p>
+
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i style="color:white;" class="glyphicon glyphicon-user"></i></span>
+                            <input ng-readonly="ReadOnly" ng-pattern="/^[a-zA-Z]*$/" ng-model="Apellido" class="form-control" name="apellido" placeholder="Apellido" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                            <input ng-readonly="ReadOnly" ng-model="DNI" class="form-control" name="dni" placeholder="DNI" type="text">
+                        </div>
+                    </div>
+
+                    <p ng-show="(cliente.dni.$error.pattern || (cliente.dni.$error.required && cliente.dni.$dirty)) && submit" style="font-family:'Century Gothic'; color:red;">Verfique DNI ingresado</p>
+
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input ng-readonly="ReadOnly" ng-model="Email" class="form-control" placeholder="Email" type="email">
+                        </div>
+                    </div>
+
+
+                    <div ng-show="ReadOnly" class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <input ng-readonly="ReadOnly" ng-model="Fecha" class="form-control" placeholder="Fecha de Nacimiento" type="text">
+                        </div>
+                    </div>
+
+                    <div ng-hide="ReadOnly" class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <!--<input class="form-control" placeholder="Email" type="date">-->
+                            <input ng-readonly="ReadOnly" ng-model="Fecha" class="form-control" type="datetime-local" id="date">
+                        </div>
+                    </div>
+
+                    <div ng-hide="ReadOnly" class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            <select name="marca" class="form-control" ng-trim="false" ng-model="MarcaSeleccionada" ng-change="ObtenerModelos(MarcaSeleccionada)" required>
+                                <option value="" disabled selected>Seleccione Marca</option>
+                                <option ng-repeat="x in Marcas" value="{{x.IdMarca}} ">{{x.Descripcion}}</option>
+                            </select>
+
+                            <!--ng-selected="MarcaSeleccionada == x.IdMarca"-->
+                            <!--<select name="..." ng-model="MarcaSeleccionada" ng-options="Id as Descripcion (IdMarca, Descripcion) in Marcas">
+                <option value="">Select date</option>
+            </select>-->
+
+                        </div>
+                    </div>
+
+                    <p ng-show=" (cliente.marca.$error.required && cliente.marca.$dirty && !ReadOnly && submit)" style="font-family:'Century Gothic'; color:red;">Seleccione marca</p>
+
+                    <div ng-hide="ReadOnly" class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            <select ng-model="Modelo" class="form-control">
+                                <option value="" disabled selected>Seleccione Modelo</option>
+                                <option ng-repeat="x in Modelos" value="{{x.IdModelo}}">{{x.Descripcion}}</option>-->
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div ng-show="ReadOnly" class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            <input ng-readonly="ReadOnly" ng-model="MarcaDescripcion" class="form-control" placeholder="Marca" type="text">
+                        </div>
+                    </div>
+                    <div ng-show="ReadOnly" class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            <input ng-readonly="ReadOnly" ng-model="ModeloDescripcion" class="form-control" placeholder="Modelo" type="text">
+                        </div>
+                    </div>
+
+
+                    <div ng-hide="ReadOnly" class="form-group col-md-12" style="width:100%;">
+                        <input ng-click="submit=true;GuardarDatos(Nombre,Apellido,DNI,Email,Fecha,MarcaSeleccionada,Modelo)" class="btn btn-primary" value="Aceptar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
+                    </div>
+                    <div ng-show="ReadOnly" class="form-group col-md-12" style="width:100%;">
+                        <input ng-click="ReadOnly=False" class="btn btn-primary" value="Modificar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
                     </div>
                 </div>
-
-                <div class="form-group col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i style="color:white;" class="glyphicon glyphicon-user"></i></span>
-                        <input ng-readonly="ReadOnly" ng-model="Apellido" class="form-control" placeholder="Apellido" type="text">
-                    </div>
-                </div>
-
-                <div class="form-group col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                        <input ng-readonly="ReadOnly" ng-model="DNI" class="form-control" placeholder="DNI" type="text">
-                    </div>
-                </div>
-
-                <div class="form-group col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input ng-readonly="ReadOnly" ng-model="Email" class="form-control" placeholder="Email" type="email">
-                    </div>
-                </div>
-
-
-                <div ng-show="ReadOnly" class="form-group col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input ng-readonly="ReadOnly" ng-model="Fecha" class="form-control" placeholder="Fecha de Nacimiento" type="text">
-                    </div>
-                </div>
-
-                <div ng-hide="ReadOnly" class="form-group col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <!--<input class="form-control" placeholder="Email" type="date">-->
-                        <input ng-readonly="ReadOnly" ng-model="Fecha" class="form-control" type="date" id="date">
-                    </div>
-                </div>
-
-                <div ng-hide="ReadOnly" class="form-group col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
-                        <select class="form-control" ng-trim="false" ng-model="MarcaSeleccionada" ng-change="ObtenerModelos(MarcaSeleccionada)" required>
-                            <option value="" disabled selected>Seleccione Marca</option>
-                            <option ng-repeat="x in Marcas" ng-selected="MarcaSeleccionada == x.IdMarca" value="{{x.IdMarca}} ">{{x.Descripcion}}</option>
-                        </select>
-
-                        <!--<select name="..." ng-model="MarcaSeleccionada" ng-options="Id as Descripcion (IdMarca, Descripcion) in Marcas">
-                        <option value="">Select date</option>
-                    </select>-->
-
-                    </div>
-                </div>
-
-
-                <div ng-hide="ReadOnly" class="form-group col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
-                        <select ng-model="Modelo" class="form-control">
-                            <option value="" disabled selected>Seleccione Modelo</option>
-                            <option ng-repeat="x in Modelos" value="{{x.IdModelo}}">{{x.Descripcion}}</option>-->
-                        </select>
-                    </div>
-                </div>
-
-
-                <div ng-show="ReadOnly" class="form-group col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
-                        <input ng-readonly="ReadOnly" ng-model="MarcaDescripcion" class="form-control" placeholder="Marca" type="text">
-                    </div>
-                </div>
-                <div ng-show="ReadOnly" class="form-group col-md-12">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
-                        <input ng-readonly="ReadOnly" ng-model="ModeloDescripcion" class="form-control" placeholder="Modelo" type="text">
-                    </div>
-                </div>
-
-
-                <div ng-hide="ReadOnly" class="form-group col-md-12" style="width:100%;">
-                    <input ng-click="GuardarDatos(Nombre,Apellido,DNI,Email,Fecha,MarcaSeleccionada,Modelo)" class="btn btn-primary" value="Aceptar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
-                </div>
-                <div ng-show="ReadOnly" class="form-group col-md-12" style="width:100%;">
-                    <input ng-click="ReadOnly=False" class="btn btn-primary" value="Modificar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
-                </div>
-            </div>
+            </form>
         </div>
 
 
