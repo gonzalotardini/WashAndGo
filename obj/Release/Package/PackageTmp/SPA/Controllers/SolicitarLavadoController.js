@@ -1,4 +1,4 @@
-﻿angular.module('app').controller("SolicitarLavadoController", ["$scope", "$sce", "$http", "$window", "ngDialog", "$filter", "SolicitarLavadoService", "$location", "$timeout", function ($scope, $sce, $http, $window, ngDialog, $filter, SolicitarLavadoService, $location, $timeout) {
+﻿angular.module('app').controller("SolicitarLavadoController", ["$scope", "$sce", "$http", "$window", "$filter", "SolicitarLavadoService", "$location", "$timeout", function ($scope, $sce, $http, $window, $filter, SolicitarLavadoService, $location, $timeout) {
 
 
     //Array de MARCAS

@@ -273,15 +273,15 @@
                     <table class="table">
                         <thead>
                             <!--<a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>-->
-                            <tr>
-                                <th class="text-center">Fecha</th>
-                                <th class="text-center">Vehículo</th>
-                                <th class="text-center">Servicio</th>
-                                <th class="text-center">Estado</th>
+                            <tr>                                
+                                <th ng-click="sort('Fecha')" class="text-center">Fecha</th>
+                                <th ng-click="sort('Modelo')" class="text-center">Vehículo</th>
+                                <th ng-click="sort('Servicio')" class="text-center">Servicio</th>
+                                <th ng-click="sort('Estado')" class="text-center">Estado</th>
                                 <th class="text-center"></th>
                             </tr>
                         </thead>
-                        <tr dir-paginate="x in ListaLavados | orderBy : '-Fecha'| filter:search |itemsPerPage:10">
+                        <tr dir-paginate="x in ListaLavados | orderBy:sortKey:reverse| filter:search |itemsPerPage:10">
                             <td>{{x.Fecha | date : "dd/MM/y"}}</td>
                             <td>{{x.Marca}} {{x.Modelo}}</td>
                             <td>{{x.Servicio}}</td>
