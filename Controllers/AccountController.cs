@@ -176,7 +176,7 @@ namespace WashAndGo.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-
+           
             try
             {            
                     if (ModelState.IsValid)
@@ -185,14 +185,24 @@ namespace WashAndGo.Controllers
                         var result = await UserManager.CreateAsync(user, model.Password);
                         if (result.Succeeded)
                         {
-                            //asigno en la base el tipo de usuario que es (lavador 1 cliente 2)
-                            using (var context = new WGentities())
+                        if (model.SelectedTipo == "1")
+
+                        {
+                            await this.UserManager.AddToRoleAsync(user.Id,"Lavador");
+                          
+                        }
+                        else
+                        {
+                            await this.UserManager.AddToRoleAsync(user.Id, "Cliente");
+                        }
+                        //asigno en la base el tipo de usuario que es (lavador 1 cliente 2)
+                        using (var context = new WGentities())
                             {
-                                AspNetUsers usuario = context.AspNetUsers.Where(c => c.Id == user.Id).First();
-                                usuario.TipoUsuario = Convert.ToInt32(model.SelectedTipo);
+                                AspNetUsers usuario = context.AspNetUsers.Where(c => c.Id == user.Id).FirstOrDefault();
+                                usuario.TipoUsuario = Convert.ToInt32(model.SelectedTipo);                           
                                 context.SaveChanges();
                             }
-                            //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                            
 
                             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                             // Send an email with this link
@@ -201,26 +211,59 @@ namespace WashAndGo.Controllers
                             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                             await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                        var cliente = new Clientes()
-                        {
-                            IdCliente = user.Id,
-                            Email=user.Email    ,
-                            Completo="False"
+                       
+                        switch (model.SelectedTipo)
+                        { 
+                            case "2":
+
+                                var cliente = new Clientes()
+                                {
+                                    IdCliente = user.Id,
+                                    Email = user.Email,
+                                    Completo = "False"
+
+                                };                             
+                               
                             
-                        };
+                                using (var context = new WGentities())
+                                {
+                                    context.Clientes.Add(cliente);
+                                    context.SaveChanges();
 
-                        using (var context = new WGentities())
-                        {
-                            context.Clientes.Add(cliente);
-                            context.SaveChanges();
+                                }
+                                break;
+                            case "1":
+                                var lavador = new Lavadores()
+                                {
+                                    IdLavador = user.Id,
+                                    Email = user.Email,
+                                    Completo = "False"
 
-                        }
+                                };
+                               
+                                using (var context = new WGentities())
+                                {
+                                    context.Lavadores.Add(lavador);
+                                   
+                                    context.SaveChanges();
+
+                                }
+
+                                break;
+                        }                      
 
 
                             return RedirectToAction("Login", "Account");
                         }
                         AddErrors(result);
+                    using (var context = new WGentities())
+                    {
+
+                        AspNetUsers usuario = context.AspNetUsers.Where(c => c.Id == user.Id).First();
+                        context.AspNetUsers.Remove(usuario);
+                        context.SaveChanges();
                     }
+                }
                 
             }
             catch (Exception ex)

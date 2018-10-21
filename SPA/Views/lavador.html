@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+        .glyphicon-user:before, .glyphicon-option-horizontal:before, .input-group-addon:first-child {
+            color: white;
+        }
+
+        .input-group-addon:first-child {
+            background-color: #1487eb;
+        }
+
+        .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+            background-color: white;
+        }
+
+        .glyphicon-user:before, .glyphicon-option-horizontal:before, .input-group-addon:first-child {
+            margin: 0px;
+        }
+
+        h4 {
+            font-family: 'Century Gothic';
+        }
+
+        .mobile-margin {
+            margin-top: 10%;
+        }
+    </style>
+</head>
+<body>
+    <div class=" container">
+
+        <div class="row col-md-12">
+            <div class="col-md-2"></div>
+            <div ng-show="LavadoAbierto" style="margin-top: 10%;" class="col-md-8">
+                <div class="panel panel-default" style="border-color:#1487eb; border-width:2px;">
+                    <div class="panel-heading text-center" style="background-color:white;border-color: #1487eb; border-width:2px; ">
+                        <h2 style="color:#1487eb; font-size:20px; font-family:'Century Gothic';" class="panel-title">
+                            Tu Lavado
+                        </h2>
+
+                    </div>
+                    <div class="panel-body ">
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h2 style="text-align:center; font-family:'Century Gothic'; color:#1487eb;">Buscando Lavador...</h2>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Estado:</b></u></h4>&nbsp;<h4>  {{Lavado.Estado}}</h4></div>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Auto: </b></u></h4>&nbsp;<h4>  {{Lavado.Marcas.Descripcion}}  {{Lavado.Modelos.Descripcion}}</h4></div>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Servicio: </b></u></h4>&nbsp;<h4> {{Lavado.Servicios.Nombre}}</h4></div>
+                                <br />
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Total:</b></u></h4>&nbsp;<h4>${{Lavado.Total}},00</h4></div>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Dirección: </b></u></h4>&nbsp;<h4>  {{Lavado.Direccion}}</h4></div>
+
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <img src="../../img/buscando.gif" />
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <a class="btn btn-danger btn-lg btn-block" ng-click="CancelarLavado(Lavado.IdLavado)" role="button">Cancelar Lavado</a>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 row text-center" style="margin-top:8%;">
+            <!--<div class="row">
+            <div class="alert alert-success">
+                <strong>Success!</strong> Datos personales guardados correctamente!.
+            </div>
+        </div>-->
+
+            <div class="mobile-margin visible-xs"></div>
+
+            <button ng-click="!MostrarDatosPersonales?MostrarDatosPersonales=true:MostrarDatosPersonales=false;ObtenerDatos();" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
+                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
+                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Datos Personales
+                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:right;"></span>
+                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:right;"></span>
+            </button>
+
+        </div>
+
+        <div class="col-md-4"></div>
+        <div ng-show="MostrarDatosPersonales && !cargandoCliente">
+            <form name="cliente">
+                <div class="panel text-center col-md-4" style="margin-top:1%;  border-style:solid; border-color:#1487eb;">
+
+                    <div class="panel-heading text-center">
+                        <h2 style="font-size:26px; font-family:'Century Gothic'; color:#1487eb;margin-bottom: 10%;margin-top: 5%;" class="panel-title">Datos Personales</h2>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input ng-readonly="ReadOnly" ng-pattern="/^[a-zA-Z]*$/" name="nombre" ng-model="lavador.Nombre" class="form-control" type="text" required placeholder="Nombre">
+                        </div>
+                    </div>
+                    <p ng-show="(cliente.nombre.$error.pattern || (cliente.nombre.$error.required && cliente.nombre.$dirty)) && submit" style="font-family:'Century Gothic'; color:red;">Verfique nombre ingresado</p>
+
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i style="color:white;" class="glyphicon glyphicon-user"></i></span>
+                            <input ng-readonly="ReadOnly" ng-pattern="/^[a-zA-Z]*$/" ng-model="lavador.Apellido" class="form-control" name="apellido" placeholder="Apellido" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                            <input ng-readonly="ReadOnly" ng-model="lavador.DNI" class="form-control" name="dni" placeholder="DNI" type="text">
+                        </div>
+                    </div>
+
+                    <p ng-show="(cliente.dni.$error.pattern || (cliente.dni.$error.required && cliente.dni.$dirty)) && submit" style="font-family:'Century Gothic'; color:red;">Verfique DNI ingresado</p>
+
+                    <div class="form-group col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input ng-readonly="ReadOnly" ng-model="lavador.Email" class="form-control" placeholder="Email" type="email">
+                        </div>
+                    </div>
+                     
+                 
+                    <div ng-hide="ReadOnly" class="form-group col-md-12" style="width:100%;">
+                        <input ng-click="submit=true;GuardarDatos(lavador)" class="btn btn-primary" value="Aceptar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
+                    </div>
+                    <div ng-show="ReadOnly" class="form-group col-md-12" style="width:100%;">
+                        <input ng-click="ReadOnly=False" class="btn btn-primary" value="Modificar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-12 row text-center" style="margin-top:1%;">
+            <button ng-click="!MostrarDatosPersonales?MostrarDatosPersonales=true:MostrarDatosPersonales=false;ObtenerMarcas();ObtenerDatos();" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
+                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
+                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Servicios que Presto
+                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:right;"></span>
+                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:right;"></span>
+            </button>
+        </div>
+        <div class="col-md-12 row text-center" style="margin-top:1%;">
+            <button ng-click="!MostrarDatosPersonales?MostrarDatosPersonales=true:MostrarDatosPersonales=false;ObtenerMarcas();ObtenerDatos();" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
+                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
+                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Mis Lavados
+                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:right;"></span>
+                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:right;"></span>
+            </button>
+        </div>
+
+
+        <!--<div class="col-md-12 text-center">
+        <img ng-show="cargandoCliente" src="../../img/loading.gif" />
+    </div>-->
+        <!--<div class="col-md-4"></div>-->
+
+
+
+    </div>
+
+    <script src="~/Scripts/dirPagination.js"></script>
+</body>
+</html>
