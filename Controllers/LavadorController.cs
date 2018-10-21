@@ -47,6 +47,46 @@ namespace WashAndGo.Controllers
 
         }
 
+        public string GetServiciosRealizo()
+        {
+            try
+            {
+                var lavadorBll = new LavadorBLL();
+                var userid = User.Identity.GetUserId();
+               
+                return JsonConvert.SerializeObject(lavadorBll.GetServiciosRealizo(userid), Formatting.None,
+                   new JsonSerializerSettings()
+                   {
+                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                   });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string GetServiciosNoRealizo()
+        {
+            try
+            {
+                var lavadorBll = new LavadorBLL();
+                var userid = User.Identity.GetUserId();
+
+                return JsonConvert.SerializeObject(lavadorBll.GetServiciosNoRealizo(userid), Formatting.None,
+                   new JsonSerializerSettings()
+                   {
+                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                   });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
         public void GuardarDatos(LavadorView lavador)
         {

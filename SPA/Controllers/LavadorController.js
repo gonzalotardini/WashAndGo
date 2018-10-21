@@ -3,6 +3,10 @@
     $scope.ReadOnly = false;
     $scope.lavador = {};
     $scope.cargandoLavador = false;
+    $scope.ServiciosRealizo = [];
+    $scope.ServiciosNoRealizo = [];
+    $scope.MostrarServiciosRealizo = false;
+
 
     $scope.ObtenerDatos = function () {
         $scope.cargandolavador = true;
@@ -60,4 +64,40 @@
             })
 
     }
+
+    $scope.RemoveService = function (service) {
+        for (var i = 0; i < array.length - 1; i++) {
+            if (array[i] === 5) {
+                arr.splice(i, 1);
+            }
+        }
+    };
+
+    $scope.GetServiciosRealizo = function () {
+
+        LavadorService.GetServiciosRealizo().then(
+            function (d) {               
+                $scope.ServiciosRealizo = d.data;
+            },
+            function (error) {
+
+                var elerror = error;
+            });
+    };
+
+    $scope.GetServiciosNoRealizo = function () {
+
+        LavadorService.GetServiciosNoRealizo().then(
+            function (d) {
+                $scope.ServiciosNoRealizo = d.data;
+            },
+            function (error) {
+
+                var elerror = error;
+            });
+    };
+
+
+
+
 }]);

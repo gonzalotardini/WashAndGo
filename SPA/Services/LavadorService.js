@@ -76,6 +76,21 @@
 
     };
 
+    service.GetServiciosRealizo = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/Lavador/GetServiciosRealizo'
+        });
+        return $q.when(promise);
+    };
+
+    service.GetServiciosNoRealizo = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/Lavador/GetServiciosNoRealizo'
+        });
+        return $q.when(promise);
+    };
 
     return service;
 })
