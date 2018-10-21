@@ -1,5 +1,6 @@
 ﻿using BLL;
 using DAL;
+using DAL.Views;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System;
@@ -47,10 +48,11 @@ namespace WashAndGo.Controllers
         }
 
 
-        public void GuardarDatos(Lavadores lavador)
+        public void GuardarDatos(LavadorView lavador)
         {
             try
             {
+
                 var lavadorid = User.Identity.GetUserId();
                 var lavadorBll = new LavadorBLL();
                 lavadorBll.GuardarDatos(lavadorid, lavador);

@@ -55,7 +55,7 @@
         var promise = $http({
             method: 'post',
             url: '/Lavador/GuardarDatos',
-            data: {
+            params: {
                 lavador:lavador
             }
         });

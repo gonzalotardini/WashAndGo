@@ -24,7 +24,17 @@
         <li>
             @*@Html.ActionLink("Hello " + User.Identity.GetUserName()+ "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
             @*@Html.ActionLink("Mi Cuenta", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
-        <a href="/#!/cliente"><span class="glyphicon glyphicon-user"></span>Mi Cuenta</a>
+
+            @if (User.IsInRole("Cliente"))
+            {
+                <a href="/#!/cliente"><span class="glyphicon glyphicon-user"></span>Mi Cuenta</a>
+            }
+            else
+            {
+                <a href="/#!/lavador"><span class="glyphicon glyphicon-user"></span>Mi CuentaL</a>
+            }
+            
+
         </li>
         <li><a  href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span>Log off</a></li>
     </ul>
