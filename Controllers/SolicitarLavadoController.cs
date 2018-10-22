@@ -248,7 +248,7 @@ namespace WashAndGo.Controllers
                           ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                       });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -275,6 +275,24 @@ namespace WashAndGo.Controllers
 
                 throw;
             }
+        }
+
+
+        public string AsignarLavado (int idlavado)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+                var userid = User.Identity.GetUserId();
+                return lavadobll.AsignarLavado(idlavado,userid);
+                      
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
     }

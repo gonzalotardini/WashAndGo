@@ -2,6 +2,7 @@
 
     $scope.MostrarLavados = false;
     $scope.Lavado = {};
+    $scope.CargandoLavados = false;
 
     $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
@@ -54,11 +55,12 @@
                             $scope.cargandoMapa = true;
                         }
                         else {
-
+                            $scope.CargandoLavados = true;
                             $scope.Direccion = json.results[0].formatted_address;
                             $scope.ErrorDireccion = false;
                             $scope.cargandoMapa = false;
                             $scope.MostrarLavados = true;
+
                             $scope.BuscarLavados($scope.Direccion);
                         }
 
@@ -99,21 +101,23 @@
     }
 
 
-    $scope.BuscarLavados = function (Direccion) {
-
+    $scope.BuscarLavados = function (Direccion) {       
 
         BuscarLavadoService.BuscarLavado(Direccion).then(
-            function (d) {
+                function (d) {
                 $scope.Lavados = d.data;
                 $scope.sort("Distancia");
                 $scope.sort("Distancia");
-
-                //$scope.cargandoModelos = false;
+                $scope.CargandoLavados = false;
+                
             },
             function (error) {
 
-
+                $scope.Error = true;
+                $scope.CargandoLavados = false;
             });
+
+        
 
     }
 

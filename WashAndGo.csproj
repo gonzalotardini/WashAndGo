@@ -242,6 +242,7 @@
     <Content Include="img\servicio básico.jpg" />
     <Content Include="img\servicio-estándar.jpg" />
     <Content Include="img\servicio-premium.jpg" />
+    <Content Include="img\tilde.png" />
     <Content Include="img\Whatsapp-botón.png" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
