@@ -6,6 +6,7 @@
     $scope.ServiciosRealizo = [];
     $scope.ServiciosNoRealizo = [];
     $scope.MostrarServiciosRealizo = false;
+    $scope.CargandoServicios = false;
 
 
     $scope.ObtenerDatos = function () {
@@ -66,17 +67,46 @@
     }
 
     $scope.RemoveService = function (service) {
-        for (var i = 0; i < array.length - 1; i++) {
-            if (array[i] === 5) {
-                arr.splice(i, 1);
+        for (var i = 0; i < $scope.ServiciosRealizo.Servicios.length; i++) {
+            if ($scope.ServiciosRealizo.Servicios[i].IdServicio == service) {
+                $scope.ServiciosNoRealizo.push($scope.ServiciosRealizo.Servicios[i]);
+                $scope.ServiciosRealizo.Servicios.splice(i, 1);
+                GuardarServicios($scope.ServiciosRealizo.Servicios);
+                
+                var hola = "hola";
             }
         }
     };
 
-    $scope.GetServiciosRealizo = function () {
+
+    $scope.AddService = function (service) {
+        for (var i = 0; i < $scope.ServiciosNoRealizo.length; i++) {
+            if ($scope.ServiciosNoRealizo[i].IdServicio == service) {
+                $scope.ServiciosRealizo.Servicios.push($scope.ServiciosNoRealizo[i]);
+                $scope.ServiciosNoRealizo.splice(i, 1);
+                GuardarServicios($scope.ServiciosRealizo.Servicios);
+
+                var hola = "hola";
+            }
+        }
+    };
+
+
+
+    $scope.GetServicios = function () {                 
+
+        $scope.CargandoServicios = true;
+        GetServiciosRealizo();
+        GetServiciosNoRealizo();
+
+        $scope.CargandoServicios = false;
+    }
+
+    
+    function GetServiciosRealizo() {
 
         LavadorService.GetServiciosRealizo().then(
-            function (d) {               
+            function (d) {
                 $scope.ServiciosRealizo = d.data;
             },
             function (error) {
@@ -85,7 +115,7 @@
             });
     };
 
-    $scope.GetServiciosNoRealizo = function () {
+    function GetServiciosNoRealizo() {
 
         LavadorService.GetServiciosNoRealizo().then(
             function (d) {
@@ -96,6 +126,27 @@
                 var elerror = error;
             });
     };
+    
+
+    function GuardarServicios(servicios) {
+        LavadorService.GuardarServicios(servicios).then(
+            function (d) {
+                //$scope.Servicios = d.data;
+                //$location.path('/a');
+                //$scope.DatosGuardadosOK = true;
+                //$scope.MostrarDatosPersonales = false;
+            },
+            function (error) {
+
+
+                //    });
+                //}
+
+                var hola = 'a';
+
+            })
+
+    }
 
 
 

@@ -55,8 +55,21 @@
         var promise = $http({
             method: 'post',
             url: '/Lavador/GuardarDatos',
-            params: {
+            data: {
                 lavador:lavador
+            }
+        });
+
+        return $q.when(promise);
+
+    };
+
+    service.GuardarServicios = function (servicios) {
+        var promise = $http({
+            method: 'post',
+            url: '/Lavador/GuardarServicios',
+            data: {
+                servicios: servicios
             }
         });
 
@@ -76,6 +89,21 @@
 
     };
 
+    service.GetServiciosRealizo = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/Lavador/GetServiciosRealizo'
+        });
+        return $q.when(promise);
+    };
+
+    service.GetServiciosNoRealizo = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/Lavador/GetServiciosNoRealizo'
+        });
+        return $q.when(promise);
+    };
 
     return service;
 })

@@ -51,7 +51,7 @@
 
     };
 
-    service.GuardarDatos = function (Nombre, Apellido, DNI, Email, Fecha, Marca,Modelo) {
+    service.GuardarDatos = function (Nombre, Apellido, DNI, Email, Marca,Modelo) {
         var promise = $http({
             method: 'post',
             url: '/Cliente/GuardarDatos',
@@ -59,8 +59,7 @@
                 Nombre: Nombre,
                 Apellido: Apellido,
                 DNI: DNI,
-                Email: Email,
-                Fecha: Fecha,
+                Email: Email,               
                 Marca: Marca,
                 Modelo:Modelo
             }

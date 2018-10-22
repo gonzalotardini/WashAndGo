@@ -88,9 +88,11 @@
             </button>
 
         </div>
+        <div class="col-md-12 text-center"> <img ng-show="cargandolavador" src="../../img/loading.gif" /></div>
+       
 
         <div class="col-md-4"></div>
-        <div ng-show="MostrarDatosPersonales && !cargandoCliente">
+        <div ng-show="MostrarDatosPersonales && !cargandolavador">
             <form name="cliente">
                 <div class="panel text-center col-md-4" style="margin-top:1%;  border-style:solid; border-color:#1487eb;">
 
@@ -141,13 +143,31 @@
         </div>
 
         <div class="col-md-12 row text-center" style="margin-top:1%;">
-            <button ng-click="!MostrarDatosPersonales?MostrarDatosPersonales=true:MostrarDatosPersonales=false;ObtenerMarcas();ObtenerDatos();" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
-                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
-                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Servicios que Presto
-                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:right;"></span>
-                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:right;"></span>
+            <button ng-click="!MostrarServiciosRealizo?MostrarServiciosRealizo=true:MostrarServiciosRealizo=false;GetServicios()" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
+                <span ng-hide="MostrarServiciosRealizo" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
+                <span ng-show="MostrarServiciosRealizo" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Servicios que Realizo
+                <span ng-hide="MostrarServiciosRealizo" class="glyphicon glyphicon-chevron-down" style="float:right;"></span>
+                <span ng-show="MostrarServiciosRealizo" class="glyphicon glyphicon-chevron-up" style="float:right;"></span>
             </button>
         </div>
+
+        <div ng-show="CargandoServicios" class="col-md-12 text-center">
+            <img src="../../img/loading.gif" />
+        </div>
+        
+        <div ng-show="MostrarServiciosRealizo && !CargandoServicios" class="col-md-12">
+            <div class="col-md-6">
+                <h2 style="text-align:center;font-family:'Century Gothic'">Realizo</h2>
+                <a class="btn btn-success" ng-click="RemoveService(x.IdServicio)" style="width:100%;margin-bottom:2%; font-family:'Century Gothic';" ng-repeat="x in ServiciosRealizo.Servicios">{{x.Nombre}}</a>
+                
+            </div>
+            <div class="col-md-6">
+                <h2 style="text-align:center;font-family:'Century Gothic'">No realizo</h2>
+                <a class="btn btn-danger" ng-click="AddService(x.IdServicio)" style="width:100%;margin-bottom:2%; font-family:'Century Gothic'" ng-repeat="x in ServiciosNoRealizo">{{x.Nombre}}</a>
+            </div>
+        </div>
+
+
         <div class="col-md-12 row text-center" style="margin-top:1%;">
             <button ng-click="!MostrarDatosPersonales?MostrarDatosPersonales=true:MostrarDatosPersonales=false;ObtenerMarcas();ObtenerDatos();" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
                 <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>

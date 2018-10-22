@@ -64,6 +64,19 @@
 
     };
 
+    service.GuardarServicios = function (servicios) {
+        var promise = $http({
+            method: 'post',
+            url: '/Lavador/GuardarServicios',
+            data: {
+                servicios: servicios
+            }
+        });
+
+        return $q.when(promise);
+
+    };
+
 
     service.ObtenerDatos = function () {
         var promise = $http({

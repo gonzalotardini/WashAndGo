@@ -182,22 +182,7 @@
                             <input ng-readonly="ReadOnly" ng-model="Email" class="form-control" placeholder="Email" type="email">
                         </div>
                     </div>
-
-
-                    <div ng-show="ReadOnly" class="form-group col-md-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                            <input ng-readonly="ReadOnly" ng-model="Fecha" class="form-control" placeholder="Fecha de Nacimiento" type="text">
-                        </div>
-                    </div>
-
-                    <div ng-hide="ReadOnly" class="form-group col-md-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                            <!--<input class="form-control" placeholder="Email" type="date">-->
-                            <input ng-readonly="ReadOnly" ng-model="Fecha" class="form-control" type="datetime-local" id="date">
-                        </div>
-                    </div>
+                                                         
 
                     <div ng-hide="ReadOnly" class="form-group col-md-12">
                         <div class="input-group">
@@ -243,7 +228,7 @@
 
 
                     <div ng-hide="ReadOnly" class="form-group col-md-12" style="width:100%;">
-                        <input ng-click="submit=true;GuardarDatos(Nombre,Apellido,DNI,Email,Fecha,MarcaSeleccionada,Modelo)" class="btn btn-primary" value="Aceptar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
+                        <input ng-click="submit=true;GuardarDatos(Nombre, Apellido, DNI, Email, MarcaSeleccionada, Modelo)" class="btn btn-primary" value="Aceptar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
                     </div>
                     <div ng-show="ReadOnly" class="form-group col-md-12" style="width:100%;">
                         <input ng-click="ReadOnly=False" class="btn btn-primary" value="Modificar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
@@ -293,20 +278,7 @@
                             <td>{{x.Servicio}}</td>
                             <td>{{x.Estado}}</td>
                             <td class="text-center"><a class='btn btn-warning btn-xs' data-toggle="modal" data-target="#myModal" style="color:black;" href=""><span class="glyphicon glyphicon-edit"></span> Detalle</a> <!--<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>--></td>
-                        </tr>
-
-                        <!--<tr>
-                        <td>2</td>
-                        <td>Products</td>
-                        <td>Main Products</td>
-                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Blogs</td>
-                        <td>Parent Blogs</td>
-                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                    </tr>-->
+                        </tr>                      
                     </table>
                 </div>
                 <dir-pagination-controls max-size="5"

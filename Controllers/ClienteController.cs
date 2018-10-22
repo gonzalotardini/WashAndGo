@@ -19,12 +19,12 @@ namespace WashAndGo.Controllers
         }
 
 
-        public void GuardarDatos(string Nombre, string Apellido, string DNI, string Email, string Fecha, string Marca,string Modelo)
+        public void GuardarDatos(string Nombre, string Apellido, string DNI, string Email, string Marca,string Modelo)
         {
             try
             {   var clienteid = User.Identity.GetUserId();
                 var clienteBLL = new ClienteBLL();
-                clienteBLL.GuardarDatos(clienteid,Nombre, Apellido, DNI, Email, Fecha, Marca, Modelo);
+                clienteBLL.GuardarDatos(clienteid,Nombre, Apellido, DNI, Email, Marca, Modelo);
             }
             catch (Exception)
             {

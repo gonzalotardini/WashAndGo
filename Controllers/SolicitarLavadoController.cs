@@ -235,5 +235,47 @@ namespace WashAndGo.Controllers
         }
 
 
+        public string BuscarLavados(string Direccion)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+                var lavadorid = User.Identity.GetUserId();
+
+                return JsonConvert.SerializeObject(lavadobll.BuscarLavados(lavadorid, Direccion), Formatting.None,
+                      new JsonSerializerSettings()
+                      {
+                          ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                      });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+            
+        }
+
+
+        public string GetLavadoDetalle(int idlavado)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();                
+
+                return JsonConvert.SerializeObject(lavadobll.GetLavadoDetalle(idlavado), Formatting.None,
+                      new JsonSerializerSettings()
+                      {
+                          ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                      });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

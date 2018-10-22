@@ -102,6 +102,22 @@ namespace WashAndGo.Controllers
 
                 throw;
             }
+        }
+
+        public void GuardarServicios(List<Servicios> servicios)
+        {
+            try
+            {
+
+                var lavadorid = User.Identity.GetUserId();
+                var lavadorBll = new LavadorBLL();
+                lavadorBll.GuardarServicios(lavadorid, servicios);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
 
         }
     }

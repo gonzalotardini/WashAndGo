@@ -1,31 +1,34 @@
 ﻿angular.module('app').controller("LavadorController", ["$scope", "$sce", "$http", "$window", "$filter", "LavadorService", "SolicitarLavadoService", "$location", function ($scope, $sce, $http, $window, $filter, LavadorService, SolicitarLavadoService, $location) {
 
+    $scope.ReadOnly = false;
+    $scope.lavador = {};
+    $scope.cargandoLavador = false;
+    $scope.ServiciosRealizo = [];
+    $scope.ServiciosNoRealizo = [];
+    $scope.MostrarServiciosRealizo = false;
+    $scope.CargandoServicios = false;
 
-    $scope.lavador = { IdLavador:"aaaaaa", Nombre: "", Apellido: "", DNI: "", Email:"", Completo:"False"};
 
     $scope.ObtenerDatos = function () {
-        $scope.cargandoLavador = true;
+        $scope.cargandolavador = true;
         LavadorService.ObtenerDatos().then(
             function (d) {
                 var lavador = d.data;
                 var fecha = new Date();
 
-                if (lavador.Completo === 'True') {
-                    $scope.Nombre = $scope.Cliente.Nombre,
-                        $scope.Apellido = $scope.Cliente.Apellido,
-                        $scope.DNI = $scope.Cliente.DNI,
-                        $scope.Email = $scope.Cliente.Email,
-                        $scope.Fecha = $filter('date')($scope.Cliente.FechaNacimiento.slice(0, 10), "dd/MM/yyyy"),
-                        $scope.MarcaDescripcion = $scope.Cliente.Marcas.Descripcion,
-                        $scope.ModeloDescripcion = $scope.Cliente.Modelos.Descripcion
+                if (lavador.Completo == 'True') {
+                    $scope.ReadOnly = true;
+                    $scope.cargandolavador = false;     
+                    $scope.lavador.Nombre = lavador.Nombre,
+                    $scope.lavador.Apellido = lavador.Apellido,
+                    $scope.lavador.DNI = lavador.DNI,
+                    $scope.lavador.Email = lavador.Email,                       
                     //$scope.MarcaSeleccionada = $scope.Cliente.Marca
-                    $scope.cargandoCliente = false;
-                    var element = angular.element('#my_modal_popup');
-                    element.modal('show');
+                    $scope.cargandolavador = false;                   
                 }
                 else {
                     $scope.ReadOnly = false;
-                    $scope.cargandoCliente = false;
+                    $scope.cargandolavador = false;
                     $scope.lavador.Email = lavador.Email;
                 }
 
@@ -62,4 +65,90 @@
             })
 
     }
+
+    $scope.RemoveService = function (service) {
+        for (var i = 0; i < $scope.ServiciosRealizo.Servicios.length; i++) {
+            if ($scope.ServiciosRealizo.Servicios[i].IdServicio == service) {
+                $scope.ServiciosNoRealizo.push($scope.ServiciosRealizo.Servicios[i]);
+                $scope.ServiciosRealizo.Servicios.splice(i, 1);
+                GuardarServicios($scope.ServiciosRealizo.Servicios);
+                
+                var hola = "hola";
+            }
+        }
+    };
+
+
+    $scope.AddService = function (service) {
+        for (var i = 0; i < $scope.ServiciosNoRealizo.length; i++) {
+            if ($scope.ServiciosNoRealizo[i].IdServicio == service) {
+                $scope.ServiciosRealizo.Servicios.push($scope.ServiciosNoRealizo[i]);
+                $scope.ServiciosNoRealizo.splice(i, 1);
+                GuardarServicios($scope.ServiciosRealizo.Servicios);
+
+                var hola = "hola";
+            }
+        }
+    };
+
+
+
+    $scope.GetServicios = function () {                 
+
+        $scope.CargandoServicios = true;
+        GetServiciosRealizo();
+        GetServiciosNoRealizo();
+
+        $scope.CargandoServicios = false;
+    }
+
+    
+    function GetServiciosRealizo() {
+
+        LavadorService.GetServiciosRealizo().then(
+            function (d) {
+                $scope.ServiciosRealizo = d.data;
+            },
+            function (error) {
+
+                var elerror = error;
+            });
+    };
+
+    function GetServiciosNoRealizo() {
+
+        LavadorService.GetServiciosNoRealizo().then(
+            function (d) {
+                $scope.ServiciosNoRealizo = d.data;
+            },
+            function (error) {
+
+                var elerror = error;
+            });
+    };
+    
+
+    function GuardarServicios(servicios) {
+        LavadorService.GuardarServicios(servicios).then(
+            function (d) {
+                //$scope.Servicios = d.data;
+                //$location.path('/a');
+                //$scope.DatosGuardadosOK = true;
+                //$scope.MostrarDatosPersonales = false;
+            },
+            function (error) {
+
+
+                //    });
+                //}
+
+                var hola = 'a';
+
+            })
+
+    }
+
+
+
+
 }]);

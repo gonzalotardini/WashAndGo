@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+        .jumbotron {
+            background-color: white;
+            margin-top: 10%;
+            border-style: solid;
+            border-color: #003359;
+            padding: 2%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class=" col-md-12 text-center jumbotron">
+            <h2 style="font-family:'Century Gothic'; color:#003359;font-size:45px;">Buscar Lavados</h2>
+        </div>
+
+        <div ng-show="!MostrarLavados" class="col-md-12 text-center ">
+            <h3 style="font-family:'Century Gothic'; color:#003359;">Ingresá tu ubicación:</h3>
+            <br />
+            <div>
+                <img ng-show="cargandoMapa" src="../../img/loading.gif" />
+                <div ng-hide="cargandoMapa" id="map">
+                    <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{url}}" allowfullscreen></iframe>
+                </div>
+                <div class="form-group">
+                    <div class="form-inline" style="width: 100%;">
+                        <input id="direccion" ng-model="Direccion" class="form-control" style="width: 85%" value="{{Direccion}}" type="text" />
+                        <button type="button" ng-click="ActualizarUbicacion(Direccion)" class="btn btn-info">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+
+                    <div ng-show="ErrorDireccion" class="alert alert-danger">
+                        <strong>Error!</strong> La dirección introducida es incorrecta. Intente nuevamente.
+                    </div>
+
+                </div>
+
+            </div>
+            
+
+        </div>
+
+
+        <div ng-show="MostrarLavados" ng-app="angularTable" class="col-md-12 row text-center" style="margin-top:1%;">
+
+            <div class="row col-md-12">
+
+                <!--<form style="    margin-bottom: 2%;    margin-top: 2%;    margin-left: 4%;" class="form-inline text-left">
+        <div class="form-group">
+            <label>Search</label>
+            <input type="text" ng-model="search" class="form-control" placeholder="Search">
+        </div>
+    </form>-->
+                <div class="table-responsive">
+
+                    <table class="table">
+                        <thead>
+
+                            <tr>
+                                <th ng-click="sort('Auto')" class="text-center">Auto</th>
+                                <th ng-click="sort('Servicio')" class="text-center">Servicio</th>
+                                <th ng-click="sort('Distancia')" class="text-center">Distancia</th>
+                                <!--<th ng-click="sort('Estado')" class="text-center">Estado</th>-->
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tr dir-paginate="x in Lavados| orderBy:sortKey:reverse| filter:search |itemsPerPage:10">
+                            <!--<td>{{x.Fecha | date : "dd/MM/y"}}</td>-->
+                            <td>{{x.Auto}}</td>
+                            <td>{{x.Servicio}}</td>
+                            <td>{{x.Distancia}}</td>
+                            <td class="text-center"><a class='btn btn-warning btn-xs' ng-click="GetDetalleLavado(x.IdLavado)" data-toggle="modal" data-target="#myModal" style="color:black;" href=""><span class="glyphicon glyphicon-edit"></span> Detalle</a></td>
+                        </tr>
+                    </table>
+                </div>
+                <dir-pagination-controls max-size="5"
+                                         direction-links="true"
+                                         boundary-links="true">
+                </dir-pagination-controls>
+
+
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Detalle del Lavado</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Cliente: {{Lavado.Clientes.Nombre}}-{{Lavado.Clientes.Apellido}}</h3>
+                                <h3>Auto: {{Lavado.Marcas.Descripcion}}-{{Lavado.Modelos.Descripcion}}</h3>
+                                <h3>Servicio: {{Lavado.Servicios.Nombre}}</h3>
+                                <h3>Precio: {{Lavado.Total}}</h3>
+                                <h3>Dirección: {{Lavado.Direccion}}</h3>
+
+                                <div ng-hide="cargandoMapa" id="map">
+                                    <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{urlCliente}}" allowfullscreen></iframe>
+                                </div>
+                                <a class="btn btn-info">Realizar Lavado</a>
+                            </div>
+                            <!--<div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>-->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    </div>
+</body>
+</html>

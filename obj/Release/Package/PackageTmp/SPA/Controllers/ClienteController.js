@@ -23,6 +23,7 @@
     $scope.ListaLavados = [];
     $scope.CargandoLavados = false;
     $scope.submit = false;
+    $scope.Modelo2 = '';
  
 
     ObtenerLavadoAbierto();
@@ -54,12 +55,12 @@
                 
                 if ($scope.Cliente.Completo === 'True') {
                     $scope.Nombre = $scope.Cliente.Nombre,
-                    $scope.Apellido = $scope.Cliente.Apellido,
-                    $scope.DNI = $scope.Cliente.DNI,
-                    $scope.Email = $scope.Cliente.Email,                    
-                    $scope.Fecha = $filter('date')($scope.Cliente.FechaNacimiento.slice(0, 10), "dd/MM/yyyy"),                    
-                    $scope.MarcaDescripcion = $scope.Cliente.Marcas.Descripcion,
-                    $scope.ModeloDescripcion = $scope.Cliente.Modelos.Descripcion
+                        $scope.Apellido = $scope.Cliente.Apellido,
+                        $scope.DNI = $scope.Cliente.DNI,
+                        $scope.Email = $scope.Cliente.Email,
+                        //$scope.Fecha = $filter('date')($scope.Cliente.FechaNacimiento.slice(0, 10), "dd/MM/yyyy"),                    
+                        $scope.MarcaDescripcion = $scope.Cliente.Marcas.Descripcion,
+                        $scope.ModeloDescripcion = $scope.Cliente.Modelos.Descripcion
                     //$scope.MarcaSeleccionada = $scope.Cliente.Marca
                     $scope.cargandoCliente = false;
                     var element = angular.element('#my_modal_popup');
@@ -68,6 +69,7 @@
                 else {
                     $scope.ReadOnly = false;
                     $scope.cargandoCliente = false;
+                    $scope.Email = $scope.Cliente.Email;
                 }
 
             },
@@ -102,13 +104,13 @@
         }
     }
 
-    $scope.GuardarDatos = function (Nombre, Apellido, DNI, Email, Fecha, MarcaSeleccionada, Modelo) {
+    $scope.GuardarDatos = function (Nombre, Apellido, DNI, Email, MarcaSeleccionada, Modelo) {
 
         if ($scope.cliente.$valid==false) {
             var hola = 'a';
         }
         else {
-            ClienteService.GuardarDatos(Nombre, Apellido, DNI, Email, Fecha, MarcaSeleccionada, Modelo).then(
+            ClienteService.GuardarDatos(Nombre, Apellido, DNI, Email, MarcaSeleccionada, Modelo).then(
                 function (d) {
                     //$scope.Servicios = d.data;
                     //$location.path('/a');
