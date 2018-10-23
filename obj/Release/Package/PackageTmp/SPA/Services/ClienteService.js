@@ -40,6 +40,19 @@
 
     };   
 
+    service.GetDetalleLavado = function (idlavado) {
+        var promise = $http({
+            method: 'get',
+            url: '/SolicitarLavado/GetLavadoDetalle',
+            params: {
+                idlavado: idlavado
+            }
+
+        });
+
+        return $q.when(promise);
+
+    };
 
     service.ObtenerMarcas = function () {
         var promise = $http({

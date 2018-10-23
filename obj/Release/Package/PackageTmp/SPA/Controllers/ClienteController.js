@@ -219,4 +219,23 @@
             });
 
     };
+
+    $scope.GetDetalleLavado = function (idlavado) {
+        $scope.CargandoDetalle = true;
+
+       ClienteService.GetDetalleLavado(idlavado).then(
+            function (d) {
+                $scope.LavadoV = d.data;
+                $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + $scope.LavadoV.Direccion);
+                $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + $scope.LavadoV.Direccion);
+                $scope.CargandoDetalle = false;
+                //$scope.cargandoModelos = false;
+            },
+            function (error) {
+                $scope.CargandoDetalle = false;
+
+            });
+    }
+
+    $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 }]) 

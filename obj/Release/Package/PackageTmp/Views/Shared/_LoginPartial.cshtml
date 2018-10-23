@@ -1,18 +1,15 @@
 ﻿<style>
 
     .glyphicon-user:before, .glyphicon-option-horizontal:before, .input-group-addon:first-child {
-        color: white;
+        color: white;      
         margin: 10px;
     }
 
     .glyphicon-off:before {
         margin:10px;
-    }
-    img {
-        width: auto;
-        max-width: 60%;
-    }
-       }
+       
+    }   
+     
 }
 </style>
 
@@ -28,8 +25,8 @@
 
 
         <ul ng-app="app" ng-controller="generalController" class="nav navbar-nav navbar-right form-inline">
-            <li><a class="text-center" style="padding-right:0;" ng-click="changeLanguage('es')"><span><img  src="~/img/Spanish.png" /></span></a></li>
-            <li><a class="text-center" style="padding-left:0;" ng-click="changeLanguage('en')"><span><img  src="~/img/english.png" /></span></a></li>
+            <li><a class="text-center" style="padding-right:0;" href="" ng-click="changeLanguage('es')"><span><img href="" style=" width: auto; max-width: 60%;" src="~/img/Spanish.png" /></span></a></li>
+            <li><a class="text-center" style="padding-left:0;" href="" ng-click="changeLanguage('en')"><span><img href="" style=" width: auto;max-width: 60%;" src="~/img/english.png" /></span></a></li>
             <li>
                 @*@Html.ActionLink("Hello " + User.Identity.GetUserName()+ "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
                 @*@Html.ActionLink("Mi Cuenta", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
@@ -40,12 +37,13 @@
                 }
                 else
                 {
-                    <a href="/#!/lavador"><span class="glyphicon glyphicon-user"></span>{{ 'MI CUENTA' | translate }}L</a>
+                    <a href="/#!/lavador"><span class="glyphicon glyphicon-user"></span>{{ 'MI CUENTA' | translate }}</a>
+                    @*<a href="/#!/lavador"><span style="font-family:'Century Gothic'; font-size:16px;" class="glyphicon glyphicon-user"></span>L</a>*@
                 }
 
 
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span>Log off</a></li>
+            <li><a href="" onclick="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span>Log off</a></li>
         </ul>
     }
 }
@@ -55,8 +53,8 @@ else
             @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink"})</li>*@
             @*<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class= "glyphicon glyphicon-alert" })</li>*@
 
-            <li><a class="text-center" style="padding-right:0;" ng-click="changeLanguage('es')"><span><img src="~/img/Spanish.png" /></span></a></li>
-            <li><a class="text-center" style="padding-left:0;" ng-click="changeLanguage('en')"><span><img src="~/img/english.png" /></span></a></li>
+            <li><a class="text-center" href="" style="padding-right:0;" ng-click="changeLanguage('es')"><span><img href="" style=" width: auto;max-width: 60%;" src="~/img/Spanish.png" /></span></a></li>
+            <li><a class="text-center" href="" style="padding-left:0;" ng-click="changeLanguage('en')"><span><img href="" style=" width: auto; max-width: 60%;" src="~/img/english.png" /></span></a></li>
             <li><a href="/account/register"><span class="glyphicon glyphicon-plus"></span> Register</a></li>
             <li><a href="/account/login"><span class="glyphicon glyphicon-log-in"></span>Log in</a></li>
 

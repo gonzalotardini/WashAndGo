@@ -92,7 +92,7 @@
 
 </head>
 <body ng-app="app">
-    <div  class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -108,16 +108,16 @@
             <div ng-controller="generalController" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li><a href="#quienesSomosTitle">Quiénes Somos</a></li>
+                    <li><a href="#quienesSomosTitle">{{'¿Quiénes Somos?' | translate }}</a></li>
 
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>                  
-                   
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
 
                     @if (Request.IsAuthenticated)
                     {
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="">
                                 Menu
                                 <span class="caret"></span>
                             </a>
@@ -176,7 +176,7 @@
     <script src="~/Scripts/angular-route.min.js"></script>
     <script src="~/Scripts/dirPagination.js"></script>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.18.1/angular-translate.min.js"></script>
 
     <script src="~/SPA/Controllers/AppController.js"></script>
     <script src="~/SPA/Controllers/SolicitarLavadoController.js"></script>
@@ -195,8 +195,8 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/ngDialog.min.js"></script>
-    <script src="~/Scripts/dirPagination.js"></script>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.18.1/angular-translate.min.js"></script>
+    <script src="~/Scripts/dirPagination.js"></script>
+
 
 
 
