@@ -91,8 +91,8 @@
 
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body ng-app="app">
+    <div  class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -105,13 +105,14 @@
 
                 @*@Html.ActionLink("Wash & Go!", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
-            <div class="navbar-collapse collapse">
+            <div ng-controller="generalController" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li><a href="#quienesSomosTitle">Quiénes Somos</a></li>
 
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>                  
+                   
 
                     @if (Request.IsAuthenticated)
                     {
@@ -124,7 +125,7 @@
                             {
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="/#!/solicitarlavado">Solicitar Lavado</a></li>
+                                    <li><a href="/#!/solicitarlavado">{{'SOLICITAR LAVADO' | translate }}</a></li>
                                 </ul>
                             }
                             else
@@ -149,7 +150,7 @@
 
         @RenderBody()
         <hr />
-        <footer style="padding-top:3%;">
+        <footer ng-controller="generalController" style="padding-top:3%;">
 
             <div class="container col-md-12">
                 <div class="col-md-4">
@@ -194,7 +195,10 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/ngDialog.min.js"></script>
-    <script src="~/Scripts/dirPagination.js"></script>
+    <script src="~/Scripts/dirPagination.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.18.1/angular-translate.min.js"></script>
+
+
 
 </body>
 

@@ -233,6 +233,7 @@
     <Content Include="img\comodidad.PNG" />
     <Content Include="img\ecofriendly.png" />
     <Content Include="img\Encamino.gif" />
+    <Content Include="img\english.png" />
     <Content Include="img\loading.gif" />
     <Content Include="img\logo fb.png" />
     <Content Include="img\favicon.ico" />
@@ -243,6 +244,7 @@
     <Content Include="img\servicio básico.jpg" />
     <Content Include="img\servicio-estándar.jpg" />
     <Content Include="img\servicio-premium.jpg" />
+    <Content Include="img\Spanish.png" />
     <Content Include="img\tilde.png" />
     <Content Include="img\Whatsapp-botón.png" />
     <Content Include="Scripts\angular-animate.js" />

@@ -7,6 +7,7 @@
     $scope.AsignacionError = false;
     $scope.showModal = true;
     $scope.Direccion = '';
+    $scope.CargandoDetalle = false;
     var bandera = 0;
 
 
@@ -96,16 +97,17 @@
 
       
     $scope.GetDetalleLavado = function (idlavado) {
+        $scope.CargandoDetalle = true;
 
         BuscarLavadoService.GetDetalleLavado(idlavado).then(
             function (d) {
                 $scope.Lavado = d.data;
                 $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + $scope.Lavado.Direccion);
-
+                $scope.CargandoDetalle = false;
                 //$scope.cargandoModelos = false;
             },
             function (error) {
-
+                $scope.CargandoDetalle = false;
 
             });
 

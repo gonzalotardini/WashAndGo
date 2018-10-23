@@ -1,4 +1,5 @@
 ﻿<style>
+
     .glyphicon-user:before, .glyphicon-option-horizontal:before, .input-group-addon:first-child {
         color: white;
         margin: 10px;
@@ -6,7 +7,9 @@
 
     .glyphicon-off:before {
         margin:10px;
-    }
+    }   
+     
+}
 </style>
 
 @using Microsoft.AspNet.Identity
@@ -20,35 +23,38 @@
 
 
 
-    <ul class="nav navbar-nav navbar-right form-inline">
-        <li>
-            @*@Html.ActionLink("Hello " + User.Identity.GetUserName()+ "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
-            @*@Html.ActionLink("Mi Cuenta", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+        <ul ng-app="app" ng-controller="generalController" class="nav navbar-nav navbar-right form-inline">
+            <li><a class="text-center" style="padding-right:0;" ng-click="changeLanguage('es')"><span><img style=" width: auto; max-width: 60%;" src="~/img/Spanish.png" /></span></a></li>
+            <li><a class="text-center" style="padding-left:0;" ng-click="changeLanguage('en')"><span><img style=" width: auto;max-width: 60%;" src="~/img/english.png" /></span></a></li>
+            <li>
+                @*@Html.ActionLink("Hello " + User.Identity.GetUserName()+ "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+                @*@Html.ActionLink("Mi Cuenta", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
 
-            @if (User.IsInRole("Cliente"))
-            {
-                <a href="/#!/cliente"><span class="glyphicon glyphicon-user"></span>Mi Cuenta</a>
-            }
-            else
-            {
-                <a href="/#!/lavador"><span class="glyphicon glyphicon-user"></span>Mi CuentaL</a>
-            }
-            
+                @if (User.IsInRole("Cliente"))
+                {
+                    <a href="/#!/cliente"><span class="glyphicon glyphicon-user"></span>{{ 'MI CUENTA' | translate }}</a>
+                }
+                else
+                {
+                    <a href="/#!/lavador"><span class="glyphicon glyphicon-user"></span>{{ 'MI CUENTA' | translate }}L</a>
+                }
 
-        </li>
-        <li><a  href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span>Log off</a></li>
-    </ul>
+
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span>Log off</a></li>
+        </ul>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink"})</li>*@
-        @*<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class= "glyphicon glyphicon-alert" })</li>*@
-        
-        
-        <li><a href="/account/register"><span class="glyphicon glyphicon-plus"></span>     Register</a></li>
-        <li><a href="/account/login"><span class="glyphicon glyphicon-log-in"></span>     Log in</a></li>
+        <ul ng-app="app" ng-controller="generalController" class="nav navbar-nav navbar-right">
+            @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink"})</li>*@
+            @*<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class= "glyphicon glyphicon-alert" })</li>*@
 
-    </ul>
+            <li><a class="text-center" style="padding-right:0;" ng-click="changeLanguage('es')"><span><img style=" width: auto;max-width: 60%;" src="~/img/Spanish.png" /></span></a></li>
+            <li><a class="text-center" style="padding-left:0;" ng-click="changeLanguage('en')"><span><img  width: auto;max-width: 60%; src="~/img/english.png" /></span></a></li>
+            <li><a href="/account/register"><span class="glyphicon glyphicon-plus"></span> Register</a></li>
+            <li><a href="/account/login"><span class="glyphicon glyphicon-log-in"></span>Log in</a></li>
+
+        </ul>
 }

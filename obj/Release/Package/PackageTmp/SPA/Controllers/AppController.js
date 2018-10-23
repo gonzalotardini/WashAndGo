@@ -1,4 +1,4 @@
-﻿var app = angular.module("app", ['ngRoute', 'angularUtils.directives.dirPagination']);
+﻿var app = angular.module("app", ['ngRoute', 'angularUtils.directives.dirPagination', 'pascalprecht.translate']);
 
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -39,3 +39,28 @@ app.config(function ($routeProvider, $locationProvider) {
 
 
 });
+
+
+app.config(['$translateProvider', function ($translateProvider) {
+    $translateProvider.translations('es', {
+        'TITLE': 'LAVAMOS TU AUTO DONDE SEA QUE ESTÉS',
+        'SOLICITAR LAVADO': 'SOLICITAR LAVADO',
+        'MI CUENTA': 'Mi Cuenta'
+    });
+
+    $translateProvider.translations('en', {
+        'TITLE': 'WE WASH YOUR CAR WHEREVER YOU ARE',
+        'SOLICITAR LAVADO': 'REQUEST A WASH',
+        'MI CUENTA': 'My Account'
+    });
+
+    $translateProvider.preferredLanguage('en');
+
+
+}]);
+
+app.controller("generalController", ["$scope", "$translate", function ($scope, $translate) {
+    $scope.changeLanguage = function (lang) {
+        $translate.use(lang);
+    };
+}]);
