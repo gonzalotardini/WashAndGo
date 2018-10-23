@@ -278,25 +278,25 @@ namespace WashAndGo.Controllers
         }
 
 
-        public string CalcularHoraLLegada(string origen, string destino)
-        {
-            try
-            {
+        //public string CalcularHoraLLegada(string origen, string destino)
+        //{
+        //    try
+        //    {
 
-                var lavado = new SolicitarLavadoBLL();
+        //        var lavado = new SolicitarLavadoBLL();
 
-                return JsonConvert.SerializeObject(lavado.CalcularHoraLLegada(origen,destino), Formatting.None,
-                   new JsonSerializerSettings()
-                   {
-                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                   });
-            }
-            catch (Exception ex)
-            {
+        //        return JsonConvert.SerializeObject(lavado.CalcularHoraLLegada(origen,destino), Formatting.None,
+        //           new JsonSerializerSettings()
+        //           {
+        //               ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        //           });
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
 
         public string AsignarLavado (int idlavado, string Direccion)
         {

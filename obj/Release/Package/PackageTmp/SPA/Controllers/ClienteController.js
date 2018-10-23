@@ -142,15 +142,17 @@
 
                     switch ($scope.Lavado.Estado) {
                         case "SOLICITADO":
+                            $scope.LavadoAsignado =false;
                             $scope.LavadoSolicitado = true;
                             break;
 
                         case "ASIGNADO":
+                            $scope.LavadoSolicitado = false;
                            $scope.LavadoAsignado = true;
                            
-                            var origen = $scope.Lavado.DireccionLavador;
-                            var destino = $scope.Lavado.Direccion;
-                            CalcularHoraLLegada(origen,destino); 
+                            //var origen = $scope.Lavado.DireccionLavador;
+                            //var destino = $scope.Lavado.Direccion;
+                            //CalcularHoraLLegada(origen,destino); 
                             break;
 
                         default:
@@ -167,20 +169,20 @@
             });
     }
 
-    function CalcularHoraLLegada (origen, destino) {
+    //function CalcularHoraLLegada (origen, destino) {
 
-        ClienteService.CalcularHoraLLegada(origen,destino).then(
-            function (d) {
-                var json = d.data;
-                $scope.HoraLLegada = d.data;
-            },
-            function (error) {
-
-
-            });
+    //    ClienteService.CalcularHoraLLegada(origen,destino).then(
+    //        function (d) {
+    //            var json = d.data;
+    //            $scope.HoraLLegada = d.data;
+    //        },
+    //        function (error) {
 
 
-    }
+    //        });
+
+
+    //}
 
 
     $scope.CancelarLavado = function (lavadoid) {
