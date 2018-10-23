@@ -3,8 +3,11 @@
     $scope.MostrarLavados = false;
     $scope.Lavado = {};
     $scope.CargandoLavados = false;
+    $scope.AsignacionOk = false;
+    $scope.AsignacionError = false;
+    $scope.showModal = true;
 
-    $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
+   
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 
     function onPositionUpdate(position) {
@@ -48,9 +51,9 @@
 
                         var address = json.results[0].formatted_address;
                         var n = address.search("Argentina");
-                        var length = json.results[0].address_components.length
+                        var length = json.results[0].address_components.length;
 
-                        if (n < 0 || length <= 5) {
+                        if (n < 0 || length < 5) {
                             $scope.ErrorDireccion = true;
                             $scope.cargandoMapa = true;
                         }
@@ -115,11 +118,39 @@
 
                 $scope.Error = true;
                 $scope.CargandoLavados = false;
-            });
-
-        
+       });      
 
     }
 
+
+    $scope.AsignarLavado = function (idlavado, Direccion) {
+
+        BuscarLavadoService.AsignarLavado(idlavado,Direccion).then(
+            function (d) {
+                $scope.Lavados = d.data;
+
+                if ($scope.Lavados == "OK") {
+                    $scope.AsignacionOk = true;
+                    $timeout(function () { 
+                        $('#myModal').modal('hide');
+                        $window.location.href = '#!/lavador';
+                        
+                    }, 5000);
+                }
+                else {
+                    $scope.AsignacionError = true;
+                    BuscarLavados(Direccion);
+                }
+                
+
+            },
+            function (error) {
+                
+            });
+
+    }
+
+    $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
+    $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 
 }]); 

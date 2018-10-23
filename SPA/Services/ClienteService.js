@@ -25,6 +25,21 @@
 
     };   
 
+    service.CalcularHoraLLegada = function (origen,destino) {
+        var promise = $http({
+            method: 'get',
+            url: '/SolicitarLavado/CalcularHoraLLegada',
+            params: {
+                origen: origen,
+                destino: destino
+            }
+
+        });
+
+        return $q.when(promise);
+
+    };   
+
 
     service.ObtenerMarcas = function () {
         var promise = $http({

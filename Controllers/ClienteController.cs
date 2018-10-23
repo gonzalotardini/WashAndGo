@@ -62,6 +62,9 @@ namespace WashAndGo.Controllers
 
         }
 
+
+        
+
         public string ObtenerLavadoAbierto()
         {
             try

@@ -7,6 +7,7 @@
     $scope.ServiciosNoRealizo = [];
     $scope.MostrarServiciosRealizo = false;
     $scope.CargandoServicios = false;
+    $scope.CargandoServicios2 = false;
 
 
     $scope.ObtenerDatos = function () {
@@ -95,7 +96,7 @@
 
     $scope.GetServicios = function () {                 
 
-        $scope.CargandoServicios = true;
+      
         GetServiciosRealizo();
         GetServiciosNoRealizo();
 
@@ -104,25 +105,27 @@
 
     
     function GetServiciosRealizo() {
-
+        $scope.CargandoServicios = true;
         LavadorService.GetServiciosRealizo().then(
             function (d) {
                 $scope.ServiciosRealizo = d.data;
+                $scope.CargandoServicios = false;
             },
             function (error) {
-
+                $scope.CargandoServicios = false;
                 var elerror = error;
             });
     };
 
     function GetServiciosNoRealizo() {
-
+        $scope.CargandoServicios2 = true;
         LavadorService.GetServiciosNoRealizo().then(
             function (d) {
                 $scope.ServiciosNoRealizo = d.data;
+                $scope.CargandoServicios2 = false;
             },
             function (error) {
-
+                $scope.CargandoServicios = false;
                 var elerror = error;
             });
     };

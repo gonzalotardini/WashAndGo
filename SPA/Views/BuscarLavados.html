@@ -12,6 +12,13 @@
             border-color: #003359;
             padding: 2%;
         }
+        .modal-dialog {
+            width: 75%;
+        }
+        h3 {
+            font-family: 'Century Gothic';
+            color: #003359;
+        }
     </style>
 </head>
 <body ng-app="app">
@@ -103,29 +110,32 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" id="close" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Detalle del Lavado</h4>
+                                <h2 style="font-family:'Century Gothic'; color:#003359;" class="modal-title">Detalle del Lavado</h2>
                             </div>
                             <div class="modal-body">
+                              
                                 <div ng-show="!AsignacionOk && !AsignacionError">
-                                    <h3>Cliente: {{Lavado.Clientes.Nombre}}-{{Lavado.Clientes.Apellido}}</h3>
-                                    <h3>Auto: {{Lavado.Marcas.Descripcion}}-{{Lavado.Modelos.Descripcion}}</h3>
-                                    <h3>Servicio: {{Lavado.Servicios.Nombre}}</h3>
-                                    <h3>Precio: {{Lavado.Total}}</h3>
-                                    <h3>Dirección: {{Lavado.Direccion}}</h3>
-
-                                    <div ng-hide="cargandoMapa" id="map">
-                                        <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{urlCliente}}" allowfullscreen></iframe>
+                                    <div class="col-md-6">
+                                        <h3><strong>Cliente:</strong>&nbsp;{{Lavado.Clientes.Nombre}}&nbsp;{{Lavado.Clientes.Apellido}}</h3>
+                                        <h3><strong>Auto:</strong>&nbsp;{{Lavado.Marcas.Descripcion}}&nbsp;{{Lavado.Modelos.Descripcion}}</h3>
+                                        <h3><strong>Servicio:</strong>&nbsp;{{Lavado.Servicios.Nombre}}</h3>
+                                        <h3><strong>Precio:</strong>&nbsp;${{Lavado.Total}},00</h3>
+                                        <h3><strong>Dirección:</strong>&nbsp; {{Lavado.Direccion}}</h3>
                                     </div>
-                                    <a ng-click="AsignarLavado(Lavado.IdLavado,Direccion)" class="btn btn-info">Realizar Lavado</a>
-                                </div>
-                                <div class="text-center" ng-show="AsignacionOk">
-                                    <img src="../../img/tilde.png" />
-                                </div>
+                                    <div class="col-md-6">
+                                        <div ng-hide="cargandoMapa" id="map">
+                                            <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{urlCliente}}" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                        <a ng-click="AsignarLavado(Lavado.IdLavado,Direccion)" style="width:90%;font-size:26px;margin-top:5% ;font-family:'Century Gothic';" class="btn btn-info btn-lg">Realizar Lavado</a>
+                                    </div>
+                                    <div class="text-center" ng-show="AsignacionOk">
+                                        <h2>Se ha asignado correctamente el lavado</h2>
+                                        <img src="../../img/tilde.png" />
+                                        <h2>Redirigiendo...</h2>
+                                    </div>
 
-                            </div>
-                            <!--<div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>-->
+                                </div>                            
                         </div>
 
                     </div>

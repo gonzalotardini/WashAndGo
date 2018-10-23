@@ -115,28 +115,28 @@
 
                     @if (Request.IsAuthenticated)
                     {
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Menu
-                            <span class="caret"></span>
-                        </a>
-                        @if (User.IsInRole("Cliente"))
-                        {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Menu
+                                <span class="caret"></span>
+                            </a>
+                            @if (User.IsInRole("Cliente"))
+                            {
 
-                            <ul class="dropdown-menu">
-                                <li><a href="/#!/solicitarlavado">Solicitar Lavado</a></li>
-                            </ul>
-                        }
-                        else
-                        {
-                            <ul class="dropdown-menu">
-                                <li><a href="/#!/BuscarLavado">Buscar Lavados</a></li>
-                            </ul>
-                        }
+                                <ul class="dropdown-menu">
+                                    <li><a href="/#!/solicitarlavado">Solicitar Lavado</a></li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul class="dropdown-menu">
+                                    <li><a href="/#!/BuscarLavado">Buscar Lavados</a></li>
+                                </ul>
+                            }
 
 
 
-                    </li>
+                        </li>
 
                     }
 
@@ -176,6 +176,7 @@
     <script src="~/Scripts/dirPagination.js"></script>
 
 
+
     <script src="~/SPA/Controllers/AppController.js"></script>
     <script src="~/SPA/Controllers/SolicitarLavadoController.js"></script>
     <script src="~/SPA/Controllers/ClienteController.js"></script>
@@ -194,6 +195,7 @@
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/ngDialog.min.js"></script>
     <script src="~/Scripts/dirPagination.js"></script>
+
 </body>
 
 

@@ -51,9 +51,9 @@
 
                         var address = json.results[0].formatted_address;
                         var n = address.search("Argentina");
-                        var length = json.results[0].address_components.length
+                        var length = json.results[0].address_components.length;
 
-                        if (n < 0 || length <= 5) {
+                        if (n < 0 || length < 5) {
                             $scope.ErrorDireccion = true;
                             $scope.cargandoMapa = true;
                         }
@@ -125,14 +125,14 @@
 
     $scope.AsignarLavado = function (idlavado, Direccion) {
 
-        BuscarLavadoService.AsignarLavado(idlavado).then(
+        BuscarLavadoService.AsignarLavado(idlavado,Direccion).then(
             function (d) {
                 $scope.Lavados = d.data;
 
                 if ($scope.Lavados == "OK") {
                     $scope.AsignacionOk = true;
                     $timeout(function () { 
-                        $('#myModal').modal('hide')
+                        $('#myModal').modal('hide');
                         $window.location.href = '#!/lavador';
                         
                     }, 5000);
@@ -151,6 +151,6 @@
     }
 
     $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
-
+    $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 
 }]); 

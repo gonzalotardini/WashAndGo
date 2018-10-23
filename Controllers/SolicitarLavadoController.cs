@@ -133,7 +133,7 @@ namespace WashAndGo.Controllers
                     IdServicio = Convert.ToInt32(Servicio),
                     Direccion = dir,
                     Estado="SOLICITADO",
-                    Fecha = DateTime.Now,                    
+                    Fecha = DateTime.Now.AddHours(-3),                    
                     Total=  Decimal.Parse(total.Replace(" ", ""), NumberStyles.AllowThousands
                             | NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol)
             };
@@ -278,13 +278,33 @@ namespace WashAndGo.Controllers
         }
 
 
-        public string AsignarLavado (int idlavado)
+        public string CalcularHoraLLegada(string origen, string destino)
+        {
+            try
+            {
+
+                var lavado = new SolicitarLavadoBLL();
+
+                return JsonConvert.SerializeObject(lavado.CalcularHoraLLegada(origen,destino), Formatting.None,
+                   new JsonSerializerSettings()
+                   {
+                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                   });
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public string AsignarLavado (int idlavado, string Direccion)
         {
             try
             {
                 var lavadobll = new SolicitarLavadoBLL();
                 var userid = User.Identity.GetUserId();
-                return lavadobll.AsignarLavado(idlavado,userid);
+                return lavadobll.AsignarLavado(idlavado,userid, Direccion);
                       
             }
             catch (Exception)

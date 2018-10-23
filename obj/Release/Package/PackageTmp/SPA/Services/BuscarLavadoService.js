@@ -30,6 +30,23 @@
 
     };
 
+
+    service.AsignarLavado = function (idlavado, Direccion) {
+        var promise = $http({
+            method: 'post',
+            url: '/SolicitarLavado/AsignarLavado',
+            params: {
+                idlavado: idlavado,
+                Direccion: Direccion
+            }
+        });
+
+        return $q.when(promise);
+
+    };
+    
+
+
     //service.SolicitarLavado = function () {
     //    var promise = $http({
     //        method: 'get',

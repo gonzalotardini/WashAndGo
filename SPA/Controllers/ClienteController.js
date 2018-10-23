@@ -24,6 +24,8 @@
     $scope.CargandoLavados = false;
     $scope.submit = false;
     $scope.Modelo2 = '';
+    $scope.LavadoSolicitado = false;
+    $scope.LavadoAsignado = false;
  
 
     ObtenerLavadoAbierto();
@@ -136,7 +138,25 @@
 
                 if ($scope.Lavado != "null") {
                     $scope.LavadoAbierto = true;
-                }
+
+
+                    switch ($scope.Lavado.Estado) {
+                        case "SOLICITADO":
+                            $scope.LavadoSolicitado = true;
+                            break;
+
+                        case "ASIGNADO":
+                           $scope.LavadoAsignado = true;
+                           
+                            var origen = $scope.Lavado.DireccionLavador;
+                            var destino = $scope.Lavado.Direccion;
+                            CalcularHoraLLegada(origen,destino); 
+                            break;
+
+                        default:
+                    }
+                       
+                                                                                                          }
                 else {
                     $scope.LavadoAbierto = false;
                 }
@@ -147,6 +167,20 @@
             });
     }
 
+    function CalcularHoraLLegada (origen, destino) {
+
+        ClienteService.CalcularHoraLLegada(origen,destino).then(
+            function (d) {
+                var json = d.data;
+                $scope.HoraLLegada = d.data;
+            },
+            function (error) {
+
+
+            });
+
+
+    }
 
 
     $scope.CancelarLavado = function (lavadoid) {

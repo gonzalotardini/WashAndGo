@@ -232,6 +232,7 @@
     <Content Include="img\calidad.png" />
     <Content Include="img\comodidad.PNG" />
     <Content Include="img\ecofriendly.png" />
+    <Content Include="img\Encamino.gif" />
     <Content Include="img\loading.gif" />
     <Content Include="img\logo fb.png" />
     <Content Include="img\favicon.ico" />

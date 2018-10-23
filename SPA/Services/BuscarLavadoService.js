@@ -31,12 +31,13 @@
     };
 
 
-    service.AsignarLavado = function (idlavado) {
+    service.AsignarLavado = function (idlavado, Direccion) {
         var promise = $http({
             method: 'post',
             url: '/SolicitarLavado/AsignarLavado',
             params: {
-                idlavado: idlavado
+                idlavado: idlavado,
+                Direccion: Direccion
             }
         });
 
