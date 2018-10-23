@@ -7,6 +7,10 @@
     $scope.AsignacionError = false;
     $scope.showModal = true;
 
+
+    setInterval(function () {
+        $scope.BuscarLavados(Direccion);
+    }, 30000);
    
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
 

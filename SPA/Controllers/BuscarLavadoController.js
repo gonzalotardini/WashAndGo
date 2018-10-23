@@ -6,10 +6,15 @@
     $scope.AsignacionOk = false;
     $scope.AsignacionError = false;
     $scope.showModal = true;
+    $scope.Direccion = '';
+    var bandera = 0;
 
 
     setInterval(function () {
-        BuscarLavados(Direccion);
+        if (bandera==1) {
+            $scope.BuscarLavados($scope.Direccion);
+        }
+        
     }, 30000);
    
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
@@ -115,7 +120,8 @@
                 $scope.Lavados = d.data;
                 $scope.sort("Distancia");
                 $scope.sort("Distancia");
-                $scope.CargandoLavados = false;
+                    $scope.CargandoLavados = false;
+                    bandera = 1;
                 
             },
             function (error) {
