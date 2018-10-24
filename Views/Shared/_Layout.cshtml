@@ -116,10 +116,10 @@
 
                     @if (Request.IsAuthenticated)
                     {
+                        <span class="caret"></span>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="">
                                 Menu
-                                <span class="caret"></span>
                             </a>
                             @if (User.IsInRole("Cliente"))
                             {
@@ -133,13 +133,14 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="/#!/BuscarLavado">Buscar Lavados</a></li>
                                 </ul>
-                            }
-
+                            }                                                    
 
 
                         </li>
 
                     }
+
+                        <li>@Html.ActionLink("Autos", "Index", "Modelos")</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")

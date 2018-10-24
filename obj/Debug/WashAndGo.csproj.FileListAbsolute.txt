@@ -515,3 +515,9 @@ C:\WashAndGO\WashAndGo\bin\DAL.dll.config
 C:\WashAndGO\WashAndGo\obj\Debug\WashAndGo.csprojAssemblyReference.cache
 C:\WashAndGO\WashAndGo\obj\Debug\WashAndGo.csproj.CoreCompileInputs.cache
 C:\WashAndGO\WashAndGo\obj\Debug\WashAndGo.csproj.CopyComplete
+C:\WashAndGO\WashAndGo\bin\System.Net.Http.Formatting.dll
+C:\WashAndGO\WashAndGo\bin\System.Web.Http.dll
+C:\WashAndGO\WashAndGo\bin\System.Web.Http.WebHost.dll
+C:\WashAndGO\WashAndGo\bin\System.Net.Http.Formatting.xml
+C:\WashAndGO\WashAndGo\bin\System.Web.Http.xml
+C:\WashAndGO\WashAndGo\bin\System.Web.Http.WebHost.xml
