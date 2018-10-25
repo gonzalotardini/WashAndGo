@@ -79,8 +79,8 @@
                     @Html.DisplayFor(modelItem => item.Servicios.Nombre)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Edit", "Edit", new { idServicio = item.IdServicio,idSegmento=item.IdSegmento }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdServicio}) |
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                 </td>
             </tr>

@@ -107,14 +107,15 @@ namespace WashAndGo.Controllers
         }
 
         // GET: ListaPrecios/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? idServicio, int? idSegmento )
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ListaPrecios listaPrecios = db.ListaPrecios.Find(id);
-            if (listaPrecios == null)
+            var hola = "";
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            ListaPrecios listaPrecios = db.ListaPrecios.Where(x => x.IdSegmento == idSegmento && x.IdServicio == idServicio).First(); 
+           if (listaPrecios == null)
             {
                 return HttpNotFound();
             }
