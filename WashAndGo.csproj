@@ -208,8 +208,10 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LavadorController.cs" />
+    <Compile Include="Controllers\ListaPreciosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModelosController.cs" />
+    <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Controllers\SolicitarLavadoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1148,6 +1150,16 @@
     <Content Include="Views\Modelos\Details.cshtml" />
     <Content Include="Views\Modelos\Edit.cshtml" />
     <Content Include="Views\Modelos\Index.cshtml" />
+    <Content Include="Views\ListaPrecios\Create.cshtml" />
+    <Content Include="Views\ListaPrecios\Delete.cshtml" />
+    <Content Include="Views\ListaPrecios\Details.cshtml" />
+    <Content Include="Views\ListaPrecios\Edit.cshtml" />
+    <Content Include="Views\ListaPrecios\Index.cshtml" />
+    <Content Include="Views\Servicios\Create.cshtml" />
+    <Content Include="Views\Servicios\Delete.cshtml" />
+    <Content Include="Views\Servicios\Details.cshtml" />
+    <Content Include="Views\Servicios\Edit.cshtml" />
+    <Content Include="Views\Servicios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

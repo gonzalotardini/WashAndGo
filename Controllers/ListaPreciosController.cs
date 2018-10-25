@@ -10,120 +10,116 @@ using DAL;
 
 namespace WashAndGo.Controllers
 {
-    public class ModelosController : Controller
+    public class ListaPreciosController : Controller
     {
         private WGentities db = new WGentities();
 
-        // GET: Modelos
+        // GET: ListaPrecios
         public ActionResult Index()
         {
-            var modelos = db.Modelos.Include(m => m.Marcas).Include(m => m.Segmentos);
-            return View(modelos.ToList());
+            var listaPrecios = db.ListaPrecios.Include(l => l.Segmentos).Include(l => l.Servicios);
+            return View(listaPrecios.ToList());
         }
 
-        // GET: Modelos/Details/5
+        // GET: ListaPrecios/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Modelos modelos = db.Modelos.Find(id);
-            if (modelos == null)
+            ListaPrecios listaPrecios = db.ListaPrecios.Find(id);
+            if (listaPrecios == null)
             {
                 return HttpNotFound();
             }
-            return View(modelos);
+            return View(listaPrecios);
         }
 
-        // GET: Modelos/Create
+        // GET: ListaPrecios/Create
         public ActionResult Create()
         {
-            ViewBag.IdMarca = new SelectList(db.Marcas, "IdMarca", "Descripcion");
             ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion");
+            ViewBag.IdServicio = new SelectList(db.Servicios, "IdServicio", "Nombre");
             return View();
         }
 
-        // POST: Modelos/Create
+        // POST: ListaPrecios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdModelo,IdMarca,Descripcion,IdSegmento")] Modelos modelos)
+        public ActionResult Create([Bind(Include = "IdSegmento,IdServicio,Precio,FechaDesde,FechaHasta")] ListaPrecios listaPrecios)
         {
-
-            
-
             if (ModelState.IsValid)
             {
-                modelos.Descripcion = modelos.Descripcion.ToUpper();
-                db.Modelos.Add(modelos);
+                db.ListaPrecios.Add(listaPrecios);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdMarca = new SelectList(db.Marcas, "IdMarca", "Descripcion", modelos.IdMarca);
-            ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion", modelos.IdSegmento);
-            return View(modelos);
+            ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion", listaPrecios.IdSegmento);
+            ViewBag.IdServicio = new SelectList(db.Servicios, "IdServicio", "Nombre", listaPrecios.IdServicio);
+            return View(listaPrecios);
         }
 
-        // GET: Modelos/Edit/5
+        // GET: ListaPrecios/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Modelos modelos = db.Modelos.Find(id);
-            if (modelos == null)
+            ListaPrecios listaPrecios = db.ListaPrecios.Find(id);
+            if (listaPrecios == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdMarca = new SelectList(db.Marcas, "IdMarca", "Descripcion", modelos.IdMarca);
-            ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion", modelos.IdSegmento);
-            return View(modelos);
+            ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion", listaPrecios.IdSegmento);
+            ViewBag.IdServicio = new SelectList(db.Servicios, "IdServicio", "Nombre", listaPrecios.IdServicio);
+            return View(listaPrecios);
         }
 
-        // POST: Modelos/Edit/5
+        // POST: ListaPrecios/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdModelo,IdMarca,Descripcion,IdSegmento")] Modelos modelos)
+        public ActionResult Edit([Bind(Include = "IdSegmento,IdServicio,Precio,FechaDesde,FechaHasta")] ListaPrecios listaPrecios)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(modelos).State = EntityState.Modified;
+                db.Entry(listaPrecios).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdMarca = new SelectList(db.Marcas, "IdMarca", "Descripcion", modelos.IdMarca);
-            ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion", modelos.IdSegmento);
-            return View(modelos);
+            ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion", listaPrecios.IdSegmento);
+            ViewBag.IdServicio = new SelectList(db.Servicios, "IdServicio", "Nombre", listaPrecios.IdServicio);
+            return View(listaPrecios);
         }
 
-        // GET: Modelos/Delete/5
+        // GET: ListaPrecios/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Modelos modelos = db.Modelos.Find(id);
-            if (modelos == null)
+            ListaPrecios listaPrecios = db.ListaPrecios.Find(id);
+            if (listaPrecios == null)
             {
                 return HttpNotFound();
             }
-            return View(modelos);
+            return View(listaPrecios);
         }
 
-        // POST: Modelos/Delete/5
+        // POST: ListaPrecios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Modelos modelos = db.Modelos.Find(id);
-            db.Modelos.Remove(modelos);
+            ListaPrecios listaPrecios = db.ListaPrecios.Find(id);
+            db.ListaPrecios.Remove(listaPrecios);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

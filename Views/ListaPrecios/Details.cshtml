@@ -1,0 +1,58 @@
+﻿@model DAL.ListaPrecios
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ListaPrecios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDesde)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaDesde)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaHasta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaHasta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Segmentos.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Segmentos.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Servicios.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Servicios.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

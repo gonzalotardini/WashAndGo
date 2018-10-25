@@ -10,120 +10,107 @@ using DAL;
 
 namespace WashAndGo.Controllers
 {
-    public class ModelosController : Controller
+    public class ServiciosController : Controller
     {
         private WGentities db = new WGentities();
 
-        // GET: Modelos
+        // GET: Servicios
         public ActionResult Index()
         {
-            var modelos = db.Modelos.Include(m => m.Marcas).Include(m => m.Segmentos);
-            return View(modelos.ToList());
+            return View(db.Servicios.ToList());
         }
 
-        // GET: Modelos/Details/5
+        // GET: Servicios/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Modelos modelos = db.Modelos.Find(id);
-            if (modelos == null)
+            Servicios servicios = db.Servicios.Find(id);
+            if (servicios == null)
             {
                 return HttpNotFound();
             }
-            return View(modelos);
+            return View(servicios);
         }
 
-        // GET: Modelos/Create
+        // GET: Servicios/Create
         public ActionResult Create()
         {
-            ViewBag.IdMarca = new SelectList(db.Marcas, "IdMarca", "Descripcion");
-            ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion");
             return View();
         }
 
-        // POST: Modelos/Create
+        // POST: Servicios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdModelo,IdMarca,Descripcion,IdSegmento")] Modelos modelos)
+        public ActionResult Create([Bind(Include = "IdServicio,Nombre,Descripcion")] Servicios servicios)
         {
-
-            
-
             if (ModelState.IsValid)
             {
-                modelos.Descripcion = modelos.Descripcion.ToUpper();
-                db.Modelos.Add(modelos);
+                db.Servicios.Add(servicios);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdMarca = new SelectList(db.Marcas, "IdMarca", "Descripcion", modelos.IdMarca);
-            ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion", modelos.IdSegmento);
-            return View(modelos);
+            return View(servicios);
         }
 
-        // GET: Modelos/Edit/5
+        // GET: Servicios/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Modelos modelos = db.Modelos.Find(id);
-            if (modelos == null)
+            Servicios servicios = db.Servicios.Find(id);
+            if (servicios == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdMarca = new SelectList(db.Marcas, "IdMarca", "Descripcion", modelos.IdMarca);
-            ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion", modelos.IdSegmento);
-            return View(modelos);
+            return View(servicios);
         }
 
-        // POST: Modelos/Edit/5
+        // POST: Servicios/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdModelo,IdMarca,Descripcion,IdSegmento")] Modelos modelos)
+        public ActionResult Edit([Bind(Include = "IdServicio,Nombre,Descripcion")] Servicios servicios)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(modelos).State = EntityState.Modified;
+                db.Entry(servicios).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdMarca = new SelectList(db.Marcas, "IdMarca", "Descripcion", modelos.IdMarca);
-            ViewBag.IdSegmento = new SelectList(db.Segmentos, "IdSegmento", "Descripcion", modelos.IdSegmento);
-            return View(modelos);
+            return View(servicios);
         }
 
-        // GET: Modelos/Delete/5
+        // GET: Servicios/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Modelos modelos = db.Modelos.Find(id);
-            if (modelos == null)
+            Servicios servicios = db.Servicios.Find(id);
+            if (servicios == null)
             {
                 return HttpNotFound();
             }
-            return View(modelos);
+            return View(servicios);
         }
 
-        // POST: Modelos/Delete/5
+        // POST: Servicios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Modelos modelos = db.Modelos.Find(id);
-            db.Modelos.Remove(modelos);
+            Servicios servicios = db.Servicios.Find(id);
+            db.Servicios.Remove(servicios);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

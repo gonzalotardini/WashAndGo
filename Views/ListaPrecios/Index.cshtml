@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DAL.ListaPrecios>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container">
+
+    <div style="margin-top:10%; font-family:'Century Gothic'; color:white; background-color:#003359; border:solid; border-color:#003359;" class="jumbotron text-center">
+        <h2>Precios</h2>
+    </div>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDesde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHasta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Segmentos.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Servicios.Nombre)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                   $ @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaDesde)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaHasta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Segmentos.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Servicios.Nombre)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+</div>
