@@ -15,9 +15,52 @@ namespace WashAndGo.Controllers
         private WGentities db = new WGentities();
 
         // GET: ListaPrecios
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
+            ViewBag.FechaDesdeSort = String.IsNullOrEmpty(sortOrder) ? "Fecha_Desde" : "";
+            ViewBag.FechaHastaSort = sortOrder == "Fecha_hasta" ? "Fecha_hasta_desc" : "Fecha_hasta";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.PrecioSort = sortOrder == "Precio" ? "Precio_desc" : "Precio";
+            ViewBag.Segmento = sortOrder == "Segmento" ? "Segmento_desc" : "Segmento";
+            ViewBag.Servicios = sortOrder == "Servicios" ? "Serviciose_desc" : "Servicios";
+
+
             var listaPrecios = db.ListaPrecios.Include(l => l.Segmentos).Include(l => l.Servicios);
+            switch (sortOrder)
+            {
+                case "Fecha_Desde":
+                    listaPrecios = listaPrecios.OrderByDescending(s => s.FechaDesde);
+                    break;
+                case "Fecha_hasta":
+                    listaPrecios = listaPrecios.OrderBy(s => s.FechaHasta);
+                    break;
+                case "Fecha_hasta_Desc":
+                    listaPrecios = listaPrecios.OrderByDescending(s => s.FechaHasta);
+                    break;
+                case "Precio":
+                    listaPrecios = listaPrecios.OrderBy(s => s.Precio);
+                    break;
+                case "Precio_desc":
+                    listaPrecios = listaPrecios.OrderByDescending(s => s.Precio);
+                    break;
+                case "Segmento_desc":
+                    listaPrecios = listaPrecios.OrderByDescending(s => s.Segmentos.Descripcion);
+                    break;
+                case "Segmento":
+                    listaPrecios = listaPrecios.OrderBy(s => s.Segmentos.Descripcion);
+                    break;
+                case "Servicios":
+                    listaPrecios = listaPrecios.OrderBy(s => s.Servicios.Nombre);
+                    break;
+                case "Servicios_desc":
+                    listaPrecios = listaPrecios.OrderByDescending(s => s.Servicios.Nombre);
+                    break;
+                    //default:
+                    //    students = students.OrderBy(s => s.LastName);
+                    //    break;
+            }
+
+           
             return View(listaPrecios.ToList());
         }
 

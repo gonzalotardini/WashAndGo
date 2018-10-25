@@ -5,6 +5,28 @@
 }
 
 
+<style>
+    a {
+        color: #003359;
+        font-family:'Century Gothic';
+    }
+    #SomeID {
+        border: solid;
+        border-radius: 5px 5px 5px 5px;
+        padding: 0.5%;
+        margin-bottom: 1%;
+    }
+
+    td{
+        font-family:'Century Gothic';
+        text-align:center;
+    }
+    th{
+        text-align:center;
+    }
+
+</style>
+
 <div class="container">
 
     <div style="margin-top:10%; font-family:'Century Gothic'; color:white; background-color:#003359; border:solid; border-color:#003359;" class="jumbotron text-center">
@@ -12,24 +34,28 @@
     </div>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "Create", null, new { id= "SomeID" })
     </p>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Precio)
+                @Html.ActionLink("Precio", "Index", new { sortOrder = ViewBag.PrecioSort })
+                @*@Html.DisplayNameFor(model => model.Precio)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaDesde)
+                @Html.ActionLink("Fecha Desde", "Index", new { sortOrder = ViewBag.FechaDesdeSort })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaHasta)
+                @Html.ActionLink("Fecha Hasta", "Index", new { sortOrder = ViewBag.FechaHastaSort })
+                @*@Html.DisplayNameFor(model => model.FechaHasta)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Segmentos.Descripcion)
+                @Html.ActionLink("Descripción", "Index", new { sortOrder = ViewBag.Segmento})
+                @*@Html.DisplayNameFor(model => model.Segmentos.Descripcion)*@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Servicios.Nombre)
+                @Html.ActionLink("Servicios", "Index", new { sortOrder = ViewBag.Servicios })
+                @*@Html.DisplayNameFor(model => model.Servicios.Nombre)*@
             </th>
             <th></th>
         </tr>
