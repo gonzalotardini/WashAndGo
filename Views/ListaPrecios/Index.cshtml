@@ -1,15 +1,19 @@
-﻿@model IEnumerable<DAL.ListaPrecios>
+﻿@model PagedList.IPagedList<DAL.ListaPrecios>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ListaPrecios";
 }
 
 
 <style>
     a {
         color: #003359;
-        font-family:'Century Gothic';
+        font-family: 'Century Gothic';
     }
+
     #SomeID {
         border: solid;
         border-radius: 5px 5px 5px 5px;
@@ -17,76 +21,101 @@
         margin-bottom: 1%;
     }
 
-    td{
-        font-family:'Century Gothic';
-        text-align:center;
-    }
-    th{
-        text-align:center;
+    td {
+        font-family: 'Century Gothic';
+        text-align: center;
     }
 
+    th {
+        text-align: center;
+    }
+    .form-inline {
+        margin-bottom: 2%;
+    }
+    .pagination-container{
+        text-align:center;
+    }
 </style>
 
 <div class="container">
 
-    <div style="margin-top:10%; font-family:'Century Gothic'; color:white; background-color:#003359; border:solid; border-color:#003359;" class="jumbotron text-center">
-        <h2>Precios</h2>
-    </div>
+    @using (Html.BeginForm("Index", "ListaPrecios", FormMethod.Get))
+    {
 
-    <p>
-        @Html.ActionLink("Create New", "Create", null, new { id= "SomeID" })
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.ActionLink("Precio", "Index", new { sortOrder = ViewBag.PrecioSort })
-                @*@Html.DisplayNameFor(model => model.Precio)*@
-            </th>
-            <th>
-                @Html.ActionLink("Fecha Desde", "Index", new { sortOrder = ViewBag.FechaDesdeSort })
-            </th>
-            <th>
-                @Html.ActionLink("Fecha Hasta", "Index", new { sortOrder = ViewBag.FechaHastaSort })
-                @*@Html.DisplayNameFor(model => model.FechaHasta)*@
-            </th>
-            <th>
-                @Html.ActionLink("Descripción", "Index", new { sortOrder = ViewBag.Segmento})
-                @*@Html.DisplayNameFor(model => model.Segmentos.Descripcion)*@
-            </th>
-            <th>
-                @Html.ActionLink("Servicios", "Index", new { sortOrder = ViewBag.Servicios })
-                @*@Html.DisplayNameFor(model => model.Servicios.Nombre)*@
-            </th>
-            <th></th>
-        </tr>
+        <div style="margin-top:10%; font-family:'Century Gothic'; color:white; background-color:#003359; border:solid; border-color:#003359;" class="jumbotron text-center">
+            <h2>Precios</h2>
+        </div>
 
-        @foreach (var item in Model)
-        {
+        <div class="form-inline">
+            @Html.ActionLink("Create New", "Create", null, new { id = "SomeID" })
+            @*<input class="form-control" type="text" />*@
+            @Html.TextBox("search", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+            <input type="submit" class="btn btn-success" value="Buscar" />
+        </div>
+
+
+        <table class="table">
             <tr>
-                <td>
-                   $ @Html.DisplayFor(modelItem => item.Precio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaDesde)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaHasta)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Segmentos.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Servicios.Nombre)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { idServicio = item.IdServicio,idSegmento=item.IdSegmento }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.IdServicio}) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
+                <th>
+                    @Html.ActionLink("Precio", "Index", new { sortOrder = ViewBag.PrecioSort, currentFilter = ViewBag.CurrentFilter })
+                    @*@Html.DisplayNameFor(model => model.Precio)*@
+                </th>
+                <th>
+
+                    @Html.ActionLink("Fecha Desde", "Index", new { sortOrder = ViewBag.FechaDesdeSort, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    @Html.ActionLink("Fecha Hasta", "Index", new { sortOrder = ViewBag.FechaHastaSort, currentFilter = ViewBag.CurrentFilter })
+                    @*@Html.DisplayNameFor(model => model.FechaHasta)*@
+                </th>
+                <th>
+                    @Html.ActionLink("Descripción", "Index", new { sortOrder = ViewBag.Segmento, currentFilter = ViewBag.CurrentFilter })
+                    @*@Html.DisplayNameFor(model => model.Segmentos.Descripcion)*@
+                </th>
+                <th>
+                    @Html.ActionLink("Servicios", "Index", new { sortOrder = ViewBag.Servicios, currentFilter = ViewBag.CurrentFilter })
+                    @*@Html.DisplayNameFor(model => model.Servicios.Nombre)*@
+                </th>
+                <th></th>
             </tr>
-        }
 
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        $ @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td>
+
+                        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.FechaDesde))
+                        @*@Html.DisplayFor(modelItem => item.FechaDesde)*@
+                    </td>
+                    <td>
+                        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.FechaHasta))
+                        @*@Html.DisplayFor(modelItem => item.FechaHasta)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Segmentos.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Servicios.Nombre)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { idServicio = item.IdServicio, idSegmento = item.IdSegmento }) |
+                        @Html.ActionLink("Details", "Details", new { idServicio = item.IdServicio, idSegmento = item.IdSegmento }) |
+                        @Html.ActionLink("Delete", "Delete", new { idServicio = item.IdServicio, idSegmento = item.IdSegmento })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+    @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 
-</div>
+     
+
+    </div>

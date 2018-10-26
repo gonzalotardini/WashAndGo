@@ -521,3 +521,7 @@ C:\WashAndGO\WashAndGo\bin\System.Web.Http.WebHost.dll
 C:\WashAndGO\WashAndGo\bin\System.Net.Http.Formatting.xml
 C:\WashAndGO\WashAndGo\bin\System.Web.Http.xml
 C:\WashAndGO\WashAndGo\bin\System.Web.Http.WebHost.xml
+C:\WashAndGO\WashAndGo\bin\PagedList.dll
+C:\WashAndGO\WashAndGo\bin\PagedList.Mvc.dll
+C:\WashAndGO\WashAndGo\bin\PagedList.xml
+C:\WashAndGO\WashAndGo\bin\PagedList.Mvc.xml
