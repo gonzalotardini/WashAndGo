@@ -133,14 +133,17 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="/#!/BuscarLavado">Buscar Lavados</a></li>
                                 </ul>
-                            }                                                    
+                            }
 
 
                         </li>
 
                     }
 
-                        <li>@Html.ActionLink("Autos", "Index", "Modelos")</li>
+                    <li>@Html.ActionLink("Autos", "Index", "Modelos")</li>
+                    <li>@Html.ActionLink("Precios", "Index", "ListaPrecios")</li>
+                    <li>@Html.ActionLink("Marcas", "Index", "Marcas")</li>
+                    <li>@Html.ActionLink("Servicios", "Index", "Servicios")</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")
