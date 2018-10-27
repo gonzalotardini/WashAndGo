@@ -26,6 +26,7 @@
     $scope.Modelo2 = '';
     $scope.LavadoSolicitado = false;
     $scope.LavadoAsignado = false;
+    $scope.LavadorEnDomicilio = false;
  
 
     ObtenerLavadoAbierto();
@@ -148,11 +149,10 @@
 
                         case "ASIGNADO":
                             $scope.LavadoSolicitado = false;
-                           $scope.LavadoAsignado = true;
-                           
-                            //var origen = $scope.Lavado.DireccionLavador;
-                            //var destino = $scope.Lavado.Direccion;
-                            //CalcularHoraLLegada(origen,destino); 
+                            $scope.LavadoAsignado = true;
+                            break;
+                        case "LAVADOR EN DOMICILIO":    
+                            var hola = "";
                             break;
 
                         default:
@@ -193,8 +193,7 @@
             function (d) {
                 //$scope.Servicios = d.data;
                 ObtenerLavadoAbierto();
-                //$scope.abrirDialogSolicitado();
-                //$location.path('/a');
+                $('#myModalSolicitado').modal('hide');
             },
             function (error) {
 

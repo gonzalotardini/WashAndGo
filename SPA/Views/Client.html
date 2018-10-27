@@ -100,8 +100,15 @@
 
                     </div>
                 </div>
+                <div ng-show="LavadoSolicitado">
+                    <a ng-show="LavadoSolicitado" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#myModalSolicitado" role="button">Cancelar Lavado</a>
+                </div>
 
-                <a class="btn btn-danger btn-lg btn-block" ng-click="CancelarLavado(Lavado.IdLavado)" role="button">Cancelar Lavado</a>
+                <div ng-show="LavadoAsignado" class="form-inline">
+                    <a style="width:33%;font-family:'Century Gothic';" class="btn btn-success btn-lg">Llegó el lavador</a>
+                    <a style="width:33%;font-family:'Century Gothic';" class="btn btn-primary btn-lg">El lavador nunca llegó</a>
+                    <a style="width:32%;font-family:'Century Gothic';" class="btn btn-danger btn-lg" ng-click="CancelarLavado(Lavado.IdLavado)" role="button">Cancelar Lavado</a>
+                </div>
             </div>
 
         </div>
@@ -306,8 +313,34 @@
                 </div>
 
             </div>
+        
+        <div id="myModalSolicitado" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Seguro desea cancelar el lavado?</p>
+                        <div class="form-inline">
+                            <a ng-click="CancelarLavado(Lavado.IdLavado)" class="btn btn-default">Sí</a>
+                            <a  class="btn btn-default" data-dismiss="modal">No</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
+    
+    
     </div>
+    
 
     <script src="~/Scripts/dirPagination.js"></script>
 </body>
