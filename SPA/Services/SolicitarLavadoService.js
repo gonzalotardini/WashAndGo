@@ -111,6 +111,36 @@
         return $q.when(promise);
 
     };
+           
+
+    service.FinalizarLavadoCliente = function (calificacion, comentario, lavadoid) {
+        var promise = $http({
+            method: 'post',
+            url: '/SolicitarLavado/FinalizarLavadoCliente',
+            params: {
+                calificacion: calificacion,
+                comentario:comentario,
+                lavadoid: lavadoid
+            }
+        });
+
+        return $q.when(promise);
+
+    };
+
+    service.LLegoLavador = function (idlavado) {
+        var promise = $http({
+            method: 'post',
+            url: '/SolicitarLavado/LLegoLavador',
+            params: {
+                idlavado: idlavado
+            }
+        });
+
+        return $q.when(promise);
+
+    };
+
 
 
     service.ObtenerDatos = function () {
@@ -135,10 +165,10 @@
 
     };
 
-    service.VerificarLavadoAbierto = function () {
+    service.VerificarLavadoAbiertoCliente = function () {
         var promise = $http({
             method: 'get',
-            url: '/SolicitarLavado/VerificarLavadoAbierto'
+            url: '/SolicitarLavado/VerificarLavadoAbiertoCliente'
 
         });
 

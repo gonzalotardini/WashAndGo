@@ -1,4 +1,4 @@
-﻿angular.module('app').controller("ClienteController", ["$scope", "$sce", "$http", "$window", "$filter", "ClienteService", "SolicitarLavadoService", "$location", function ($scope, $sce, $http, $window, $filter, ClienteService, SolicitarLavadoService, $location) {
+﻿angular.module('app').controller("ClienteController", ["$scope","$route" ,"$sce", "$http", "$window", "$filter", "ClienteService", "SolicitarLavadoService", "$location", function ($scope, $route,$sce, $http, $window, $filter, ClienteService, SolicitarLavadoService, $location) {
 
     $scope.MostrarDatosPersonales = false;
     $scope.Marcas = [];
@@ -27,14 +27,33 @@
     $scope.LavadoSolicitado = false;
     $scope.LavadoAsignado = false;
     $scope.LavadorEnDomicilio = false;
+    $scope.FinalizarLavado = false;
+    var i = 0;
+    $scope.calificando = false;    
+    $scope.comentario = '';
+    $scope.items = ["--",1, 2, 3,4,5,6,7,8,9,10];
+    $scope.calificacion=$scope.items[0];
+
+
  
 
     ObtenerLavadoAbierto();
     
 
     setInterval(function () {
-        ObtenerLavadoAbierto();
-    }, 30000)
+        if ($scope.calificando==false) {
+            ObtenerLavadoAbierto();
+        }
+       
+        if (i==5) {
+            $route.reload();
+        }
+        else {
+            i = i + 1;
+        }
+
+
+    }, 30000);
 
 
     $scope.ObtenerMarcas = function () {
@@ -151,8 +170,10 @@
                             $scope.LavadoSolicitado = false;
                             $scope.LavadoAsignado = true;
                             break;
-                        case "LAVADOR EN DOMICILIO":    
-                            var hola = "";
+                        case "EN PROCESO":    
+                            $scope.LavadoSolicitado = false;
+                            $scope.LavadoAsignado = false;
+                            $scope.LavadorEnDomicilio = true;
                             break;
 
                         default:
@@ -194,6 +215,41 @@
                 //$scope.Servicios = d.data;
                 ObtenerLavadoAbierto();
                 $('#myModalSolicitado').modal('hide');
+            },
+            function (error) {
+
+
+            });
+
+    };
+
+    $scope.FinalizarLavadoAccion = function (calificacion, comentario, lavadoid) {
+
+        if (calificacion == "--") {
+            $scope.ErrorCalificacion = true;
+        }
+        else {
+            $scope.ErrorCalificacion = false;
+            SolicitarLavadoService.FinalizarLavadoCliente(calificacion, comentario, lavadoid).then(
+                function (d) {
+                    //$scope.Servicios = d.data;
+                    ObtenerLavadoAbierto();
+
+                },
+                function (error) {
+
+
+                });
+        }
+    };
+
+    $scope.LLegoLavador = function (lavadoid) {
+
+        SolicitarLavadoService.LLegoLavador(lavadoid).then(
+            function (d) {
+                //$scope.Servicios = d.data;
+                ObtenerLavadoAbierto();
+                //$('#myModalSolicitado').modal('hide');
             },
             function (error) {
 

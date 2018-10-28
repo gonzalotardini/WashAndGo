@@ -356,7 +356,7 @@
 
    function VerificarLavadoAbierto () {
 
-        SolicitarLavadoService.VerificarLavadoAbierto().then(
+        SolicitarLavadoService.VerificarLavadoAbiertoCliente().then(
             function (d) {
                 var abierto = d.data;
                 if (abierto>0) {

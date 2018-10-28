@@ -176,14 +176,14 @@ namespace WashAndGo.Controllers
 
         }
 
-        public int VerificarLavadoAbierto()
+        public int VerificarLavadoAbiertoCliente()
         {
             try
             {
                 var userId = User.Identity.GetUserId();
                 var lavadoBll = new SolicitarLavadoBLL();
 
-                return lavadoBll.VerificarLavadoAbiertoBLL(userId);
+                return lavadoBll.VerificarLavadoAbiertoCliente(userId);
 
             }
             catch (Exception)
@@ -276,27 +276,8 @@ namespace WashAndGo.Controllers
                 throw;
             }
         }
-
-
-        //public string CalcularHoraLLegada(string origen, string destino)
-        //{
-        //    try
-        //    {
-
-        //        var lavado = new SolicitarLavadoBLL();
-
-        //        return JsonConvert.SerializeObject(lavado.CalcularHoraLLegada(origen,destino), Formatting.None,
-        //           new JsonSerializerSettings()
-        //           {
-        //               ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        //           });
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        throw;
-        //    }
-        //}
+        
+        
 
         public string AsignarLavado (int idlavado, string Direccion)
         {
@@ -315,5 +296,34 @@ namespace WashAndGo.Controllers
 
         }
 
+
+        public void LLegoLavador(int idlavado)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+                lavadobll.LLegoLavador(idlavado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void FinalizarLavadoCliente(int calificacion, string comentario, int lavadoid)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+
+                lavadobll.FinalizarLavadoCliente(calificacion, comentario, lavadoid);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }
