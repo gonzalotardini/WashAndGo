@@ -104,3 +104,13 @@ C:\WashAndGO\WashAndGo\obj\Release\WashAndGo.csproj.CoreCompileInputs.cache
 C:\WashAndGO\WashAndGo\obj\Release\WashAndGo.csproj.CopyComplete
 C:\WashAndGO\WashAndGo\obj\Release\WashAndGo.dll
 C:\WashAndGO\WashAndGo\obj\Release\WashAndGo.pdb
+C:\WashAndGO\WashAndGo\bin\PagedList.dll
+C:\WashAndGO\WashAndGo\bin\PagedList.Mvc.dll
+C:\WashAndGO\WashAndGo\bin\System.Net.Http.Formatting.dll
+C:\WashAndGO\WashAndGo\bin\System.Web.Http.dll
+C:\WashAndGO\WashAndGo\bin\System.Web.Http.WebHost.dll
+C:\WashAndGO\WashAndGo\bin\PagedList.xml
+C:\WashAndGO\WashAndGo\bin\PagedList.Mvc.xml
+C:\WashAndGO\WashAndGo\bin\System.Net.Http.Formatting.xml
+C:\WashAndGO\WashAndGo\bin\System.Web.Http.xml
+C:\WashAndGO\WashAndGo\bin\System.Web.Http.WebHost.xml

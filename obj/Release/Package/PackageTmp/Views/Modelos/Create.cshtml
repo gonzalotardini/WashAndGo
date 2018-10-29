@@ -1,0 +1,88 @@
+﻿@model DAL.Modelos
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style>
+    input, select, textarea {
+        max-width: 100%;
+        font-family:'Century Gothic';
+    }
+    #btn {
+        width: 100%;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        color: white;
+    }
+    label{
+        font-family:'Century Gothic';
+    }
+
+    h2,h1,h3,h4{
+        font-family:'Century Gothic';
+       
+    }
+    
+</style>
+
+<div class="container">
+    @*<div class="jumbotron">
+        <h2>Create</h2>
+    </div>*@
+
+    <div style=" margin-top:15%;" class="col-md-12">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div class="col-md-3"></div>
+
+            <div class="form-horizontal col-md-6" style="border: solid;">
+                <h3 style="text-align:center;">Alta de Modelo</h3>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                   <label class="control-label col-md-3">MARCA</label> @*@Html.LabelFor(model => model.IdMarca, "IdMarca", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-9">
+                        @Html.DropDownList("IdMarca", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdMarca, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3">DESCRIPCIÓN</label>  @*@Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3">SEGMENTO</label>  @*@Html.LabelFor(model => model.IdSegmento, "IdSegmento", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-9">
+                        @Html.DropDownList("IdSegmento", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdSegmento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                        <div class="col-md-3"></div>      
+                        <div class="col-md-9">
+                            <input id="btn" type="submit" value="Create" class="btn btn-default btn-lg" />
+                        </div>
+                </div>
+            </div>
+        }
+
+
+        
+    </div>
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -256,13 +256,13 @@ namespace WashAndGo.Controllers
                             return RedirectToAction("Login", "Account");
                         }
                         AddErrors(result);
-                    using (var context = new WGentities())
-                    {
+                    //using (var context = new WGentities())
+                    //{
 
-                        AspNetUsers usuario = context.AspNetUsers.Where(c => c.Id == user.Id).First();
-                        context.AspNetUsers.Remove(usuario);
-                        context.SaveChanges();
-                    }
+                    //    AspNetUsers usuario = context.AspNetUsers.Where(c => c.Id == user.Id).First();
+                    //    context.AspNetUsers.Remove(usuario);
+                    //    context.SaveChanges();
+                    //}
                 }
                 
             }
@@ -289,8 +289,23 @@ namespace WashAndGo.Controllers
 
             // If we got this far, something failed, redisplay form
             //return View(model);
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem
+            {
+                Text = "Lavador",
+                Value = "1"
+            });
 
-            return RedirectToAction("Error","Account");
+            items.Add(new SelectListItem
+            {
+                Text = "Cliente",
+                Value = "2"
+            });
+
+            SelectList s = new SelectList(items, "Value", "Text");
+            ViewBag.TipoList = s;
+
+            return View(model);
         }
 
 

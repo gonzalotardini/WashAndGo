@@ -33,11 +33,11 @@
 
                 @if (User.IsInRole("Cliente"))
                 {
-                    <a href="/#!/cliente"><span class="glyphicon glyphicon-user"></span>{{ 'MI CUENTA' | translate }}</a>
+                    <a translate="MI CUENTA" href="/#!/cliente"><span class="glyphicon glyphicon-user"></span></a>
                 }
                 else
                 {
-                    <a href="/#!/lavador"><span class="glyphicon glyphicon-user"></span>{{ 'MI CUENTA' | translate }}</a>
+                    <a translate="MI CUENTA" href="/#!/lavador"><span class="glyphicon glyphicon-user"></span></a>
                     @*<a href="/#!/lavador"><span style="font-family:'Century Gothic'; font-size:16px;" class="glyphicon glyphicon-user"></span>L</a>*@
                 }
 

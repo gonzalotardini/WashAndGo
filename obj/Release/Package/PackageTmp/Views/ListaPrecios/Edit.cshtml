@@ -1,0 +1,95 @@
+﻿@model DAL.ListaPrecios
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<style>
+    input, select, textarea {
+        max-width: 100%;
+        font-family: 'Century Gothic';
+    }
+
+    #btn {
+        width: 100%;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+        color: white;
+    }
+
+    label {
+        font-family: 'Century Gothic';
+    }
+
+    h2, h1, h3, h4 {
+        font-family: 'Century Gothic';
+    }
+</style>
+
+<div class="container">
+
+
+    <div style=" margin-top:15%;" class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="col-md-3"></div>
+
+
+            <div class="form-horizontal col-md-6" style="border: solid; border-radius:10px 10px 10px 10px;">
+
+                
+
+
+
+                <div class="form-horizontal">
+                    <h3 style="text-align:center;">Segmento:@Model.Segmentos.Descripcion </h3>
+                    <h3 style="text-align:center;">Servicio: @Model.Servicios.Nombre</h3>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.IdSegmento)
+
+                    @Html.HiddenFor(model => model.IdServicio)
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">PRECIO</label>
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">DESDE</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.FechaDesde, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+
+                            @Html.ValidationMessageFor(model => model.FechaDesde, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">HASTA</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.FechaHasta, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                            @Html.ValidationMessageFor(model => model.FechaHasta, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9">
+                            <input id="btn" type="submit" value="Aceptar" class="btn btn-default btn-lg" />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+
+            </div>
+        }
+        </div>
+    </div>

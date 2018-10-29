@@ -1,0 +1,42 @@
+﻿@model DAL.Modelos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Modelos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marcas.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marcas.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Segmentos.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Segmentos.Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdModelo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
