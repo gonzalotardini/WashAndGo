@@ -32,7 +32,8 @@
     $scope.calificando = false;    
     $scope.comentario = '';
     $scope.items = ["--",1, 2, 3,4,5,6,7,8,9,10];
-    $scope.calificacion=$scope.items[0];
+    $scope.calificacion = $scope.items[0];
+    $scope.CancelarLavadoAsignado_ = false;
 
 
  
@@ -223,6 +224,22 @@
 
     };
 
+    $scope.CancelarLavadoAsignado = function (idlavado, comentario) {
+
+
+        SolicitarLavadoService.CancelarLavadoAsignadoCliente(idlavado,comentario).then(
+            function (d) {
+                //$scope.Servicios = d.data;
+                ObtenerLavadoAbierto();
+               
+            },
+            function (error) {
+
+
+            });
+
+    };
+
     $scope.FinalizarLavadoAccion = function (calificacion, comentario, lavadoid) {
 
         if (calificacion == "--") {
@@ -241,6 +258,23 @@
 
                 });
         }
+    };
+
+    $scope.LavadorNuncaLLego = function (idlavado, comentario) {
+        $scope.LavadorNuncaLLego_ = true;
+           
+            SolicitarLavadoService.LavadorNuncaLLego(idlavado,comentario).then(
+                function (d) {
+                    //$scope.Servicios = d.data;
+                    $scope.LavadorNuncaLLego_ = false;
+                    ObtenerLavadoAbierto();
+
+                },
+                function (error) {
+
+
+                });
+        
     };
 
     $scope.LLegoLavador = function (lavadoid) {

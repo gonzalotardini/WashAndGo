@@ -315,9 +315,40 @@ namespace WashAndGo.Controllers
         {
             try
             {
-                var lavadobll = new SolicitarLavadoBLL();
+                
+var lavadobll = new SolicitarLavadoBLL();
 
                 lavadobll.FinalizarLavadoCliente(calificacion, comentario, lavadoid);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        public void LavadorNuncaLLego(int idlavado, string comentario)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+                lavadobll.LavadorNuncaLLego(idlavado, comentario);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public void CancelarLavadoAsignadoCliente(int idlavado, string comentario)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+                lavadobll.CancelarLavadoAsignadoCliente(idlavado, comentario);
             }
             catch (Exception ex)
             {
