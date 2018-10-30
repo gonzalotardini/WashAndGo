@@ -1,33 +1,68 @@
 ﻿@model IEnumerable<DAL.Marcas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Marcas";
 }
 
-<h2>Index</h2>
+<style>
+    a {
+        color: #003359;
+        font-family: 'Century Gothic';
+    }
+    a:hover{
+        color:black;
+    }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th></th>
-    </tr>
+    #SomeID {
+        border: solid;
+        border-radius: 5px 5px 5px 5px;
+        padding: 0.5%;
+        margin-bottom: 1%;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdMarca }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdMarca }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdMarca })
-        </td>
-    </tr>
-}
+    td {
+        font-family: 'Century Gothic';
+        text-align: center;
+    }
 
-</table>
+    th {
+        text-align: center;
+    }
+</style>
+
+
+<div class="container">
+
+    <div style="margin-top:10%; font-family:'Century Gothic'; color:white; background-color:#003359; border:solid; border-color:#003359;" class="jumbotron text-center">
+        <h2>Marcas</h2>
+    </div>
+
+    <p>
+        @Html.ActionLink("Create New", "Create",null, new { id = "SomeID" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdMarca }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdMarca }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdMarca })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+

@@ -17,7 +17,7 @@ namespace WashAndGo.Controllers
         // GET: Servicios
         public ActionResult Index()
         {
-            return View(db.Servicios.ToList());
+            return View(db.Servicios.Where(x=> x.Hbilitado=="S").ToList());
         }
 
         // GET: Servicios/Details/5
@@ -110,7 +110,7 @@ namespace WashAndGo.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Servicios servicios = db.Servicios.Find(id);
-            db.Servicios.Remove(servicios);
+            servicios.Hbilitado = "N";
             db.SaveChanges();
             return RedirectToAction("Index");
         }

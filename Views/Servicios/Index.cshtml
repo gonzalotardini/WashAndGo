@@ -4,36 +4,71 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th></th>
-    </tr>
+<style>
+    a {
+        color: #003359;
+        font-family: 'Century Gothic';
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdServicio }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdServicio }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdServicio })
-        </td>
-    </tr>
-}
+        a:hover {
+            color: black;
+        }
 
-</table>
+    #SomeID {
+        border: solid;
+        border-radius: 5px 5px 5px 5px;
+        padding: 0.5%;
+        margin-bottom: 1%;
+    }
+
+    td {
+        font-family: 'Century Gothic';
+        text-align: center;
+    }
+
+    th {
+        text-align: center;
+    }
+</style>
+
+
+<div class="container">
+
+    <div style="margin-top:10%; font-family:'Century Gothic'; color:white; background-color:#003359; border:solid; border-color:#003359;" class="jumbotron text-center">
+        <h2>Servicios</h2>
+    </div>
+
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { id = "SomeID" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdServicio }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdServicio }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdServicio })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
