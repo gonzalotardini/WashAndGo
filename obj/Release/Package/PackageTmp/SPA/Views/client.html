@@ -43,6 +43,11 @@
         textarea {
             max-width: 100%;
         }
+
+        #password{
+            font-family:'Century Gothic';
+            margin-bottom:1%;
+        }
     </style>
 </head>
 <body>
@@ -59,11 +64,11 @@
                             Tu Lavado
                         </h2>
                         <!--<div class="checkbox pull-right">
-                            <label>
-                                <input type="checkbox" />
-                                Remember
-                            </label>
-                        </div>-->
+                        <label>
+                            <input type="checkbox" />
+                            Remember
+                        </label>
+                    </div>-->
                     </div>
                     <div class="panel-body ">
 
@@ -84,21 +89,21 @@
 
                         </div>
 
-                        <div ng-show="LavadoAsignado" class="row">                            
-                                <div class="col-md-8">
-                                    <h2 style="text-align:center; font-family:'Century Gothic'; color:#1487eb;">Tu lavador está en camino!</h2>
-                                    <div class="form-inline" style="display:inline-flex"><h4><u><b>Lavador:</b></u></h4>&nbsp;<h4>{{Lavado.Lavadores.Nombre}}&nbsp;{{Lavado.Lavadores.Apellido}} </h4></div>
-                                    <div class="form-inline" style="display:inline-flex"><h4><u><b>Auto: </b></u></h4>&nbsp;<h4>  {{Lavado.Marcas.Descripcion}}  {{Lavado.Modelos.Descripcion}}</h4></div>
-                                    <div class="form-inline" style="display:inline-flex"><h4><u><b>Servicio: </b></u></h4>&nbsp;<h4> {{Lavado.Servicios.Nombre}}</h4></div>
-                                    <br />
-                                    <div class="form-inline" style="display:inline-flex"><h4><u><b>Total:</b></u></h4>&nbsp;<h4>${{Lavado.Total}},00</h4></div>
-                                    <br />
-                                    <div class="form-inline" style="display:inline-flex"><h4><u><b>Hora de llegada: </b></u></h4>&nbsp;<h4> {{Lavado.HoraLLegada}}&nbsp(Aprox)</h4></div>
+                        <div ng-show="LavadoAsignado" class="row">
+                            <div class="col-md-8">
+                                <h2 style="text-align:center; font-family:'Century Gothic'; color:#1487eb;">Tu lavador está en camino!</h2>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Lavador:</b></u></h4>&nbsp;<h4>{{Lavado.Lavadores.Nombre}}&nbsp;{{Lavado.Lavadores.Apellido}} </h4></div>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Auto: </b></u></h4>&nbsp;<h4>  {{Lavado.Marcas.Descripcion}}  {{Lavado.Modelos.Descripcion}}</h4></div>
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Servicio: </b></u></h4>&nbsp;<h4> {{Lavado.Servicios.Nombre}}</h4></div>
+                                <br />
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Total:</b></u></h4>&nbsp;<h4>${{Lavado.Total}},00</h4></div>
+                                <br />
+                                <div class="form-inline" style="display:inline-flex"><h4><u><b>Hora de llegada: </b></u></h4>&nbsp;<h4> {{Lavado.HoraLLegada}}&nbsp(Aprox)</h4></div>
 
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <img style="width:100%;" src="../../img/Encamino.gif" />
-                                </div>                            
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <img style="width:100%;" src="../../img/Encamino.gif" />
+                            </div>
                         </div>
 
                         <div ng-show="CancelarLavadoAsignado_">
@@ -152,7 +157,7 @@
                                 </div>
 
                             </div>
-                            
+
 
                         </div>
 
@@ -160,7 +165,7 @@
                             <div class="col-md-12">
                                 <h2 style="text-align:center; font-family:'Century Gothic'; color:#1487eb;margin-top:0px;">El lavador nunca llegó</h2>
 
-                               
+
                                 <div class="form-inline">
                                     <h4>Comentario:</h4>
                                     <textarea ng-model="comentario" style="width: 100%;" class="form-control" rows="5" id="comment"></textarea>
@@ -172,8 +177,8 @@
 
                             </div>
                             <!--<div class="col-md-4" style="vertical-align:central;">
-            <img style="width:100%; margin-top:7%;" src="../../img/lavando.gif" />
-        </div>-->
+                            <img style="width:100%; margin-top:7%;" src="../../img/lavando.gif" />
+                        </div>-->
 
                         </div>
 
@@ -198,12 +203,20 @@
 
         </div>
 
+        
+
         <div class="col-md-12 row text-center" style="margin-top:8%;">
+
             <div ng-show="DatosGuardadosOK" class="row">
                 <div class="alert alert-success">
                     <strong>Success!</strong> Datos personales guardados correctamente!.
                 </div>
             </div>
+            <div class="text-left">
+                <a class="btn btn-success text-left" id="password" href="../../Manage/ChangePassword">Cambiar Contraseña</a>
+            </div>          
+
+
             <button ng-click="!MostrarDatosPersonales?MostrarDatosPersonales=true:MostrarDatosPersonales=false;ObtenerMarcas();ObtenerDatos();" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
                 <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
                 <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Datos Personales
@@ -268,8 +281,8 @@
 
                             <!--ng-selected="MarcaSeleccionada == x.IdMarca"-->
                             <!--<select name="..." ng-model="MarcaSeleccionada" ng-options="Id as Descripcion (IdMarca, Descripcion) in Marcas">
-                                <option value="">Select date</option>
-                            </select>-->
+                            <option value="">Select date</option>
+                        </select>-->
 
                         </div>
                     </div>
@@ -371,7 +384,7 @@
                         <button type="button" id="close" class="close" data-dismiss="modal">&times;</button>
                         <h2 style="font-family:'Century Gothic'; color:#5bc0de;font-weight:bold;" class="modal-title text-center">Detalle del Lavado</h2>
                     </div>
-                    <div ng-show="CargandoDetalle">
+                    <div class="text-center" ng-show="CargandoDetalle">
                         <img class="text-center" src="../../img/loading.gif" />
                     </div>
                     <div ng-show="!CargandoDetalle" class="modal-body">

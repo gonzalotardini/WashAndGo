@@ -274,6 +274,7 @@ namespace WashAndGo.Controllers
                     AspNetUsers usuario = context.AspNetUsers.Where(c => c.Id == user.Id).First();
                     context.AspNetUsers.Remove(usuario);
                     context.SaveChanges();
+                    return RedirectToAction("Error", "Account");
                 }
             }
 
