@@ -28,6 +28,11 @@
         .mobile-margin {
             margin-top: 10%;
         }
+
+        #password {
+            font-family: 'Century Gothic';
+            margin-bottom: 1%;
+        }
     </style>
 </head>
 <body>
@@ -73,13 +78,15 @@
 
         <div class="col-md-12 row text-center" style="margin-top:8%;">
             <!--<div class="row">
-            <div class="alert alert-success">
-                <strong>Success!</strong> Datos personales guardados correctamente!.
-            </div>
-        </div>-->
+        <div class="alert alert-success">
+            <strong>Success!</strong> Datos personales guardados correctamente!.
+        </div>
+    </div>-->
 
             <div class="mobile-margin visible-xs"></div>
-
+            <div class="text-left">
+                <a class="btn btn-success text-left" id="password" href="../../Manage/ChangePassword">Cambiar Contraseña</a>
+            </div>
             <button ng-click="!MostrarDatosPersonales?MostrarDatosPersonales=true:MostrarDatosPersonales=false;ObtenerDatos();" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
                 <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
                 <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Datos Personales
