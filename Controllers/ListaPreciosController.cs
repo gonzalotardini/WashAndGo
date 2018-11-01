@@ -12,6 +12,7 @@ using PagedList.Mvc;
 
 namespace WashAndGo.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ListaPreciosController : Controller
     {
         private WGentities db = new WGentities();

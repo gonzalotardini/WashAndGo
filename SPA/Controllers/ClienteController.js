@@ -34,12 +34,32 @@
     $scope.items = ["--",1, 2, 3,4,5,6,7,8,9,10];
     $scope.calificacion = $scope.items[0];
     $scope.CancelarLavadoAsignado_ = false;
+    $scope.auth=false;
 
 
  
-
+    VerifyAuth();
     ObtenerLavadoAbierto();
-    
+
+
+    function VerifyAuth() {
+        $scope.auth = false;
+        ClienteService.VerifyAuth().then(
+            function (d) {
+                if (d.data=="403") {
+                    $scope.auth = false;
+                    window.location.href = '/Account/LogIn';
+                }
+                else {
+                    $scope.auth = true;
+                }
+            },
+            function (error) {
+
+                
+            });
+    }
+
 
     setInterval(function () {
         if ($scope.calificando==false) {

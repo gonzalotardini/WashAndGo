@@ -89,6 +89,16 @@
 
     };
 
+    service.VerifyAuth = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/Lavador/VerifyAuth'
+
+        });
+
+        return $q.when(promise);
+    }
+
     service.GetServiciosRealizo = function () {
         var promise = $http({
             method: 'get',

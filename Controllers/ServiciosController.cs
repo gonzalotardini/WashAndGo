@@ -10,6 +10,7 @@ using DAL;
 
 namespace WashAndGo.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ServiciosController : Controller
     {
         private WGentities db = new WGentities();

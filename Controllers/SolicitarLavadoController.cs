@@ -356,5 +356,41 @@ var lavadobll = new SolicitarLavadoBLL();
                 throw;
             }
         }
+
+
+        public string VerifyAuthLavador()
+        {
+            try
+            {
+                if (!User.IsInRole("Lavador"))
+                {
+                    return "403";
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string DatosCompletosLavador()
+        {
+            try
+            {
+                var lavadorbll = new SolicitarLavadoBLL();
+                var userid = User.Identity.GetUserId();
+                return lavadorbll.DatosCompletosLavador(userid);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

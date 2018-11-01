@@ -9,6 +9,21 @@
     $scope.CargandoServicios = false;
     $scope.CargandoServicios2 = false;
 
+    VerifyAuth();
+
+    function VerifyAuth() {        
+        LavadorService.VerifyAuth().then(
+            function (d) {
+                if (d.data=="403") {
+                    window.location.href = '/Account/LogIn';
+                }
+            },
+            function (error) {
+                
+            });
+    }
+
+
 
     $scope.ObtenerDatos = function () {
         $scope.cargandolavador = true;

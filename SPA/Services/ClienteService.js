@@ -13,6 +13,16 @@
 
     };   
 
+    service.VerifyAuth = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/Cliente/VerifyAuthCliente'
+
+        });
+
+        return $q.when(promise);
+
+    };   
 
     service.ObtenerLavadoAbierto = function () {
         var promise = $http({

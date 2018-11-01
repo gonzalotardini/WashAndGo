@@ -62,8 +62,28 @@ namespace WashAndGo.Controllers
 
         }
 
+        public string VerifyAuthCliente()
+        {
+            try
+            {
+                if (!User.IsInRole("Cliente"))
+                {
+                    return "403";
+                }
+                else
+                {
+                    return "";
+                }
 
-        
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
 
         public string ObtenerLavadoAbierto()
         {

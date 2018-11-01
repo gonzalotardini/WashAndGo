@@ -80,7 +80,7 @@ namespace WashAndGo.Controllers
                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                    });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -119,6 +119,18 @@ namespace WashAndGo.Controllers
                 throw;
             }
 
+        }
+
+        public string VerifyAuth()
+        {
+            if (!User.IsInRole("Lavador"))
+            {
+                return "403";
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }
