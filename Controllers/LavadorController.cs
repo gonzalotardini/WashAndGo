@@ -53,7 +53,7 @@ namespace WashAndGo.Controllers
             {
                 var lavadorBll = new LavadorBLL();
                 var userid = User.Identity.GetUserId();
-               
+
                 return JsonConvert.SerializeObject(lavadorBll.GetServiciosRealizo(userid), Formatting.None,
                    new JsonSerializerSettings()
                    {
@@ -132,5 +132,28 @@ namespace WashAndGo.Controllers
                 return "";
             }
         }
+
+        public string GetLavadoAbierto()
+        {
+            try
+            {
+                var lavadorbll = new LavadorBLL();
+                var idlavador = User.Identity.GetUserId();
+
+                return JsonConvert.SerializeObject(lavadorbll.GetLavadoAbierto(idlavador), Formatting.None,
+                   new JsonSerializerSettings()
+                   {
+                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                   });
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

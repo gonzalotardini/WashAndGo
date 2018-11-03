@@ -8,8 +8,70 @@
     $scope.MostrarServiciosRealizo = false;
     $scope.CargandoServicios = false;
     $scope.CargandoServicios2 = false;
+    $scope.LavadoAbierto = false;
+    $scope.Lavado = {};
+    $scope.urlCliente = '';
+    $scope.LavadoAsignado = false;
+    $scope.cargandoMapa = false;
+    $scope.LavadorEnDomicilio = false;
+    var i = 0;
 
     VerifyAuth();
+    GetLavadoAbierto();
+
+    setInterval(function () {
+        if ($scope.calificando == false) {
+            GetLavadoAbierto();
+        }
+
+        if (i == 5) {
+            $route.reload();
+        }
+        else {
+            i = i + 1;
+        }
+
+
+    }, 30000);
+
+    function GetLavadoAbierto() {
+        $scope.cargandoMapa = true;
+        $scope.LavadoAsignado = false;
+        LavadorService.GetLavadoAbierto().then(           
+            function (d) {
+                $scope.Lavado = d.data;
+                if ($scope.Lavado !== null) {
+                    $scope.cargandoMapa =true;                    
+                    $scope.LavadoAbierto = true;
+
+                    switch ($scope.Lavado.Estado) {
+
+                        case "ASIGNADO":
+                            $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + $scope.Lavado.Direccion);
+                            $scope.LavadoAsignado = true;
+                            break;
+                        case "EN PROCESO":
+                            
+                            $scope.LavadoAsignado = false;
+                            $scope.LavadorEnDomicilio = true;
+                            break;
+
+                        default:
+                    }
+
+                    $scope.cargandoMapa = false;
+                }
+                else {
+                    $scope.LavadoAbierto = false;
+                    $scope.cargandoMapa = false;
+                }
+
+            },
+            function (error) {
+                //$scope.CargandoServicios = false;
+                //var elerror = error;
+            });
+    }
 
     function VerifyAuth() {        
         LavadorService.VerifyAuth().then(
@@ -23,6 +85,17 @@
             });
     }
 
+    $scope.LLegue = function (idlavado) {       
+        LavadorService.LLegue(idlavado).then(
+            function (d) {
+               
+                GetLavadoAbierto();
+            },
+            function (error) {
+
+                var elerror = error;
+            });
+    };
 
 
     $scope.ObtenerDatos = function () {
@@ -168,5 +241,5 @@
 
 
 
-
+    $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 }]);
