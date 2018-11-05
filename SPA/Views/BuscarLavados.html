@@ -21,6 +21,15 @@
             font-family: 'Century Gothic';
             color: #003359;
         }
+
+        @media only screen and (max-width: 600px) {
+            #buscador {
+                display: -webkit-inline-box;
+            }
+        }
+       
+
+
     </style>
 </head>
 <body ng-app="app">
@@ -48,12 +57,13 @@
                         <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{url}}" allowfullscreen></iframe>
                     </div>
                     <div class="form-group">
-                        <div class="form-inline" style="width: 100%;">
+                        <div id="buscador" class="form-inline" style="width: 100%;">
                             <input id="direccion" ng-model="Direccion" class="form-control" style="width: 85%" value="{{Direccion}}" type="text" />
                             <button type="button" ng-click="ActualizarUbicacion(Direccion)" class="btn btn-info">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </div>
+                        <a ng-show="buscarlavados" ng-click="BuscarLavados(Direccion)" style="margin-top:2%;font-size: 20px;" class="btn btn-info">Buscar Lavados</a>
 
                         <div ng-show="ErrorDireccion" class="alert alert-danger">
                             <strong>Error!</strong> La dirección introducida es incorrecta. Intente nuevamente.

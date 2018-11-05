@@ -14,6 +14,11 @@
     $scope.LavadoAsignado = false;
     $scope.cargandoMapa = false;
     $scope.LavadorEnDomicilio = false;
+    $scope.CancelarLavadoAsignado_ = false;
+    $scope.items = ["--", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    $scope.calificacion = $scope.items[0];
+    $scope.FinalizadoCliente = false;
+
     var i = 0;
 
     VerifyAuth();
@@ -34,13 +39,37 @@
 
     }, 30000);
 
+
+    $scope.CancelarLavadoAsignado = function (idlavado, comentario) {
+
+        if ($scope.comentf.$valid == false) {
+           
+        }
+        else {
+            SolicitarLavadoService.CancelarLavadoAsignadoLavador(idlavado, comentario).then(
+                function (d) {
+                    //$scope.Servicios = d.data;
+                    GetLavadoAbierto();
+
+                },
+                function (error) {
+
+
+                });
+        }
+
+       
+
+    };
+
+
     function GetLavadoAbierto() {
         $scope.cargandoMapa = true;
         $scope.LavadoAsignado = false;
         LavadorService.GetLavadoAbierto().then(           
             function (d) {
                 $scope.Lavado = d.data;
-                if ($scope.Lavado !== null) {
+                if ($scope.Lavado !== "null") {
                     $scope.cargandoMapa =true;                    
                     $scope.LavadoAbierto = true;
 
@@ -54,6 +83,13 @@
                             
                             $scope.LavadoAsignado = false;
                             $scope.LavadorEnDomicilio = true;
+                            break;
+                        case "FINALIZADO CLIENTE":
+
+                            $scope.LavadoAsignado = false;
+                            $scope.LavadorEnDomicilio = false;
+                            $scope.FinalizadoCliente = true;
+
                             break;
 
                         default:
@@ -164,6 +200,27 @@
                 
                 var hola = "hola";
             }
+        }
+    };
+
+
+    $scope.FinalizarLavadoAccion = function (calificacion, comentario, lavadoid) {
+
+        if (calificacion == "--") {
+            $scope.ErrorCalificacion = true;
+        }
+        else {
+            $scope.ErrorCalificacion = false;
+            SolicitarLavadoService.FinalizarLavadoLavador(calificacion, comentario, lavadoid).then(
+                function (d) {
+                    //$scope.Servicios = d.data;
+                    GetLavadoAbierto();
+
+                },
+                function (error) {
+
+
+                });
         }
     };
 

@@ -8,7 +8,49 @@
     $scope.showModal = true;
     $scope.Direccion = '';
     $scope.CargandoDetalle = false;
+    $scope.auth = false;
+    $scope.completo = true;
+    
     var bandera = 0;
+
+    VerifyAuth();
+    DatosCompletos();
+
+    function VerifyAuth() {
+        $scope.auth = false;
+        BuscarLavadoService.VerifyAuth().then(
+            function (d) {
+                if (d.data=="403") {
+                    window.location.href = '/Account/LogIn';
+                }
+                else {
+                    $scope.auth = true;
+                }
+            },
+            function (error) {
+                
+
+            });
+    }
+    
+    function DatosCompletos() {     
+        
+        BuscarLavadoService.DatosCompletos().then(
+            function (d) {
+                if (d.data != "True") {
+                    
+                    $scope.completo = false;
+                } else {
+                    $scope.completo = true;
+                }
+            },
+            function (error) {
+
+
+            });
+
+    }
+
 
 
     setInterval(function () {

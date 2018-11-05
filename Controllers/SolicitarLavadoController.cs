@@ -13,7 +13,7 @@ using DAL.Views;
 
 namespace WashAndGo.Controllers
 {
-  
+
     public class SolicitarLavadoController : Controller
     {
         // GET: SolicitarLavado
@@ -27,7 +27,7 @@ namespace WashAndGo.Controllers
         [Authorize]
         public string obtenerMarcas()
         {
-                   
+
             var lavado = new Lavado();
             return JsonConvert.SerializeObject(lavado.ObtenerMarcas(), Formatting.None,
                    new JsonSerializerSettings()
@@ -81,12 +81,12 @@ namespace WashAndGo.Controllers
             int idser;
             idser = Convert.ToInt32(idServicio);
 
-            return JsonConvert.SerializeObject(lavado.ObtenerTotal(idSegmento,idser), Formatting.None,
+            return JsonConvert.SerializeObject(lavado.ObtenerTotal(idSegmento, idser), Formatting.None,
                    new JsonSerializerSettings()
                    {
                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                    });
-           
+
         }
 
         [Authorize]
@@ -98,7 +98,7 @@ namespace WashAndGo.Controllers
             var solicitarlavadobll = new SolicitarLavadoBLL();
             string direccion;
 
-            direccion=solicitarlavadobll.ObtenerDireccion(url);
+            direccion = solicitarlavadobll.ObtenerDireccion(url);
 
             return direccion;
 
@@ -110,11 +110,11 @@ namespace WashAndGo.Controllers
 
         }
 
-        public void crearSolicitud(string Marca, string Modelo,string Servicio,int seg,string dir,string total,string NombreTarjeta,long NumeroTarjeta, int Mes,int Año,int CodTarjeta)
+        public void crearSolicitud(string Marca, string Modelo, string Servicio, int seg, string dir, string total, string NombreTarjeta, long NumeroTarjeta, int Mes, int Año, int CodTarjeta)
         {
             try
             {
-               
+
 
                 var userID = User.Identity.GetUserId();
                 var lavadoDal = new Lavado();
@@ -132,17 +132,17 @@ namespace WashAndGo.Controllers
                     IdLavador = "-1",
                     IdServicio = Convert.ToInt32(Servicio),
                     Direccion = dir,
-                    Estado="SOLICITADO",
-                    Fecha = DateTime.Now.AddHours(-3),                    
-                    Total=  Decimal.Parse(total.Replace(" ", ""), NumberStyles.AllowThousands
+                    Estado = "SOLICITADO",
+                    Fecha = DateTime.Now.AddHours(-3),
+                    Total = Decimal.Parse(total.Replace(" ", ""), NumberStyles.AllowThousands
                             | NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol)
-            };
+                };
 
                 context.Lavados.Add(lavado);
                 context.SaveChanges();
 
                 lavadobll.ProcesarPago(lavado.IdLavado, NombreTarjeta, NumeroTarjeta, Año, Mes, CodTarjeta);
-                
+
             }
             catch (Exception ex)
             {
@@ -158,12 +158,12 @@ namespace WashAndGo.Controllers
                 if (User.Identity.IsAuthenticated == false)
                 {
                     return "403";
-                  
+
                 }
 
                 var userid = User.Identity.GetUserId();
                 var lavadodal = new Lavado();
-                var estado= lavadodal.VerificarClienteDAL(userid);
+                var estado = lavadodal.VerificarClienteDAL(userid);
 
                 return estado;
 
@@ -228,9 +228,9 @@ namespace WashAndGo.Controllers
                 throw;
             }
 
-            
 
-            
+
+
 
         }
 
@@ -253,8 +253,8 @@ namespace WashAndGo.Controllers
 
                 throw;
             }
-           
-            
+
+
         }
 
 
@@ -262,7 +262,7 @@ namespace WashAndGo.Controllers
         {
             try
             {
-                var lavadobll = new SolicitarLavadoBLL();                
+                var lavadobll = new SolicitarLavadoBLL();
 
                 return JsonConvert.SerializeObject(lavadobll.GetLavadoDetalle(idlavado), Formatting.None,
                       new JsonSerializerSettings()
@@ -276,17 +276,17 @@ namespace WashAndGo.Controllers
                 throw;
             }
         }
-        
-        
 
-        public string AsignarLavado (int idlavado, string Direccion)
+
+
+        public string AsignarLavado(int idlavado, string Direccion)
         {
             try
             {
                 var lavadobll = new SolicitarLavadoBLL();
                 var userid = User.Identity.GetUserId();
-                return lavadobll.AsignarLavado(idlavado,userid, Direccion);
-                      
+                return lavadobll.AsignarLavado(idlavado, userid, Direccion);
+
             }
             catch (Exception)
             {
@@ -315,10 +315,27 @@ namespace WashAndGo.Controllers
         {
             try
             {
-                
-var lavadobll = new SolicitarLavadoBLL();
+
+                var lavadobll = new SolicitarLavadoBLL();
 
                 lavadobll.FinalizarLavadoCliente(calificacion, comentario, lavadoid);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+        public void FinalizarLavadoLavador(int calificacion, string comentario, int lavadoid)
+        {
+            try
+            {
+
+                var lavadobll = new SolicitarLavadoBLL();
+
+                lavadobll.FinalizarLavadoLavador(calificacion, comentario, lavadoid);
             }
             catch (Exception ex)
             {
@@ -349,6 +366,20 @@ var lavadobll = new SolicitarLavadoBLL();
             {
                 var lavadobll = new SolicitarLavadoBLL();
                 lavadobll.CancelarLavadoAsignadoCliente(idlavado, comentario);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public void CancelarLavadoAsignadoLavador(int idlavado, string comentario)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+                lavadobll.CancelarLavadoAsignadoLavador(idlavado, comentario);
             }
             catch (Exception ex)
             {
@@ -393,7 +424,7 @@ var lavadobll = new SolicitarLavadoBLL();
             }
         }
 
-        
-        
+
+
     }
 }

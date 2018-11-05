@@ -128,6 +128,21 @@
 
     };
 
+    service.FinalizarLavadoLavador = function (calificacion, comentario, lavadoid) {
+        var promise = $http({
+            method: 'post',
+            url: '/SolicitarLavado/FinalizarLavadoLavador',
+            params: {
+                calificacion: calificacion,
+                comentario: comentario,
+                lavadoid: lavadoid
+            }
+        });
+
+        return $q.when(promise);
+
+    };
+
 
     service.LavadorNuncaLLego = function (idlavado, comentario) {
         var promise = $http({
@@ -147,6 +162,21 @@
         var promise = $http({
             method: 'post',
             url: '/SolicitarLavado/CancelarLavadoAsignadoCliente',
+            params: {
+                idlavado: idlavado,
+                comentario: comentario
+            }
+        });
+
+        return $q.when(promise);
+
+    };
+
+
+    service.CancelarLavadoAsignadoLavador = function (idlavado, comentario) {
+        var promise = $http({
+            method: 'post',
+            url: '/SolicitarLavado/CancelarLavadoAsignadoLavador',
             params: {
                 idlavado: idlavado,
                 comentario: comentario
@@ -187,6 +217,7 @@
         var promise = $http({
             method: 'get',
             url: '/SolicitarLavado/ObtenerLavados'
+
 
         });
 

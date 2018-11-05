@@ -1,4 +1,4 @@
-﻿angular.module('app').controller("ClienteController", ["$scope","$route" ,"$sce", "$http", "$window", "$filter", "ClienteService", "SolicitarLavadoService", "$location", function ($scope, $route,$sce, $http, $window, $filter, ClienteService, SolicitarLavadoService, $location) {
+﻿angular.module('app').controller("ClienteController", ["$scope", "$route", "$sce", "$http", "$window", "$filter", "ClienteService", "SolicitarLavadoService", "$location", function ($scope, $route, $sce, $http, $window, $filter, ClienteService, SolicitarLavadoService, $location) {
 
     $scope.MostrarDatosPersonales = false;
     $scope.Marcas = [];
@@ -29,15 +29,15 @@
     $scope.LavadorEnDomicilio = false;
     $scope.FinalizarLavado = false;
     var i = 0;
-    $scope.calificando = false;    
+    $scope.calificando = false;
     $scope.comentario = '';
-    $scope.items = ["--",1, 2, 3,4,5,6,7,8,9,10];
+    $scope.items = ["--", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     $scope.calificacion = $scope.items[0];
     $scope.CancelarLavadoAsignado_ = false;
-    $scope.auth=false;
+    $scope.auth = false;
 
 
- 
+
     VerifyAuth();
     ObtenerLavadoAbierto();
 
@@ -46,7 +46,7 @@
         $scope.auth = false;
         ClienteService.VerifyAuth().then(
             function (d) {
-                if (d.data=="403") {
+                if (d.data == "403") {
                     $scope.auth = false;
                     window.location.href = '/Account/LogIn';
                 }
@@ -56,25 +56,31 @@
             },
             function (error) {
 
-                
+
             });
     }
 
 
+
     setInterval(function () {
-        if ($scope.calificando==false) {
+        if ($scope.calificando == false) {
             ObtenerLavadoAbierto();
         }
-       
-        if (i==5) {
+
+        if (i == 5) {
             $route.reload();
         }
         else {
             i = i + 1;
         }
-
-
     }, 30000);
+
+
+    //setInterval(function () {
+
+
+
+    //}, 30000);
 
 
     $scope.ObtenerMarcas = function () {
@@ -95,7 +101,7 @@
             function (d) {
                 $scope.Cliente = d.data;
                 var fecha = new Date();
-                
+
                 if ($scope.Cliente.Completo === 'True') {
                     $scope.Nombre = $scope.Cliente.Nombre,
                         $scope.Apellido = $scope.Cliente.Apellido,
@@ -149,7 +155,7 @@
 
     $scope.GuardarDatos = function (Nombre, Apellido, DNI, Email, MarcaSeleccionada, Modelo) {
 
-        if ($scope.cliente.$valid==false) {
+        if ($scope.cliente.$valid == false) {
             var hola = 'a';
         }
         else {
@@ -166,16 +172,16 @@
                 });
         }
 
-       
+
 
     }
 
-   
+
     function ObtenerLavadoAbierto() {
 
         ClienteService.ObtenerLavadoAbierto().then(
             function (response) {
-               $scope.Lavado = response.data;
+                $scope.Lavado = response.data;
 
                 if ($scope.Lavado != "null") {
                     $scope.LavadoAbierto = true;
@@ -183,7 +189,7 @@
 
                     switch ($scope.Lavado.Estado) {
                         case "SOLICITADO":
-                            $scope.LavadoAsignado =false;
+                            $scope.LavadoAsignado = false;
                             $scope.LavadoSolicitado = true;
                             break;
 
@@ -191,7 +197,7 @@
                             $scope.LavadoSolicitado = false;
                             $scope.LavadoAsignado = true;
                             break;
-                        case "EN PROCESO":    
+                        case "EN PROCESO":
                             $scope.LavadoSolicitado = false;
                             $scope.LavadoAsignado = false;
                             $scope.LavadorEnDomicilio = true;
@@ -199,8 +205,8 @@
 
                         default:
                     }
-                       
-                                                                                                          }
+
+                }
                 else {
                     $scope.LavadoAbierto = false;
                 }
@@ -247,11 +253,11 @@
     $scope.CancelarLavadoAsignado = function (idlavado, comentario) {
 
 
-        SolicitarLavadoService.CancelarLavadoAsignadoCliente(idlavado,comentario).then(
+        SolicitarLavadoService.CancelarLavadoAsignadoCliente(idlavado, comentario).then(
             function (d) {
                 //$scope.Servicios = d.data;
                 ObtenerLavadoAbierto();
-               
+
             },
             function (error) {
 
@@ -282,19 +288,19 @@
 
     $scope.LavadorNuncaLLego = function (idlavado, comentario) {
         $scope.LavadorNuncaLLego_ = true;
-           
-            SolicitarLavadoService.LavadorNuncaLLego(idlavado,comentario).then(
-                function (d) {
-                    //$scope.Servicios = d.data;
-                    $scope.LavadorNuncaLLego_ = false;
-                    ObtenerLavadoAbierto();
 
-                },
-                function (error) {
+        SolicitarLavadoService.LavadorNuncaLLego(idlavado, comentario).then(
+            function (d) {
+                //$scope.Servicios = d.data;
+                $scope.LavadorNuncaLLego_ = false;
+                ObtenerLavadoAbierto();
+
+            },
+            function (error) {
 
 
-                });
-        
+            });
+
     };
 
     $scope.LLegoLavador = function (lavadoid) {
@@ -317,10 +323,10 @@
 
         $scope.CargandoLavados = true;
         SolicitarLavadoService.ObtenerLavados().then(
-            function (d) {              
+            function (d) {
                 //$scope.Servicios = d.data;
                 $scope.CargandoLavados = false;
-                $scope.ListaLavados = d.data;                
+                $scope.ListaLavados = d.data;
             },
             function (error) {
 
@@ -332,7 +338,7 @@
     $scope.GetDetalleLavado = function (idlavado) {
         $scope.CargandoDetalle = true;
 
-       ClienteService.GetDetalleLavado(idlavado).then(
+        ClienteService.GetDetalleLavado(idlavado).then(
             function (d) {
                 $scope.LavadoV = d.data;
                 $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + $scope.LavadoV.Direccion);

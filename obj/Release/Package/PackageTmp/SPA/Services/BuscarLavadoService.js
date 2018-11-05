@@ -2,6 +2,29 @@
 
     var service = {};
 
+
+    service.VerifyAuth = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/SolicitarLavado/VerifyAuthLavador'            
+
+        });
+
+        return $q.when(promise);
+
+    };
+
+    service.DatosCompletos = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/SolicitarLavado/DatosCompletosLavador'
+
+        });
+
+        return $q.when(promise);
+
+    };
+
     service.BuscarLavado = function (Direccion) {
         var promise = $http({
             method: 'get',

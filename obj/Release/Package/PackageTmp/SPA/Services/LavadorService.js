@@ -2,54 +2,19 @@
 
     var service = {};
 
-    //service.VerificarCliente = function () {
-    //    var promise = $http({
-    //        method: 'get',
-    //        url: '/SolicitarLavado/VerificarCliente'
+   
+    service.GetLavadoAbierto = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/Lavador/GetLavadoAbierto'
 
-    //    });
+        });
 
-    //    return $q.when(promise);
+        return $q.when(promise);
 
-    //};
-
-
-    //service.ObtenerLavadoAbierto = function () {
-    //    var promise = $http({
-    //        method: 'get',
-    //        url: '/Cliente/ObtenerLavadoAbierto'
-
-    //    });
-
-    //    return $q.when(promise);
-
-    //};
+    };
 
 
-    //service.ObtenerMarcas = function () {
-    //    var promise = $http({
-    //        method: 'get',
-    //        url: '/SolicitarLavado/ObtenerMarcas'
-
-    //    });
-
-    //    return $q.when(promise);
-
-    //};
-
-
-    //service.ObtenerModelos = function (Marca) {
-    //    var promise = $http({
-    //        method: 'get',
-    //        url: '/SolicitarLavado/obtenerModelos',
-    //        params: {
-    //            Marca: Marca
-    //        }
-    //    });
-
-    //    return $q.when(promise);
-
-    //};
 
     service.GuardarDatos = function (lavador) {
         var promise = $http({
@@ -57,6 +22,19 @@
             url: '/Lavador/GuardarDatos',
             data: {
                 lavador:lavador
+            }
+        });
+
+        return $q.when(promise);
+
+    };
+
+    service.LLegue = function (idlavado) {
+        var promise = $http({
+            method: 'post',
+            url: '/SolicitarLavado/LLegoLavador',
+            data: {
+                idlavado: idlavado
             }
         });
 
@@ -88,6 +66,16 @@
         return $q.when(promise);
 
     };
+
+    service.VerifyAuth = function () {
+        var promise = $http({
+            method: 'get',
+            url: '/Lavador/VerifyAuth'
+
+        });
+
+        return $q.when(promise);
+    }
 
     service.GetServiciosRealizo = function () {
         var promise = $http({
