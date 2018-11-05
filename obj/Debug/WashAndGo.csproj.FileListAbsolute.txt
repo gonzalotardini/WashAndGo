@@ -525,3 +525,5 @@ C:\WashAndGO\WashAndGo\bin\PagedList.dll
 C:\WashAndGO\WashAndGo\bin\PagedList.Mvc.dll
 C:\WashAndGO\WashAndGo\bin\PagedList.xml
 C:\WashAndGO\WashAndGo\bin\PagedList.Mvc.xml
+C:\WashAndGO\WashAndGo\bin\itextsharp.dll
+C:\WashAndGO\WashAndGo\bin\itextsharp.xml

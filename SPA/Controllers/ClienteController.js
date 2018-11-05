@@ -35,6 +35,7 @@
     $scope.calificacion = $scope.items[0];
     $scope.CancelarLavadoAsignado_ = false;
     $scope.auth = false;
+    $scope.FinalizadoLavador = false;
 
 
 
@@ -202,6 +203,13 @@
                             $scope.LavadoAsignado = false;
                             $scope.LavadorEnDomicilio = true;
                             break;
+                        case "FINALIZADO LAVADOR":
+                            $scope.LavadoSolicitado = false;
+                            $scope.LavadoAsignado = false;
+                            $scope.LavadorEnDomicilio = false;
+                            $scope.calificando = true;
+                            $scope.FinalizadoLavador = true;
+                            break;
 
                         default:
                     }
@@ -332,7 +340,6 @@
 
 
             });
-
     };
 
     $scope.GetDetalleLavado = function (idlavado) {

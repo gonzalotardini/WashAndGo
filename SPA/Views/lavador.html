@@ -45,10 +45,21 @@
         #asignado{
             width:49%;
         }
+        .modal-dialog {
+            width: 75%;
+        }
+        h3 {
+            font-family: 'Century Gothic';
+            color: #003359;
+        }
+
 
         @media only screen and (max-width: 600px) {
             #asignado,.btn{
                 width:100%;
+            }
+            .modal-dialog {
+                width: unset;
             }
         }
 
@@ -164,6 +175,27 @@
                             </form>
                         </div>
 
+                        <div ng-show="ClienteNoRespondio_" class="row">
+                            <div class="col-md-12">
+                                <h2 style="text-align:center; font-family:'Century Gothic'; color:#1487eb;margin-top:0px;">El lavador nunca llegó</h2>
+
+
+                                <div class="form-inline">
+                                    <h4>Comentario:</h4>
+                                    <textarea ng-model="comentario" style="width: 100%;" class="form-control" rows="5" id="comment"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <a style="width:100%;margin-top:1%;" ng-click="ClienteNoRespondio(Lavado.IdLavado,comentario)" class="btn btn-info btn-lg">Finalizar Lavado</a>
+                                </div>
+
+                            </div>
+                            <!--<div class="col-md-4" style="vertical-align:central;">
+                            <img style="width:100%; margin-top:7%;" src="../../img/lavando.gif" />
+                        </div>-->
+
+                        </div>
+
                     </div>
                 </div>
                 <div ng-show="LavadoAsignado" class="form-inline">
@@ -172,7 +204,7 @@
                 </div>
                 <div ng-show="LavadorEnDomicilio" class="form-inline">
                     <a style="font-family:'Century Gothic';" class="btn btn-success btn-lg" ng-click="FinalizarLavado=true;LavadorEnDomicilio=false;calificando=true;">Finalizar Lavado</a>
-                    <a style="font-family:'Century Gothic';" class="btn btn-primary btn-lg" ng-click="FinalizarLavado=false;LavadorEnDomicilio=false;calificando=true;LavadorNuncaLLego_=true;LavadoAsignado=false">El cliente no respondió</a>
+                    <a style="font-family:'Century Gothic';" class="btn btn-primary btn-lg" ng-click="FinalizarLavado=false;LavadorEnDomicilio=false;calificando=true;ClienteNoRespondio_=true;LavadoAsignado=false">El cliente no respondió</a>
                     <a style="font-family:'Century Gothic';" class="btn btn-danger btn-lg" ng-click="CancelarLavadoAsignado_=true;LavadoAsignado=false;calificando=true;LavadorEnDomicilio=false;" role="button">Cancelar Lavado</a>
                 </div>
 
@@ -182,10 +214,10 @@
 
         <div class="col-md-12 row text-center" style="margin-top:8%;">
             <!--<div class="row">
-        <div class="alert alert-success">
-            <strong>Success!</strong> Datos personales guardados correctamente!.
-        </div>
-    </div>-->
+            <div class="alert alert-success">
+                <strong>Success!</strong> Datos personales guardados correctamente!.
+            </div>
+        </div>-->
 
             <div class="mobile-margin visible-xs"></div>
             <div class="text-left">
@@ -200,7 +232,7 @@
 
         </div>
         <div class="col-md-12 text-center"> <img ng-show="cargandolavador" src="../../img/loading.gif" /></div>
-       
+
 
         <div class="col-md-4"></div>
         <div ng-show="MostrarDatosPersonales && !cargandolavador">
@@ -241,8 +273,8 @@
                             <input ng-readonly="ReadOnly" ng-model="lavador.Email" class="form-control" placeholder="Email" type="email">
                         </div>
                     </div>
-                     
-                 
+
+
                     <div ng-hide="ReadOnly" class="form-group col-md-12" style="width:100%;">
                         <input ng-click="submit=true;GuardarDatos(lavador)" class="btn btn-primary" value="Aceptar" style="font-family:'Century Gothic'; color:white; width: 100%;font-size: 18px;" />
                     </div>
@@ -265,12 +297,12 @@
         <div ng-show="CargandoServicios || CargandoServicios2" class="col-md-12 text-center">
             <img src="../../img/loading.gif" />
         </div>
-        
+
         <div ng-show="MostrarServiciosRealizo && !CargandoServicios && !CargandoServicios2" class="col-md-12">
             <div class="col-md-6">
                 <h2 style="text-align:center;font-family:'Century Gothic'">Realizo</h2>
                 <a class="btn btn-success" ng-click="RemoveService(x.IdServicio)" style="width:100%;margin-bottom:2%; font-family:'Century Gothic';" ng-repeat="x in ServiciosRealizo">{{x.Nombre}}</a>
-                
+
             </div>
             <div class="col-md-6">
                 <h2 style="text-align:center;font-family:'Century Gothic'">No realizo</h2>
@@ -279,22 +311,108 @@
         </div>
 
 
-        <div class="col-md-12 row text-center" style="margin-top:1%;">
-            <button ng-click="!MostrarDatosPersonales?MostrarDatosPersonales=true:MostrarDatosPersonales=false;ObtenerMarcas();ObtenerDatos();" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
-                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
-                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Mis Lavados
-                <span ng-hide="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-down" style="float:right;"></span>
-                <span ng-show="MostrarDatosPersonales" class="glyphicon glyphicon-chevron-up" style="float:right;"></span>
+        <div ng-app="angularTable" class="col-md-12 row text-center" style="margin-top:1%;">
+            <button type="button" ng-click="!VerListaLavados?VerListaLavados=true:VerListaLavados=false; ObtenerLavados()" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;">
+                <span ng-hide="VerListaLavados" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
+                <span ng-show="VerListaLavados" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Mis Lavados
+                <span ng-hide="VerListaLavados" class="glyphicon glyphicon-chevron-down" style="float:right;"></span>
+                <span ng-show="VerListaLavados" class="glyphicon glyphicon-chevron-up" style="float:right;"></span>
             </button>
+
+
+            <div ng-show="CargandoLavados" class="col-md-12 text-center">
+                <img src="../../img/loading.gif" />
+            </div>
+            <div class="row col-md-12" ng-show="VerListaLavados && !CargandoLavados">
+
+                <form style="    margin-bottom: 2%;    margin-top: 2%;    margin-left: 4%;" class="form-inline text-left">
+                    <div class="form-group">
+                        <label>Search</label>
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                    </div>
+                </form>
+                <div class="table-responsive">
+
+                    <table class="table">
+                        <thead>
+                            <!--<a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>-->
+                            <tr>
+                                <th ng-click="sort('Fecha')" class="text-center">Fecha</th>
+                                <th ng-click="sort('Modelo')" class="text-center">Vehículo</th>
+                                <th ng-click="sort('Servicio')" class="text-center">Servicio</th>
+                                <th ng-click="sort('Estado')" class="text-center">Estado</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tr dir-paginate="x in ListaLavados | orderBy:sortKey:reverse| filter:search |itemsPerPage:10">
+                            <td>{{x.Fecha | date : "dd/MM/y"}}</td>
+                            <td>{{x.Marca}} {{x.Modelo}}</td>
+                            <td>{{x.Servicio}}</td>
+                            <td>{{x.Estado}}</td>
+                            <td class="text-center"><a class='btn btn-warning btn-xs' data-toggle="modal" data-target="#myModal" ng-click="GetDetalleLavado(x.IdLavado)" style="color:black;width:100%;" href=""><span class="glyphicon glyphicon-edit"></span> Detalle</a> <!--<a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a>--></td>
+                        </tr>
+                    </table>
+                </div>
+                <dir-pagination-controls max-size="5"
+                                         direction-links="true"
+                                         boundary-links="true">
+                </dir-pagination-controls>
+            </div>
         </div>
 
 
-        <!--<div class="col-md-12 text-center">
-        <img ng-show="cargandoCliente" src="../../img/loading.gif" />
-    </div>-->
-        <!--<div class="col-md-4"></div>-->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" id="close" class="close" data-dismiss="modal">&times;</button>
+                        <h2 style="font-family:'Century Gothic'; color:#5bc0de;font-weight:bold;" class="modal-title text-center">Detalle del Lavado</h2>
+                    </div>
+                    <div class="text-center" ng-show="CargandoDetalle">
+                        <img class="text-center" src="../../img/loading.gif" />
+                    </div>
+                    <div ng-show="!CargandoDetalle" class="modal-body">
 
 
+                        <div class="col-md-6 text-center">
+                            <h3><strong>Lavador:</strong>&nbsp;{{LavadoV.Lavadores.Nombre}}&nbsp;{{LavadoV.Lavadores.Apellido}}</h3>
+                            <h3><strong>Auto:</strong>&nbsp;{{LavadoV.Marcas.Descripcion}}&nbsp;{{LavadoV.Modelos.Descripcion}}</h3>
+                            <h3><strong>Estado:</strong>&nbsp;{{LavadoV.Estado}}</h3>
+                            <h3><strong>Servicio:</strong>&nbsp;{{LavadoV.Servicios.Nombre}}</h3>
+                            <h3><strong>Precio:</strong>&nbsp;${{LavadoV.Total}},00</h3>
+                            <h3><strong>Dirección:</strong>&nbsp; {{LavadoV.Direccion}}</h3>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div ng-hide="cargandoMapa" id="map">
+                                <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{urlCliente}}" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <p>-</p>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <button pdf-save-button="idOne" pdf-name="someone.pdf" class="btn">Hello Someone</button>
+        <!-- below block will be saved as pdf -->
+
+        <div pdf-save-content="idOne">
+            Hello Someone
+        </div>
+
+        <button pdf-save-button="idOneGraph" pdf-name="hello.pdf" class="btn">Hello World</button>
+
+        <!-- below block will be saved as pdf -->
+
+        <div pdf-save-content="idOneGraph">
+            Hello World
+        </div>
 
     </div>
 

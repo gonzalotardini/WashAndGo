@@ -227,11 +227,28 @@ namespace WashAndGo.Controllers
 
                 throw;
             }
+        }
+
+        public string ObtenerLavadosLavador()
+        {
+
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+                var idlavador = User.Identity.GetUserId();
 
 
+                return JsonConvert.SerializeObject(lavadobll.ObtenerLavadosLavador(idlavador), Formatting.None,
+                   new JsonSerializerSettings()
+                   {
+                       ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                   });
+            }
+            catch (Exception ex)
+            {
 
-
-
+                throw;
+            }
         }
 
 
@@ -351,6 +368,21 @@ namespace WashAndGo.Controllers
             {
                 var lavadobll = new SolicitarLavadoBLL();
                 lavadobll.LavadorNuncaLLego(idlavado, comentario);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public void ClienteNoRespondio(int idlavado, string comentario)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+                lavadobll.ClienteNoRespondio(idlavado, comentario);
 
             }
             catch (Exception ex)

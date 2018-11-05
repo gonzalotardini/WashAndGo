@@ -18,6 +18,11 @@
     $scope.items = ["--", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     $scope.calificacion = $scope.items[0];
     $scope.FinalizadoCliente = false;
+    $scope.calificando = false;
+    $scope.ClienteNoRespondio_ = false;
+    $scope.ListaLavados = [];
+    $scope.VerListaLavados = false;
+    $scope.CargandoDetalle = false;
 
     var i = 0;
 
@@ -43,7 +48,7 @@
     $scope.CancelarLavadoAsignado = function (idlavado, comentario) {
 
         if ($scope.comentf.$valid == false) {
-           
+            var hola = "";
         }
         else {
             SolicitarLavadoService.CancelarLavadoAsignadoLavador(idlavado, comentario).then(
@@ -109,6 +114,47 @@
             });
     }
 
+    $scope.sort = function (keyname) {
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    };
+
+    $scope.sort('Fecha');
+
+    $scope.ObtenerLavados = function () {
+
+        $scope.CargandoLavados = true;
+        SolicitarLavadoService.ObtenerLavadosLavador().then(
+            function (d) {
+                //$scope.Servicios = d.data;
+                $scope.CargandoLavados = false;
+                $scope.ListaLavados = d.data;
+            },
+            function (error) {
+
+
+            });
+    };
+
+
+    $scope.ClienteNoRespondio = function (idlavado, comentario) {
+        $scope.ClienteNoRespondio_ = true;
+
+        SolicitarLavadoService.ClienteNoRespondio(idlavado, comentario).then(
+            function (d) {
+                //$scope.Servicios = d.data;
+                $scope.ClienteNoRespondio_ = false;
+                GetLavadoAbierto();
+
+            },
+            function (error) {
+
+
+            });
+
+    };
+
+
     function VerifyAuth() {        
         LavadorService.VerifyAuth().then(
             function (d) {
@@ -132,6 +178,24 @@
                 var elerror = error;
             });
     };
+
+
+    $scope.GetDetalleLavado = function (idlavado) {
+        $scope.CargandoDetalle = true;
+
+        LavadorService.GetDetalleLavado(idlavado).then(
+            function (d) {
+                $scope.LavadoV = d.data;
+                $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + $scope.LavadoV.Direccion);
+                $scope.urlCliente = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + $scope.LavadoV.Direccion);
+                $scope.CargandoDetalle = false;
+                //$scope.cargandoModelos = false;
+            },
+            function (error) {
+                $scope.CargandoDetalle = false;
+
+            });
+    }
 
 
     $scope.ObtenerDatos = function () {

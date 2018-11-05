@@ -14,7 +14,19 @@
 
     };
 
+    service.GetDetalleLavado = function (idlavado) {
+        var promise = $http({
+            method: 'get',
+            url: '/SolicitarLavado/GetLavadoDetalle',
+            params: {
+                idlavado: idlavado
+            }
 
+        });
+
+        return $q.when(promise);
+
+    };
 
     service.GuardarDatos = function (lavador) {
         var promise = $http({

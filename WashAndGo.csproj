@@ -218,6 +218,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\ModelosController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Controllers\SolicitarLavadoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1097,10 +1098,12 @@
     <Content Include="SPA\Controllers\BuscarLavadoController.js" />
     <Content Include="SPA\Controllers\ClienteController.js" />
     <Content Include="SPA\Controllers\LavadorController.js" />
+    <Content Include="SPA\Controllers\ReportesController.js" />
     <Content Include="SPA\Controllers\SolicitarLavadoController.js" />
     <Content Include="SPA\Services\BuscarLavadoService.js" />
     <Content Include="SPA\Services\ClienteService.js" />
     <Content Include="SPA\Services\LavadorService.js" />
+    <Content Include="SPA\Services\ReportesService.js" />
     <Content Include="SPA\Services\SolicitarLavadoService.js" />
     <Content Include="SPA\Views\BuscarLavados.html" />
     <Content Include="SPA\Views\client.html" />
@@ -1108,6 +1111,7 @@
     <Content Include="SPA\Views\Home.html" />
     <Content Include="SPA\Views\lavador.html" />
     <Content Include="SPA\Views\Modal\lavado.html" />
+    <Content Include="SPA\Views\Reportes.html" />
     <Content Include="SPA\Views\SolicitarLavado.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1177,8 +1181,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Reports\" />
     <Folder Include="Views\Cliente\" />
     <Folder Include="Views\Lavador\" />
+    <Folder Include="Views\Reportes\" />
     <Folder Include="Views\SolicitarLavado\" />
   </ItemGroup>
   <ItemGroup>
