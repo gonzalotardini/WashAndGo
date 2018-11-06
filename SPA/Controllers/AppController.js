@@ -31,9 +31,14 @@ app.config(function ($routeProvider, $locationProvider) {
             {
                 templateUrl: 'SPA/Views/Reportes.html',
                 controller: 'ReportesController'
+        })
+        .when('/BuscarLavado',
+            {
+                templateUrl: 'SPA/Views/BuscarLavados.html',
+                controller: 'BuscarLavadoController'
             })
         .otherwise({
-            templateUrl: 'SPA/Views/Home.html',
+            templateUrl: 'SPA/Views/Home.html'
             //////controller: 'LoginController'
         });
 

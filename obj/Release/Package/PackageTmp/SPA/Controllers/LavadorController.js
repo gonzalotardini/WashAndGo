@@ -256,11 +256,11 @@
     }
 
     $scope.RemoveService = function (service) {
-        for (var i = 0; i < $scope.ServiciosRealizo.Servicios.length; i++) {
-            if ($scope.ServiciosRealizo.Servicios[i].IdServicio == service) {
-                $scope.ServiciosNoRealizo.push($scope.ServiciosRealizo.Servicios[i]);
-                $scope.ServiciosRealizo.Servicios.splice(i, 1);
-                GuardarServicios($scope.ServiciosRealizo.Servicios);
+        for (var i = 0; i < $scope.ServiciosRealizo.length; i++) {
+            if ($scope.ServiciosRealizo[i].IdServicio == service) {
+                $scope.ServiciosNoRealizo.push($scope.ServiciosRealizo[i]);
+                $scope.ServiciosRealizo.splice(i, 1);
+                GuardarServicios($scope.ServiciosRealizo);
                 
                 var hola = "hola";
             }
@@ -292,9 +292,9 @@
     $scope.AddService = function (service) {
         for (var i = 0; i < $scope.ServiciosNoRealizo.length; i++) {
             if ($scope.ServiciosNoRealizo[i].IdServicio == service) {
-                $scope.ServiciosRealizo.Servicios.push($scope.ServiciosNoRealizo[i]);
+                $scope.ServiciosRealizo.push($scope.ServiciosNoRealizo[i]);
                 $scope.ServiciosNoRealizo.splice(i, 1);
-                GuardarServicios($scope.ServiciosRealizo.Servicios);
+                GuardarServicios($scope.ServiciosRealizo);
 
                 var hola = "hola";
             }
