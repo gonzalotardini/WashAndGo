@@ -27,10 +27,10 @@ app.config(function ($routeProvider, $locationProvider) {
                 templateUrl: 'SPA/Views/lavador.html',
                 controller: 'LavadorController'
         })
-        .when('/BuscarLavado',
+        .when('/reportes',
             {
-                templateUrl: 'SPA/Views/BuscarLavados.html',
-                controller: 'BuscarLavadoController'
+                templateUrl: 'SPA/Views/Reportes.html',
+                controller: 'ReportesController'
             })
         .otherwise({
             templateUrl: 'SPA/Views/Home.html',

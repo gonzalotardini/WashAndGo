@@ -1,4 +1,4 @@
-﻿var app = angular.module("app", ['ngRoute', 'angularUtils.directives.dirPagination', 'htmlToPdfSave', 'pascalprecht.translate']);
+﻿var app = angular.module("app", ['ngRoute', 'angularUtils.directives.dirPagination', 'pascalprecht.translate']);
 
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider

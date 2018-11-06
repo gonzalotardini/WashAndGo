@@ -114,3 +114,5 @@ C:\WashAndGO\WashAndGo\bin\PagedList.Mvc.xml
 C:\WashAndGO\WashAndGo\bin\System.Net.Http.Formatting.xml
 C:\WashAndGO\WashAndGo\bin\System.Web.Http.xml
 C:\WashAndGO\WashAndGo\bin\System.Web.Http.WebHost.xml
+C:\WashAndGO\WashAndGo\bin\itextsharp.dll
+C:\WashAndGO\WashAndGo\bin\itextsharp.xml
