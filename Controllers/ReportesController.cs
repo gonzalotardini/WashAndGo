@@ -3,6 +3,7 @@ using DAL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -20,15 +21,24 @@ namespace WashAndGo.Controllers
 
 
 
-        public ActionResult ReporteLavadores()
+        public ActionResult ReporteLavadores(string Desde, string Hasta)
         {
             try
             {
                 var path = HttpRuntime.AppDomainAppPath;
-               
+                
+
+                DateTime _desde = new DateTime();
+                DateTime _hasta = new DateTime();
+                _desde = DateTime.ParseExact(Desde, "dd/MM/yyyy", null);
+                _hasta  = DateTime.ParseExact(Hasta, "dd/MM/yyyy", null);
+
+
+
 
                 var lavadobll = new SolicitarLavadoBLL();
-                path=lavadobll.GenerarReporteLavadores(path);               
+
+                path=lavadobll.GenerarReporteLavadores(path,_desde,_hasta);               
                 
 
                 //byte[] fileBytes = System.IO.File.ReadAllBytes(System.IO.Path.Combine(HttpRuntime.AppDomainAppPath, "Reports\\P.pdf"));

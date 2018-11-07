@@ -8,8 +8,29 @@
 
     <div class="container">
         <div class="col-md-12">
-            <a ng-click="ReporteLavadores()" class="btn btn-lg btn-info" style="font-family:'Century Gothic'; width:100%;margin-top:10%;">Generar Reporte Lavadores</a>
+            <button ng-click="!MostrarReporteLavadores?MostrarReporteLavadores=true:MostrarReporteLavadores=false;" type="button" class="btn btn-lg btn-info" style="font-family:'Century Gothic';width:100%;margin-top:10%;">
+                <span ng-hide="MostrarReporteLavadores" class="glyphicon glyphicon-chevron-down" style="float:left;"></span>
+                <span ng-show="MostrarReporteLavadores" class="glyphicon glyphicon-chevron-up" style="float:left;"></span> Generar Reporte Lavadores
+                <span ng-hide="MostrarReporteLavadores" class="glyphicon glyphicon-chevron-down" style="float:right;"></span>
+                <span ng-show="MostrarReporteLavadores" class="glyphicon glyphicon-chevron-up" style="float:right;"></span>
+
+            </button>
+            <div ng-show="MostrarReporteLavadores">
+                <div class="form-inline">
+                    <label style="margin-top:2%;">Desde &nbsp;</label><input class="form-control" type="date" /> <label>&nbsp;Hasta&nbsp;</label><input class="form-control" type="date" /> <a style="font-family:'Century Gothic';" ng-click="ReporteLavadores()" class="btn btn-success">Generar</a>
+
+                </div>
+            </div>
+
+            <!--<a ng-click="ReporteLavadores()" class="btn btn-lg btn-info" style="font-family:'Century Gothic'; width:100%;margin-top:10%;">Generar Reporte Lavadores</a>-->
         </div>
+
+        
+
+       
+        
     </div>
+
 </body>
 </html>
+
