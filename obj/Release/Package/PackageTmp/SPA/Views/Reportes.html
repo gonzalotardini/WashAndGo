@@ -17,7 +17,12 @@
             </button>
             <div ng-show="MostrarReporteLavadores">
                 <div class="form-inline">
-                    <label style="margin-top:2%;">Desde &nbsp;</label><input class="form-control" type="date" /> <label>&nbsp;Hasta&nbsp;</label><input class="form-control" type="date" /> <a style="font-family:'Century Gothic';" ng-click="ReporteLavadores()" class="btn btn-success">Generar</a>
+                    <label style="margin-top:2%;">Desde &nbsp;</label>
+                    <input date="dd/MM/yyyy" class="form-control" type="date" ng-model="Desde" />
+                    <label>&nbsp;Hasta&nbsp;</label>
+                    <input class="form-control" type="date" ng-model="Hasta" />
+                    <a style="font-family:'Century Gothic';" ng-click="ReporteLavadores()" class="btn btn-success">Generar</a>                 
+
 
                 </div>
             </div>

@@ -76,7 +76,7 @@ app.config(['$translateProvider', function ($translateProvider) {
         'ComodidadDesc': 'Without moving from where you are and with just one click, we arrive.'
     });
 
-    $translateProvider.preferredLanguage('en');
+    $translateProvider.preferredLanguage('es');
 
 
 }]);
