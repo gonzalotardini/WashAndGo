@@ -8,6 +8,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using DAL;
 using DAL.Views;
+using BLL;
 
 namespace WashAndGo.Controllers
 {
@@ -25,6 +26,7 @@ namespace WashAndGo.Controllers
 
             try
             {
+                var modelobll = new ModelosBLL();
                 if (excelfile == null || excelfile.ContentLength == 0)
                 {
                     ViewBag.Message = "Selecciona un archivo";
@@ -34,14 +36,14 @@ namespace WashAndGo.Controllers
                 {
                     if (excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
                     {
-                        string path = Server.MapPath("~/xls/" + excelfile.FileName);
+                        string path = Server.MapPath("~/xls/" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + excelfile.FileName);
 
                         if (System.IO.File.Exists(path))
                         {
                             System.IO.File.Delete(path);
                         }
-
-                       
+                        
+                        excelfile.SaveAs(path);
                         Excel.Application xlApp = new Excel.Application();
                         Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
                         Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
@@ -62,13 +64,21 @@ namespace WashAndGo.Controllers
                         for (int i = 1; i <= rowCount; i++)
                         {
                             var modelo = new ModeloView();
-                            modelo.Marca = xlRange.Cells[i, 1].Value2.ToString();
+                            modelo.Marca = xlRange.Cells[i, 1].Value2.ToString();                            
                             modelo.Modelo = xlRange.Cells[i, 2].Value2.ToString();
-                            modelo.Marca = xlRange.Cells[1, 3].Value2.ToString();
+                            modelo.Segmento = xlRange.Cells[i, 3].Value2.ToString();
 
-                            listamodelos.Add(modelo);
+                            if (i==1 && modelo.Marca!="MARCA")
+                            {
+                                ViewBag.Message = "Archivo incorrecto, revise encabezados";
+                                return View("Index");
+                            }
+                            if (i>1)
+                            {
+                                listamodelos.Add(modelo);
+                            }                           
                         }
-
+                                               
                         //cleanup
                         GC.Collect();
                         GC.WaitForPendingFinalizers();
@@ -90,7 +100,7 @@ namespace WashAndGo.Controllers
                         Marshal.ReleaseComObject(xlApp);
 
 
-
+                        var resultado = modelobll.ImportarModelos(listamodelos);
 
 
                         return View("Success");
@@ -104,7 +114,8 @@ namespace WashAndGo.Controllers
             }
             catch (Exception ex)
             {
-
+                ViewBag.Message = "Error";
+                return View("Index");
                 throw;
             }
             
