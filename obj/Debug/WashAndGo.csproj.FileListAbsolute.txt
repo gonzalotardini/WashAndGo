@@ -527,3 +527,4 @@ C:\WashAndGO\WashAndGo\bin\PagedList.xml
 C:\WashAndGO\WashAndGo\bin\PagedList.Mvc.xml
 C:\WashAndGO\WashAndGo\bin\itextsharp.dll
 C:\WashAndGO\WashAndGo\bin\itextsharp.xml
+C:\WashAndGO\WashAndGo\obj\Debug\WashAndGo.csproj.ResolveComReference.cache

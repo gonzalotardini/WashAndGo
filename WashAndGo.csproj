@@ -221,6 +221,7 @@
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Controllers\SolicitarLavadoController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -277,6 +278,8 @@
     <Content Include="Scripts\angular-cookies.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\angular-csp.css" />
+    <Content Include="Scripts\angular-file-upload.js" />
+    <Content Include="Scripts\angular-file-upload.min.js" />
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
     <Content Include="Scripts\angular-message-format.js" />
@@ -330,6 +333,8 @@
     <Content Include="Scripts\angular-resource.min.js.map" />
     <Content Include="Scripts\angular-parse-ext.min.js.map" />
     <None Include="Properties\PublishProfiles\WashAndGo - Web Deploy.pubxml" />
+    <Content Include="Scripts\angular-file-upload.min.js.map" />
+    <Content Include="Scripts\angular-file-upload.js.map" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\geolocation.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -1101,6 +1106,7 @@
     <Content Include="SPA\Controllers\LavadorController.js" />
     <Content Include="SPA\Controllers\ReportesController.js" />
     <Content Include="SPA\Controllers\SolicitarLavadoController.js" />
+    <Content Include="SPA\Controllers\UploadController.js" />
     <Content Include="SPA\Services\BuscarLavadoService.js" />
     <Content Include="SPA\Services\ClienteService.js" />
     <Content Include="SPA\Services\LavadorService.js" />
@@ -1114,6 +1120,7 @@
     <Content Include="SPA\Views\Modal\lavado.html" />
     <Content Include="SPA\Views\Reportes.html" />
     <Content Include="SPA\Views\SolicitarLavado.html" />
+    <Content Include="SPA\Views\Upload.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1179,6 +1186,8 @@
     <Content Include="Views\Marcas\Details.cshtml" />
     <Content Include="Views\Marcas\Edit.cshtml" />
     <Content Include="Views\Marcas\Index.cshtml" />
+    <Content Include="Views\Upload\Index.cshtml" />
+    <Content Include="Views\Upload\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1187,6 +1196,7 @@
     <Folder Include="Views\Lavador\" />
     <Folder Include="Views\Reportes\" />
     <Folder Include="Views\SolicitarLavado\" />
+    <Folder Include="xls\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1206,6 +1216,35 @@
       <Project>{2a384e9d-808f-4de5-94f7-071edbbd8ac6}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -145,6 +145,7 @@
                                     <li>@Html.ActionLink("Marcas", "Index", "Marcas")</li>
                                     <li>@Html.ActionLink("Servicios", "Index", "Servicios")</li>
                                     <li><a href="/#!/reportes">Reportes</a></li>
+                                    <li><a href="/#!/Upload">Upload</a></li>
                                 </ul>
                             }
 
@@ -210,7 +211,7 @@
     <script src="~/SPA/Controllers/LavadorController.js"></script>
     <script src="~/SPA/Controllers/BuscarLavadoController.js"></script>
     <script src="~/SPA/Controllers/ReportesController.js"></script>
-
+    <script src="~/SPA/Controllers/UploadController.js"></script>
 
     <script src="~/SPA/Services/SolicitarLavadoService.js"></script>
     <script src="~/SPA/Services/ClienteService.js"></script>
@@ -223,10 +224,7 @@
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/ngDialog.min.js"></script>
     <script src="~/Scripts/dirPagination.js"></script>
-
-
-
-
+    <script src="~/Scripts/angular-file-upload.js"></script>
 
 
 </body>
