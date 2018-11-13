@@ -7,7 +7,6 @@
 
 
 
-
     $scope.ReporteLavadores = function () {
 
         $scope.Desde = $scope.Desde.toLocaleDateString('en-GB');

@@ -9,6 +9,11 @@ using System.Runtime.InteropServices;
 using DAL;
 using DAL.Views;
 using BLL;
+using System.Data.OleDb;
+using System.Data;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 
 namespace WashAndGo.Controllers
 {
@@ -36,7 +41,8 @@ namespace WashAndGo.Controllers
                 {
                     if (excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
                     {
-                        string path = Server.MapPath("~/xls/" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + excelfile.FileName);
+                        string path2 = HttpRuntime.AppDomainAppPath; 
+                        string path = path2 + "Reports\\" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + excelfile.FileName;
 
                         if (System.IO.File.Exists(path))
                         {
@@ -44,13 +50,13 @@ namespace WashAndGo.Controllers
                         }
                         
                         excelfile.SaveAs(path);
-                        Excel.Application xlApp = new Excel.Application();
-                        Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
-                        Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-                        Excel.Range xlRange = xlWorksheet.UsedRange;
+                        //Excel.Application xlApp = new Excel.Application();
+                        //Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(path);
+                        //Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                        //Excel.Range xlRange = xlWorksheet.UsedRange;
 
-                        int rowCount = xlRange.Rows.Count;
-                        int colCount = xlRange.Columns.Count;
+                        //int rowCount = xlRange.Rows.Count;
+                        //int colCount = xlRange.Columns.Count;
 
 
                         //excelfile.SaveAs(path);
@@ -58,50 +64,90 @@ namespace WashAndGo.Controllers
                         //Excel.Workbook workbook = application.Workbooks.Open(path);
                         //Excel.Worksheet worksheet = workbook.ActiveSheet;
                         //Excel.Range range = worksheet.UsedRange;
-
                         var listamodelos = new List<ModeloView>();
 
-                        for (int i = 1; i <= rowCount; i++)
+                        ISheet sheet; //Create the ISheet object to read the sheet cell values  
+                        string filename = Path.GetFileName(Server.MapPath(excelfile.FileName)); //get the uploaded file name  
+                        var fileExt = Path.GetExtension(filename); //get the extension of uploaded excel file  
+                        if (fileExt == ".xls")
                         {
-                            var modelo = new ModeloView();
-                            modelo.Marca = xlRange.Cells[i, 1].Value2.ToString();                            
-                            modelo.Modelo = xlRange.Cells[i, 2].Value2.ToString();
-                            modelo.Segmento = xlRange.Cells[i, 3].Value2.ToString();
-
-                            if (i==1 && modelo.Marca!="MARCA")
-                            {
-                                ViewBag.Message = "Archivo incorrecto, revise encabezados";
-                                return View("Index");
-                            }
-                            if (i>1)
-                            {
-                                listamodelos.Add(modelo);
-                            }                           
+                            HSSFWorkbook hssfwb = new HSSFWorkbook(excelfile.InputStream); //HSSWorkBook object will read the Excel 97-2000 formats  
+                            sheet = hssfwb.GetSheetAt(0); //get first Excel sheet from workbook  
                         }
+                        else
+                        {
+                            XSSFWorkbook hssfwb = new XSSFWorkbook(excelfile.InputStream); //XSSFWorkBook will read 2007 Excel format  
+                            sheet = hssfwb.GetSheetAt(0); //get first Excel sheet from workbook   
+                        }
+                        for (int row = 0; row <= sheet.LastRowNum; row++) //Loop the records upto filled row  
+                        {
+                            if (sheet.GetRow(row) != null) //null is when the row only contains empty cells   
+                            {
+                                var modelo = new ModeloView();
+                                modelo.Marca = sheet.GetRow(row).GetCell(0).ToString().ToUpper(); //Here for sample , I just save the value in "value" field, Here you can write your custom logics...  
+                                modelo.Modelo= sheet.GetRow(row).GetCell(1).ToString().ToUpper();
+                                modelo.Segmento = sheet.GetRow(row).GetCell(2).ToString().ToUpper();
+
+                                if (row == 0 && modelo.Marca != "MARCA")
+                                {
+                                    ViewBag.Message = "Archivo incorrecto, revise encabezados";
+                                    return View("Index");
+                                }
+                                if (row > 1)
+                                {
+                                    listamodelos.Add(modelo);
+                                }
+
+
+                                listamodelos.Add(modelo);
+                            }
+                        }
+
+
+                       
+
+                        //for (int i = 1; i <= rowCount; i++)
+                        //{
+                        //    var modelo = new ModeloView();
+                        //    modelo.Marca = xlRange.Cells[i, 1].Value2.ToString();                            
+                        //    modelo.Modelo = xlRange.Cells[i, 2].Value2.ToString();
+                        //    modelo.Segmento = xlRange.Cells[i, 3].Value2.ToString();
+
+                        //    if (i==1 && modelo.Marca!="MARCA")
+                        //    {
+                        //        ViewBag.Message = "Archivo incorrecto, revise encabezados";
+                        //        return View("Index");
+                        //    }
+                        //    if (i>1)
+                        //    {
+                        //        listamodelos.Add(modelo);
+                        //    }                           
+                        //}
                                                
                         //cleanup
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
+                        //GC.Collect();
+                        //GC.WaitForPendingFinalizers();
 
                         //rule of thumb for releasing com objects:
                         //  never use two dots, all COM objects must be referenced and released individually
                         //  ex: [somthing].[something].[something] is bad
 
                         //release com objects to fully kill excel process from running in the background
-                        Marshal.ReleaseComObject(xlRange);
-                        Marshal.ReleaseComObject(xlWorksheet);
+                        //Marshal.ReleaseComObject(xlRange);
+                        //Marshal.ReleaseComObject(xlWorksheet);
 
                         //close and release
-                        xlWorkbook.Close();
-                        Marshal.ReleaseComObject(xlWorkbook);
+                        //xlWorkbook.Close();
+                        //Marshal.ReleaseComObject(xlWorkbook);
 
                         //quit and release
-                        xlApp.Quit();
-                        Marshal.ReleaseComObject(xlApp);
+                        //xlApp.Quit();
+                        //Marshal.ReleaseComObject(xlApp);
 
 
                         var resultado = modelobll.ImportarModelos(listamodelos);
 
+                        ViewBag.Resultado = resultado;
 
                         return View("Success");
                     }
@@ -114,11 +160,10 @@ namespace WashAndGo.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Message = "Error";
+                ViewBag.Message = "Error" + ex.Message;
                 return View("Index");
                 throw;
-            }
-            
+            }           
            
 
         }

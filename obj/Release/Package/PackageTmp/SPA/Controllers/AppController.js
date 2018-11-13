@@ -1,4 +1,4 @@
-﻿var app = angular.module("app", ['ngRoute', 'angularUtils.directives.dirPagination', 'pascalprecht.translate']);
+﻿var app = angular.module("app", ['ngRoute', 'angularUtils.directives.dirPagination', 'pascalprecht.translate','angularFileUpload']);
 
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -36,6 +36,11 @@ app.config(function ($routeProvider, $locationProvider) {
             {
                 templateUrl: 'SPA/Views/BuscarLavados.html',
                 controller: 'BuscarLavadoController'
+        })
+        .when('/Upload',
+            {
+                templateUrl: 'SPA/Views/Upload.html',
+                controller: 'UploadController'
             })
         .otherwise({
             templateUrl: 'SPA/Views/Home.html'

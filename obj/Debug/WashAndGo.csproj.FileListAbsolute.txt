@@ -528,3 +528,8 @@ C:\WashAndGO\WashAndGo\bin\PagedList.Mvc.xml
 C:\WashAndGO\WashAndGo\bin\itextsharp.dll
 C:\WashAndGO\WashAndGo\bin\itextsharp.xml
 C:\WashAndGO\WashAndGo\obj\Debug\WashAndGo.csproj.ResolveComReference.cache
+C:\WashAndGO\WashAndGo\bin\ICSharpCode.SharpZipLib.dll
+C:\WashAndGO\WashAndGo\bin\NPOI.dll
+C:\WashAndGO\WashAndGo\bin\NPOI.OOXML.dll
+C:\WashAndGO\WashAndGo\bin\NPOI.OpenXml4Net.dll
+C:\WashAndGO\WashAndGo\bin\NPOI.OpenXmlFormats.dll

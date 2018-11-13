@@ -28,12 +28,20 @@
 
 <body>
     <div class="container">
+        <div class="text-left">
+            <a class="btn btn-success text-left" id="password" href="../../Upload/Index">Importar Archivo</a>
+        </div>
         <div style="margin-top:10%; font-family:'Century Gothic'; color:white; background-color:#003359; border:solid; border-color:#003359;" class="jumbotron text-center">
             <h1 style="font-size:50px;">Autos</h1>
         </div>
-        <p>
-            @Html.ActionLink("Create New", "Create", null, new { id = "someID" })
-        </p>
+        <div class="row" style="margin-bottom:2%;">
+            <div class="form-inline">
+                @*<p>@Html.ActionLink("Create New", "Create", null, new { id = "someID" })</p>*@
+                <a class="btn btn-success text-left" id="password" href="../../Modelos/Create">Crear Nuevo</a>
+                <a class="btn btn-success text-left" id="password" href="../../Upload/Index">Importar Archivo</a>
+
+            </div>
+        </div>
         <table class="table text-center">
             <tr>
                 <th style="text-align:center;font-family:'Century Gothic';">
@@ -52,10 +60,10 @@
             {
                 <tr>
                     <td style="text-align:center;font-family:'Century Gothic';">
-                        @Html.DisplayFor(modelItem => item.Descripcion)
+                        @Html.DisplayFor(modelItem => item.Marcas.Descripcion)
                     </td>
                     <td style="text-align:center;font-family:'Century Gothic';">
-                        @Html.DisplayFor(modelItem => item.Marcas.Descripcion)
+                        @Html.DisplayFor(modelItem => item.Descripcion)
                     </td>
                     <td style="text-align:center;font-family:'Century Gothic';">
                         @Html.DisplayFor(modelItem => item.Segmentos.Descripcion)
