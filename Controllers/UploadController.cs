@@ -41,8 +41,8 @@ namespace WashAndGo.Controllers
                 {
                     if (excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
                     {
-                        string path2 = HttpRuntime.AppDomainAppPath; 
-                        string path = path2 + "Reports\\" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + excelfile.FileName;
+                        string path2 = HttpRuntime.AppDomainAppPath;
+                        string path = path2 + "Reports\\" + excelfile.FileName; //DateTime.Now.ToString("yyyyMMddHHmmssfff") + excelfile.FileName;
 
                         if (System.IO.File.Exists(path))
                         {
@@ -93,13 +93,13 @@ namespace WashAndGo.Controllers
                                     ViewBag.Message = "Archivo incorrecto, revise encabezados";
                                     return View("Index");
                                 }
-                                if (row > 1)
+                                if (row > 0)
                                 {
                                     listamodelos.Add(modelo);
                                 }
 
 
-                                listamodelos.Add(modelo);
+                                //listamodelos.Add(modelo);
                             }
                         }
 

@@ -456,6 +456,26 @@ namespace WashAndGo.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/GetLavadosFinalizados")]
+        public string GetLavadosFinalizados()
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+
+                return JsonConvert.SerializeObject(lavadobll.GetLavadosFinalizados(), Formatting.None,
+                      new JsonSerializerSettings()
+                      {
+                          ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                      });
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
 
     }
