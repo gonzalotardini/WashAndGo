@@ -497,5 +497,26 @@ namespace WashAndGo.Controllers
             }
         }
 
+
+        [HttpGet]
+        public string AprobarLavado (string idlavado)
+        {
+            try
+            {
+                var lavadobll = new SolicitarLavadoBLL();
+
+                return JsonConvert.SerializeObject(lavadobll.AprobarLavado(Convert.ToInt32(idlavado)), Formatting.None,
+                      new JsonSerializerSettings()
+                      {
+                          ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                      });
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
