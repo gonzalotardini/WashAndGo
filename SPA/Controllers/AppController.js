@@ -63,7 +63,30 @@ app.config(['$translateProvider', function ($translateProvider) {
         'Calidad': 'CALIDAD',
         'CalidadDesc': 'Profesionales capacitados, productos de primera calidad y respuesta inmediata.',
         'Comodidad': 'COMODIDAD',
-        'ComodidadDesc':'Sin moverte de donde estés y con solo un click, llegamos.'
+        'ComodidadDesc': 'Sin moverte de donde estés y con solo un click, llegamos.',
+        'MARCA':'MARCA',
+        'MODELO':'MODELO',
+        'SEGMENTO': 'SEGMENTO',
+        'Crear Nuevo': 'Crear Nuevo',
+        'NuestrosServicios': 'Nuestros Servicios',
+        'Contacto': 'Contacto',
+        'BuscarLavado': 'Buscar Lavado',
+        'Autos': 'Autos',
+        'Precios': 'Precios',
+        'Marcas': 'Marcas',
+        'Servicios': 'Servicios',
+        'Reportes': 'Reportes',
+        'LavadoExterior': 'Lavado Exterior',
+        'LavadoInterior': 'Lavado Interior',
+        'CeraLiquida': 'Cera Líquida',
+        'CeraPasta': 'Cera en Pasta',
+        'AspiradoInterior': 'Aspirado Interior',
+        'LimpiezaPlasticos': 'Limpieza de Plásticos',
+        'TituloServicios': '¡No más tiempos de espera antes y durante el lavado de tu auto! Ofrecemos tres servicios que se acomodan a tus necesidades, solicitá el tuyo!',
+        'Basico': 'Básico',
+        'Estandar': 'Estandar'
+
+
         
     });
 
@@ -78,7 +101,28 @@ app.config(['$translateProvider', function ($translateProvider) {
         'Calidad': 'QUALITY',
         'CalidadDesc': 'Trained professionals, first quality products and immediate response.',
         'Comodidad': 'COMFORT',
-        'ComodidadDesc': 'Without moving from where you are and with just one click, we arrive.'
+        'ComodidadDesc': 'Without moving from where you are and with just one click, we arrive.',
+        'MARCA': 'BRAND',
+        'MODELO': 'MODEL',
+        'SEGMENTO': 'SEGMENT',
+        'Crear Nuevo': 'Create new',
+        'NuestrosServicios': 'Our Services',
+        'Contacto': 'Contact',
+        'BuscarLavado': 'Search Wash',
+        'Autos': 'Cars',
+        'Precios': 'Prices',
+        'Marcas': 'Brands',
+        'Servicios': 'Servies',
+        'Reportes': 'Reports',
+        'LavadoExterior': 'Outside Washing',
+        'LavadoInterior': 'Interior Washing',
+        'CeraLiquida': 'Liquid Wax',
+        'CeraPasta': 'Wax in Paste',
+        'AspiradoInterior': 'Interior Sucked',
+        'LimpiezaPlasticos': 'Plastic Cleaning',
+        'TituloServicios': 'No more waiting times before and during the washing of your car! We offer three services that suit your needs, request yours!',
+        'Basico': 'Basic',
+        'Estandar':'Standar'
     });
 
     $translateProvider.preferredLanguage('es');
