@@ -109,8 +109,8 @@
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li><a translate="¿Quiénes Somos?" href="#quienesSomosTitle"></a></li>
-                    <li><a href="#servicios_">Nuestros Servicios</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#servicios_" translate="NuestrosServicios"></a></li>
+                    <li><a href="#contacto" translate="Contacto"></a></li>
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
 
@@ -133,19 +133,19 @@
                             @if (User.IsInRole("Lavador"))
                             {
                                 <ul class="dropdown-menu">
-                                    <li><a href="/#!/BuscarLavado">Buscar Lavados</a></li>
+                                    <li><a href="/#!/BuscarLavado" translate="BuscarLavado"></a></li>
                                 </ul>
                             }
 
                             @if (User.IsInRole("Admin"))
                             {
                                 <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Autos", "Index", "Modelos")</li>
-                                    <li>@Html.ActionLink("Precios", "Index", "ListaPrecios")</li>
-                                    <li>@Html.ActionLink("Marcas", "Index", "Marcas")</li>
-                                    <li>@Html.ActionLink("Servicios", "Index", "Servicios")</li>
-                                    <li><a href="/#!/reportes">Reportes</a></li>
-                                    
+                                    <li><a translate="Autos" href="/Modelos/Index"></a></li>
+                                    <li><a translate="Precios" href="/ListaPrecios/Index"></a></li>
+                                    <li><a translate="Marcas" href="/Marcas/Index"></a></li>
+                                    <li><a translate="Marcas" href="/Servicios/Index"></a></li>                                    
+                                    <li><a href="/#!/reportes" translate="Reports"></a></li>
+
                                 </ul>
                             }
 

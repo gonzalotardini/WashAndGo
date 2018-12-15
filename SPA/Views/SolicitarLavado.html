@@ -83,110 +83,120 @@
     <div class="container">
         <div ng-hide="BuscandoCliente || ClienteSinDatos || Pago || LavadoAbierto" class="col-md-12 jumbotron" style="margin-top:10%">
 
-            <div class="col-md-6 text-center" id="jumbovehiculoservicio">
+            <form name="solicitarlavado">
 
-                <h3 style="text-align:left; font-weight:bold;">¿Cuál es tu auto?</h3>
-                <h5 style="text-align:left; font-weight:bold;">Elegí marca y modelo del vehiculo a lavar</h5>
+                <div class="col-md-6 text-center" id="jumbovehiculoservicio">
 
-                <div ng-show="EditAuto" class="form-group">
-                    <select ng-model="Marca" ng-change="ObtenerModelos(Marca); limpiarSegmentoMarca()" class="form-control" id="sel1" required>
-                        <option value="" disabled selected>Seleccione Marca</option>
-                        <option ng-repeat="x in Marcas" value="{{x.IdMarca}} ">{{x.Descripcion}}</option>
-                    </select>
-                </div>
+                    <h3 style="text-align:left; font-weight:bold;">¿Cuál es tu auto?</h3>
+                    <h5 style="text-align:left; font-weight:bold;">Elegí marca y modelo del vehiculo a lavar</h5>
 
-                <div ng-show="EditAuto" class="form-group">
-                    <div class="input-group">
-                        <select style="margin-bottom:2%;" ng-model="Modelo" ng-change="ObtenerSegmento(Modelo)" class="form-control">
-                            <option value="" disabled selected>Seleccione Modelo</option>
-                            <option ng-repeat="x in Modelos" value="{{x.IdModelo}}">{{x.Descripcion}}</option>
+                    <div ng-show="EditAuto" class="form-group">
+                        <select name="marca" ng-model="Marca" ng-change="ObtenerModelos(Marca); limpiarSegmentoMarca()" class="form-control" id="sel1" required>
+                            <option value="" disabled selected>Seleccione Marca</option>
+                            <option ng-repeat="x in Marcas" value="{{x.IdMarca}} ">{{x.Descripcion}}</option>
                         </select>
-                        <span ng-show="cargandoModelos">
-                            <img style="width:25px; padding:-1px;" src="../../img/loading.gif" />
-                        </span>
+                    </div>
+
+                    <div ng-show="EditAuto" class="form-group">
+                        <div class="input-group">
+                            <select name="modelo" required style="margin-bottom:2%;" ng-model="Modelo" ng-change="ObtenerSegmento(Modelo)" class="form-control">
+                                <option value="" disabled selected>Seleccione Modelo</option>
+                                <option ng-repeat="x in Modelos" value="{{x.IdModelo}}">{{x.Descripcion}}</option>
+                            </select>
+                            <span ng-show="cargandoModelos">
+                                <img style="width:25px; padding:-1px;" src="../../img/loading.gif" />
+                            </span>
+
+                        </div>
+                    </div>
+                    <p ng-show=" (solicitarlavado.marca.$error.required  && EditAuto && submit)" style="font-family:'Century Gothic'; color:red;font-size:14px;">Seleccione marca</p>
+                    <p ng-show=" (solicitarlavado.modelo.$error.required  && EditAuto && submit)" style="font-family:'Century Gothic'; color:red;font-size:14px;">Seleccione modelo</p>
+
+
+
+                    <div ng-show="!EditAuto" class="form-group">
+                        <input ng-readonly="ReadOnly" style="width:85%" ng-model="MarcaDescripcion" class="form-control" type="text" />
+                    </div>
+                    <div ng-show="!EditAuto" style="text-align:left;" class="form-group form-inline">
+                        <input style="width:85%;" ng-readonly="ReadOnly" ng-model="ModeloDescripcion" class="form-control" type="text" />
+                        <button ng-click="EditarAuto()" style="width:auto;" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
 
                     </div>
+
+                   
+
+                    <img src="../../img/auto.png" style="width: 30%" />
+                    <h3 ng-model="Segmento">Segmento: {{Segmento.Descripcion}}</h3>
+                    <!--<h3 ng-view="IdSegmento">{{Segmento.IdSegmento}}</h3>-->
+                    <br />
+                    <br />
+
+
+
                 </div>
 
-                <div ng-show="!EditAuto" class="form-group">
-                    <input ng-readonly="ReadOnly" style="width:85%" ng-model="MarcaDescripcion" class="form-control" type="text" />
+
+
+                <div class="col-md-6 text-center ">
+                    <div>
+                        <img ng-show="cargandoMapa" src="../../img/loading.gif" />
+                        <div ng-hide="cargandoMapa" id="map">
+                            <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{url}}" allowfullscreen></iframe>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline" style="width: 100%; text-align:left;">
+                                <input id="direccion" ng-model="Direccion" class="form-control" style="width: 85%" value="{{Direccion}}" type="text" />
+                                <button type="button" ng-click="ActualizarUbicacion(Direccion)" class="btn btn-info">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </div>
+
+                            <div ng-show="ErrorDireccion" class="alert alert-danger">
+                                <strong>Error!</strong> La dirección introducida es incorrecta. Intente nuevamente.
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
-                <div ng-show="!EditAuto" style="text-align:left;" class="form-group form-inline">
-                    <input style="width:85%;" ng-readonly="ReadOnly" ng-model="ModeloDescripcion" class="form-control" type="text" />
-                    <button ng-click="EditarAuto()" style="width:auto;" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-edit"></span>
+
+                <div class="row col-md-12">
+
+                    <div class="col-md-6">
+                        <h3 style="text-align:left;font-weight:bold">¿Qué tipo de lavado querés?</h3>
+                        <h5 style="text-align:left;font-weight:bold">Elegí el servicio ideal para tu vehículo</h5>
+                        <div class="form-group form-inline">
+                            <select required name="_servicio" style="width:90%;" ng-model="Servicio" ng-change="botonTotal()" class="form-control">
+                            <select required name="_servicio" style="width:90%;" ng-model="Servicio" ng-change="botonTotal()" class="form-control">
+                                <option value="" disabled selected>Seleccione Servicio</option>
+                                <option ng-repeat="x in Servicios" value="{{x.IdServicio}} ">{{x.Nombre}}</option>
+                            </select>
+                            <label><span data-toggle="modal" data-target="#myModal" style="width:5%;" class="glyphicon glyphicon-info-sign"></span></label>
+                        </div>
+                        <p ng-show=" (solicitarlavado._servicio.$error.required  && EditAuto && submit)" style="font-family:'Century Gothic'; color:red;font-size:14px;">Seleccione servicio</p>
+
+                    </div>
+
+                    <div class="col-md-6 text-center">
+                        <h2 style="font-weight:bold;">Total</h2>
+                        <h2>$ {{Total}}</h2>
+
+                    </div>
+
+                </div>
+                <!--ng-click="CrearSolicitud(Marca,Modelo,Servicio)"-->
+
+                <div class="col-md-12 row text-center" style="margin-top:5%;">
+                    <button type="submit" ng-click="ValidarLavado(Direccion)"  class="btn btn-lg btn-danger" style="font-family:'Century Gothic';width:90%;font-size: 26px;">
+                        <span class="glyphicon glyphicon-ok"></span> Solicitar Lavado
                     </button>
-
                 </div>
-
-
-
-                <img src="../../img/auto.png" style="width: 30%" />
-                <h3 ng-model="Segmento">Segmento: {{Segmento.Descripcion}}</h3>
-                <!--<h3 ng-view="IdSegmento">{{Segmento.IdSegmento}}</h3>-->
-                <br />
-                <br />
-
-
-
-            </div>
-
-
-
-            <div class="col-md-6 text-center ">
-                <div>
-                    <img ng-show="cargandoMapa" src="../../img/loading.gif" />
-                    <div ng-hide="cargandoMapa" id="map">
-                        <iframe id="iframe" width="250" height="350" frameborder="0" style="border:0" src="{{url}}" allowfullscreen></iframe>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-inline" style="width: 100%; text-align:left;">
-                            <input id="direccion" ng-model="Direccion" class="form-control" style="width: 85%" value="{{Direccion}}" type="text" />
-                            <button type="button" ng-click="ActualizarUbicacion(Direccion)" class="btn btn-info">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </div>
-
-                        <div ng-show="ErrorDireccion" class="alert alert-danger">
-                            <strong>Error!</strong> La dirección introducida es incorrecta. Intente nuevamente.
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="row col-md-12">
-
-                <div class="col-md-6">
-                    <h3 style="text-align:left;font-weight:bold">¿Qué tipo de lavado querés?</h3>
-                    <h5 style="text-align:left;font-weight:bold">Elegí el servicio ideal para tu vehículo</h5>
-                    <div class="form-group form-inline">
-                        <select style="width:90%;" ng-model="Servicio" ng-change="botonTotal()" class="form-control">
-                            <option value="" disabled selected>Seleccione Servicio</option>
-                            <option ng-repeat="x in Servicios" value="{{x.IdServicio}} ">{{x.Nombre}}</option>
-                        </select>
-                        <label><span data-toggle="modal" data-target="#myModal" style="width:5%;" class="glyphicon glyphicon-info-sign"></span></label>
-                    </div>
-                </div>
-
-                <div class="col-md-6 text-center">
-                    <h2 style="font-weight:bold;">Total</h2>
-                    <h2>$ {{Total}}</h2>
-
-                </div>
-
-            </div>
-            <!--ng-click="CrearSolicitud(Marca,Modelo,Servicio)"-->
-
-            <div class="col-md-12 row text-center" style="margin-top:5%;">
-                <button type="button" ng-click="Pago=true" class="btn btn-lg btn-danger" style="font-family:'Century Gothic';width:90%;font-size: 26px;">
-                    <span class="glyphicon glyphicon-ok"></span> Solicitar Lavado
-                </button>
-            </div>
-
+            </form>
         </div>
+    
 
         <div style="margin-top:10%;" ng-show="ClienteSinDatos" class="col-md-12 text-center">
 

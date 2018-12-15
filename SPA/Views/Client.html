@@ -258,23 +258,24 @@
                     <div class="form-group col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i style="color:white;" class="glyphicon glyphicon-user"></i></span>
-                            <input ng-readonly="ReadOnly" ng-pattern="/^[a-zA-Z]*$/" ng-model="Apellido" class="form-control" name="apellido" placeholder="Apellido" type="text">
+                            <input ng-readonly="ReadOnly" ng-pattern="/^[a-zA-Z]*$/" required ng-model="Apellido" class="form-control" name="apellido" placeholder="Apellido" type="text">
                         </div>
                     </div>
+                    <p ng-show="(cliente.apellido.$error.pattern || (cliente.apellido.$error.required && cliente.apellido.$dirty)) && submit" style="font-family:'Century Gothic'; color:red;">Verfique apellido ingresado</p>
 
                     <div class="form-group col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                            <input ng-readonly="ReadOnly" ng-model="DNI" class="form-control" name="dni" placeholder="DNI" type="text">
+                            <input ng-pattern="/^[0-9]*$/" ng-readonly="ReadOnly" required ng-model="DNI" ng-minlength="7" ng-maxlength="8" class="form-control" name="dni" placeholder="DNI" type="text">
                         </div>
                     </div>
 
-                    <p ng-show="(cliente.dni.$error.pattern || (cliente.dni.$error.required && cliente.dni.$dirty)) && submit" style="font-family:'Century Gothic'; color:red;">Verfique DNI ingresado</p>
+                    <p ng-show="(cliente.dni.$error.maxlength||cliente.dni.$error.minlength ||cliente.dni.$error.pattern || (cliente.dni.$error.required && cliente.dni.$dirty)) && submit" style="font-family:'Century Gothic'; color:red;">Verfique DNI ingresado</p>
 
                     <div class="form-group col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input ng-readonly="ReadOnly" ng-model="Email" class="form-control" placeholder="Email" type="email">
+                            <input ng-readonly="ReadOnly" required ng-model="Email" class="form-control" placeholder="Email" type="email">
                         </div>
                     </div>
 
@@ -289,8 +290,8 @@
 
                             <!--ng-selected="MarcaSeleccionada == x.IdMarca"-->
                             <!--<select name="..." ng-model="MarcaSeleccionada" ng-options="Id as Descripcion (IdMarca, Descripcion) in Marcas">
-                            <option value="">Select date</option>
-                        </select>-->
+                <option value="">Select date</option>
+            </select>-->
 
                         </div>
                     </div>
@@ -300,13 +301,14 @@
                     <div ng-hide="ReadOnly" class="form-group col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-chevron-down"></i></span>
-                            <select ng-model="Modelo" class="form-control">
+                            <select name="modelo" ng-model="Modelo" class="form-control" required>
                                 <option value="" disabled selected>Seleccione Modelo</option>
                                 <option ng-repeat="x in Modelos" value="{{x.IdModelo}}">{{x.Descripcion}}</option>-->
                             </select>
                         </div>
                     </div>
 
+                    <p ng-show=" (cliente.modelo.$error.required && cliente.modelo.$dirty && !ReadOnly && submit)" style="font-family:'Century Gothic'; color:red;">Seleccione modelo</p>
 
                     <div ng-show="ReadOnly" class="form-group col-md-12">
                         <div class="input-group">

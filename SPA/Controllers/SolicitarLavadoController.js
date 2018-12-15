@@ -49,6 +49,7 @@
     $scope.Mes;
     $scope.Anio;
     $scope.CodTarjeta;
+    $scope.submit = false;
 
     $scope.Redirigiendo = false;
 
@@ -297,12 +298,25 @@
 
     };
 
+
+    $scope.ValidarLavado = function () {
+        ActualizarUbicacion();
+        if ($scope.solicitarlavado.$valid == false || $scope.ErrorDireccion == false) {
+            $scope.submit = true;
+           
+        }
+        else {
+            $scope.Pago = true;
+        }
+
+    }
+
  
 
     $scope.CrearSolicitud = function (Marca, Modelo, Servicio, NombreTarjeta, NumeroTarjeta, Mes, Anio, CodTarjeta) {
 
 
-        if ($scope.paymentForm.$valid==false) {
+        if ($scope.paymentForm.$valid == false ) {
             var hola = "g";
         }
         else {

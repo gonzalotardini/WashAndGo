@@ -84,7 +84,9 @@ app.config(['$translateProvider', function ($translateProvider) {
         'LimpiezaPlasticos': 'Limpieza de Plásticos',
         'TituloServicios': '¡No más tiempos de espera antes y durante el lavado de tu auto! Ofrecemos tres servicios que se acomodan a tus necesidades, solicitá el tuyo!',
         'Basico': 'Básico',
-        'Estandar': 'Estandar'
+        'Estandar': 'Estandar',
+        'Contactanos': 'Contactanos',
+        'TextContacto':'Envianos tu consulta al siguiente mail y te responderemos a la brevedad.'
 
 
         
@@ -122,7 +124,9 @@ app.config(['$translateProvider', function ($translateProvider) {
         'LimpiezaPlasticos': 'Plastic Cleaning',
         'TituloServicios': 'No more waiting times before and during the washing of your car! We offer three services that suit your needs, request yours!',
         'Basico': 'Basic',
-        'Estandar':'Standar'
+        'Estandar': 'Standar',
+        'Contactanos': 'Contact Us',
+        'TextContacto': 'Send us your doubts to the following email and we will respond as soon as possible.'
     });
 
     $translateProvider.preferredLanguage('es');
