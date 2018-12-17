@@ -18,7 +18,7 @@ namespace WashAndGo.Controllers
         // GET: Marcas
         public ActionResult Index()
         {
-            return View(db.Marcas.ToList());
+            return View(db.Marcas.Where(m=>m.Habilitado=="S").ToList());
         }
 
         // GET: Marcas/Details/5
@@ -111,7 +111,8 @@ namespace WashAndGo.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Marcas marcas = db.Marcas.Find(id);
-            db.Marcas.Remove(marcas);
+            marcas.Habilitado = "N";
+            //db.Marcas.Remove(marcas);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

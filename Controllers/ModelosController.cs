@@ -18,7 +18,7 @@ namespace WashAndGo.Controllers
         // GET: Modelos
         public ActionResult Index()
         {
-            var modelos = db.Modelos.Include(m => m.Marcas).Include(m => m.Segmentos);
+            var modelos = db.Modelos.Include(m => m.Marcas).Include(m => m.Segmentos).Where(m=>m.Habilitado=="S");
             return View(modelos.ToList());
         }
 
@@ -58,6 +58,7 @@ namespace WashAndGo.Controllers
             if (ModelState.IsValid)
             {
                 modelos.Descripcion = modelos.Descripcion.ToUpper();
+                modelos.Habilitado = "S";
                 db.Modelos.Add(modelos);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -124,7 +125,8 @@ namespace WashAndGo.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Modelos modelos = db.Modelos.Find(id);
-            db.Modelos.Remove(modelos);
+            modelos.Habilitado ="N";
+           // db.Modelos.Remove(modelos);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

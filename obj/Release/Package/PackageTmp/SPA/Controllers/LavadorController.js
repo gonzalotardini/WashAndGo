@@ -230,29 +230,29 @@
 
     $scope.GuardarDatos = function (lavador) {
 
-        //if ($scope.cliente.$valid == false) {
-        //    var hola = 'a';
-        //}
-        //else {
-        var hola="";
-       
-        LavadorService.GuardarDatos(lavador).then(
-            function (d) {
-                //$scope.Servicios = d.data;
-                //$location.path('/a');
-                $scope.DatosGuardadosOK = true;
-                $scope.MostrarDatosPersonales = false;
-            },
-            function (error) {
+        if ($scope.cliente.$valid == false) {
+            var hola = 'a';
+        }
+        else {
+            var hola = "";
+
+            LavadorService.GuardarDatos(lavador).then(
+                function (d) {
+                    //$scope.Servicios = d.data;
+                    //$location.path('/a');
+                    $scope.DatosGuardadosOK = true;
+                    $scope.MostrarDatosPersonales = false;
+                },
+                function (error) {
 
 
-                //    });
-                //}
+                    //    });
+                    //}
 
-                var hola = 'a';
+                    var hola = 'a';
 
-            })
-
+                })
+        }
     }
 
     $scope.RemoveService = function (service) {

@@ -24,10 +24,12 @@
                     <input date="dd/MM/yyyy" class="form-control" type="date" ng-model="Desde" />
                     <label>&nbsp;Hasta&nbsp;</label>
                     <input class="form-control" type="date" ng-model="Hasta" />
+
                     <a style="font-family:'Century Gothic';" ng-click="ReporteLavadores()" class="btn btn-success">Generar</a>
 
 
                 </div>
+                <p ng-show="Error" style="font-family:'Century Gothic'; color:red;">Verfique Fechas</p>
             </div>
        
 
