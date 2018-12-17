@@ -30,7 +30,7 @@
     // variable para ocultar o mostrar el formulario dependiendo si esta o no validado el cliente
     $scope.BuscandoCliente = true;
 
-    $scope.ClienteSinDatos =false;
+    $scope.ClienteSinDatos = false;
 
     $scope.Pago = false;
 
@@ -65,14 +65,14 @@
     VerificarLavadoAbierto();
 
     VerificarCliente();
-     
+
 
 
     $scope.EditarAuto = function () {
 
         $scope.Marca = '';
         $scope.Modelo = '';
-        $scope.Segmento.Descripcion='';
+        $scope.Segmento.Descripcion = '';
         $scope.EditAuto = true;
         ObtenerMarcas();
 
@@ -89,7 +89,7 @@
                 if (estado == "403") {
 
                     window.location.href = '/Account/LogIn';
-                   //$location.path('/Account/LogIn');
+                    //$location.path('/Account/LogIn');
 
                 } else {
                     if (estado == "False") {
@@ -101,12 +101,12 @@
                     else {
                         $scope.BuscandoCliente = false;
                     }
-                }               
-                
+                }
+
             },
             function (error) {
 
-                var hola= error;
+                var hola = error;
 
             });
 
@@ -127,15 +127,15 @@
                     //    $scope.Email = $scope.Cliente.Email,
                     //    $scope.Fecha = $scope.Cliente.FechaNacimiento.slice(0, 10),
                     $scope.MarcaDescripcion = $scope.Cliente.Marcas.Descripcion,
-                    $scope.ModeloDescripcion = $scope.Cliente.Modelos.Descripcion;                    
+                        $scope.ModeloDescripcion = $scope.Cliente.Modelos.Descripcion;
                     $scope.Marca = $scope.Cliente.Marcas.IdMarca;
                     $scope.Modelo = $scope.Cliente.Modelos.IdModelo;
                     //$scope.MarcaSeleccionada = $scope.Cliente.Marca
-                 
+
                     $scope.ObtenerSegmento($scope.Cliente.Modelos.IdSegmento);
 
                     $scope.cargandoCliente = false;
-                    
+
                 }
                 else {
                     $scope.ReadOnly = false;
@@ -255,40 +255,41 @@
         if (Direccion === "") {
 
             $scope.cargandoMapa = true;
+            $scope.ErrorDireccion = true;
         }
         else {
 
             $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + Direccion);
             var h = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + Direccion + '&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY';
-    
+
             $http.get(h).
                 then(function (response) {
-               var json = response.data;
-                if ((json.results.length) == 0) {
-                    $scope.ErrorDireccion = true;
-                    $scope.cargandoMapa = true;
-                }
-                else {
-
-                    var address = json.results[0].formatted_address;
-                    var n = address.search("Argentina");
-                    var length = json.results[0].address_components.length
-
-                    if (n < 0 || length <= 5) {
+                    var json = response.data;
+                    if ((json.results.length) == 0) {
                         $scope.ErrorDireccion = true;
                         $scope.cargandoMapa = true;
                     }
                     else {
 
-                        $scope.Direccion = json.results[0].formatted_address;
-                        $scope.ErrorDireccion = false;
-                        $scope.cargandoMapa = false;
-                    }
-                                                         
+                        var address = json.results[0].formatted_address;
+                        var n = address.search("Argentina");
+                        var length = json.results[0].address_components.length
 
-                }
-                return $http;
-            });
+                        if (n < 0 || length <= 5) {
+                            $scope.ErrorDireccion = true;
+                            $scope.cargandoMapa = true;
+                        }
+                        else {
+
+                            $scope.Direccion = json.results[0].formatted_address;
+                            $scope.ErrorDireccion = false;
+                            $scope.cargandoMapa = false;
+                        }
+
+
+                    }
+                    return $http;
+                });
 
 
 
@@ -300,10 +301,53 @@
 
 
     $scope.ValidarLavado = function () {
-        ActualizarUbicacion();
-        if ($scope.solicitarlavado.$valid == false || $scope.ErrorDireccion == false) {
+        //ActualizarUbicacion();
+        if ($scope.Direccion === "") {
+
+            $scope.cargandoMapa = true;
+            $scope.ErrorDireccion = true;
+        }
+        else {
+
+            $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + $scope.Direccion);
+            var h = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + $scope.Direccion + '&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY';
+
+            $http.get(h).
+                then(function (response) {
+                    var json = response.data;
+                    if ((json.results.length) == 0) {
+                        $scope.ErrorDireccion = true;
+                        $scope.cargandoMapa = true;
+                    }
+                    else {
+
+                        var address = json.results[0].formatted_address;
+                        var n = address.search("Argentina");
+                        var length = json.results[0].address_components.length
+
+                        if (n < 0 || length <= 5) {
+                            $scope.ErrorDireccion = true;
+                            $scope.cargandoMapa = true;
+                        }
+                        else {
+
+                            $scope.Direccion = json.results[0].formatted_address;
+                            $scope.ErrorDireccion = false;
+                            $scope.cargandoMapa = false;
+                        }
+
+
+                    }
+                    return $http;
+                });
+
+
+
+
+        }
+        if ($scope.solicitarlavado.$valid == false || $scope.ErrorDireccion == true || $scope.Total == "") {
             $scope.submit = true;
-           
+
         }
         else {
             $scope.Pago = true;
@@ -311,136 +355,146 @@
 
     }
 
- 
+
 
     $scope.CrearSolicitud = function (Marca, Modelo, Servicio, NombreTarjeta, NumeroTarjeta, Mes, Anio, CodTarjeta) {
-
-
-        if ($scope.paymentForm.$valid == false ) {
-            var hola = "g";
-        }
-        else {
-
-            $scope.ProcesandoPago = true;
-        var seg = $scope.Segmento.IdSegmento;
-        var dir = $scope.Direccion;
-        var total = $scope.Total;
-
-        SolicitarLavadoService.CrearSolicitud(Marca, Modelo, Servicio, seg, dir, total, NombreTarjeta, NumeroTarjeta, Mes, Anio, CodTarjeta).then(
-            function (d) {
-                //$scope.Servicios = d.data;
-                sleep(50000);
-                $scope.ProcesandoPago = false;
-                $scope.Redirigiendo = true;
-                $timeout(function () {
-                    $location.path('/cliente');
-                }, 5000);
-               
-                
-            },
-            function (error) {
-
-
-            });
-        }
-    };
-
-
-
-    $scope.ObtenerLavados = function () {
-
+        var today = new Date();
+        var month = today.getMonth() + 1;
+        var year = today.getFullYear();
        
+        var errorfecha = 0;
 
-        SolicitarLavadoService.ObtenerLavados().then(
-            function (d) {
-                //$scope.Servicios = d.data;
-                $scope.Lavados = d.data;
-             
-            },
-            function (error) {
+        if (month == Mes && Anio+2000== year) {
+    errorfecha = 1;
+        }
+
+if ($scope.paymentForm.$valid == false || errorfecha == 1) {
 
 
-            });
+    var hola = "g";
+}
+else {
+    errorfecha = 0;
+    $scope.ProcesandoPago = true;
+    var seg = $scope.Segmento.IdSegmento;
+    var dir = $scope.Direccion;
+    var total = $scope.Total;
 
+    SolicitarLavadoService.CrearSolicitud(Marca, Modelo, Servicio, seg, dir, total, NombreTarjeta, NumeroTarjeta, Mes, Anio, CodTarjeta).then(
+        function (d) {
+            //$scope.Servicios = d.data;
+            sleep(50000);
+            $scope.ProcesandoPago = false;
+            $scope.Redirigiendo = true;
+            $timeout(function () {
+                $location.path('/cliente');
+            }, 5000);
+
+
+        },
+        function (error) {
+
+
+        });
+}
     };
 
-   
+
+
+$scope.ObtenerLavados = function () {
 
 
 
-   function VerificarLavadoAbierto () {
+    SolicitarLavadoService.ObtenerLavados().then(
+        function (d) {
+            //$scope.Servicios = d.data;
+            $scope.Lavados = d.data;
 
-        SolicitarLavadoService.VerificarLavadoAbiertoCliente().then(
-            function (d) {
-                var abierto = d.data;
-                if (abierto>0) {
-                    $scope.LavadoAbierto = true;
-                }
-
-            },
-            function (error) {
+        },
+        function (error) {
 
 
-            });
+        });
 
-    };
-
-
-    
+};
 
 
-    function ObtenerMarcas() {
-
-        SolicitarLavadoService.SolicitarLavado().then(
-            function (response) {                
-                $scope.Marcas = response.data;
-            },
-            function (error) {
-
-                var elerror = error;
-            });
-    }
 
 
-    //=======Obtengo geolocalizacion======
-    function onPositionUpdate(position) {
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
-        var json='';
-        var h = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY';
-        $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + lat + "," + lng + "&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q");
 
+function VerificarLavadoAbierto() {
 
-        //while (json === '') {
-            $http.get(h)
-                .then(function (response) {
-                    json = response.data.results[0].formatted_address;
-                    $scope.Direccion = response.data.results[0].formatted_address;
-                });
-      
-        $scope.cargandoMapa = false;
-    }
-
-    function sleep(milliseconds) {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > milliseconds) {
-                break;
+    SolicitarLavadoService.VerificarLavadoAbiertoCliente().then(
+        function (d) {
+            var abierto = d.data;
+            if (abierto > 0) {
+                $scope.LavadoAbierto = true;
             }
+
+        },
+        function (error) {
+
+
+        });
+
+};
+
+
+
+
+
+function ObtenerMarcas() {
+
+    SolicitarLavadoService.SolicitarLavado().then(
+        function (response) {
+            $scope.Marcas = response.data;
+        },
+        function (error) {
+
+            var elerror = error;
+        });
+}
+
+
+//=======Obtengo geolocalizacion======
+function onPositionUpdate(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    var json = '';
+    var h = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY';
+    $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?q=" + lat + "," + lng + "&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q");
+
+
+    //while (json === '') {
+    $http.get(h)
+        .then(function (response) {
+            json = response.data.results[0].formatted_address;
+            $scope.Direccion = response.data.results[0].formatted_address;
+        });
+
+    $scope.cargandoMapa = false;
+}
+
+function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds) {
+            break;
         }
     }
+}
 
-    //$scope.abrirDialogSolicitado = function () {
-    //    ngDialog.open({
-    //        template: 'SPA/Views/Modal/lavado.html',
-    //        className: 'ngdialog-theme-default',
-    //        scope: $scope,
+//$scope.abrirDialogSolicitado = function () {
+//    ngDialog.open({
+//        template: 'SPA/Views/Modal/lavado.html',
+//        className: 'ngdialog-theme-default',
+//        scope: $scope,
 
-    //    });
-    //}; 
+//    });
+//}; 
 
-    //url por defecto para q me cargo algo en el mapa
-    $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
+//url por defecto para q me cargo algo en el mapa
+$scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=Argentina");
 
 
 

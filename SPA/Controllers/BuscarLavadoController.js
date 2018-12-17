@@ -158,6 +158,62 @@
 
 
     $scope.BuscarLavados = function (Direccion) {
+
+        $scope.buscarlavados = false;
+
+        if (Direccion === "") {
+            $scope.buscarlavados = false;
+            $scope.cargandoMapa = true;
+            $scope.ErrorDireccion = true;
+        }
+        else {
+
+            $scope.url = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY&q=" + Direccion);
+            var h = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + Direccion + '&key=AIzaSyBUYwRCVoIKPtjckkr_ncxZYa4SyH9U5SY';
+
+            $http.get(h).
+                then(function (response) {
+                    var json = response.data;
+                    if ((json.results.length) == 0) {
+                        $scope.ErrorDireccion = true;
+                        $scope.cargandoMapa = true;
+                    }
+                    else {
+
+                        var address = json.results[0].formatted_address;
+                        var n = address.search("Argentina");
+                        var length = json.results[0].address_components.length;
+
+                        if (n < 0 || length < 5) {
+                            $scope.ErrorDireccion = true;
+                            $scope.cargandoMapa = true;
+                        }
+                        else {
+
+                            $scope.Direccion = json.results[0].formatted_address;
+                            $scope.ErrorDireccion = false;
+                            $scope.cargandoMapa = false;
+                            $scope.buscarlavados = true;
+                            //$scope.BuscarLavados($scope.Direccion);
+                        }
+
+
+                    }
+                    return $http;
+                });
+
+
+
+
+        }
+
+
+        if (Direccion == "" || $scope.ErrorDireccion == true) {
+
+        }
+        else {
+
+        
         $scope.CargandoLavados = true;
         $scope.MostrarLavados = true;
         BuscarLavadoService.BuscarLavado(Direccion).then(
@@ -165,7 +221,7 @@
                 $scope.Lavados = d.data;
                 $scope.sort("Distancia");
                 $scope.sort("Distancia");
-                $scope.CargandoLavados = false;                
+                $scope.CargandoLavados = false;
                 bandera = 1;
 
             },
@@ -174,6 +230,7 @@
                 $scope.Error = true;
                 $scope.CargandoLavados = false;
             });
+    }
 
     }
 

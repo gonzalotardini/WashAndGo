@@ -87,12 +87,12 @@
 
                 <div class="col-md-6 text-center" id="jumbovehiculoservicio">
 
-                    <h3 style="text-align:left; font-weight:bold;">¿Cuál es tu auto?</h3>
-                    <h5 style="text-align:left; font-weight:bold;">Elegí marca y modelo del vehiculo a lavar</h5>
+                    <h3 style="text-align:left; font-weight:bold;" translate="CualEsTuAuto"></h3>
+                    <h5 style="text-align:left; font-weight:bold;" translate="Elegi"></h5>
 
                     <div ng-show="EditAuto" class="form-group">
                         <select name="marca" ng-model="Marca" ng-change="ObtenerModelos(Marca); limpiarSegmentoMarca()" class="form-control" id="sel1" required>
-                            <option value="" disabled selected>Seleccione Marca</option>
+                            <option value="" disabled selected>{{'ElegiMarca'|translate}}</option>
                             <option ng-repeat="x in Marcas" value="{{x.IdMarca}} ">{{x.Descripcion}}</option>
                         </select>
                     </div>
@@ -100,7 +100,7 @@
                     <div ng-show="EditAuto" class="form-group">
                         <div class="input-group">
                             <select name="modelo" required style="margin-bottom:2%;" ng-model="Modelo" ng-change="ObtenerSegmento(Modelo)" class="form-control">
-                                <option value="" disabled selected>Seleccione Modelo</option>
+                                <option value="" disabled selected>{{'ElegiModelo'|translate}}</option>
                                 <option ng-repeat="x in Modelos" value="{{x.IdModelo}}">{{x.Descripcion}}</option>
                             </select>
                             <span ng-show="cargandoModelos">
@@ -109,8 +109,8 @@
 
                         </div>
                     </div>
-                    <p ng-show=" (solicitarlavado.marca.$error.required  && EditAuto && submit)" style="font-family:'Century Gothic'; color:red;font-size:14px;">Seleccione marca</p>
-                    <p ng-show=" (solicitarlavado.modelo.$error.required  && EditAuto && submit)" style="font-family:'Century Gothic'; color:red;font-size:14px;">Seleccione modelo</p>
+                    <p ng-show=" (solicitarlavado.marca.$error.required  && EditAuto && submit)" style="font-family:'Century Gothic'; color:red;font-size:14px;">{{'ElegiMarca'|translate}}</p>
+                    <p ng-show=" (solicitarlavado.modelo.$error.required  && EditAuto && submit)" style="font-family:'Century Gothic'; color:red;font-size:14px;">{{'ElegiModelo'|translate}}</p>
 
 
 
@@ -128,7 +128,7 @@
                    
 
                     <img src="../../img/auto.png" style="width: 30%" />
-                    <h3 ng-model="Segmento">Segmento: {{Segmento.Descripcion}}</h3>
+                    <h3 ng-model="Segmento">{{'Segmento'|translate}}: {{Segmento.Descripcion}}</h3>
                     <!--<h3 ng-view="IdSegmento">{{Segmento.IdSegmento}}</h3>-->
                     <br />
                     <br />
@@ -167,16 +167,15 @@
 
                     <div class="col-md-6">
                         <h3 style="text-align:left;font-weight:bold">¿Qué tipo de lavado querés?</h3>
-                        <h5 style="text-align:left;font-weight:bold">Elegí el servicio ideal para tu vehículo</h5>
-                        <div class="form-group form-inline">
+                        <h5 style="text-align:left;font-weight:bold" translate="Elegi2"></h5>
+                        <div class="form-group form-inline">                            
                             <select required name="_servicio" style="width:90%;" ng-model="Servicio" ng-change="botonTotal()" class="form-control">
-                            <select required name="_servicio" style="width:90%;" ng-model="Servicio" ng-change="botonTotal()" class="form-control">
-                                <option value="" disabled selected>Seleccione Servicio</option>
+                                <option value="" disabled selected>{{'SeleccioneServicio'|translate}}</option>
                                 <option ng-repeat="x in Servicios" value="{{x.IdServicio}} ">{{x.Nombre}}</option>
                             </select>
                             <label><span data-toggle="modal" data-target="#myModal" style="width:5%;" class="glyphicon glyphicon-info-sign"></span></label>
                         </div>
-                        <p ng-show=" (solicitarlavado._servicio.$error.required  && EditAuto && submit)" style="font-family:'Century Gothic'; color:red;font-size:14px;">Seleccione servicio</p>
+                        <p ng-show=" (solicitarlavado._servicio.$error.required  && submit)" style="font-family:'Century Gothic'; color:red;font-size:14px;">{{'SeleccioneServicio'|translate}}</p>
 
                     </div>
 
@@ -191,7 +190,7 @@
 
                 <div class="col-md-12 row text-center" style="margin-top:5%;">
                     <button type="submit" ng-click="ValidarLavado(Direccion)"  class="btn btn-lg btn-danger" style="font-family:'Century Gothic';width:90%;font-size: 26px;">
-                        <span class="glyphicon glyphicon-ok"></span> Solicitar Lavado
+                        <span class="glyphicon glyphicon-ok"></span>{{'SolicitarLavado'|translate}}
                     </button>
                 </div>
             </form>
@@ -200,16 +199,16 @@
 
         <div style="margin-top:10%;" ng-show="ClienteSinDatos" class="col-md-12 text-center">
 
-            <h3>Atención! Ingrese sus datos personales antes de contratar un lavado!</h3>
-            <a class="btn btn-lg btn-danger" href="/#!/cliente">Datos Personales</a>
+            <h3 translate="SinDatos"></h3>
+            <a class="btn btn-lg btn-danger" href="/#!/cliente" translate="DatosPersonales"></a>
 
         </div>
 
         <div style="margin-top:10%;" ng-show="LavadoAbierto" class="col-md-12 text-center">
 
-            <h3>Atención!</h3>
-            <h3>Usted ya posee un lavado en proceso, no puede contratar otro hasta que este no finalice!</h3>
-            <a class="btn btn-lg btn-danger" href="/#!/cliente">Mis Lavados</a>
+           
+            <h3 translate="PoseeLavado"></h3>
+            <a class="btn btn-lg btn-danger" href="/#!/cliente" translate="MisLavados"></a>
 
         </div>
 
@@ -220,8 +219,8 @@
             <div ng-hide="ProcesandoPago || Redirigiendo" style="margin-top: 10%;" class="col-xs-12 col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center" style="background-color:#5bc0de; color:white;">
-                        <h3 class="panel-title">
-                            Payment Details
+                        <h3 class="panel-title" translate="Detalle">
+                            
                         </h3>
                         <!--<div class="checkbox pull-right">
                         <label>
@@ -234,15 +233,15 @@
                     <div class="panel-body">
                         <form name="paymentForm" role="form">
                             <div class="form-group">
-                                <label for="cardNumber">
-                                    Nombre
+                                <label translate="Nombre" for="cardNumber">
+                                    
                                 </label>
                                 <input type="text" name="nombre" ng-model="NombreTarjeta" class="form-control" style="max-width:100%;" id="nombre" placeholder="Ej: Gonzalo T. Tardini" ng-minlength="10" ng-maxlength="50" ng-pattern="/^[a-zA-Z\s]*$/" required autofocus />
                             </div>
                            
                             <div class="form-group">
-                                <label for="cardNumber">
-                                    N° de Tarjeta
+                                <label translate="N" for="cardNumber">
+                                   
                                 </label>
                                 <div class="input-group">
                                     <input name="creditNumber" ng-maxlength="16" type="number" min="1" ng-minlength="16" class="form-control" id="cardNumber" ng-pattern="/^[0-9]*$/" ng-model="NumeroTarjeta" placeholder="Ej: 4485 7158 6086 8875"
@@ -254,8 +253,8 @@
                             <div class="row">
                                 <div class="col-xs-5 col-md-5">
                                     <div class="form-group" style="margin-top: 10%;">
-                                        <label style="font-family:'Century Gothic'" for="cvCode">
-                                            Vencimiento
+                                        <label translate="Vencimiento" style="font-family:'Century Gothic'" for="cvCode">
+                                            
                                         </label>
                                         <div class="form-inline">
                                             <input style="width:45%;" name="mes" ng-minlength="2" ng-maxlength="2" ng-model="Mes" min="01" max="12" type="number" class="form-control" ng-pattern="/^[0-9]*$/" placeholder="MM" required />
@@ -293,18 +292,18 @@
                     </li>
                 </ul>
                 <br />
-                <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="CrearSolicitud(Marca,Modelo,Servicio,NombreTarjeta,NumeroTarjeta,Mes,Anio,CodTarjeta)">Pay</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="CrearSolicitud(Marca,Modelo,Servicio,NombreTarjeta,NumeroTarjeta,Mes,Anio,CodTarjeta)" translate="Pagar"></button>
                 <!--<a class="btn btn-success btn-lg btn-block" ng-click="CrearSolicitud(Marca,Modelo,Servicio,NombreTarjeta,NumeroTarjeta,Mes,Anio,CodTarjeta)" >Pay</a>-->
             </div>
 
             <div ng-show="ProcesandoPago && !Redirigiendo" style="margin-top: 10%;" class="col-xs-12 col-md-4">
                 <img src="../../img/payment.gif" />
-                <h3 style="text-align:center;">Procesando Pago...</h3>
+                <h3 style="text-align:center;" translate="Procesando"></h3>
             </div>
 
             <div class="col-md-12 text-center" style="margin-top:15%;" ng-show="Redirigiendo">
-                <h2>Solicitud de lavado creada correctamente!</h2>
-                <h3>Redirigiendo...</h3>
+                <h2 translate="CreadaOK"></h2>
+                <h3 translate="Redirigiendo"></h3>
             </div>
 
         </div>

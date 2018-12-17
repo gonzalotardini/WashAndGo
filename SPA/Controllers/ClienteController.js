@@ -242,9 +242,6 @@
 
 
     $scope.CancelarLavado = function (lavadoid) {
-
-
-
         SolicitarLavadoService.CancelarLavado(lavadoid).then(
             function (d) {
                 //$scope.Servicios = d.data;

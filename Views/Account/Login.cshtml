@@ -40,7 +40,7 @@
         <div class="col-md-4 col-md-offset-4" style="margin-top: 6%;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Iniciar Sesión</h3>
+                    <h3 class="panel-title" translate="IniciarSesion"></h3>
                 </div>
                 
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
@@ -55,28 +55,28 @@
                                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group">
-                                        <div class="form-group has-feedback">                                          
+                                        <div class="form-group has-feedback">
                                             @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", id = "myInput" })
                                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                             @*<i onclick="myFunction()" class="glyphicon glyphicon-eye-open form-control-feedback"></i>*@
-                                        </div> 
-                                        <input  type="checkbox" onclick="myFunction()"/> Show Password
-                                       
+                                        </div>
+                                        <input type="checkbox" onclick="myFunction()" /> {{'MostrarContrasena'|translate}}
+
                                     </div>
                                     <div class="form-group">
                                         <div class="checkbox" id="check">
                                             @Html.CheckBoxFor(m => m.RememberMe)
-                                            @Html.LabelFor(m => m.RememberMe)
+                                            <label translate="Recordarme"></label>
                                         </div>
                                     </div>
                                     
-                                    <input  class="btn btn-lg btn-info btn-block" type="submit" value="Login">
+                                    <input  class="btn btn-lg btn-info btn-block" type="submit" value="{{'IniciarSesion'|translate}}">
                                 </fieldset>
 
                          
 
-                                <div class="row"><a style="color:black; margin-left:5%;" href="register">Registrar</a></div>
-                               <div class="row"><a style="color:black; margin-left:5%;" href="ForgotPassword">Olvide mi Contraseña</a></div>
+                                <div class="row"><a style="color:black; margin-left:5%;" href="register" translate="Registrar"></a></div>
+                               <div class="row"><a style="color:black; margin-left:5%;" href="ForgotPassword" translate="Olvide"></a></div>
                                 
                                
 
